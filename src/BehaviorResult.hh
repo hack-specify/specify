@@ -19,6 +19,11 @@ class BehaviorResult implements VerifyResult
         return $this->description;
     }
 
+    public function getMethodResults() : MethodBehaviorResultCollection
+    {
+        return $this->methodResults;
+    }
+
     <<__Memoize>>
     public function isPassed() : bool
     {

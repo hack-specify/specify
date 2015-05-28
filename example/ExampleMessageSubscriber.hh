@@ -22,6 +22,12 @@ class ExampleMessageSubscriber implements LifeCycleMessageSubscriber
     public function onSpecVerifyFinish(BehaviorResult $result) : void
     {
         echo $result->getDescription(), "\n";
+        $methodResults = $result->getMethodResults();
+
+        foreach ($methodResults as $methodResult) {
+            $status = $methodResult->isFailed() ? 'ok' : 'ng';
+            echo "    ", $status, " ", $methodResult->getDescription(), "\n";
+        }
         echo "onSpecVerifyFinish", "\n";
     }
 
