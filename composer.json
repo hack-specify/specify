@@ -1,0 +1,20 @@
+{
+  "name": "minimalist/minitest",
+  "authors": [
+    {
+      "name": "holyshared",
+      "email": "holy.shared.design@gmail.com"
+    }
+  ],
+  "require": {},
+  "autoload": {
+    "psr-4": {
+      "\\minitest\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "\\minitest\\example\\": "example"
+    }
+  }
+}
