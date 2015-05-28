@@ -12,7 +12,7 @@
       "minitest\\": "src"
     },
     "files": [
-      "src/autoloafd.hh"
+      "src/autoload.hh"
     ]
   },
   "autoload-dev": {
