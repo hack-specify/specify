@@ -2,11 +2,19 @@
 
 namespace minitest;
 
-use \ReflectionClass;
+use \Exception;
 use \ReflectionMethod;
+
 
 abstract class AbstractSpecification implements Specification
 {
+
+    private VerifyResultCollection $verifyResults;
+
+    public function __construct()
+    {
+        $this->verifyResults = Vector {};
+    }
 
     public function verify() : void
     {
@@ -14,8 +22,21 @@ abstract class AbstractSpecification implements Specification
         $methods = $collector->collectFrom($this);
 
         foreach ($methods as $method) {
-            $method->invoke($this);
+            $this->verifyBehavior($method);
         }
+    }
+
+    private function verifyBehavior(ReflectionMethod $method) : void
+    {
+        $result = BehaviorResult::pass(''); //FIXME description from user attribute
+
+        try {
+            $method->invoke($this);
+        } catch (Exception $exception) {
+            $result = BehaviorResult::failed(''); //FIXME description from user attribute
+        }
+
+        $this->verifyResults->add($result);
     }
 
 }
