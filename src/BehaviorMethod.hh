@@ -5,7 +5,7 @@ namespace minitest;
 use \ReflectionMethod;
 use \Exception;
 
-class BehaviorMethod implements Specification<BehaviorResult>
+class BehaviorMethod implements Specification<MethodBehaviorResult>
 {
 
     const string ATTRIBUTE_NAME = 'Specification';
@@ -17,7 +17,7 @@ class BehaviorMethod implements Specification<BehaviorResult>
     {
     }
 
-    public function verify() : BehaviorResult
+    public function verify() : MethodBehaviorResult
     {
         $description = 'pending';
         $attributeValues = $this->method->getAttribute(self::ATTRIBUTE_NAME);
@@ -26,12 +26,12 @@ class BehaviorMethod implements Specification<BehaviorResult>
             $description = (string) $attributeValues[0];
         }
 
-        $result = BehaviorResult::pass($description);
+        $result = MethodBehaviorResult::pass($description);
 
         try {
             $this->method->invoke($this->target);
         } catch (Exception $exception) {
-            $result = BehaviorResult::failed($description, $exception);
+            $result = MethodBehaviorResult::failed($description, $exception);
         }
 
         return $result;
