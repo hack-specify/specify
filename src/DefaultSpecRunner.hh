@@ -13,12 +13,12 @@ class DefaultSpecRunner implements SpecRunner
 
     public function run(LifeCycleNotifier $notifier) : void
     {
-        $notifier->runnerStart();
-
         $specs = $this->specs->getIterator();
 
+        $notifier->runnerStart();
+
         foreach ($specs as $spec) {
-            $spec->verify();
+            $behaviorResult = $spec->verify();
         }
 
         $notifier->runnerStop();
