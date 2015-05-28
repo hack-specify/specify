@@ -6,7 +6,7 @@ class DefaultSpecRunner implements SpecRunner
 {
 
     public function __construct(
-        private ImmVector<Specification> $specs
+        private SpecificationCollection $specs
     )
     {
     }

@@ -6,7 +6,7 @@ class DefaultLifeCycleNotifier implements LifeCycleNotifier
 {
 
     public function __construct(
-        private ImmVector<LifeCycleMessageSubscriber> $subscribers
+        private LifeCycleMessageSubscriberCollection $subscribers
     )
     {
     }

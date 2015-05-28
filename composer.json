@@ -10,7 +10,10 @@
   "autoload": {
     "psr-4": {
       "minitest\\": "src"
-    }
+    },
+    "files": [
+      "src/autoloafd.hh"
+    ]
   },
   "autoload-dev": {
     "psr-4": {
