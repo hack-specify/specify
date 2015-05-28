@@ -31,7 +31,7 @@ class BehaviorMethod implements Specification<BehaviorResult>
         try {
             $this->method->invoke($this->target);
         } catch (Exception $exception) {
-            $result = BehaviorResult::failed($description);
+            $result = BehaviorResult::failed($description, $exception);
         }
 
         return $result;

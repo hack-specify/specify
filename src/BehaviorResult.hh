@@ -2,12 +2,16 @@
 
 namespace minitest;
 
+use \Exception;
+
+
 class BehaviorResult implements VerifyResult
 {
 
     public function __construct(
         private string $description,
-        private bool $result
+        private bool $result,
+        private ?Exception $exception = null
     )
     {
     }
@@ -32,9 +36,9 @@ class BehaviorResult implements VerifyResult
         return new self($description, true);
     }
 
-    public static function failed(string $description) : BehaviorResult
+    public static function failed(string $description, Exception $reason) : BehaviorResult
     {
-        return new self($description, false);
+        return new self($description, false, $reason);
     }
 
 }
