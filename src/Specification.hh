@@ -2,7 +2,7 @@
 
 namespace minitest;
 
-interface Specification
+interface Specification<Tr>
 {
-    public function verify() : void;
+    public function verify() : Tr;
 }

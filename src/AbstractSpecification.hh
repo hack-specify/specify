@@ -6,7 +6,7 @@ use \Exception;
 use \ReflectionMethod;
 
 
-abstract class AbstractSpecification implements Specification
+abstract class AbstractSpecification implements Specification<void>
 {
 
     private VerifyResultCollection $verifyResults;
@@ -26,16 +26,9 @@ abstract class AbstractSpecification implements Specification
         }
     }
 
-    private function verifyBehavior(ReflectionMethod $method) : void
+    private function verifyBehavior(BehaviorMethod $method) : void
     {
-        $result = BehaviorResult::pass(''); //FIXME description from user attribute
-
-        try {
-            $method->invoke($this);
-        } catch (Exception $exception) {
-            $result = BehaviorResult::failed(''); //FIXME description from user attribute
-        }
-
+        $result = $method->verify();
         $this->verifyResults->add($result);
     }
 

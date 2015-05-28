@@ -5,8 +5,8 @@ namespace minitest;
 use \ReflectionMethod;
 use \Generator;
 
-type SpecificationCollection = ImmVector<Specification>;
+type SpecificationCollection = ImmVector<Specification<void>>;
 type LifeCycleMessageSubscriberCollection = ImmVector<LifeCycleMessageSubscriber>;
-type MethodCollection = Generator<int, ReflectionMethod, void>;
+type BehaviorMethodCollection = Generator<int, BehaviorMethod, void>;
 
 type VerifyResultCollection = Vector<VerifyResult>;

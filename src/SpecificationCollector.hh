@@ -5,21 +5,21 @@ namespace minitest;
 use \ReflectionClass;
 use \ReflectionMethod;
 
-class SpecificationCollector implements Collector<Specification, int, ReflectionMethod>
+class SpecificationCollector implements Collector<Specification<void>, int, BehaviorMethod>
 {
 
-    public function collectFrom(Specification $target) : MethodCollection
+    public function collectFrom(Specification<void> $target) : BehaviorMethodCollection
     {
         $reflection = new ReflectionClass($target);
         $methods = $reflection->getMethods(ReflectionMethod::IS_PUBLIC);
 
         foreach ($methods as $method) {
-            $attribute = $method->getAttribute('Specification');
+            $attribute = $method->getAttribute(BehaviorMethod::ATTRIBUTE_NAME);
 
             if ($attribute === null) {
                 continue;
             }
-            yield $method;
+            yield new BehaviorMethod($target, $method);
         }
     }
 
