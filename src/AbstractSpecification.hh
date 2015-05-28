@@ -6,30 +6,37 @@ use \Exception;
 use \ReflectionMethod;
 
 
-abstract class AbstractSpecification implements Specification<void>
+abstract class AbstractSpecification implements Specification<BehaviorResult>
 {
 
-    private VerifyResultCollection $verifyResults;
+    private string $name;
 
     public function __construct()
     {
-        $this->verifyResults = Vector {};
+        $this->name = str_replace('Spec', '', get_class($this)); //XXX nameed base?
     }
 
-    public function verify() : void
+    <<__Memoize>>
+    public function verify() : BehaviorResult
     {
         $collector = new SpecificationCollector();
         $methods = $collector->collectFrom($this);
 
-        foreach ($methods as $method) {
-            $this->verifyBehavior($method);
-        }
+        $verifyResults = $this->verifyAll($methods);
+
+        return new BehaviorResult($this->name, $verifyResults);
     }
 
-    private function verifyBehavior(BehaviorMethod $method) : void
+    private function verifyAll(BehaviorMethodCollection $methods) : MethodBehaviorResultCollection
     {
-        $result = $method->verify();
-        $this->verifyResults->add($result);
+        $verifyResults = Vector {};
+
+        foreach ($methods as $method) {
+            $result = $method->verify();
+            $verifyResults->add($result);
+        }
+
+        return $verifyResults;
     }
 
 }

@@ -28,7 +28,7 @@ class MethodBehaviorResult implements VerifyResult
 
     public function isFailed() : bool
     {
-        return $this->isPass() === false;
+        return $this->isPassed() === false;
     }
 
     public static function passed(string $description) : MethodBehaviorResult

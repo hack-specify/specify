@@ -11,7 +11,7 @@ class BehaviorMethod implements Specification<MethodBehaviorResult>
     const string ATTRIBUTE_NAME = 'Specification';
 
     public function __construct(
-        private Specification<void> $target,
+        private Specification<BehaviorResult> $target,
         private ReflectionMethod $method
     )
     {
