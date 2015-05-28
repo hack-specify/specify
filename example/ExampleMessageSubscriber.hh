@@ -16,10 +16,13 @@ class ExampleMessageSubscriber implements LifeCycleMessageSubscriber
 
     public function onSpecVerifyStart() : void
     {
+        echo "onSpecVerifyStart", "\n";
     }
 
     public function onSpecVerifyFinish(BehaviorResult $result) : void
     {
+        echo $result->getDescription(), "\n";
+        echo "onSpecVerifyFinish", "\n";
     }
 
     public function onRunnerStop() : void

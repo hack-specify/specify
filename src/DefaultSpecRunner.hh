@@ -18,7 +18,9 @@ class DefaultSpecRunner implements SpecRunner
         $notifier->runnerStart();
 
         foreach ($specs as $spec) {
+            $notifier->specVerifyStart();
             $behaviorResult = $spec->verify();
+            $notifier->specVerifyFinish($behaviorResult);
         }
 
         $notifier->runnerStop();
