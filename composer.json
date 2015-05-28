@@ -7,7 +7,6 @@
     }
   ],
   "require": {
-    "titon/event": "dev-master"
   },
   "autoload": {
     "psr-4": {
