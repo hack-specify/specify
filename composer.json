@@ -9,12 +9,12 @@
   "require": {},
   "autoload": {
     "psr-4": {
-      "\\minitest\\": "src"
+      "minitest\\": "src"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "\\minitest\\example\\": "example"
+      "minitest\\example\\": "example"
     }
   }
 }
