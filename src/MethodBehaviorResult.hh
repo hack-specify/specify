@@ -21,7 +21,7 @@ class MethodBehaviorResult implements VerifyResult
         return $this->description;
     }
 
-    public function isPass() : bool
+    public function isPassed() : bool
     {
         return $this->result === true;
     }
@@ -31,7 +31,7 @@ class MethodBehaviorResult implements VerifyResult
         return $this->isPass() === false;
     }
 
-    public static function pass(string $description) : MethodBehaviorResult
+    public static function passed(string $description) : MethodBehaviorResult
     {
         return new self($description, true);
     }

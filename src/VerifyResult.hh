@@ -5,6 +5,6 @@ namespace minitest;
 interface VerifyResult
 {
     public function getDescription() : string;
-    public function isPass() : bool;
+    public function isPassed() : bool;
     public function isFailed() : bool;
 }

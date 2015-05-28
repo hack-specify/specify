@@ -26,7 +26,7 @@ class BehaviorMethod implements Specification<MethodBehaviorResult>
             $description = (string) $attributeValues[0];
         }
 
-        $result = MethodBehaviorResult::pass($description);
+        $result = MethodBehaviorResult::passed($description);
 
         try {
             $this->method->invoke($this->target);

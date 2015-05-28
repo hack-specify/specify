@@ -2,16 +2,14 @@
 
 namespace minitest;
 
-use \Exception;
 
 
 class BehaviorResult implements VerifyResult
 {
 
     public function __construct(
-        private string $description,
-        private bool $result,
-        private ?Exception $exception = null
+        private string $description
+        private MethodBehaviorResultCollection $methodResults
     )
     {
     }
@@ -21,24 +19,26 @@ class BehaviorResult implements VerifyResult
         return $this->description;
     }
 
-    public function isPass() : bool
+    <<__Memoize>>
+    public function isPassed() : bool
     {
-        return $this->result === true;
+        $result = true;
+        $results = $this->methodResults->getIterator();
+
+        foreach ($results as $result) {
+            if ($result->isPassed()) {
+                continue;
+            }
+            $result = false;
+            break;
+        }
+
+        return $result;
     }
 
     public function isFailed() : bool
     {
         return $this->isPass() === false;
-    }
-
-    public static function pass(string $description) : BehaviorResult
-    {
-        return new self($description, true);
-    }
-
-    public static function failed(string $description, Exception $reason) : BehaviorResult
-    {
-        return new self($description, false, $reason);
     }
 
 }

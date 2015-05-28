@@ -10,3 +10,5 @@ type LifeCycleMessageSubscriberCollection = ImmVector<LifeCycleMessageSubscriber
 type BehaviorMethodCollection = Generator<int, BehaviorMethod, void>;
 
 type VerifyResultCollection = Vector<VerifyResult>;
+
+type MethodBehaviorResultCollection = Vector<MethodBehaviorResult>;
