@@ -6,7 +6,9 @@
       "email": "holy.shared.design@gmail.com"
     }
   ],
-  "require": {},
+  "require": {
+    "titon/event": "dev-master"
+  },
   "autoload": {
     "psr-4": {
       "minitest\\": "src"
@@ -19,5 +21,6 @@
     "psr-4": {
       "minitest\\example\\": "example"
     }
-  }
+  },
+  "minimum-stability": "dev"
 }
