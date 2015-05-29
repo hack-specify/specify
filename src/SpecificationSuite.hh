@@ -6,7 +6,7 @@ use \Exception;
 use \ReflectionMethod;
 
 
-abstract class SpecificationSuite implements Specification<BehaviorResult>
+abstract class SpecificationSuite implements Specification<ObjectBehaviorResult>
 {
 
     private string $name;
@@ -17,14 +17,14 @@ abstract class SpecificationSuite implements Specification<BehaviorResult>
     }
 
     <<__Memoize>>
-    public function verify() : BehaviorResult
+    public function verify() : ObjectBehaviorResult
     {
         $collector = new SpecificationCollector();
         $methods = $collector->collectFrom($this);
 
         $verifyResults = $this->verifyAll($methods);
 
-        return new BehaviorResult($this->name, $verifyResults);
+        return new ObjectBehaviorResult($this->name, $verifyResults);
     }
 
     private function verifyAll(BehaviorMethodCollection $methods) : MethodBehaviorResultCollection

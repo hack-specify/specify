@@ -5,7 +5,7 @@ namespace minitest;
 use \ReflectionMethod;
 use \Generator;
 
-type ObjectBehaviorSpecification = Specification<BehaviorResult>;
+type ObjectBehaviorSpecification = Specification<ObjectBehaviorResult>;
 
 type SpecificationCollection = ImmVector<ObjectBehaviorSpecification>;
 type LifeCycleMessageSubscriberCollection = ImmVector<LifeCycleMessageSubscriber>;

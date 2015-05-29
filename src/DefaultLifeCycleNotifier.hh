@@ -27,7 +27,7 @@ class DefaultLifeCycleNotifier implements LifeCycleNotifier
         $this->send(new SpecVerifyStart());
     }
 
-    public function specVerifyFinish(BehaviorResult $result) : void
+    public function specVerifyFinish(ObjectBehaviorResult $result) : void
     {
         $this->send(new SpecVerifyFinish($result));
     }

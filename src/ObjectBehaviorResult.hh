@@ -4,7 +4,7 @@ namespace minitest;
 
 
 
-class BehaviorResult implements VerifyResult
+class ObjectBehaviorResult implements VerifyResult
 {
 
     public function __construct(
