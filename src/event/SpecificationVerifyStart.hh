@@ -6,7 +6,7 @@ use minitest\LifeCycleEvent;
 use minitest\LifeCycleEventType;
 use DateTimeImmutable;
 
-class SpecVerifyStart extends AbstractNamedEvent implements LifeCycleEvent
+class SpecificationVerifyStart extends AbstractNamedEvent implements LifeCycleEvent
 {
 
     public function __construct()

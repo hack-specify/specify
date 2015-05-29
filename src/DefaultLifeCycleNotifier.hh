@@ -3,8 +3,8 @@
 namespace minitest;
 
 use minitest\event\VerifyStart;
-use minitest\event\SpecVerifyStart;
-use minitest\event\SpecVerifyFinish;
+use minitest\event\SpecificationVerifyStart;
+use minitest\event\SpecificationVerifyFinish;
 use minitest\event\VerifyFinish;
 
 
@@ -24,12 +24,12 @@ class DefaultLifeCycleNotifier implements LifeCycleNotifier
 
     public function specVerifyStart() : void
     {
-        $this->send(new SpecVerifyStart());
+        $this->send(new SpecificationVerifyStart());
     }
 
     public function specVerifyFinish(ObjectBehaviorResult $result) : void
     {
-        $this->send(new SpecVerifyFinish($result));
+        $this->send(new SpecificationVerifyFinish($result));
     }
 
     public function verifyFinish() : void

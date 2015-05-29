@@ -6,8 +6,8 @@ use minitest\BehaviorResult;
 use minitest\LifeCycleEvent;
 use minitest\LifeCycleMessageSubscriber;
 use minitest\event\VerifyStart;
-use minitest\event\SpecVerifyStart;
-use minitest\event\SpecVerifyFinish;
+use minitest\event\SpecificationVerifyStart;
+use minitest\event\SpecificationVerifyFinish;
 use minitest\event\VerifyFinish;
 
 
@@ -19,10 +19,10 @@ class ExampleMessageSubscriber implements LifeCycleMessageSubscriber
 
         if ($event instanceof VerifyStart) {
             $this->onVerifyStart($event);
-        } else if ($event instanceof SpecVerifyStart) {
-            $this->onSpecVerifyStart($event);
-        } else if ($event instanceof SpecVerifyFinish) {
-            $this->onSpecVerifyFinish($event);
+        } else if ($event instanceof SpecificationVerifyStart) {
+            $this->onSpecificationVerifyStart($event);
+        } else if ($event instanceof SpecificationVerifyFinish) {
+            $this->onSpecificationVerifyFinish($event);
         } else if ($event instanceof VerifyFinish) {
             $this->onVerifyFinish($event);
         }
@@ -33,12 +33,12 @@ class ExampleMessageSubscriber implements LifeCycleMessageSubscriber
         echo $event->getName(), "\n";
     }
 
-    public function onSpecVerifyStart(SpecVerifyStart $event) : void
+    public function onSpecificationVerifyStart(SpecificationVerifyStart $event) : void
     {
         echo $event->getName(), "\n";
     }
 
-    public function onSpecVerifyFinish(SpecVerifyFinish $event) : void
+    public function onSpecificationVerifyFinish(SpecificationVerifyFinish $event) : void
     {
         $result = $event->getBehaviorResult();
 
@@ -49,7 +49,6 @@ class ExampleMessageSubscriber implements LifeCycleMessageSubscriber
             $status = $methodResult->isFailed() ? 'ok' : 'ng';
             echo "    ", $status, " ", $methodResult->getDescription(), "\n";
         }
-        echo "onSpecVerifyFinish", "\n";
     }
 
     public function onVerifyFinish(VerifyFinish $event) : void
