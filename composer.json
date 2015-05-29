@@ -27,7 +27,7 @@
     }
   },
   "scripts": {
-    "test": "vendor/bin/peridot -c peridot.hh --grep *Spec.hh specs"
+    "test": "vendor/bin/peridot -c peridot.hh --grep *Spec.hh specs -r dot"
   },
   "minimum-stability": "dev"
 }
