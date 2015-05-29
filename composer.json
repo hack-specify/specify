@@ -23,7 +23,8 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "specify\\example\\": "example"
+      "specify\\example\\": "example",
+      "specify\\fixtures\\": "specs/fixtures/specs"
     }
   },
   "scripts": {

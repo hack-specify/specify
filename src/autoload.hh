@@ -24,3 +24,21 @@ namespace specify\result
 
     type MethodBehaviorResultCollection = Vector<MethodBehaviorResult>;
 }
+
+namespace specify\specification
+{
+    use \Generator;
+
+    type PackageNamespace = string;
+    type DirectoryPath = string;
+
+    /**
+     * <code>
+     * $package = Pair {'example\\spec\\', __DIR__};
+     * </code>
+     */
+    type SpecificationPackage = Pair<PackageNamespace, DirectoryPath>;
+
+    type SpecificationFile = string;
+    type SpecificationFileCollection = Generator<int, SpecificationFile, void>;
+}
