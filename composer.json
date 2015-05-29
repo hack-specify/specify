@@ -27,6 +27,9 @@
       "specify\\fixtures\\": "specs/fixtures/specs"
     }
   },
+  "bin": [
+    "bin/specify"
+  ],
   "scripts": {
     "test": "vendor/bin/peridot -c peridot.hh --grep *Spec.hh specs -r dot"
   },
