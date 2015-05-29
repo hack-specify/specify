@@ -3,15 +3,15 @@
 namespace minitest\event;
 
 use minitest\LifeCycleEvent;
+use minitest\LifeCycleEventType;
 use DateTimeImmutable;
 
-
-class RunnerStart extends AbstractNamedEvent implements LifeCycleEvent
+class VerifyFinish extends AbstractNamedEvent implements LifeCycleEvent
 {
 
     public function __construct()
     {
-        $this->name = self::RUNNER_START;
+        $this->name = LifeCycleEventType::VerifyFinish;
         $this->sendAt = new DateTimeImmutable();
     }
 

@@ -15,7 +15,7 @@ class DefaultSpecRunner implements SpecRunner
     {
         $specs = $this->specs->getIterator();
 
-        $notifier->runnerStart();
+        $notifier->verifyStart();
 
         foreach ($specs as $spec) {
             $notifier->specVerifyStart();
@@ -23,7 +23,7 @@ class DefaultSpecRunner implements SpecRunner
             $notifier->specVerifyFinish($behaviorResult);
         }
 
-        $notifier->runnerStop();
+        $notifier->verifyFinish();
     }
 
 }

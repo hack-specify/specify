@@ -3,6 +3,7 @@
 namespace minitest\event;
 
 use minitest\LifeCycleEvent;
+use minitest\LifeCycleEventType;
 use DateTimeImmutable;
 
 class SpecVerifyStart extends AbstractNamedEvent implements LifeCycleEvent
@@ -10,7 +11,7 @@ class SpecVerifyStart extends AbstractNamedEvent implements LifeCycleEvent
 
     public function __construct()
     {
-        $this->name = self::SPEC_VERIFY_START;
+        $this->name = LifeCycleEventType::SpecificationVerifyStart;
         $this->sendAt = new DateTimeImmutable();
     }
 

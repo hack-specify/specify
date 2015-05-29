@@ -2,10 +2,10 @@
 
 namespace minitest;
 
-use minitest\event\RunnerStart;
+use minitest\event\VerifyStart;
 use minitest\event\SpecVerifyStart;
 use minitest\event\SpecVerifyFinish;
-use minitest\event\RunnerStop;
+use minitest\event\VerifyFinish;
 
 
 class DefaultLifeCycleNotifier implements LifeCycleNotifier
@@ -17,9 +17,9 @@ class DefaultLifeCycleNotifier implements LifeCycleNotifier
     {
     }
 
-    public function runnerStart() : void
+    public function verifyStart() : void
     {
-        $this->send(new RunnerStart());
+        $this->send(new VerifyStart());
     }
 
     public function specVerifyStart() : void
@@ -32,9 +32,9 @@ class DefaultLifeCycleNotifier implements LifeCycleNotifier
         $this->send(new SpecVerifyFinish($result));
     }
 
-    public function runnerStop() : void
+    public function verifyFinish() : void
     {
-        $this->send(new RunnerStop());
+        $this->send(new VerifyFinish());
     }
 
     private function send(LifeCycleEvent $event) : void

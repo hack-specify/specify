@@ -5,10 +5,10 @@ namespace minitest\example;
 use minitest\BehaviorResult;
 use minitest\LifeCycleEvent;
 use minitest\LifeCycleMessageSubscriber;
-use minitest\event\RunnerStart;
+use minitest\event\VerifyStart;
 use minitest\event\SpecVerifyStart;
 use minitest\event\SpecVerifyFinish;
-use minitest\event\RunnerStop;
+use minitest\event\VerifyFinish;
 
 
 class ExampleMessageSubscriber implements LifeCycleMessageSubscriber
@@ -17,18 +17,18 @@ class ExampleMessageSubscriber implements LifeCycleMessageSubscriber
     public function handle(LifeCycleEvent $event) : void
     {
 
-        if ($event instanceof RunnerStart) {
-            $this->onRunnerStart($event);
+        if ($event instanceof VerifyStart) {
+            $this->onVerifyStart($event);
         } else if ($event instanceof SpecVerifyStart) {
             $this->onSpecVerifyStart($event);
         } else if ($event instanceof SpecVerifyFinish) {
             $this->onSpecVerifyFinish($event);
-        } else if ($event instanceof RunnerStop) {
-            $this->onRunnerStop($event);
+        } else if ($event instanceof VerifyFinish) {
+            $this->onVerifyFinish($event);
         }
     }
 
-    public function onRunnerStart(RunnerStart $event) : void
+    public function onVerifyStart(VerifyStart $event) : void
     {
         echo $event->getName(), "\n";
     }
@@ -52,7 +52,7 @@ class ExampleMessageSubscriber implements LifeCycleMessageSubscriber
         echo "onSpecVerifyFinish", "\n";
     }
 
-    public function onRunnerStop(RunnerStop $event) : void
+    public function onVerifyFinish(VerifyFinish $event) : void
     {
         echo $event->getName(), "\n";
     }
