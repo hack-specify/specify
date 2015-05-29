@@ -4,14 +4,14 @@ namespace minitest\event;
 
 use minitest\LifeCycleEvent;
 
-class RunnerStop implements LifeCycleEvent
+class SpecVerifyFinish implements LifeCycleEvent
 {
 
     use NamedEvent;
 
     public function __construct()
     {
-        $this->name = self::RUNNER_STOP;
+        $this->name = self::SPEC_VERIFY_FINISH;
     }
 
 }

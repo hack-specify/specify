@@ -8,11 +8,11 @@ use minitest\LifeCycleEvent;
 class RunnerStart implements LifeCycleEvent
 {
 
-    private string $name;
+    use NamedEvent;
 
     public function __construct()
     {
-        $this->name = 'runnerStart';
+        $this->name = self::RUNNER_START;
     }
 
 }
