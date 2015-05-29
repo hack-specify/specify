@@ -27,10 +27,13 @@ namespace specify\result
 
 namespace specify\specification
 {
+    use specify\Specification;
+    use specify\result\ObjectBehaviorResult;
     use \Generator;
 
     type PackageNamespace = string;
     type DirectoryPath = string;
+    type SpecificationFile = string;
 
     /**
      * <code>
@@ -38,7 +41,7 @@ namespace specify\specification
      * </code>
      */
     type SpecificationPackage = Pair<PackageNamespace, DirectoryPath>;
+    type ObjectBehaviorSpecification = Specification<ObjectBehaviorResult>;
 
-    type SpecificationFile = string;
-    type SpecificationFileCollection = Generator<int, SpecificationFile, void>;
+    type ObjectBehaviorSpecificationCollection = Generator<int, ObjectBehaviorSpecification, void>;
 }

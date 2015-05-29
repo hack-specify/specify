@@ -2,6 +2,15 @@
 
 namespace specify\fixtures;
 
-class A
+use specify\Specification;
+use specify\result\ObjectBehaviorResult;
+
+class A implements Specification<ObjectBehaviorResult>
 {
+
+    public function verify() : ObjectBehaviorResult
+    {
+        return new ObjectBehaviorResult('A', Vector {});
+    }
+
 }

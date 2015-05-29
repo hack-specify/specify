@@ -14,8 +14,18 @@ class PackageSpecification
     public function __construct(
         SpecificationPackage $package)
     {
-        $this->ns = $package->at(0);
+        $this->ns = (string) $package->at(0);
         $this->packageDirectory = realpath($package->at(1));
+    }
+
+    public function getNamespace() : PackageNamespace
+    {
+        return $this->ns;
+    }
+
+    public function getPackageDirectory() : DirectoryPath
+    {
+        return $this->packageDirectory;
     }
 
     public function resolve(SpecificationFile $file) : ReflectionClass
