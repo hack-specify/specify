@@ -4,23 +4,29 @@ namespace minitest\example;
 
 use minitest\BehaviorResult;
 use minitest\LifeCycleMessageSubscriber;
+use minitest\event\RunnerStart;
+use minitest\event\SpecVerifyStart;
+use minitest\event\SpecVerifyFinish;
+use minitest\event\RunnerStop;
 
 
 class ExampleMessageSubscriber implements LifeCycleMessageSubscriber
 {
 
-    public function onRunnerStart() : void
+    public function onRunnerStart(RunnerStart $event) : void
     {
-        echo "onRunnerStart", "\n";
+        echo $event->getName(), "\n";
     }
 
-    public function onSpecVerifyStart() : void
+    public function onSpecVerifyStart(SpecVerifyStart $event) : void
     {
-        echo "onSpecVerifyStart", "\n";
+        echo $event->getName(), "\n";
     }
 
-    public function onSpecVerifyFinish(BehaviorResult $result) : void
+    public function onSpecVerifyFinish(SpecVerifyFinish $event) : void
     {
+        $result = $event->getBehaviorResult();
+
         echo $result->getDescription(), "\n";
         $methodResults = $result->getMethodResults();
 
@@ -31,9 +37,9 @@ class ExampleMessageSubscriber implements LifeCycleMessageSubscriber
         echo "onSpecVerifyFinish", "\n";
     }
 
-    public function onRunnerStop() : void
+    public function onRunnerStop(RunnerStop $event) : void
     {
-        echo "onRunnerStop", "\n";
+        echo $event->getName(), "\n";
     }
 
 }
