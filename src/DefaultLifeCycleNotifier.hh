@@ -6,6 +6,7 @@ use minitest\event\VerifyStart;
 use minitest\event\SpecificationVerifyStart;
 use minitest\event\SpecificationVerifyFinish;
 use minitest\event\VerifyFinish;
+use minitest\result\ObjectBehaviorResult;
 
 
 class DefaultLifeCycleNotifier implements LifeCycleNotifier

@@ -2,6 +2,7 @@
 
 namespace minitest;
 
+use minitest\result\MethodBehaviorResult;
 use \ReflectionMethod;
 use \Exception;
 

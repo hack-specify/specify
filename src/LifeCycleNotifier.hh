@@ -2,6 +2,8 @@
 
 namespace minitest;
 
+use minitest\result\ObjectBehaviorResult;
+
 interface LifeCycleNotifier
 {
     public function verifyStart() : void;

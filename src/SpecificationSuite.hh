@@ -2,6 +2,7 @@
 
 namespace minitest;
 
+use minitest\result\ObjectBehaviorResult;
 use \Exception;
 use \ReflectionMethod;
 

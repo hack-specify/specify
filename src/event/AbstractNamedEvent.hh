@@ -5,20 +5,21 @@ namespace minitest\event;
 use minitest\LifeCycleEvent;
 use minitest\LifeCycleEventType;
 use minitest\LifeCycleMessageSubscriber;
-use DateTimeImmutable;
+use \DateTime;
+
 
 abstract class AbstractNamedEvent implements LifeCycleEvent
 {
 
     protected LifeCycleEventType $name;
-    protected DateTimeImmutable $sendAt;
+    protected DateTime $sendAt;
 
     public function getName() : string
     {
         return (string) $this->name;
     }
 
-    public function getSendAt() : DateTimeImmutable
+    public function getSendAt() : DateTime
     {
         return $this->sendAt;
     }

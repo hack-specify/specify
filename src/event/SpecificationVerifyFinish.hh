@@ -4,8 +4,8 @@ namespace minitest\event;
 
 use minitest\LifeCycleEvent;
 use minitest\LifeCycleEventType;
-use minitest\ObjectBehaviorResult;
-use DateTimeImmutable;
+use minitest\result\ObjectBehaviorResult;
+use DateTime;
 
 class SpecificationVerifyFinish extends AbstractNamedEvent implements LifeCycleEvent
 {
@@ -15,7 +15,7 @@ class SpecificationVerifyFinish extends AbstractNamedEvent implements LifeCycleE
     )
     {
         $this->name = LifeCycleEventType::SpecificationVerifyFinish;
-        $this->sendAt = new DateTimeImmutable();
+        $this->sendAt = new DateTime();
     }
 
     public function getBehaviorResult() : ObjectBehaviorResult

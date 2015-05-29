@@ -1,8 +1,8 @@
 <?hh //strict
 
-namespace minitest;
+namespace minitest\result;
 
-
+use minitest\VerifyResult;
 
 class ObjectBehaviorResult implements VerifyResult
 {
