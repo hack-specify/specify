@@ -5,10 +5,8 @@ namespace minitest\event;
 use minitest\LifeCycleEvent;
 use DateTimeImmutable;
 
-class SpecVerifyStart implements LifeCycleEvent
+class SpecVerifyStart extends AbstractNamedEvent implements LifeCycleEvent
 {
-
-    use NamedEvent;
 
     public function __construct()
     {

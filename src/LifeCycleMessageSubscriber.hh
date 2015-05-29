@@ -9,8 +9,5 @@ use minitest\event\RunnerStop;
 
 interface LifeCycleMessageSubscriber
 {
-    public function onRunnerStart(RunnerStart $event) : void;
-    public function onSpecVerifyStart(SpecVerifyStart $event) : void;
-    public function onSpecVerifyFinish(SpecVerifyFinish $event) : void;
-    public function onRunnerStop(RunnerStop $event) : void;
+    public function handle(LifeCycleEvent $event) : void;
 }

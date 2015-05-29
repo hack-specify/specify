@@ -5,10 +5,8 @@ namespace minitest\event;
 use minitest\LifeCycleEvent;
 use DateTimeImmutable;
 
-class RunnerStop implements LifeCycleEvent
+class RunnerStop extends AbstractNamedEvent implements LifeCycleEvent
 {
-
-    use NamedEvent;
 
     public function __construct()
     {

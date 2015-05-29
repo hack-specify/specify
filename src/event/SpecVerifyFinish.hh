@@ -6,10 +6,8 @@ use minitest\LifeCycleEvent;
 use minitest\BehaviorResult;
 use DateTimeImmutable;
 
-class SpecVerifyFinish implements LifeCycleEvent
+class SpecVerifyFinish extends AbstractNamedEvent implements LifeCycleEvent
 {
-
-    use NamedEvent;
 
     public function __construct(
         private BehaviorResult $result

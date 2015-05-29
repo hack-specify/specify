@@ -6,9 +6,8 @@ use minitest\LifeCycleEvent;
 use DateTimeImmutable;
 
 
-class RunnerStart implements LifeCycleEvent
+class RunnerStart extends AbstractNamedEvent implements LifeCycleEvent
 {
-    use NamedEvent;
 
     public function __construct()
     {

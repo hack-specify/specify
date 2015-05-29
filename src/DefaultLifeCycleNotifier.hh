@@ -19,37 +19,28 @@ class DefaultLifeCycleNotifier implements LifeCycleNotifier
 
     public function runnerStart() : void
     {
-        $event = new RunnerStart();
-
-        foreach ($this->subscribers as $subscriber) {
-            $subscriber->onRunnerStart($event);
-        }
+        $this->send(new RunnerStart());
     }
 
     public function specVerifyStart() : void
     {
-        $event = new SpecVerifyStart();
-
-        foreach ($this->subscribers as $subscriber) {
-            $subscriber->onSpecVerifyStart($event);
-        }
+        $this->send(new SpecVerifyStart());
     }
 
     public function specVerifyFinish(BehaviorResult $result) : void
     {
-        $event = new SpecVerifyFinish($result);
-
-        foreach ($this->subscribers as $subscriber) {
-            $subscriber->onSpecVerifyFinish($event);
-        }
+        $this->send(new SpecVerifyFinish($result));
     }
 
     public function runnerStop() : void
     {
-        $event = new RunnerStop();
+        $this->send(new RunnerStop());
+    }
 
+    private function send(LifeCycleEvent $event) : void
+    {
         foreach ($this->subscribers as $subscriber) {
-            $subscriber->onRunnerStop($event);
+            $event->sendTo($subscriber);
         }
     }
 

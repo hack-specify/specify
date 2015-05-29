@@ -8,4 +8,6 @@ interface LifeCycleEvent
     const string SPEC_VERIFY_START = 'specVerifyStart';
     const string SPEC_VERIFY_FINISH = 'specVerifyFinish';
     const string RUNNER_STOP = 'runnerStop';
+
+    public function sendTo(LifeCycleMessageSubscriber $subscriber) : void;
 }
