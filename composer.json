@@ -1,7 +1,7 @@
 {
   "name": "specify/specify",
   "keywords": [ "hack", "hhvm", "spec", "test", "bdd" ],
-  "description": "testing framework for hack",
+  "description": "BDD testing framework for Hack",
   "authors": [
     {
       "name": "holyshared",
