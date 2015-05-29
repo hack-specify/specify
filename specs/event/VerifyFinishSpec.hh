@@ -1,15 +1,15 @@
 <?hh //partial
 
 use minitest\LifeCycleEventType;
-use minitest\event\VerifyStart;
+use minitest\event\VerifyFinish;
 
-describe(VerifyStart::class, function() {
+describe(VerifyFinish::class, function() {
     describe('->getName()', function() {
         beforeEach(function() {
-            $this->message = new VerifyStart();
+            $this->message = new VerifyFinish();
         });
         it('returns the event name', function() {
-            $name = (string) LifeCycleEventType::VerifyStart;
+            $name = (string) LifeCycleEventType::VerifyFinish;
             expect($this->message->getName())->toBe($name);
         });
     });
