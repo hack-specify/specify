@@ -1,9 +1,9 @@
 <?hh //strict
 
-namespace minitest
+namespace specify
 {
-    use minitest\result\ObjectBehaviorResult;
-    use minitest\result\MethodBehaviorResult;
+    use specify\result\ObjectBehaviorResult;
+    use specify\result\MethodBehaviorResult;
     use \ReflectionMethod;
     use \Generator;
 
@@ -18,9 +18,9 @@ namespace minitest
     type MethodBehaviorResultCollection = Vector<MethodBehaviorResult>;
 }
 
-namespace minitest\result
+namespace specify\result
 {
-    use minitest\result\MethodBehaviorResult;
+    use specify\result\MethodBehaviorResult;
 
     type MethodBehaviorResultCollection = Vector<MethodBehaviorResult>;
 }

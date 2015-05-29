@@ -1,12 +1,12 @@
 <?hh //strict
 
-namespace minitest;
+namespace specify;
 
-use minitest\event\VerifyStart;
-use minitest\event\SpecificationVerifyStart;
-use minitest\event\SpecificationVerifyFinish;
-use minitest\event\VerifyFinish;
-use minitest\result\ObjectBehaviorResult;
+use specify\event\VerifyStart;
+use specify\event\SpecificationVerifyStart;
+use specify\event\SpecificationVerifyFinish;
+use specify\event\VerifyFinish;
+use specify\result\ObjectBehaviorResult;
 
 
 class DefaultLifeCycleNotifier implements LifeCycleNotifier

@@ -1,11 +1,11 @@
 <?hh //strict
 
-namespace minitest;
+namespace specify;
 
-use minitest\event\RunnerStart;
-use minitest\event\SpecVerifyStart;
-use minitest\event\SpecVerifyFinish;
-use minitest\event\RunnerStop;
+use specify\event\RunnerStart;
+use specify\event\SpecVerifyStart;
+use specify\event\SpecVerifyFinish;
+use specify\event\RunnerStop;
 
 interface LifeCycleMessageSubscriber
 {

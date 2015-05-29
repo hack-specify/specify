@@ -15,7 +15,7 @@
   },
   "autoload": {
     "psr-4": {
-      "minitest\\": "src"
+      "specify\\": "src"
     },
     "files": [
       "src/autoload.hh"
@@ -23,7 +23,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "minitest\\example\\": "example"
+      "specify\\example\\": "example"
     }
   },
   "scripts": {

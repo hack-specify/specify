@@ -1,8 +1,8 @@
 <?hh //strict
 
-namespace minitest\example;
+namespace specify\example;
 
-use minitest\SpecificationSuite;
+use specify\SpecificationSuite;
 use \Exception;
 
 

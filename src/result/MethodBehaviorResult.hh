@@ -1,8 +1,8 @@
 <?hh //strict
 
-namespace minitest\result;
+namespace specify\result;
 
-use minitest\VerifyResult;
+use specify\VerifyResult;
 use \Exception;
 
 

@@ -1,14 +1,14 @@
 <?hh //strict
 
-namespace minitest\example;
+namespace specify\example;
 
-use minitest\BehaviorResult;
-use minitest\LifeCycleEvent;
-use minitest\LifeCycleMessageSubscriber;
-use minitest\event\VerifyStart;
-use minitest\event\SpecificationVerifyStart;
-use minitest\event\SpecificationVerifyFinish;
-use minitest\event\VerifyFinish;
+use specify\BehaviorResult;
+use specify\LifeCycleEvent;
+use specify\LifeCycleMessageSubscriber;
+use specify\event\VerifyStart;
+use specify\event\SpecificationVerifyStart;
+use specify\event\SpecificationVerifyFinish;
+use specify\event\VerifyFinish;
 
 
 class ExampleMessageSubscriber implements LifeCycleMessageSubscriber

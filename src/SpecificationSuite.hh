@@ -1,8 +1,8 @@
 <?hh //strict
 
-namespace minitest;
+namespace specify;
 
-use minitest\result\ObjectBehaviorResult;
+use specify\result\ObjectBehaviorResult;
 use \Exception;
 use \ReflectionMethod;
 

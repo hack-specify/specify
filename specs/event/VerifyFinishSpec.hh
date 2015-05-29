@@ -1,7 +1,7 @@
 <?hh //partial
 
-use minitest\LifeCycleEventType;
-use minitest\event\VerifyFinish;
+use specify\LifeCycleEventType;
+use specify\event\VerifyFinish;
 
 describe(VerifyFinish::class, function() {
     describe('->getName()', function() {

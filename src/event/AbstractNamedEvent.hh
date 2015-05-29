@@ -1,10 +1,10 @@
 <?hh //strict
 
-namespace minitest\event;
+namespace specify\event;
 
-use minitest\LifeCycleEvent;
-use minitest\LifeCycleEventType;
-use minitest\LifeCycleMessageSubscriber;
+use specify\LifeCycleEvent;
+use specify\LifeCycleEventType;
+use specify\LifeCycleMessageSubscriber;
 use \DateTime;
 
 

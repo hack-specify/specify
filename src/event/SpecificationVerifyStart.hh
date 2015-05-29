@@ -1,9 +1,9 @@
 <?hh //strict
 
-namespace minitest\event;
+namespace specify\event;
 
-use minitest\LifeCycleEvent;
-use minitest\LifeCycleEventType;
+use specify\LifeCycleEvent;
+use specify\LifeCycleEventType;
 use \DateTime;
 
 class SpecificationVerifyStart extends AbstractNamedEvent implements LifeCycleEvent

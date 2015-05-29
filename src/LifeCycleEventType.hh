@@ -1,6 +1,6 @@
 <?hh //strict
 
-namespace minitest;
+namespace specify;
 
 enum LifeCycleEventType : string
 {
