@@ -2,11 +2,11 @@
 
 namespace minitest\example;
 
-use minitest\AbstractSpecification;
+use minitest\SpecificationSuite;
 use \Exception;
 
 
-final class ExampleSpec extends AbstractSpecification
+final class ExampleSpec extends SpecificationSuite
 {
 
     <<Specification("example1")>>

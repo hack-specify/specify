@@ -6,7 +6,7 @@ use \Exception;
 use \ReflectionMethod;
 
 
-abstract class AbstractSpecification implements Specification<BehaviorResult>
+abstract class SpecificationSuite implements Specification<BehaviorResult>
 {
 
     private string $name;
