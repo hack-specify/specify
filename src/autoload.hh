@@ -35,6 +35,14 @@ namespace specify\collector
     type MethodExampleCollection = Generator<int, MethodExample, void>;
 }
 
+namespace specify\example
+{
+    use \Generator;
+
+    type ExampleGroupRunnerCollection = ImmVector<ExampleGroupRunner>;
+    type MethodExampleCollection = Generator<int, MethodExample, void>;
+}
+
 namespace specify\runner
 {
     use \Generator;
