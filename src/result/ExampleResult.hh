@@ -6,7 +6,7 @@ use specify\VerifyResult;
 use \Exception;
 
 
-class MethodBehaviorResult implements VerifyResult
+class ExampleResult implements VerifyResult
 {
 
     public function __construct(
@@ -32,12 +32,12 @@ class MethodBehaviorResult implements VerifyResult
         return $this->isPassed() === false;
     }
 
-    public static function passed(string $description) : MethodBehaviorResult
+    public static function passed(string $description) : ExampleResult
     {
         return new self($description, true);
     }
 
-    public static function failed(string $description, Exception $reason) : MethodBehaviorResult
+    public static function failed(string $description, Exception $reason) : ExampleResult
     {
         return new self($description, false, $reason);
     }

@@ -9,7 +9,7 @@ class ObjectBehaviorResult implements VerifyResult
 
     public function __construct(
         private string $description,
-        private MethodBehaviorResultCollection $methodResults
+        private ExampleResultCollection $methodResults
     )
     {
     }
@@ -19,7 +19,7 @@ class ObjectBehaviorResult implements VerifyResult
         return $this->description;
     }
 
-    public function getMethodResults() : MethodBehaviorResultCollection
+    public function getMethodResults() : ExampleResultCollection
     {
         return $this->methodResults;
     }

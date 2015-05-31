@@ -2,11 +2,11 @@
 
 namespace specify;
 
-use specify\result\MethodBehaviorResult;
+use specify\result\ExampleResult;
 use \ReflectionMethod;
 use \Exception;
 
-class BehaviorMethod implements Specification<MethodBehaviorResult>
+class BehaviorMethod implements Specification<ExampleResult>
 {
 
     const string ATTRIBUTE_NAME = 'Specification';
@@ -18,7 +18,7 @@ class BehaviorMethod implements Specification<MethodBehaviorResult>
     {
     }
 
-    public function verify() : MethodBehaviorResult
+    public function verify() : ExampleResult
     {
         $description = 'pending';
         $attributeValues = $this->method->getAttribute(self::ATTRIBUTE_NAME);
@@ -27,12 +27,12 @@ class BehaviorMethod implements Specification<MethodBehaviorResult>
             $description = (string) $attributeValues[0];
         }
 
-        $result = MethodBehaviorResult::passed($description);
+        $result = ExampleResult::passed($description);
 
         try {
             $this->method->invoke($this->target);
         } catch (Exception $exception) {
-            $result = MethodBehaviorResult::failed($description, $exception);
+            $result = ExampleResult::failed($description, $exception);
         }
 
         return $result;

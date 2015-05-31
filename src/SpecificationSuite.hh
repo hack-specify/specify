@@ -28,7 +28,7 @@ abstract class SpecificationSuite implements Specification<ObjectBehaviorResult>
         return new ObjectBehaviorResult($this->name, $verifyResults);
     }
 
-    private function verifyAll(BehaviorMethodCollection $methods) : MethodBehaviorResultCollection
+    private function verifyAll(BehaviorMethodCollection $methods) : ExampleResultCollection
     {
         $verifyResults = Vector {};
 

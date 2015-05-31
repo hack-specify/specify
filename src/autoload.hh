@@ -3,7 +3,7 @@
 namespace specify
 {
     use specify\result\ObjectBehaviorResult;
-    use specify\result\MethodBehaviorResult;
+    use specify\result\ExampleResult;
     use \ReflectionMethod;
     use \Generator;
 
@@ -15,14 +15,14 @@ namespace specify
 
     type VerifyResultCollection = Vector<VerifyResult>;
 
-    type MethodBehaviorResultCollection = Vector<MethodBehaviorResult>;
+    type ExampleResultCollection = Vector<ExampleResult>;
 }
 
 namespace specify\result
 {
-    use specify\result\MethodBehaviorResult;
+    use specify\result\ExampleResult;
 
-    type MethodBehaviorResultCollection = Vector<MethodBehaviorResult>;
+    type ExampleResultCollection = Vector<ExampleResult>;
 }
 
 
