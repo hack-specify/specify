@@ -44,7 +44,7 @@ class ExampleGroup implements SpecificationExample<ExampleGroupResult>
     {
         $exampleResults = Vector {};
 
-        $notifier->specVerifyStart();
+        $notifier->exampleGroupStart();
 
         foreach ($this->examples as $example) {
             $result = $example->verify();
@@ -56,7 +56,7 @@ class ExampleGroup implements SpecificationExample<ExampleGroupResult>
             $exampleResults
         );
 
-        $notifier->specVerifyFinish($result);
+        $notifier->exampleGroupFinish($result);
     }
 
 }

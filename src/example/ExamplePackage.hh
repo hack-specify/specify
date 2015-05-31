@@ -16,13 +16,13 @@ class ExamplePackage implements SpecificationExample<void>
 
     public function verify(LifeCycleNotifier $notifier) : void
     {
-        $notifier->verifyStart();
+        $notifier->examplePackageStart();
 
         foreach ($this->exampleGroups as $exampleGroup) {
             $exampleGroup->verify($notifier);
         }
 
-        $notifier->verifyFinish();
+        $notifier->examplePackageFinish();
     }
 
 }

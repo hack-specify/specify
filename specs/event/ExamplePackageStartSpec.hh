@@ -1,15 +1,15 @@
 <?hh //partial
 
 use specify\LifeCycleEventType;
-use specify\event\VerifyStart;
+use specify\event\ExamplePackageStart;
 
-describe(VerifyStart::class, function() {
+describe(ExamplePackageStart::class, function() {
     describe('->getName()', function() {
         beforeEach(function() {
-            $this->message = new VerifyStart();
+            $this->message = new ExamplePackageStart();
         });
         it('returns the event name', function() {
-            $name = (string) LifeCycleEventType::VerifyStart;
+            $name = (string) LifeCycleEventType::ExamplePackageStart;
             expect($this->message->getName())->toBe($name);
         });
     });

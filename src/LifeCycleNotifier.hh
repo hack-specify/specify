@@ -2,12 +2,12 @@
 
 namespace specify;
 
-use specify\result\ObjectBehaviorResult;
+use specify\result\ExampleGroupResult;
 
 interface LifeCycleNotifier
 {
-    public function verifyStart() : void;
-    public function specVerifyStart() : void;
-    public function specVerifyFinish(ObjectBehaviorResult $result) : void;
-    public function verifyFinish() : void;
+    public function examplePackageStart() : void;
+    public function exampleGroupStart() : void;
+    public function exampleGroupFinish(ExampleGroupResult $result) : void;
+    public function examplePackageFinish() : void;
 }

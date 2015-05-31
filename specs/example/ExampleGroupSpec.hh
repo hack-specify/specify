@@ -24,8 +24,8 @@ describe(ExampleGroup::class, function() {
             $this->prophet = new Prophet();
 
             $notifier = $this->prophet->prophesize(LifeCycleNotifier::class);
-            $notifier->specVerifyStart()->shouldBeCalled();
-            $notifier->specVerifyFinish(Argument::type(ExampleGroupResult::class))->shouldBeCalled();
+            $notifier->exampleGroupStart()->shouldBeCalled();
+            $notifier->exampleGroupFinish(Argument::type(ExampleGroupResult::class))->shouldBeCalled();
 
             $this->notifier = $notifier->reveal();
             $this->exampleGroup = new ExampleGroup(new ReflectionClass(A::class));

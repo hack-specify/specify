@@ -12,8 +12,8 @@ describe(ExamplePackage::class, function() {
             $this->prophet = new Prophet();
 
             $notifier = $this->prophet->prophesize(LifeCycleNotifier::class);
-            $notifier->verifyStart()->shouldBeCalled();
-            $notifier->verifyFinish()->shouldBeCalled();
+            $notifier->examplePackageStart()->shouldBeCalled();
+            $notifier->examplePackageFinish()->shouldBeCalled();
 
             $this->notifier = $notifier->reveal();
 
@@ -23,7 +23,7 @@ describe(ExamplePackage::class, function() {
             $group2 = $this->prophet->prophesize(SpecificationExample::class);
             $group2->verify($this->notifier)->shouldBeCalled();
 
-            $this->package = new Package(ImmVector {
+            $this->package = new ExamplePackage(ImmVector {
                 $group1->reveal(),
                 $group2->reveal()
             });
