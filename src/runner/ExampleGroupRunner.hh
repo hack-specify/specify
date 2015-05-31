@@ -12,7 +12,7 @@ use \ReflectionClass;
 class ExampleGroupRunner implements ExampleRunner
 {
 
-    private object $description;
+    private string $description;
     private object $exampleGroup;
     private BehaviorMethodCollection $examples;
 
