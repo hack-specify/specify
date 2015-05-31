@@ -1,18 +1,20 @@
 <?hh //strict
 
-namespace specify;
+namespace specify\example;
 
+use specify\Specification;
 use specify\result\ExampleResult;
 use \ReflectionMethod;
 use \Exception;
 
-class BehaviorMethod implements Specification<ExampleResult>
+
+class MethodExample implements Specification<ExampleResult>
 {
 
-    const string ATTRIBUTE_NAME = 'Specification';
+    const string ATTRIBUTE_NAME = 'Example';
 
     public function __construct(
-        private ObjectBehaviorSpecification $target,
+        private object $target,
         private ReflectionMethod $method
     )
     {

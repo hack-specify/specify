@@ -4,7 +4,7 @@ namespace specify\runner;
 
 use specify\ExampleRunner;
 use specify\LifeCycleNotifier;
-use specify\SpecificationCollector;
+use specify\collector\ExampleCollector;
 use specify\result\ExampleGroupResult;
 use \ReflectionClass;
 
@@ -14,14 +14,14 @@ class ExampleGroupRunner implements ExampleRunner
 
     private string $description;
     private object $exampleGroup;
-    private BehaviorMethodCollection $examples;
+    private MethodExampleCollection $examples;
 
     public function __construct(ReflectionClass $reflection)
     {
         $this->description = $reflection->getName();
         $this->exampleGroup = $reflection->newInstance();
 
-        $collector = new SpecificationCollector();
+        $collector = new ExampleCollector();
         $this->examples = $collector->collectFrom($this->exampleGroup);
     }
 

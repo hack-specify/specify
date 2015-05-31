@@ -2,6 +2,7 @@
 
 namespace specify
 {
+    use specify\example\MethodExample;
     use specify\result\ExampleResult;
     use specify\result\ExampleGroupResult;
     use \ReflectionMethod;
@@ -11,7 +12,7 @@ namespace specify
 
     type SpecificationCollection = ImmVector<ObjectBehaviorSpecification>;
     type LifeCycleMessageSubscriberCollection = ImmVector<LifeCycleMessageSubscriber>;
-    type BehaviorMethodCollection = Generator<int, BehaviorMethod, void>;
+    type MethodExampleCollection = Generator<int, MethodExample, void>;
 
     type VerifyResultCollection = Vector<VerifyResult>;
 
@@ -26,13 +27,21 @@ namespace specify\result
 }
 
 
+namespace specify\collector
+{
+    use \Generator;
+    use specify\example\MethodExample;
+
+    type MethodExampleCollection = Generator<int, MethodExample, void>;
+}
+
 namespace specify\runner
 {
     use \Generator;
-    use specify\BehaviorMethod;
+    use specify\example\MethodExample;
 
     type ExampleGroupRunnerCollection = ImmVector<ExampleGroupRunner>;
-    type BehaviorMethodCollection = Generator<int, BehaviorMethod, void>;
+    type MethodExampleCollection = Generator<int, MethodExample, void>;
 }
 
 namespace specify\specification
