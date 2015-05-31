@@ -8,7 +8,7 @@ namespace specify
     use \ReflectionMethod;
     use \Generator;
 
-    type ObjectBehaviorSpecification = Specification<ExampleResult>;
+    type ObjectBehaviorSpecification = Example<ExampleResult>;
 
     type SpecificationCollection = ImmVector<ObjectBehaviorSpecification>;
     type LifeCycleMessageSubscriberCollection = ImmVector<LifeCycleMessageSubscriber>;
@@ -46,7 +46,7 @@ namespace specify\runner
 
 namespace specify\specification
 {
-    use specify\Specification;
+    use specify\Example;
     use specify\result\ExampleResult;
     use \Generator;
 
@@ -60,7 +60,7 @@ namespace specify\specification
      * </code>
      */
     type SpecificationPackage = Pair<PackageNamespace, DirectoryPath>;
-    type ObjectBehaviorSpecification = Specification<ExampleResult>;
+    type ObjectBehaviorSpecification = Example<ExampleResult>;
 
     type ObjectBehaviorSpecificationCollection = Generator<int, ObjectBehaviorSpecification, void>;
 }

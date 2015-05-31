@@ -2,13 +2,13 @@
 
 namespace specify\example;
 
-use specify\Specification;
+use specify\Example;
 use specify\result\ExampleResult;
 use \ReflectionMethod;
 use \Exception;
 
 
-class MethodExample implements Specification<ExampleResult>
+class MethodExample implements Example<ExampleResult>
 {
 
     const string ATTRIBUTE_NAME = 'Example';

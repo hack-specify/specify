@@ -2,7 +2,7 @@
 
 namespace specify;
 
-interface Specification<Tr>
+interface Example<Tr>
 {
     public function verify() : Tr;
 }
