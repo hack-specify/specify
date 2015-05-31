@@ -31,6 +31,7 @@ namespace specify\runner
     use \Generator;
     use specify\BehaviorMethod;
 
+    type ExampleGroupRunnerCollection = ImmVector<ExampleGroupRunner>;
     type BehaviorMethodCollection = Generator<int, BehaviorMethod, void>;
 }
 
