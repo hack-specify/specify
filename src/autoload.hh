@@ -29,6 +29,7 @@ namespace specify\collector
     use specify\example\Example;
     use specify\example\ExampleGroup;
 
+    type DirectoryPath = string;
     type ExampleCollection = Generator<int, Example, void>;
     type ExampleGroupCollection = Generator<int, ExampleGroup, void>;
 }

@@ -4,6 +4,7 @@ namespace specify\collector;
 
 use specify\Collector;
 use specify\example\ExampleGroup;
+use specify\specification\PackageSpecification;
 use \RecursiveDirectoryIterator;
 use \FilesystemIterator;
 use \RecursiveIteratorIterator;

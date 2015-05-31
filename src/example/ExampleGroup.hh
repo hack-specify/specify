@@ -47,7 +47,7 @@ class ExampleGroup implements SpecificationExample<ExampleGroupResult>
         $notifier->exampleGroupStart();
 
         foreach ($this->examples as $example) {
-            $result = $example->verify();
+            $result = $example->verify($notifier);
             $exampleResults->add($result);
         }
 
@@ -57,6 +57,8 @@ class ExampleGroup implements SpecificationExample<ExampleGroupResult>
         );
 
         $notifier->exampleGroupFinish($result);
+
+        return $result;
     }
 
 }
