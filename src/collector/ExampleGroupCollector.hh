@@ -3,6 +3,7 @@
 namespace specify\collector;
 
 use specify\Collector;
+use specify\example\ExampleGroup;
 use \RecursiveDirectoryIterator;
 use \FilesystemIterator;
 use \RecursiveIteratorIterator;
@@ -14,7 +15,7 @@ class ExampleGroupCollector implements Collector<PackageSpecification, int, obje
     /**
      *
      */
-    public function collectFrom(PackageSpecification $target) : ObjectBehaviorSpecificationCollection
+    public function collectFrom(PackageSpecification $target) : ExampleGroupCollection
     {
         $targetDirectory = $target->getPackageDirectory();
         $exampleGroupFiles = $this->createIterator($targetDirectory);
@@ -23,7 +24,7 @@ class ExampleGroupCollector implements Collector<PackageSpecification, int, obje
             $fileName = $exampleGroupFile->getPathname();
 
             $reflection = $target->resolve($fileName);
-            yield $reflection->newInstance();
+            yield new ExampleGroup($reflection);
         }
     }
 

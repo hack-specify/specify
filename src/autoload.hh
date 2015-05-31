@@ -8,14 +8,10 @@ namespace specify
     use \ReflectionMethod;
     use \Generator;
 
-    type ObjectBehaviorSpecification = Example<ExampleResult>;
-
-    type SpecificationCollection = ImmVector<ObjectBehaviorSpecification>;
     type LifeCycleMessageSubscriberCollection = ImmVector<LifeCycleMessageSubscriber>;
+
     type MethodExampleCollection = Generator<int, MethodExample, void>;
-
     type VerifyResultCollection = Vector<VerifyResult>;
-
     type ExampleResultCollection = Vector<ExampleResult>;
 }
 
@@ -31,8 +27,10 @@ namespace specify\collector
 {
     use \Generator;
     use specify\example\MethodExample;
+    use specify\example\ExampleGroup;
 
     type MethodExampleCollection = Generator<int, MethodExample, void>;
+    type ExampleGroupCollection = Generator<int, ExampleGroup, void>;
 }
 
 namespace specify\example
@@ -68,7 +66,7 @@ namespace specify\specification
      * </code>
      */
     type SpecificationPackage = Pair<PackageNamespace, DirectoryPath>;
-    type ObjectBehaviorSpecification = Example<ExampleResult>;
+//    type ObjectBehaviorSpecification = Example<ExampleResult>;
 
-    type ObjectBehaviorSpecificationCollection = Generator<int, ObjectBehaviorSpecification, void>;
+//    type ObjectBehaviorSpecificationCollection = Generator<int, ObjectBehaviorSpecification, void>;
 }
