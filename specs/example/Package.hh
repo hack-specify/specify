@@ -1,13 +1,13 @@
 <?hh //partial
 
 use specify\LifeCycleNotifier;
-use specify\ExampleRunner;
-use specify\runner\PackageExampleRunner;
+use specify\SpecificationExample;
+use specify\example\Package;
 use \Prophecy\Prophet;
 
 
-describe(PackageExampleRunner::class, function() {
-    describe('->run()', function() {
+describe(Package::class, function() {
+    describe('->verify()', function() {
         beforeEach(function() {
             $this->prophet = new Prophet();
 
@@ -17,18 +17,18 @@ describe(PackageExampleRunner::class, function() {
 
             $this->notifier = $notifier->reveal();
 
-            $group1 = $this->prophet->prophesize(ExampleRunner::class);
-            $group1->run($this->notifier)->shouldBeCalled();
+            $group1 = $this->prophet->prophesize(SpecificationExample::class);
+            $group1->verify($this->notifier)->shouldBeCalled();
 
-            $group2 = $this->prophet->prophesize(ExampleRunner::class);
-            $group2->run($this->notifier)->shouldBeCalled();
+            $group2 = $this->prophet->prophesize(SpecificationExample::class);
+            $group2->verify($this->notifier)->shouldBeCalled();
 
-            $this->package = new PackageExampleRunner(ImmVector {
+            $this->package = new Package(ImmVector {
                 $group1->reveal(),
                 $group2->reveal()
             });
         });
-        it('run all example groups', function() {
+        it('verify all example groups', function() {
             $this->package->run($this->notifier);
             $this->prophet->checkPredictions();
         });

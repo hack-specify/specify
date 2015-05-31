@@ -2,13 +2,14 @@
 
 namespace specify\example;
 
-use specify\Example;
+use specify\SpecificationExample;
+use specify\LifeCycleNotifier;
 use specify\result\ExampleResult;
 use \ReflectionMethod;
 use \Exception;
 
 
-class MethodExample implements Example<ExampleResult>
+class Example implements SpecificationExample<ExampleResult>
 {
 
     const string ATTRIBUTE_NAME = 'Example';
@@ -20,7 +21,7 @@ class MethodExample implements Example<ExampleResult>
     {
     }
 
-    public function verify() : ExampleResult
+    public function verify(LifeCycleNotifier $notifier) : ExampleResult
     {
         $description = 'pending';
         $attributeValues = $this->method->getAttribute(self::ATTRIBUTE_NAME);

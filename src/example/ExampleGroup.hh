@@ -2,20 +2,22 @@
 
 namespace specify\example;
 
-use specify\Example;
+use specify\LifeCycleNotifier;
+use specify\SpecificationExample;
 use specify\result\ExampleGroupResult;
 use specify\collector\ExampleCollector;
+
 use \ReflectionClass;
 use \ReflectionMethod;
 use \Exception;
 
 
-class ExampleGroup implements Example<ExampleGroupResult>
+class ExampleGroup implements SpecificationExample<ExampleGroupResult>
 {
 
     private string $description;
     private object $exampleGroup;
-    private MethodExampleCollection $examples;
+    private ExampleCollection $examples;
 
     public function __construct(
         ReflectionClass $target
@@ -33,13 +35,28 @@ class ExampleGroup implements Example<ExampleGroupResult>
         return $this->description;
     }
 
-    public function getExamples() : MethodExampleCollection
+    public function getExamples() : ExampleCollection
     {
         return $this->examples;
     }
 
-    public function verify() : ExampleGroupResult
+    public function verify(LifeCycleNotifier $notifier) : ExampleGroupResult
     {
+        $exampleResults = Vector {};
+
+        $notifier->specVerifyStart();
+
+        foreach ($this->examples as $example) {
+            $result = $example->verify();
+            $exampleResults->add($result);
+        }
+
+        $result = new ExampleGroupResult(
+            $this->description,
+            $exampleResults
+        );
+
+        $notifier->specVerifyFinish($result);
     }
 
 }

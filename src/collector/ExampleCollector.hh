@@ -3,26 +3,26 @@
 namespace specify\collector;
 
 use specify\Collector;
-use specify\example\MethodExample;
+use specify\example\Example;
 use \ReflectionClass;
 use \ReflectionMethod;
 
 
-class ExampleCollector implements Collector<object, int, MethodExample>
+class ExampleCollector implements Collector<object, int, Example>
 {
 
-    public function collectFrom(object $target) : MethodExampleCollection
+    public function collectFrom(object $target) : ExampleCollection
     {
         $reflection = new ReflectionClass($target);
         $methods = $reflection->getMethods(ReflectionMethod::IS_PUBLIC);
 
         foreach ($methods as $method) {
-            $attribute = $method->getAttribute(MethodExample::ATTRIBUTE_NAME);
+            $attribute = $method->getAttribute(Example::ATTRIBUTE_NAME);
 
             if ($attribute === null) {
                 continue;
             }
-            yield new MethodExample($target, $method);
+            yield new Example($target, $method);
         }
     }
 
