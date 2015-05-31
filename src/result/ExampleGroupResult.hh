@@ -4,12 +4,12 @@ namespace specify\result;
 
 use specify\VerifyResult;
 
-class ObjectBehaviorResult implements VerifyResult
+class ExampleGroupResult implements VerifyResult
 {
 
     public function __construct(
         private string $description,
-        private ExampleResultCollection $methodResults
+        private ExampleResultCollection $exampleResults
     )
     {
     }
@@ -19,16 +19,16 @@ class ObjectBehaviorResult implements VerifyResult
         return $this->description;
     }
 
-    public function getMethodResults() : ExampleResultCollection
+    public function getExampleResults() : ExampleResultCollection
     {
-        return $this->methodResults;
+        return $this->exampleResults;
     }
 
     <<__Memoize>>
     public function isPassed() : bool
     {
         $result = true;
-        $methodResults = $this->methodResults->getIterator();
+        $methodResults = $this->exampleResults->getIterator();
 
         foreach ($methodResults as $methodResult) {
             if ($methodResult->isPassed()) {

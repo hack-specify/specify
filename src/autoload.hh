@@ -2,12 +2,12 @@
 
 namespace specify
 {
-    use specify\result\ObjectBehaviorResult;
     use specify\result\ExampleResult;
+    use specify\result\ExampleGroupResult;
     use \ReflectionMethod;
     use \Generator;
 
-    type ObjectBehaviorSpecification = Specification<ObjectBehaviorResult>;
+    type ObjectBehaviorSpecification = Specification<ExampleResult>;
 
     type SpecificationCollection = ImmVector<ObjectBehaviorSpecification>;
     type LifeCycleMessageSubscriberCollection = ImmVector<LifeCycleMessageSubscriber>;
@@ -38,7 +38,7 @@ namespace specify\runner
 namespace specify\specification
 {
     use specify\Specification;
-    use specify\result\ObjectBehaviorResult;
+    use specify\result\ExampleResult;
     use \Generator;
 
     type PackageNamespace = string;
@@ -51,7 +51,7 @@ namespace specify\specification
      * </code>
      */
     type SpecificationPackage = Pair<PackageNamespace, DirectoryPath>;
-    type ObjectBehaviorSpecification = Specification<ObjectBehaviorResult>;
+    type ObjectBehaviorSpecification = Specification<ExampleResult>;
 
     type ObjectBehaviorSpecificationCollection = Generator<int, ObjectBehaviorSpecification, void>;
 }

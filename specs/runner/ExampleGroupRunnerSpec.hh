@@ -4,7 +4,7 @@ use specify\LifeCycleNotifier;
 use specify\runner\ExampleGroupRunner;
 use specify\fixtures\A;
 use specify\fixtures\example\B;
-use specify\result\ObjectBehaviorResult;
+use specify\result\ExampleGroupResult;
 use \ReflectionClass;
 use \Prophecy\Prophet;
 use \Prophecy\Argument;
@@ -17,7 +17,7 @@ describe(ExampleGroupRunner::class, function() {
 
             $notifier = $this->prophet->prophesize(LifeCycleNotifier::class);
             $notifier->specVerifyStart()->shouldBeCalled();
-            $notifier->specVerifyFinish(Argument::type(ObjectBehaviorResult::class))->shouldBeCalled();
+            $notifier->specVerifyFinish(Argument::type(ExampleGroupResult::class))->shouldBeCalled();
 
             $this->notifier = $notifier->reveal();
 

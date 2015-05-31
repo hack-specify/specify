@@ -5,7 +5,7 @@ namespace specify\runner;
 use specify\ExampleRunner;
 use specify\LifeCycleNotifier;
 use specify\SpecificationCollector;
-use specify\result\ObjectBehaviorResult;
+use specify\result\ExampleGroupResult;
 use \ReflectionClass;
 
 
@@ -36,7 +36,7 @@ class ExampleGroupRunner implements ExampleRunner
             $exampleResults->add($result);
         }
 
-        $result = new ObjectBehaviorResult(
+        $result = new ExampleGroupResult(
             $this->description,
             $exampleResults
         );
