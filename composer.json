@@ -8,10 +8,14 @@
       "email": "holy.shared.design@gmail.com"
     }
   ],
+  "require": {
+    "hhvm": ">=3.5.0"
+  },
   "require-dev": {
     "expect/peridot-expect-plugin": "~3.0",
     "peridot-php/peridot": "~1.15",
-    "peridot-php/peridot-dot-reporter": "~1.0"
+    "peridot-php/peridot-dot-reporter": "~1.0",
+    "phpspec/prophecy": "~1.4"
   },
   "autoload": {
     "psr-4": {

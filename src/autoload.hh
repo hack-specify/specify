@@ -25,6 +25,15 @@ namespace specify\result
     type MethodBehaviorResultCollection = Vector<MethodBehaviorResult>;
 }
 
+
+namespace specify\runner
+{
+    use \Generator;
+    use specify\BehaviorMethod;
+
+    type BehaviorMethodCollection = Generator<int, BehaviorMethod, void>;
+}
+
 namespace specify\specification
 {
     use specify\Specification;
