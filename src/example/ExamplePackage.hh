@@ -5,7 +5,7 @@ namespace specify\example;
 use specify\SpecificationExample;
 use specify\LifeCycleNotifier;
 
-class Package implements SpecificationExample<void>
+class ExamplePackage implements SpecificationExample<void>
 {
 
     public function __construct(

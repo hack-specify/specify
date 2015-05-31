@@ -2,11 +2,11 @@
 
 use specify\LifeCycleNotifier;
 use specify\SpecificationExample;
-use specify\example\Package;
+use specify\example\ExamplePackage;
 use \Prophecy\Prophet;
 
 
-describe(Package::class, function() {
+describe(ExamplePackage::class, function() {
     describe('->verify()', function() {
         beforeEach(function() {
             $this->prophet = new Prophet();
