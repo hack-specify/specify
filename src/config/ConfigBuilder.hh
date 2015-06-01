@@ -11,7 +11,7 @@ class ConfigBuilder
 {
 
     private PackageSpecification $package;
-    private LifeCycleMessageSubscriber $reporter;
+    private ExampleReporter $exampleReporter;
 
     public function package(Package $package) : this
     {
@@ -19,9 +19,9 @@ class ConfigBuilder
         return $this;
     }
 
-    public function reporter(LifeCycleMessageSubscriber $reporter) : this
+    public function exampleReporter(ExampleReporter $exampleReporter) : this
     {
-        $this->reporter = $reporter;
+        $this->exampleReporter = $exampleReporter;
         return $this;
     }
 
@@ -29,7 +29,7 @@ class ConfigBuilder
     {
         return new Config(shape(
             'package' => $this->package,
-            'reporter' => $this->reporter
+            'exampleReporter' => $this->exampleReporter
         ));
     }
 

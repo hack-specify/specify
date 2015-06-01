@@ -21,13 +21,13 @@ describe(ConfigBuilder::class, function() {
         });
         it('returns the config object', function() {
             $config = $this->builder->package($this->package)
-                ->reporter($this->reporter)
+                ->exampleReporter($this->reporter)
                 ->build();
 
             $package = $config->getPackage();
             expect($package)->toBeAnInstanceOf(PackageSpecification::class);
 
-            $reporter = $config->getReporter();
+            $reporter = $config->getExampleReporter();
             expect($reporter)->toBeAnInstanceOf(LifeCycleMessageSubscriber::class);
         });
     });

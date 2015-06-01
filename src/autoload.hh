@@ -16,17 +16,21 @@ namespace specify
     type VerifyResultCollection = Vector<VerifyResult>;
     type ExampleResultCollection = Vector<ExampleResult>;
 
+    type ExampleReporter = LifeCycleMessageSubscriber;
     type ConfigOptions = shape(
         'package' => PackageSpecification,
-        'reporter' => LifeCycleMessageSubscriber
+        'exampleReporter' => ExampleReporter
     );
 }
 
 namespace specify\config
 {
+    use specify\LifeCycleMessageSubscriber;
+
     type PackageNamespace = string;
     type DirectoryPath = string;
     type Package = Pair<PackageNamespace, DirectoryPath>;
+    type ExampleReporter = LifeCycleMessageSubscriber;
 }
 
 namespace specify\result

@@ -9,12 +9,12 @@ class Config
 {
 
     private PackageSpecification $package;
-    private LifeCycleMessageSubscriber $reporter;
+    private Reporter $exampleReporter;
 
     public function __construct(ConfigOptions $config)
     {
         $this->package = $config['package'];
-        $this->reporter = $config['reporter'];
+        $this->exampleReporter = $config['exampleReporter'];
     }
 
     public function getPackage() : PackageSpecification
@@ -22,9 +22,9 @@ class Config
         return $this->package;
     }
 
-    public function getReporter() : LifeCycleMessageSubscriber
+    public function getExampleReporter() : ExampleReporter
     {
-        return $this->reporter;
+        return $this->exampleReporter;
     }
 
 }
