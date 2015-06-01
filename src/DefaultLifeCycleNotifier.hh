@@ -7,6 +7,7 @@ use specify\event\ExampleGroupStart;
 use specify\event\ExampleGroupFinish;
 use specify\event\ExamplePackageFinish;
 use specify\result\ExampleGroupResult;
+use specify\result\ExamplePackageResult;
 
 
 class DefaultLifeCycleNotifier implements LifeCycleNotifier
@@ -33,9 +34,9 @@ class DefaultLifeCycleNotifier implements LifeCycleNotifier
         $this->send(new ExampleGroupFinish($result));
     }
 
-    public function examplePackageFinish() : void
+    public function examplePackageFinish(ExamplePackageResult $result) : void
     {
-        $this->send(new ExamplePackageFinish());
+        $this->send(new ExamplePackageFinish($result));
     }
 
     private function send(LifeCycleEvent $event) : void

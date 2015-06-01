@@ -27,7 +27,7 @@ class ExamplePackage implements SpecificationExample<ExamplePackageResult>
         }
 
         $packageResult = new ExamplePackageResult('', $groupResults); //description!!
-        $notifier->examplePackageFinish();
+        $notifier->examplePackageFinish($packageResult);
 
         return $packageResult;
     }
