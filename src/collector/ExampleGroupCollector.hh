@@ -1,29 +1,31 @@
 <?hh //strict
 
-namespace specify\specification;
+namespace specify\collector;
 
 use specify\Collector;
+use specify\example\ExampleGroup;
+use specify\specification\PackageSpecification;
 use \RecursiveDirectoryIterator;
 use \FilesystemIterator;
 use \RecursiveIteratorIterator;
 
 
-class ObjectSpecificationCollector implements Collector<PackageSpecification, int, ObjectBehaviorSpecification>
+class ExampleGroupCollector implements Collector<PackageSpecification, int, object>
 {
 
     /**
      *
      */
-    public function collectFrom(PackageSpecification $target) : ObjectBehaviorSpecificationCollection
+    public function collectFrom(PackageSpecification $target) : ExampleGroupCollection
     {
         $targetDirectory = $target->getPackageDirectory();
-        $specificationFiles = $this->createIterator($targetDirectory);
+        $exampleGroupFiles = $this->createIterator($targetDirectory);
 
-        foreach ($specificationFiles as $specificationFile) {
-            $fileName = $specificationFile->getPathname();
+        foreach ($exampleGroupFiles as $exampleGroupFile) {
+            $fileName = $exampleGroupFile->getPathname();
 
             $reflection = $target->resolve($fileName);
-            yield $reflection->newInstance();
+            yield new ExampleGroup($reflection);
         }
     }
 

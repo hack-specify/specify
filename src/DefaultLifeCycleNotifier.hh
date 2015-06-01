@@ -2,11 +2,11 @@
 
 namespace specify;
 
-use specify\event\VerifyStart;
-use specify\event\SpecificationVerifyStart;
-use specify\event\SpecificationVerifyFinish;
-use specify\event\VerifyFinish;
-use specify\result\ObjectBehaviorResult;
+use specify\event\ExamplePackageStart;
+use specify\event\ExampleGroupStart;
+use specify\event\ExampleGroupFinish;
+use specify\event\ExamplePackageFinish;
+use specify\result\ExampleGroupResult;
 
 
 class DefaultLifeCycleNotifier implements LifeCycleNotifier
@@ -18,24 +18,24 @@ class DefaultLifeCycleNotifier implements LifeCycleNotifier
     {
     }
 
-    public function verifyStart() : void
+    public function examplePackageStart() : void
     {
-        $this->send(new VerifyStart());
+        $this->send(new ExamplePackageStart());
     }
 
-    public function specVerifyStart() : void
+    public function exampleGroupStart() : void
     {
-        $this->send(new SpecificationVerifyStart());
+        $this->send(new ExampleGroupStart());
     }
 
-    public function specVerifyFinish(ObjectBehaviorResult $result) : void
+    public function exampleGroupFinish(ExampleGroupResult $result) : void
     {
-        $this->send(new SpecificationVerifyFinish($result));
+        $this->send(new ExampleGroupFinish($result));
     }
 
-    public function verifyFinish() : void
+    public function examplePackageFinish() : void
     {
-        $this->send(new VerifyFinish());
+        $this->send(new ExamplePackageFinish());
     }
 
     private function send(LifeCycleEvent $event) : void

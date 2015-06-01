@@ -5,10 +5,10 @@ namespace specify\example;
 use specify\BehaviorResult;
 use specify\LifeCycleEvent;
 use specify\LifeCycleMessageSubscriber;
-use specify\event\VerifyStart;
-use specify\event\SpecificationVerifyStart;
-use specify\event\SpecificationVerifyFinish;
-use specify\event\VerifyFinish;
+use specify\event\ExamplePackageStart;
+use specify\event\ExampleGroupStart;
+use specify\event\ExampleGroupFinish;
+use specify\event\ExamplePackageFinish;
 
 
 class ExampleMessageSubscriber implements LifeCycleMessageSubscriber
@@ -17,41 +17,41 @@ class ExampleMessageSubscriber implements LifeCycleMessageSubscriber
     public function handle(LifeCycleEvent $event) : void
     {
 
-        if ($event instanceof VerifyStart) {
-            $this->onVerifyStart($event);
-        } else if ($event instanceof SpecificationVerifyStart) {
-            $this->onSpecificationVerifyStart($event);
-        } else if ($event instanceof SpecificationVerifyFinish) {
-            $this->onSpecificationVerifyFinish($event);
-        } else if ($event instanceof VerifyFinish) {
-            $this->onVerifyFinish($event);
+        if ($event instanceof ExamplePackageStart) {
+            $this->onExamplePackageStart($event);
+        } else if ($event instanceof ExampleGroupStart) {
+            $this->onExampleGroupStart($event);
+        } else if ($event instanceof ExampleGroupFinish) {
+            $this->onExampleGroupFinish($event);
+        } else if ($event instanceof ExamplePackageFinish) {
+            $this->onExamplePackageFinish($event);
         }
     }
 
-    public function onVerifyStart(VerifyStart $event) : void
+    public function onExamplePackageStart(ExamplePackageStart $event) : void
     {
         echo $event->getName(), "\n";
     }
 
-    public function onSpecificationVerifyStart(SpecificationVerifyStart $event) : void
+    public function onExampleGroupStart(ExampleGroupStart $event) : void
     {
         echo $event->getName(), "\n";
     }
 
-    public function onSpecificationVerifyFinish(SpecificationVerifyFinish $event) : void
+    public function onExampleGroupFinish(ExampleGroupFinish $event) : void
     {
-        $result = $event->getBehaviorResult();
+        $result = $event->getExampleGroupResult();
 
         echo $result->getDescription(), "\n";
-        $methodResults = $result->getMethodResults();
+        $exampleResults = $result->getExampleResults();
 
-        foreach ($methodResults as $methodResult) {
-            $status = $methodResult->isFailed() ? 'ok' : 'ng';
-            echo "    ", $status, " ", $methodResult->getDescription(), "\n";
+        foreach ($exampleResults as $exampleResult) {
+            $status = $exampleResult->isFailed() ? 'ok' : 'ng';
+            echo "    ", $status, " ", $exampleResult->getDescription(), "\n";
         }
     }
 
-    public function onVerifyFinish(VerifyFinish $event) : void
+    public function onExamplePackageFinish(ExamplePackageFinish $event) : void
     {
         echo $event->getName(), "\n";
     }

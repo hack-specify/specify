@@ -1,24 +1,27 @@
 <?hh //strict
 
-namespace specify;
+namespace specify\example;
 
-use specify\result\MethodBehaviorResult;
+use specify\SpecificationExample;
+use specify\LifeCycleNotifier;
+use specify\result\ExampleResult;
 use \ReflectionMethod;
 use \Exception;
 
-class BehaviorMethod implements Specification<MethodBehaviorResult>
+
+class Example implements SpecificationExample<ExampleResult>
 {
 
-    const string ATTRIBUTE_NAME = 'Specification';
+    const string ATTRIBUTE_NAME = 'Example';
 
     public function __construct(
-        private ObjectBehaviorSpecification $target,
+        private object $target,
         private ReflectionMethod $method
     )
     {
     }
 
-    public function verify() : MethodBehaviorResult
+    public function verify(LifeCycleNotifier $notifier) : ExampleResult
     {
         $description = 'pending';
         $attributeValues = $this->method->getAttribute(self::ATTRIBUTE_NAME);
@@ -27,12 +30,12 @@ class BehaviorMethod implements Specification<MethodBehaviorResult>
             $description = (string) $attributeValues[0];
         }
 
-        $result = MethodBehaviorResult::passed($description);
+        $result = ExampleResult::passed($description);
 
         try {
             $this->method->invoke($this->target);
         } catch (Exception $exception) {
-            $result = MethodBehaviorResult::failed($description, $exception);
+            $result = ExampleResult::failed($description, $exception);
         }
 
         return $result;

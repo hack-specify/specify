@@ -6,12 +6,12 @@ use specify\LifeCycleEvent;
 use specify\LifeCycleEventType;
 use \DateTime;
 
-class VerifyFinish extends AbstractNamedEvent implements LifeCycleEvent
+class ExamplePackageFinish extends AbstractNamedEvent implements LifeCycleEvent
 {
 
     public function __construct()
     {
-        $this->name = LifeCycleEventType::VerifyFinish;
+        $this->name = LifeCycleEventType::ExamplePackageFinish;
         $this->sendAt = new DateTime();
     }
 

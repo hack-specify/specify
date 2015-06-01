@@ -2,35 +2,48 @@
 
 namespace specify
 {
-    use specify\result\ObjectBehaviorResult;
-    use specify\result\MethodBehaviorResult;
+    use specify\example\Example;
+    use specify\result\ExampleResult;
+    use specify\result\ExampleGroupResult;
     use \ReflectionMethod;
     use \Generator;
 
-    type ObjectBehaviorSpecification = Specification<ObjectBehaviorResult>;
-
-    type SpecificationCollection = ImmVector<ObjectBehaviorSpecification>;
     type LifeCycleMessageSubscriberCollection = ImmVector<LifeCycleMessageSubscriber>;
-    type BehaviorMethodCollection = Generator<int, BehaviorMethod, void>;
 
+    type ExampleCollection = Generator<int, Example, void>;
     type VerifyResultCollection = Vector<VerifyResult>;
-
-    type MethodBehaviorResultCollection = Vector<MethodBehaviorResult>;
+    type ExampleResultCollection = Vector<ExampleResult>;
 }
 
 namespace specify\result
 {
-    use specify\result\MethodBehaviorResult;
+    use specify\result\ExampleResult;
 
-    type MethodBehaviorResultCollection = Vector<MethodBehaviorResult>;
+    type ExampleResultCollection = Vector<ExampleResult>;
+}
+
+
+namespace specify\collector
+{
+    use \Generator;
+    use specify\example\Example;
+    use specify\example\ExampleGroup;
+
+    type DirectoryPath = string;
+    type ExampleCollection = Generator<int, Example, void>;
+    type ExampleGroupCollection = Generator<int, ExampleGroup, void>;
+}
+
+namespace specify\example
+{
+    use \Generator;
+
+    type ExampleGroupCollection = ImmVector<ExampleGroup>;
+    type ExampleCollection = Generator<int, Example, void>;
 }
 
 namespace specify\specification
 {
-    use specify\Specification;
-    use specify\result\ObjectBehaviorResult;
-    use \Generator;
-
     type PackageNamespace = string;
     type DirectoryPath = string;
     type SpecificationFile = string;
@@ -41,7 +54,4 @@ namespace specify\specification
      * </code>
      */
     type SpecificationPackage = Pair<PackageNamespace, DirectoryPath>;
-    type ObjectBehaviorSpecification = Specification<ObjectBehaviorResult>;
-
-    type ObjectBehaviorSpecificationCollection = Generator<int, ObjectBehaviorSpecification, void>;
 }
