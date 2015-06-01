@@ -29,7 +29,7 @@ describe(ExamplePackage::class, function() {
             });
         });
         it('verify all example groups', function() {
-            $this->package->run($this->notifier);
+            $this->package->verify($this->notifier);
             $this->prophet->checkPredictions();
         });
     });
