@@ -9,7 +9,7 @@ class Config
 {
 
     private PackageSpecification $package;
-    private Reporter $exampleReporter;
+    private ExampleReporter $exampleReporter;
 
     public function __construct(ConfigOptions $config)
     {
