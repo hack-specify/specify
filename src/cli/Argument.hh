@@ -19,13 +19,13 @@ class Argument
 
     public function getConfigFile() : string
     {
-        $value = (string) $this->getOption('c', 'config');
+        $value = $this->getOption('c', 'config');
 
         if ($value === null) {
             return Config::FILE_NAME;
         }
 
-        return $value;
+        return (string) $value;
     }
 
     /**
