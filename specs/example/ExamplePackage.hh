@@ -28,7 +28,7 @@ describe(ExamplePackage::class, function() {
                 ->shouldBeCalled()
                 ->willReturn(new ExampleGroupResult('group2', Vector {}));
 
-            $this->package = new ExamplePackage(ImmVector {
+            $this->package = new ExamplePackage('package', ImmVector {
                 $group1->reveal(),
                 $group2->reveal()
             });

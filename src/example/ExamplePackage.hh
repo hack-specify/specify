@@ -11,9 +11,15 @@ class ExamplePackage implements SpecificationExample<ExamplePackageResult>
 {
 
     public function __construct(
+        private string $description,
         private ExampleGroupCollection $exampleGroups
     )
     {
+    }
+
+    public function getDescription() : string
+    {
+        return $this->description;
     }
 
     public function verify(LifeCycleNotifier $notifier) : ExamplePackageResult
@@ -26,7 +32,7 @@ class ExamplePackage implements SpecificationExample<ExamplePackageResult>
             $groupResults->add($result);
         }
 
-        $packageResult = new ExamplePackageResult('', $groupResults); //description!!
+        $packageResult = new ExamplePackageResult($this->getDescription(), $groupResults);
         $notifier->examplePackageFinish($packageResult);
 
         return $packageResult;
