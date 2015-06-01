@@ -8,6 +8,8 @@ use specify\specification\PackageSpecification;
 class Config
 {
 
+    const string FILE_NAME = 'specify.hh';
+
     private PackageSpecification $package;
     private ExampleReporter $exampleReporter;
 
