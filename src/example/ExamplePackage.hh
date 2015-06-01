@@ -23,7 +23,7 @@ class ExamplePackage implements SpecificationExample<ExamplePackageResult>
 
         foreach ($this->exampleGroups as $exampleGroup) {
             $result = $exampleGroup->verify($notifier);
-            $groupResults->add($reslut);
+            $groupResults->add($result);
         }
 
         $packageResult = new ExamplePackageResult('', $groupResults); //description!!
