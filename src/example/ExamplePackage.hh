@@ -4,8 +4,10 @@ namespace specify\example;
 
 use specify\SpecificationExample;
 use specify\LifeCycleNotifier;
+use specify\result\ExamplePackageResult;
 
-class ExamplePackage implements SpecificationExample<void>
+
+class ExamplePackage implements SpecificationExample<ExamplePackageResult>
 {
 
     public function __construct(
@@ -14,15 +16,20 @@ class ExamplePackage implements SpecificationExample<void>
     {
     }
 
-    public function verify(LifeCycleNotifier $notifier) : void
+    public function verify(LifeCycleNotifier $notifier) : ExamplePackageResult
     {
+        $groupResults = Vector {};
         $notifier->examplePackageStart();
 
         foreach ($this->exampleGroups as $exampleGroup) {
-            $exampleGroup->verify($notifier);
+            $result = $exampleGroup->verify($notifier);
+            $groupResults->add($reslut);
         }
 
+        $packageResult = new ExamplePackageResult('', $groupResults); //description!!
         $notifier->examplePackageFinish();
+
+        return $packageResult;
     }
 
 }

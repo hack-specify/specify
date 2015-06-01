@@ -3,6 +3,7 @@
 use specify\LifeCycleNotifier;
 use specify\SpecificationExample;
 use specify\example\ExamplePackage;
+use specify\result\ExampleGroupResult;
 use \Prophecy\Prophet;
 
 
@@ -18,10 +19,14 @@ describe(ExamplePackage::class, function() {
             $this->notifier = $notifier->reveal();
 
             $group1 = $this->prophet->prophesize(SpecificationExample::class);
-            $group1->verify($this->notifier)->shouldBeCalled();
+            $group1->verify($this->notifier)
+                ->shouldBeCalled()
+                ->willReturn(new ExampleGroupResult('group1', Vector {}));
 
             $group2 = $this->prophet->prophesize(SpecificationExample::class);
-            $group2->verify($this->notifier)->shouldBeCalled();
+            $group2->verify($this->notifier)
+                ->shouldBeCalled()
+                ->willReturn(new ExampleGroupResult('group2', Vector {}));
 
             $this->package = new ExamplePackage(ImmVector {
                 $group1->reveal(),

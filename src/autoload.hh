@@ -34,6 +34,7 @@ namespace specify\result
     use specify\result\ExampleResult;
 
     type ExampleResultCollection = Vector<ExampleResult>;
+    type ExampleGroupResultCollection = Vector<ExampleGroupResult>;
 }
 
 
