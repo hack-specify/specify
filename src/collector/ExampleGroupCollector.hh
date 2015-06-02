@@ -6,9 +6,6 @@ use specify\Collector;
 use specify\Specification;
 use specify\example\ExampleGroup;
 use specify\specification\PackageSpecification;
-use \RecursiveDirectoryIterator;
-use \FilesystemIterator;
-use \RecursiveIteratorIterator;
 
 
 class ExampleGroupCollector implements Collector<PackageSpecification, int, ExampleGroup>
@@ -20,33 +17,21 @@ class ExampleGroupCollector implements Collector<PackageSpecification, int, Exam
     public function collectFrom(PackageSpecification $target) : ExampleGroupCollection
     {
         $targetDirectory = $target->getPackageDirectory();
-        $exampleGroupFiles = $this->createIterator($targetDirectory);
+        $specificationFiles = $this->getSpecificationFiles($targetDirectory);
 
-        foreach ($exampleGroupFiles as $exampleGroupFile) {
-            $fileName = $exampleGroupFile->getPathname();
-
-            $reflection = $target->resolve($fileName);
+        foreach ($specificationFiles as $specificationFile) {
+            $reflection = $target->resolve($specificationFile);
             yield new ExampleGroup($reflection);
         }
     }
 
     /**
      * @param string $directory
-     *
-     * @return RecursiveIteratorIterator
      */
-    private function createIterator(DirectoryPath $directory)
+    private function getSpecificationFiles(DirectoryPath $directory) : SpecificationFileCollection
     {
-        $directoryIterator = new RecursiveDirectoryIterator($directory,
-            FilesystemIterator::CURRENT_AS_FILEINFO |
-            FilesystemIterator::KEY_AS_PATHNAME |
-            FilesystemIterator::SKIP_DOTS
-        );
-
-        $filterIterator = new RecursiveIteratorIterator($directoryIterator,
-            RecursiveIteratorIterator::LEAVES_ONLY);
-
-        return $filterIterator;
+        $collector = new SpecificationFileCollector();
+        return $collector->collectFrom($directory);
     }
 
 }

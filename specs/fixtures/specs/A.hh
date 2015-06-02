@@ -2,7 +2,9 @@
 
 namespace specify\fixtures;
 
-class A
+use specify\Specification;
+
+class A implements Specification
 {
 
     <<Example("example1")>>
