@@ -11,10 +11,10 @@ use specify\result\ExamplePackageResult;
 class NotifyRecorder implements LifeCycleNotifier
 {
 
-    private string $packageDescription;
+    private ?string $packageDescription;
     private Vector<string> $groupDescriptions = Vector {};
     private Vector<ExampleGroupResult> $groupResults = Vector {};
-    private ExamplePackageResult $packageResult;
+    private ?ExamplePackageResult $packageResult;
 
     public function examplePackageStart(string $description) : void
     {
