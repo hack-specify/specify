@@ -21,6 +21,11 @@ class ExampleGroupCollector implements Collector<PackageSpecification, int, Exam
 
         foreach ($specificationFiles as $specificationFile) {
             $reflection = $target->resolve($specificationFile);
+
+            if ($reflection->implementsInterface(Specification::class) === false) {
+                continue;
+            }
+
             yield new ExampleGroup($reflection);
         }
     }

@@ -3,9 +3,10 @@
 namespace specify\example;
 
 use \Exception;
+use specify\Specification;
 
 
-final class ExampleSpec
+final class ExampleSpec implements Specification
 {
 
     <<Example("example1")>>
