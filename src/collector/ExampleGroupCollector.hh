@@ -3,6 +3,7 @@
 namespace specify\collector;
 
 use specify\Collector;
+use specify\Specification;
 use specify\example\ExampleGroup;
 use specify\specification\PackageSpecification;
 use \RecursiveDirectoryIterator;
@@ -10,7 +11,7 @@ use \FilesystemIterator;
 use \RecursiveIteratorIterator;
 
 
-class ExampleGroupCollector implements Collector<PackageSpecification, int, object>
+class ExampleGroupCollector implements Collector<PackageSpecification, int, ExampleGroup>
 {
 
     /**

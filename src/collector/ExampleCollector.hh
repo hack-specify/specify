@@ -3,15 +3,16 @@
 namespace specify\collector;
 
 use specify\Collector;
+use specify\Specification;
 use specify\example\Example;
 use \ReflectionClass;
 use \ReflectionMethod;
 
 
-class ExampleCollector implements Collector<object, int, Example>
+class ExampleCollector implements Collector<Specification, int, Example>
 {
 
-    public function collectFrom(object $target) : ExampleCollection
+    public function collectFrom(Specification $target) : ExampleCollection
     {
         $reflection = new ReflectionClass($target);
         $methods = $reflection->getMethods(ReflectionMethod::IS_PUBLIC);

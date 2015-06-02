@@ -2,6 +2,7 @@
 
 namespace specify\example;
 
+use specify\Specification;
 use specify\SpecificationExample;
 use specify\LifeCycleNotifier;
 use specify\result\ExampleResult;
@@ -15,7 +16,7 @@ class Example implements SpecificationExample<ExampleResult>
     const string ATTRIBUTE_NAME = 'Example';
 
     public function __construct(
-        private object $target,
+        private Specification $target,
         private ReflectionMethod $method
     )
     {

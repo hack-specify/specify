@@ -2,6 +2,7 @@
 
 namespace specify\example;
 
+use specify\Specification;
 use specify\LifeCycleNotifier;
 use specify\SpecificationExample;
 use specify\result\ExampleGroupResult;
@@ -16,7 +17,7 @@ class ExampleGroup implements SpecificationExample<ExampleGroupResult>
 {
 
     private string $description;
-    private object $exampleGroup;
+    private Specification $exampleGroup;
     private ExampleCollection $examples;
 
     public function __construct(
