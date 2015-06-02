@@ -13,6 +13,9 @@ use specify\event\ExamplePackageFinish;
 class SpecificationReporter implements LifeCycleMessageSubscriber
 {
 
+    private int $indentLevel = 0;
+
+
     public function handle(LifeCycleEvent $event) : void
     {
         if ($event instanceof ExamplePackageStart) {
@@ -33,25 +36,30 @@ class SpecificationReporter implements LifeCycleMessageSubscriber
 
     public function onExampleGroupStart(ExampleGroupStart $event) : void
     {
-        echo $event->getName(), "\n";
+        $this->indentLevel++;
     }
 
     public function onExampleGroupFinish(ExampleGroupFinish $event) : void
     {
         $result = $event->getExampleGroupResult();
+        $indentSpace = str_pad("", $this->indentLevel, " ");
 
         echo $result->getDescription(), "\n";
         $exampleResults = $result->getExampleResults();
 
         foreach ($exampleResults as $exampleResult) {
             $status = $exampleResult->isFailed() ? 'ok' : 'ng';
-            echo "    ", $status, " ", $exampleResult->getDescription(), "\n";
+            echo $indentSpace, $status, " ", $exampleResult->getDescription(), "\n";
         }
+
+        $this->indentLevel--;
     }
 
     public function onExamplePackageFinish(ExamplePackageFinish $event) : void
     {
-        echo $event->getName(), "\n";
+        $result = $event->getExamplePackageResult();
+        echo "\n";
+        echo $result->getExampleCount(), " example, ", $result->getFailedExampleCount(), " failures\n";
     }
 
 }

@@ -25,6 +25,22 @@ class ExampleGroupResult implements VerifyResult
     }
 
     <<__Memoize>>
+    public function getExampleCount() : int
+    {
+        return $this->exampleResults->count();
+    }
+
+    <<__Memoize>>
+    public function getFailedExampleCount() : int
+    {
+        $failedExamples = $this->exampleResults->filter((ExampleResult $exampleResult) ==> {
+            return $exampleResult->isPassed();
+        });
+
+        return $failedExamples->count();
+    }
+
+    <<__Memoize>>
     public function isPassed() : bool
     {
         $result = true;

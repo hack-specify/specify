@@ -25,6 +25,32 @@ class ExamplePackageResult implements VerifyResult
     }
 
     <<__Memoize>>
+    public function getExampleCount() : int
+    {
+        $exampleCount = 0;
+        $groupResults = $this->exampleGroupResults->items();
+
+        foreach ($groupResults as $groupResult) {
+            $exampleCount += $groupResult->getExampleCount();
+        }
+
+        return $exampleCount;
+    }
+
+    <<__Memoize>>
+    public function getFailedExampleCount() : int
+    {
+        $failedExampleCount = 0;
+        $groupResults = $this->exampleGroupResults->items();
+
+        foreach ($groupResults as $groupResult) {
+            $failedExampleCount += $groupResult->getFailedExampleCount();
+        }
+
+        return $failedExampleCount;
+    }
+
+    <<__Memoize>>
     public function isPassed() : bool
     {
         $result = true;
