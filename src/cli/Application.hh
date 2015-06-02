@@ -26,7 +26,9 @@ class Application
         });
 
         $collector = new ExampleGroupCollector();
-        $groups = $collector->collectFrom($config->getPackage());
+
+        $package = $config->getPackage();
+        $groups = $collector->collectFrom($package);
 
         $shuffleGroup = Vector {};
 
@@ -35,7 +37,7 @@ class Application
         }
         $shuffleGroup->shuffle();
 
-        $package = new ExamplePackage('', $shuffleGroup->toImmVector());
+        $package = new ExamplePackage($package->getNamespace(), $shuffleGroup->toImmVector());
         $packageResult = $package->verify($lifeCycleNotifier);
 
         $this->shutdown($packageResult);

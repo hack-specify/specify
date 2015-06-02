@@ -31,35 +31,53 @@ class SpecificationReporter implements LifeCycleMessageSubscriber
 
     public function onExamplePackageStart(ExamplePackageStart $event) : void
     {
-        echo $event->getDescription(), "\n";
+        $this->writeln("\n%s\n\n", $event->getDescription());
+        $this->indentLevel++;
     }
 
     public function onExampleGroupStart(ExampleGroupStart $event) : void
     {
+        $this->writeWithIndent("%s\n", $event->getDescription());
         $this->indentLevel++;
-        echo $event->getDescription(), "\n";
     }
 
     public function onExampleGroupFinish(ExampleGroupFinish $event) : void
     {
         $result = $event->getExampleGroupResult();
-        $indentSpace = str_pad("", $this->indentLevel, " ");
-
         $exampleResults = $result->getExampleResults();
 
         foreach ($exampleResults as $exampleResult) {
             $status = $exampleResult->isFailed() ? 'ok' : 'ng';
-            echo $indentSpace, $status, " ", $exampleResult->getDescription(), "\n";
+            $this->writeWithIndent("%s %s\n", $status, $exampleResult->getDescription());
         }
 
+        $this->writeln("\n");
         $this->indentLevel--;
     }
 
     public function onExamplePackageFinish(ExamplePackageFinish $event) : void
     {
         $result = $event->getExamplePackageResult();
-        echo "\n";
-        echo $result->getExampleCount(), " example, ", $result->getFailedExampleCount(), " failures\n";
+
+        $this->writeln("%d example, %d failures\n",
+            $result->getExampleCount(),
+            $result->getFailedExampleCount()
+        );
+    }
+
+    private function writeWithIndent(string $format, ...) : void
+    {
+        $values = func_get_args();
+        $indentSpace = str_pad("", $this->indentLevel * 2, " ");
+
+        $values[0] = $indentSpace . $format;
+        echo call_user_func_array('sprintf', $values);
+    }
+
+    private function writeln(string $format, ...) : void
+    {
+        $values = func_get_args();
+        echo call_user_func_array('sprintf', $values);
     }
 
 }
