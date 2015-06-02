@@ -4,10 +4,9 @@ use specify\LifeCycleNotifier;
 use specify\example\ExampleGroup;
 use specify\result\ExampleGroupResult;
 use specify\fixtures\A;
+use specify\helper\NotifyRecorder;
 use \ReflectionClass;
 use \Exception;
-use \Prophecy\Prophet;
-use \Prophecy\Argument;
 
 
 describe(ExampleGroup::class, function() {
@@ -21,18 +20,12 @@ describe(ExampleGroup::class, function() {
     });
     describe('->verify()', function() {
         beforeEach(function() {
-            $this->prophet = new Prophet();
-
-            $notifier = $this->prophet->prophesize(LifeCycleNotifier::class);
-            $notifier->exampleGroupStart()->shouldBeCalled();
-            $notifier->exampleGroupFinish(Argument::type(ExampleGroupResult::class))->shouldBeCalled();
-
-            $this->notifier = $notifier->reveal();
+            $this->notifier = new NotifyRecorder();
             $this->exampleGroup = new ExampleGroup(new ReflectionClass(A::class));
         });
         it('verify all examples', function() {
-            $this->exampleGroup->verify($this->notifier);
-            $this->prophet->checkPredictions();
+            $result = $this->exampleGroup->verify($this->notifier);
+            expect($result->getExampleCount())->toBe(1);
         });
     });
 });
