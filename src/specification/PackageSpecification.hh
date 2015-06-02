@@ -2,7 +2,9 @@
 
 namespace specify\specification;
 
+use specify\Specification;
 use \ReflectionClass;
+use \ReflectionException;
 
 
 class PackageSpecification
@@ -33,7 +35,17 @@ class PackageSpecification
         $relativeClass = $this->relativeClassFrom($file);
         $fullName = $this->ns . $relativeClass;
 
-        return new ReflectionClass($fullName);
+        try {
+            $reflection = new ReflectionClass($fullName);
+        } catch (ReflectionException $exception) {
+            throw new NotSpecificationFileException();
+        }
+
+        if ($reflection->implementsInterface(Specification::class) === false) {
+            throw new NotSpecificationFileException();
+        }
+
+        return $reflection;
     }
 
     private function relativeClassFrom(SpecificationFile $file) : string
