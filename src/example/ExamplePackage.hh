@@ -25,7 +25,7 @@ class ExamplePackage implements SpecificationExample<ExamplePackageResult>
     public function verify(LifeCycleNotifier $notifier) : ExamplePackageResult
     {
         $groupResults = Vector {};
-        $notifier->examplePackageStart();
+        $notifier->examplePackageStart($this->getDescription());
 
         foreach ($this->exampleGroups as $exampleGroup) {
             $result = $exampleGroup->verify($notifier);

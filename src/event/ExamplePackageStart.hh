@@ -10,10 +10,17 @@ use \DateTime;
 class ExamplePackageStart extends AbstractNamedEvent implements LifeCycleEvent
 {
 
-    public function __construct()
+    public function __construct(
+        private string $description
+    )
     {
         $this->name = LifeCycleEventType::ExamplePackageStart;
         $this->sendAt = new DateTime();
+    }
+
+    public function getDescription() : string
+    {
+        return $this->description;
     }
 
 }

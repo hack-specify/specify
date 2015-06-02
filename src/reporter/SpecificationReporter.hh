@@ -31,12 +31,13 @@ class SpecificationReporter implements LifeCycleMessageSubscriber
 
     public function onExamplePackageStart(ExamplePackageStart $event) : void
     {
-        echo $event->getName(), "\n";
+        echo $event->getDescription(), "\n";
     }
 
     public function onExampleGroupStart(ExampleGroupStart $event) : void
     {
         $this->indentLevel++;
+        echo $event->getDescription(), "\n";
     }
 
     public function onExampleGroupFinish(ExampleGroupFinish $event) : void
@@ -44,7 +45,6 @@ class SpecificationReporter implements LifeCycleMessageSubscriber
         $result = $event->getExampleGroupResult();
         $indentSpace = str_pad("", $this->indentLevel, " ");
 
-        echo $result->getDescription(), "\n";
         $exampleResults = $result->getExampleResults();
 
         foreach ($exampleResults as $exampleResult) {

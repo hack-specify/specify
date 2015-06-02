@@ -8,8 +8,8 @@ use specify\result\ExamplePackageResult;
 
 interface LifeCycleNotifier
 {
-    public function examplePackageStart() : void;
-    public function exampleGroupStart() : void;
+    public function examplePackageStart(string $description) : void;
+    public function exampleGroupStart(string $description) : void;
     public function exampleGroupFinish(ExampleGroupResult $result) : void;
     public function examplePackageFinish(ExamplePackageResult $result) : void;
 }

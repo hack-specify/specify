@@ -19,14 +19,14 @@ class DefaultLifeCycleNotifier implements LifeCycleNotifier
     {
     }
 
-    public function examplePackageStart() : void
+    public function examplePackageStart(string $description) : void
     {
-        $this->send(new ExamplePackageStart());
+        $this->send(new ExamplePackageStart($description));
     }
 
-    public function exampleGroupStart() : void
+    public function exampleGroupStart(string $description) : void
     {
-        $this->send(new ExampleGroupStart());
+        $this->send(new ExampleGroupStart($description));
     }
 
     public function exampleGroupFinish(ExampleGroupResult $result) : void
