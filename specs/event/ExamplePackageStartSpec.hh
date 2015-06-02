@@ -6,7 +6,7 @@ use specify\event\ExamplePackageStart;
 describe(ExamplePackageStart::class, function() {
     describe('->getName()', function() {
         beforeEach(function() {
-            $this->message = new ExamplePackageStart();
+            $this->message = new ExamplePackageStart('description');
         });
         it('returns the event name', function() {
             $name = (string) LifeCycleEventType::ExamplePackageStart;
