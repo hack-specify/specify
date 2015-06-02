@@ -6,6 +6,7 @@ use specify\Collector;
 use specify\Specification;
 use specify\example\ExampleGroup;
 use specify\specification\PackageSpecification;
+use \ReflectionException;
 
 
 class ExampleGroupCollector implements Collector<PackageSpecification, int, ExampleGroup>
@@ -20,7 +21,11 @@ class ExampleGroupCollector implements Collector<PackageSpecification, int, Exam
         $specificationFiles = $this->getSpecificationFiles($targetDirectory);
 
         foreach ($specificationFiles as $specificationFile) {
-            $reflection = $target->resolve($specificationFile);
+            try {
+                $reflection = $target->resolve($specificationFile);
+            } catch (ReflectionException $exception) {
+                continue;
+            }
 
             if ($reflection->implementsInterface(Specification::class) === false) {
                 continue;
