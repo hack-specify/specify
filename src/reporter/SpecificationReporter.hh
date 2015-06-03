@@ -22,8 +22,13 @@ use specify\event\ExamplePackageFinish;
 class SpecificationReporter implements LifeCycleMessageSubscriber
 {
 
+    private ProcessingTimeReporter $reporter;
     private int $indentLevel = 0;
 
+    public function __construct()
+    {
+        $this->reporter = new ProcessingTimeReporter();
+    }
 
     public function handle(LifeCycleEvent $event) : void
     {
@@ -42,6 +47,7 @@ class SpecificationReporter implements LifeCycleMessageSubscriber
     {
         $this->writeln("\n%s\n\n", $event->getDescription());
         $this->indentLevel++;
+        $this->reporter->handle($event);
     }
 
     public function onExampleGroupStart(ExampleGroupStart $event) : void
@@ -66,6 +72,8 @@ class SpecificationReporter implements LifeCycleMessageSubscriber
 
     public function onExamplePackageFinish(ExamplePackageFinish $event) : void
     {
+        $this->reporter->handle($event);
+
         $this->writeln("%d example, %d failures\n",
             $event->getExampleCount(),
             $event->getFailedExampleCount()
