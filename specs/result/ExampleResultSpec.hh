@@ -22,5 +22,17 @@ describe(ExampleResult::class, function() {
             expect($result)->toBeFalse();
         });
     });
+    context('->pending()', function() {
+        it('returns pending result', function() {
+            $exampleResult = ExampleResult::pending('foo');
+            $result = $exampleResult->isFailed();
+            expect($result)->toBeFalse();
 
+            $result = $exampleResult->isPassed();
+            expect($result)->toBeFalse();
+
+            $result = $exampleResult->isPending();
+            expect($result)->toBeTrue();
+        });
+    });
 });

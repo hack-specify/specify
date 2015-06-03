@@ -20,7 +20,7 @@ class ExampleResult implements VerifyResult
 
     public function __construct(
         private string $description,
-        private bool $result,
+        private ExampleResultType $result,
         private ?Exception $exception = null
     )
     {
@@ -33,22 +33,32 @@ class ExampleResult implements VerifyResult
 
     public function isPassed() : bool
     {
-        return $this->result === true;
+        return $this->result === ExampleResultType::Passed;
+    }
+
+    public function isPending() : bool
+    {
+        return $this->result === ExampleResultType::Pending;
     }
 
     public function isFailed() : bool
     {
-        return $this->isPassed() === false;
+        return $this->result === ExampleResultType::Failed;
     }
 
     public static function passed(string $description) : ExampleResult
     {
-        return new self($description, true);
+        return new self($description, ExampleResultType::Passed);
+    }
+
+    public static function pending(string $description) : ExampleResult
+    {
+        return new self($description, ExampleResultType::Pending);
     }
 
     public static function failed(string $description, Exception $reason) : ExampleResult
     {
-        return new self($description, false, $reason);
+        return new self($description, ExampleResultType::Failed, $reason);
     }
 
 }
