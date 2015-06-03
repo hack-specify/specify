@@ -37,6 +37,11 @@ class ExamplePackageFinish extends AbstractNamedEvent implements LifeCycleEvent
         return $this->result->getFailedExampleCount();
     }
 
+    public function getPendingExampleCount() : int
+    {
+        return $this->result->getPendingExampleCount();
+    }
+
     public function getExamplePackageResult() : ExamplePackageResult
     {
         return $this->result;

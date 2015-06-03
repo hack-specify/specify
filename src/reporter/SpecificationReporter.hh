@@ -74,9 +74,10 @@ class SpecificationReporter implements LifeCycleMessageSubscriber
     {
         $this->reporter->handle($event);
 
-        $this->writeln("%d example, %d failures\n",
+        $this->writeln("%d example, %d failures, %d pending\n",
             $event->getExampleCount(),
-            $event->getFailedExampleCount()
+            $event->getFailedExampleCount(),
+            $event->getPendingExampleCount()
         );
     }
 
