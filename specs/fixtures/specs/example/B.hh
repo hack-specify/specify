@@ -12,4 +12,8 @@ class B implements Specification
     {
     }
 
+    public function example3() : void
+    {
+    }
+
 }
