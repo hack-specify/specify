@@ -57,7 +57,7 @@ class SpecificationReporter implements LifeCycleMessageSubscriber
     {
         $indentSpace = str_pad("", $this->indentLevel * 2, " ");
 
-        $this->writer->write($indentSpace . "<green>%s</green>\n", $event->getDescription());
+        $this->writer->write($indentSpace . "<white>%s</white>\n", $event->getDescription());
         $this->indentLevel++;
     }
 
@@ -69,12 +69,12 @@ class SpecificationReporter implements LifeCycleMessageSubscriber
         $indentSpace = str_pad("", $this->indentLevel * 2, " ");
 
         foreach ($exampleResults as $exampleResult) {
-            $format = "<green>%s</green>\n";
+            $format = "<white>%s</white>\n";
 
             if ($exampleResult->isFailed()) {
                 $format = "<red>%s</red>\n";
             } else if ($exampleResult->isPending()) {
-                $format = "<yellow>%s</yellow>\n";
+                $format = "<gray>%s</gray>\n";
             }
             $this->writer->write($indentSpace . $format, $exampleResult->getDescription());
         }
@@ -87,7 +87,15 @@ class SpecificationReporter implements LifeCycleMessageSubscriber
     {
         $this->reporter->handle($event);
 
-        $this->writer->writeln("%d example, %d failures, %d pending",
+        $template = "%d example, %d failures, %d pending";
+
+        if ($event->isFailed()) {
+            $template = "<red>{$template}</red>";
+        } else {
+            $template = "<green>{$template}</green>";
+        }
+
+        $this->writer->writeln($template,
             $event->getExampleCount(),
             $event->getFailedExampleCount(),
             $event->getPendingExampleCount()
