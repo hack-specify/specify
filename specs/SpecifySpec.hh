@@ -17,7 +17,10 @@ describe(Specify::class, function() {
             $reporter = $this->prophet->prophesize(LifeCycleMessageSubscriber::class);
             $this->reporter = $reporter->reveal();
 
-            $this->package = Pair { 'specify\\fixtures\\', realpath(__DIR__ . '/../fixtures/specs') };
+            $this->package = shape(
+                'namespace' => 'specify\\fixtures\\',
+                'packageDirectory' => realpath(__DIR__ . '/../fixtures/specs')
+            );
         });
         it('configure the settings for specify', function() {
             Specify::configure((ConfigBuilder $builder) ==> {

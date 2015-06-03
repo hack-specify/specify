@@ -9,8 +9,10 @@ use specify\fixtures\example\B;
 describe(ExampleGroupCollector::class, function() {
     describe('->collectFrom()', function() {
         beforeEach(function() {
-            $package = Pair { 'specify\\fixtures\\', realpath(__DIR__ . '/../fixtures/specs') };
-
+            $package = shape(
+                'namespace' => 'specify\\fixtures\\',
+                'packageDirectory' => realpath(__DIR__ . '/../fixtures/specs')
+            );
             $this->spec = new PackageSpecification($package);
             $this->collector = new ExampleGroupCollector();
         });

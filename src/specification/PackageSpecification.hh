@@ -25,8 +25,8 @@ class PackageSpecification
     public function __construct(
         SpecificationPackage $package)
     {
-        $this->ns = (string) $package->at(0);
-        $this->packageDirectory = realpath($package->at(1));
+        $this->ns = (string) $package['namespace'];
+        $this->packageDirectory = realpath($package['packageDirectory']);
     }
 
     public function getNamespace() : PackageNamespace

@@ -38,7 +38,11 @@ namespace specify\config
 
     type PackageNamespace = string;
     type DirectoryPath = string;
-    type Package = Pair<PackageNamespace, DirectoryPath>;
+
+    type SpecificationPackage = shape(
+        'namespace' => PackageNamespace,
+        'packageDirectory' => DirectoryPath
+    );
     type ExampleReporter = LifeCycleMessageSubscriber;
 }
 
@@ -80,8 +84,14 @@ namespace specify\specification
 
     /**
      * <code>
-     * $package = Pair {'example\\spec\\', __DIR__};
+     * $package = shape(
+     *     'namespace' => 'vendorname\\spec\\',
+     *     'packageDirectory' => '/path/to/'
+     * );
      * </code>
      */
-    type SpecificationPackage = Pair<PackageNamespace, DirectoryPath>;
+    type SpecificationPackage = shape(
+        'namespace' => PackageNamespace,
+        'packageDirectory' => DirectoryPath
+    );
 }
