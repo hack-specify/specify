@@ -7,10 +7,10 @@ use specify\reporter\SpecificationReporter;
 
 Specify::configure((ConfigBuilder $builder) ==> {
 
-    $package = Pair {
-        'specify\\example\\',
-        __DIR__
-    };
+    $package = shape(
+        'namespace' => 'specify\\example\\',
+        'packageDirectory' => __DIR__
+    );
 
     $builder->package($package)
         ->exampleReporter(new SpecificationReporter());
