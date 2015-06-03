@@ -30,10 +30,10 @@ use specify\reporter\SpecificationReporter;
 
 Specify::configure((ConfigBuilder $builder) ==> {
 
-    $package = Pair {
-        'vendorname\\spec\\', //The package namespace of the spec
-        __DIR__ . '/spec' //The directory of the package spec
-    };
+    $package = shape(
+        'namespace' => 'vendorname\\spec\\', //The package namespace of the spec
+        'packageDirectory' => __DIR__ . '/spec' //The directory of the package spec
+    );
 
     $builder->package($package)
         ->exampleReporter(new SpecificationReporter());
@@ -66,10 +66,15 @@ class StackSpecification implements Specification
     }
 
     <<Example("->push() - returns the size")>>
-    public function push() : int
+    public function push() : void
     {
         $result = $this->stack->push(100);
         invariant($result === 1, "must returns the size");
+    }
+
+    <<PendingExample("->remove() - remove item from stack")>>
+    public function remove() : void
+    {
     }
 
 }
