@@ -29,9 +29,15 @@ class PackageSpecification
         $this->packageDirectory = realpath($package['packageDirectory']);
     }
 
+    <<__Memoize>>
     public function getNamespace() : PackageNamespace
     {
-        return $this->ns;
+        $atoms = explode('\\', $this->ns);
+        $atoms = (new Vector($atoms))->filter((string $atom) ==> {
+            return trim($atom) !== '';
+        });
+
+        return implode('\\', $atoms);
     }
 
     public function getPackageDirectory() : DirectoryPath
