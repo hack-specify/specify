@@ -15,8 +15,8 @@ Basic usage
 
 ### Create a configuration file
 
-Create a configuration file in order to verify the specifications.
-Use the **configure** method to do the setup.
+Create a configuration file in order to verify the specifications.  
+Use the **configure** method to do the setup.  
 
 ```hack
 <?hh //partial
@@ -40,10 +40,10 @@ Specify::configure((ConfigBuilder $builder) ==> {
 
 ### Create a specification file
 
-It will create a specification file to **vendorname/spec**.
-Specification must implement **specify\Specification**.
+It will create a specification file to **vendorname/spec**.  
+Specification must implement **specify\Specification**.  
 
-It will specify the specification in the **Example** attribute.
+It will specify the specification in the **Example** attribute.  
 
 ```hack
 <?hh //strict
@@ -74,7 +74,7 @@ class StackSpecification implements Specification
 
 ### Verify the specification
 
-In the package root directory run the following command.
+In the package root directory run the following command.  
 
 	vendor/bin/specify
 
