@@ -28,6 +28,16 @@ class ExamplePackageFinish extends AbstractNamedEvent implements LifeCycleEvent
         $this->sendAt = new DateTime();
     }
 
+    public function getExampleCount() : int
+    {
+        return $this->result->getExampleCount();
+    }
+
+    public function getFailedExampleCount() : int
+    {
+        return $this->result->getFailedExampleCount();
+    }
+
     public function getExamplePackageResult() : ExamplePackageResult
     {
         return $this->result;

@@ -66,11 +66,9 @@ class SpecificationReporter implements LifeCycleMessageSubscriber
 
     public function onExamplePackageFinish(ExamplePackageFinish $event) : void
     {
-        $result = $event->getExamplePackageResult();
-
         $this->writeln("%d example, %d failures\n",
-            $result->getExampleCount(),
-            $result->getFailedExampleCount()
+            $event->getExampleCount(),
+            $event->getFailedExampleCount()
         );
     }
 
