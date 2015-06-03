@@ -15,12 +15,28 @@ namespace specify\io;
 class Stdout implements Writer
 {
 
+    /**
+     * Write to standard output
+     *
+     * <code>
+     * $stdout = new Stdout();
+     * $stdout->write('<green>%d example, %d failures</green>', 10, 0);
+     * </code>
+     */
     public function write(string $format, ...) : void
     {
         $values = array_slice(func_get_args(), 1);
         echo $this->format($format, $values);
     }
 
+    /**
+     * Write to standard output with a line break
+     *
+     * <code>
+     * $stdout = new Stdout();
+     * $stdout->write('<green>%d example, %d failures</green>', 10, 0);
+     * </code>
+     */
     public function writeln(string $format, ...) : void
     {
         $values = array_slice(func_get_args(), 1);
