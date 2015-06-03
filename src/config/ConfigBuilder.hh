@@ -28,7 +28,7 @@ class ConfigBuilder
         $this->exampleReporter = new SpecificationReporter();
     }
 
-    public function package(Package $package) : this
+    public function package(SpecificationPackage $package) : this
     {
         $this->package = new PackageSpecification($package);
         return $this;
