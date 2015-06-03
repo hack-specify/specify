@@ -17,16 +17,19 @@ use specify\event\ExamplePackageStart;
 use specify\event\ExampleGroupStart;
 use specify\event\ExampleGroupFinish;
 use specify\event\ExamplePackageFinish;
+use specify\io\ConsoleOutput;
 
 
 class SpecificationReporter implements LifeCycleMessageSubscriber
 {
 
-    private ProcessingTimeReporter $reporter;
     private int $indentLevel = 0;
+    private ConsoleOutput $writer;
+    private ProcessingTimeReporter $reporter;
 
     public function __construct()
     {
+        $this->writer = new ConsoleOutput();
         $this->reporter = new ProcessingTimeReporter();
     }
 
@@ -45,14 +48,16 @@ class SpecificationReporter implements LifeCycleMessageSubscriber
 
     public function onExamplePackageStart(ExamplePackageStart $event) : void
     {
-        $this->writeln("\n%s\n\n", $event->getDescription());
+        $this->writer->writeln("\n%s\n", $event->getDescription());
         $this->indentLevel++;
         $this->reporter->handle($event);
     }
 
     public function onExampleGroupStart(ExampleGroupStart $event) : void
     {
-        $this->writeWithIndent("%s\n", $event->getDescription());
+        $indentSpace = str_pad("", $this->indentLevel * 2, " ");
+
+        $this->writer->write($indentSpace . "<green>%s</green>\n", $event->getDescription());
         $this->indentLevel++;
     }
 
@@ -61,18 +66,20 @@ class SpecificationReporter implements LifeCycleMessageSubscriber
         $result = $event->getExampleGroupResult();
         $exampleResults = $result->getExampleResults();
 
+        $indentSpace = str_pad("", $this->indentLevel * 2, " ");
+
         foreach ($exampleResults as $exampleResult) {
+            $format = "<green>%s</green>\n";
+
             if ($exampleResult->isFailed()) {
-                $status = 'ng';
+                $format = "<red>%s</red>\n";
             } else if ($exampleResult->isPending()) {
-                $status = 'pending';
-            } else {
-                $status = 'ok';
+                $format = "<yellow>%s</yellow>\n";
             }
-            $this->writeWithIndent("%s %s\n", $status, $exampleResult->getDescription());
+            $this->writer->write($indentSpace . $format, $exampleResult->getDescription());
         }
 
-        $this->writeln("\n");
+        $this->writer->writeln("");
         $this->indentLevel--;
     }
 
@@ -80,26 +87,11 @@ class SpecificationReporter implements LifeCycleMessageSubscriber
     {
         $this->reporter->handle($event);
 
-        $this->writeln("%d example, %d failures, %d pending\n",
+        $this->writer->writeln("%d example, %d failures, %d pending",
             $event->getExampleCount(),
             $event->getFailedExampleCount(),
             $event->getPendingExampleCount()
         );
-    }
-
-    private function writeWithIndent(string $format, ...) : void
-    {
-        $values = func_get_args();
-        $indentSpace = str_pad("", $this->indentLevel * 2, " ");
-
-        $values[0] = $indentSpace . $format;
-        echo call_user_func_array('sprintf', $values);
-    }
-
-    private function writeln(string $format, ...) : void
-    {
-        $values = func_get_args();
-        echo call_user_func_array('sprintf', $values);
     }
 
 }
