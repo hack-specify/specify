@@ -3,6 +3,7 @@
   "type": "library",
   "keywords": [ "hack", "hhvm", "spec", "test", "bdd" ],
   "description": "BDD testing framework for Hack",
+  "license": "MIT",
   "authors": [
     {
       "name": "holyshared",
