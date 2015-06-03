@@ -15,12 +15,19 @@ use specify\LifeCycleEvent;
 use specify\LifeCycleMessageSubscriber;
 use specify\event\ExamplePackageStart;
 use specify\event\ExamplePackageFinish;
+use specify\io\ConsoleOutput;
 
 
 class ProcessingTimeReporter implements LifeCycleMessageSubscriber
 {
 
     private float $startAt = 0.0;
+    private ConsoleOutput $writer;
+
+    public function __construct()
+    {
+        $this->writer = new ConsoleOutput();
+    }
 
     public function handle(LifeCycleEvent $event) : void
     {
@@ -41,13 +48,7 @@ class ProcessingTimeReporter implements LifeCycleMessageSubscriber
         $finishAt = $event->getSendAtMicrotime();
         $processingTime = $finishAt - $this->startAt;
 
-        $this->writeln("Finished in %F seconds\n", $processingTime);
-    }
-
-    private function writeln(string $format, ...) : void
-    {
-        $values = func_get_args();
-        echo call_user_func_array('sprintf', $values);
+        $this->writer->write("Finished in %F seconds\n", $processingTime);
     }
 
 }

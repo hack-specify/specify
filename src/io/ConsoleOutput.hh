@@ -12,35 +12,53 @@
 namespace specify\io;
 
 
-class Stdout implements Writer
+class ConsoleOutput implements Console
 {
+
+    private Writer $writer;
+
+    public function __construct(
+        ?Writer $writer = null
+    )
+    {
+        $outputWriter = new StdoutWriter();
+
+        if ($writer !== null) {
+            $outputWriter = $writer;
+        }
+        $this->writer = $outputWriter;
+    }
 
     /**
      * Write to standard output
      *
      * <code>
-     * $stdout = new Stdout();
-     * $stdout->write('<green>%d example, %d failures</green>', 10, 0);
+     * $output = new ConsoleOutput();
+     * $output->write('<green>%d example, %d failures</green>', 10, 0);
      * </code>
      */
     public function write(string $format, ...) : void
     {
         $values = array_slice(func_get_args(), 1);
-        echo $this->format($format, $values);
+        $content = $this->format($format, $values);
+
+        $this->writer->write($content);
     }
 
     /**
      * Write to standard output with a line break
      *
      * <code>
-     * $stdout = new Stdout();
-     * $stdout->write('<green>%d example, %d failures</green>', 10, 0);
+     * $output = new ConsoleOutput();
+     * $output->write('<green>%d example, %d failures</green>', 10, 0);
      * </code>
      */
     public function writeln(string $format, ...) : void
     {
         $values = array_slice(func_get_args(), 1);
-        echo $this->format($format, $values), "\n";
+        $content = $this->format($format, $values);
+
+        $this->writer->writeln($content);
     }
 
     private function format(string $format, array<mixed> $values) : string

@@ -11,8 +11,18 @@
 
 namespace specify\io;
 
-interface Writer
+
+class StdoutWriter implements Writer
 {
-    public function write(string $format, ...) : void;
-    public function writeln(string $format, ...) : void;
+
+    public function write(string $value) : void
+    {
+        fwrite(STDOUT, $value);
+    }
+
+    public function writeln(string $value) : void
+    {
+        fwrite(STDOUT, $value . "\n");
+    }
+
 }
