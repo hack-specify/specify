@@ -13,7 +13,7 @@ describe(ExampleCollector::class, function() {
         });
         it('returns the example objects', function() {
             $examples = $this->collector->collectFrom($this->exampleGroup);
-            expect($examples->count())->toBe(1);
+            expect($examples->count())->toBe(2);
         });
     });
 });

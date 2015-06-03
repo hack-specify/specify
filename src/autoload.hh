@@ -58,22 +58,26 @@ namespace specify\result
 namespace specify\collector
 {
     use \Generator;
+    use specify\SpecificationExample;
     use specify\example\Example;
     use specify\example\ExampleGroup;
+    use specify\result\ExampleResult;
 
     type DirectoryPath = string;
     type SpecificationFile = string;
     type SpecificationFileCollection = ImmVector<SpecificationFile>;
-    type ExampleCollection = ImmVector<Example>;
+    type ExampleCollection = ImmVector<SpecificationExample<ExampleResult>>;
     type ExampleGroupCollection = ImmVector<ExampleGroup>;
 }
 
 namespace specify\example
 {
     use \Generator;
+    use specify\SpecificationExample;
+    use specify\result\ExampleResult;
 
     type ExampleGroupCollection = ImmVector<ExampleGroup>;
-    type ExampleCollection = ImmVector<Example>;
+    type ExampleCollection = ImmVector<SpecificationExample<ExampleResult>>;
 }
 
 namespace specify\specification
