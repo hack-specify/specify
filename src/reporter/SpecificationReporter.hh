@@ -62,7 +62,13 @@ class SpecificationReporter implements LifeCycleMessageSubscriber
         $exampleResults = $result->getExampleResults();
 
         foreach ($exampleResults as $exampleResult) {
-            $status = $exampleResult->isFailed() ? 'ok' : 'ng';
+            if ($exampleResult->isFailed()) {
+                $status = 'ng';
+            } else if ($exampleResult->isPending()) {
+                $status = 'pending';
+            } else {
+                $status = 'ok';
+            }
             $this->writeWithIndent("%s %s\n", $status, $exampleResult->getDescription());
         }
 

@@ -20,4 +20,9 @@ final class ExampleSpecA implements Specification
         throw new Exception('oops!!');
     }
 
+    <<PendingExample("example3")>>
+    public function example3() : void
+    {
+    }
+
 }
