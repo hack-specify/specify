@@ -12,4 +12,9 @@ class A implements Specification
     {
     }
 
+    <<PendingExample("example2")>>
+    public function example2() : void
+    {
+    }
+
 }
