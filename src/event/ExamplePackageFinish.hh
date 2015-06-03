@@ -24,8 +24,7 @@ class ExamplePackageFinish extends AbstractNamedEvent implements LifeCycleEvent
         private ExamplePackageResult $result
     )
     {
-        $this->name = LifeCycleEventType::ExamplePackageFinish;
-        $this->sendAt = new DateTime();
+        parent::__construct(LifeCycleEventType::ExamplePackageFinish);
     }
 
     public function getExampleCount() : int

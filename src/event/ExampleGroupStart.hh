@@ -22,8 +22,7 @@ class ExampleGroupStart extends AbstractNamedEvent implements LifeCycleEvent
         private string $description
     )
     {
-        $this->name = LifeCycleEventType::ExampleGroupStart;
-        $this->sendAt = new DateTime();
+        parent::__construct(LifeCycleEventType::ExampleGroupStart);
     }
 
     public function getDescription() : string
