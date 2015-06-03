@@ -20,17 +20,30 @@ use \DateTime;
 abstract class AbstractNamedEvent implements LifeCycleEvent
 {
 
-    protected LifeCycleEventType $name;
-    protected DateTime $sendAt;
+    private DateTime $sendAtDateTime;
+    private float $sendAtMicrotime;
+
+    public function __construct(
+        protected LifeCycleEventType $name
+    )
+    {
+        $this->sendAtDateTime = new DateTime();
+        $this->sendAtMicrotime = (float) microtime(true);
+    }
 
     public function getName() : string
     {
         return (string) $this->name;
     }
 
-    public function getSendAt() : DateTime
+    public function getSendAtDateTime() : DateTime
     {
-        return $this->sendAt;
+        return $this->sendAtDateTime;
+    }
+
+    public function getSendAtMicrotime() : float
+    {
+        return $this->sendAtMicrotime;
     }
 
     public function sendTo(LifeCycleMessageSubscriber $subscriber) : void

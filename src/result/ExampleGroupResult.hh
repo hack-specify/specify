@@ -40,6 +40,16 @@ class ExampleGroupResult implements VerifyResult
     }
 
     <<__Memoize>>
+    public function getPendingExampleCount() : int
+    {
+        $pendingExamples = $this->exampleResults->filter((ExampleResult $exampleResult) ==> {
+            return $exampleResult->isPending();
+        });
+
+        return $pendingExamples->count();
+    }
+
+    <<__Memoize>>
     public function getFailedExampleCount() : int
     {
         $failedExamples = $this->exampleResults->filter((ExampleResult $exampleResult) ==> {

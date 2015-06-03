@@ -23,8 +23,17 @@ class ExampleGroupFinish extends AbstractNamedEvent implements LifeCycleEvent
         private ExampleGroupResult $result
     )
     {
-        $this->name = LifeCycleEventType::ExampleGroupFinish;
-        $this->sendAt = new DateTime();
+        parent::__construct(LifeCycleEventType::ExampleGroupFinish);
+    }
+
+    public function getExampleCount() : int
+    {
+        return $this->result->getExampleCount();
+    }
+
+    public function getFailedExampleCount() : int
+    {
+        return $this->result->getFailedExampleCount();
     }
 
     public function getExampleGroupResult() : ExampleGroupResult

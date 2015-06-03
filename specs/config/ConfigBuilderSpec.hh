@@ -16,7 +16,10 @@ describe(ConfigBuilder::class, function() {
             $reporter = $this->prophet->prophesize(LifeCycleMessageSubscriber::class);
             $this->reporter = $reporter->reveal();
 
-            $this->package = Pair { 'specify\\fixtures\\', realpath(__DIR__ . '/../fixtures/specs') };
+            $this->package = $package = shape(
+                'namespace' => 'specify\\fixtures\\',
+                'packageDirectory' => realpath(__DIR__ . '/../fixtures/specs')
+            );
             $this->builder = new ConfigBuilder();
         });
         it('returns the config object', function() {

@@ -39,14 +39,7 @@ class Application
         $package = $config->getPackage();
         $groups = $collector->collectFrom($package);
 
-        $shuffleGroup = Vector {};
-
-        foreach ($groups as $group) {
-            $shuffleGroup->add($group);
-        }
-        $shuffleGroup->shuffle();
-
-        $package = new ExamplePackage($package->getNamespace(), $shuffleGroup->toImmVector());
+        $package = new ExamplePackage($package->getNamespace(), $groups);
         $packageResult = $package->verify($lifeCycleNotifier);
 
         $this->shutdown($packageResult);

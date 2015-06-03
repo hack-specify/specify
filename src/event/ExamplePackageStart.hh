@@ -23,8 +23,7 @@ class ExamplePackageStart extends AbstractNamedEvent implements LifeCycleEvent
         private string $description
     )
     {
-        $this->name = LifeCycleEventType::ExamplePackageStart;
-        $this->sendAt = new DateTime();
+        parent::__construct(LifeCycleEventType::ExamplePackageStart);
     }
 
     public function getDescription() : string

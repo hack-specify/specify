@@ -25,7 +25,7 @@ describe(ExampleGroup::class, function() {
         });
         it('verify all examples', function() {
             $result = $this->exampleGroup->verify($this->notifier);
-            expect($result->getExampleCount())->toBe(1);
+            expect($result->getExampleCount())->toBe(2);
         });
     });
 });

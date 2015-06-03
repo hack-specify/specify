@@ -9,11 +9,11 @@
  * with this source code in the file LICENSE.
  */
 
-namespace specify;
+namespace specify\result;
 
-use \Generator;
-
-interface Collector<Tt, Tr>
+enum ExampleResultType : int
 {
-    public function collectFrom(Tt $target) : Tr;
+    Passed = 0;
+    Failed = 1;
+    Pending = 2;
 }

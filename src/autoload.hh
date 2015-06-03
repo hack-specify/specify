@@ -38,7 +38,11 @@ namespace specify\config
 
     type PackageNamespace = string;
     type DirectoryPath = string;
-    type Package = Pair<PackageNamespace, DirectoryPath>;
+
+    type SpecificationPackage = shape(
+        'namespace' => PackageNamespace,
+        'packageDirectory' => DirectoryPath
+    );
     type ExampleReporter = LifeCycleMessageSubscriber;
 }
 
@@ -54,22 +58,26 @@ namespace specify\result
 namespace specify\collector
 {
     use \Generator;
+    use specify\SpecificationExample;
     use specify\example\Example;
     use specify\example\ExampleGroup;
+    use specify\result\ExampleResult;
 
     type DirectoryPath = string;
     type SpecificationFile = string;
-    type SpecificationFileCollection = Generator<int, SpecificationFile, void>;
-    type ExampleCollection = Generator<int, Example, void>;
-    type ExampleGroupCollection = Generator<int, ExampleGroup, void>;
+    type SpecificationFileCollection = ImmVector<SpecificationFile>;
+    type ExampleCollection = ImmVector<SpecificationExample<ExampleResult>>;
+    type ExampleGroupCollection = ImmVector<ExampleGroup>;
 }
 
 namespace specify\example
 {
     use \Generator;
+    use specify\SpecificationExample;
+    use specify\result\ExampleResult;
 
     type ExampleGroupCollection = ImmVector<ExampleGroup>;
-    type ExampleCollection = Generator<int, Example, void>;
+    type ExampleCollection = ImmVector<SpecificationExample<ExampleResult>>;
 }
 
 namespace specify\specification
@@ -80,8 +88,14 @@ namespace specify\specification
 
     /**
      * <code>
-     * $package = Pair {'example\\spec\\', __DIR__};
+     * $package = shape(
+     *     'namespace' => 'vendorname\\spec\\',
+     *     'packageDirectory' => '/path/to/'
+     * );
      * </code>
      */
-    type SpecificationPackage = Pair<PackageNamespace, DirectoryPath>;
+    type SpecificationPackage = shape(
+        'namespace' => PackageNamespace,
+        'packageDirectory' => DirectoryPath
+    );
 }

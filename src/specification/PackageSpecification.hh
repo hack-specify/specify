@@ -25,13 +25,19 @@ class PackageSpecification
     public function __construct(
         SpecificationPackage $package)
     {
-        $this->ns = (string) $package->at(0);
-        $this->packageDirectory = realpath($package->at(1));
+        $this->ns = (string) $package['namespace'];
+        $this->packageDirectory = realpath($package['packageDirectory']);
     }
 
+    <<__Memoize>>
     public function getNamespace() : PackageNamespace
     {
-        return $this->ns;
+        $atoms = explode('\\', $this->ns);
+        $atoms = (new Vector($atoms))->filter((string $atom) ==> {
+            return trim($atom) !== '';
+        });
+
+        return implode('\\', $atoms);
     }
 
     public function getPackageDirectory() : DirectoryPath

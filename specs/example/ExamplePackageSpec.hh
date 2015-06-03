@@ -22,7 +22,7 @@ describe(ExamplePackage::class, function() {
         });
         it('verify all example groups', function() {
             $result = $this->package->verify($this->notifier);
-            expect($result->getExampleCount())->toBe(2);
+            expect($result->getExampleCount())->toBe(3);
         });
     });
 });

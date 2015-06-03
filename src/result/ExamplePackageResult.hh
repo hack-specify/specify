@@ -47,6 +47,19 @@ class ExamplePackageResult implements VerifyResult
     }
 
     <<__Memoize>>
+    public function getPendingExampleCount() : int
+    {
+        $pendingExampleCount = 0;
+        $groupResults = $this->exampleGroupResults->items();
+
+        foreach ($groupResults as $groupResult) {
+            $pendingExampleCount += $groupResult->getPendingExampleCount();
+        }
+
+        return $pendingExampleCount;
+    }
+
+    <<__Memoize>>
     public function getFailedExampleCount() : int
     {
         $failedExampleCount = 0;

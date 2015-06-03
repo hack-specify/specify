@@ -14,26 +14,67 @@ namespace specify\collector;
 use specify\Collector;
 use specify\Specification;
 use specify\example\Example;
+use specify\example\PendingExample;
+use specify\result\ExampleResult;
+use specify\SpecificationExample;
 use \ReflectionClass;
 use \ReflectionMethod;
 
 
-class ExampleCollector implements Collector<Specification, int, Example>
+class ExampleCollector implements Collector<Specification, ExampleCollection>
 {
+
+    private Map<string, ReflectionClass> $registry;
+
+
+    public function __construct()
+    {
+        $this->registry = Map {
+            Example::ATTRIBUTE_NAME => new ReflectionClass(Example::class),
+            PendingExample::ATTRIBUTE_NAME => new ReflectionClass(PendingExample::class)
+        };
+    }
 
     public function collectFrom(Specification $target) : ExampleCollection
     {
+        $examples = Vector {};
         $reflection = new ReflectionClass($target);
         $methods = $reflection->getMethods(ReflectionMethod::IS_PUBLIC);
 
         foreach ($methods as $method) {
-            $attribute = $method->getAttribute(Example::ATTRIBUTE_NAME);
+            $example = $this->createExample($target, $method);
 
-            if ($attribute === null) {
+            if ($example === null) {
                 continue;
             }
-            yield new Example($target, $method);
+            $examples->add($example);
         }
+        $examples->shuffle();
+
+        return $examples->toImmVector();
+    }
+
+    private function createExample(Specification $target, ReflectionMethod $method) : ?SpecificationExample<ExampleResult>
+    {
+        $example = null;
+        $attributes = $method->getAttributes();
+
+        if ($attributes === null) {
+            return $example;
+        }
+
+        foreach ($attributes as $key => $attribute) {
+            if ($this->registry->contains($key) === false) {
+                continue;
+            }
+            $args = [$target, $method];
+
+            $factory = $this->registry->at($key);
+            $example = $factory->newInstanceArgs($args);
+            break;
+        }
+
+        return $example;
     }
 
 }
