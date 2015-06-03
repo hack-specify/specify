@@ -18,7 +18,7 @@ use specify\specification\PackageSpecification;
 use specify\specification\NotSpecificationFileException;
 
 
-class ExampleGroupCollector implements Collector<PackageSpecification, int, ExampleGroup>
+class ExampleGroupCollector implements Collector<PackageSpecification, ExampleGroupCollection>
 {
 
     /**
@@ -26,6 +26,7 @@ class ExampleGroupCollector implements Collector<PackageSpecification, int, Exam
      */
     public function collectFrom(PackageSpecification $target) : ExampleGroupCollection
     {
+        $exampleGroups = Vector {};
         $targetDirectory = $target->getPackageDirectory();
         $specificationFiles = $this->getSpecificationFiles($targetDirectory);
 
@@ -36,8 +37,12 @@ class ExampleGroupCollector implements Collector<PackageSpecification, int, Exam
                 continue;
             }
 
-            yield new ExampleGroup($reflection);
+            $group = new ExampleGroup($reflection);
+            $exampleGroups->add($group);
         }
+        $exampleGroups->shuffle();
+
+        return $exampleGroups->toImmVector();
     }
 
     /**

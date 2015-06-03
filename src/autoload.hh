@@ -63,9 +63,9 @@ namespace specify\collector
 
     type DirectoryPath = string;
     type SpecificationFile = string;
-    type SpecificationFileCollection = Generator<int, SpecificationFile, void>;
-    type ExampleCollection = Generator<int, Example, void>;
-    type ExampleGroupCollection = Generator<int, ExampleGroup, void>;
+    type SpecificationFileCollection = ImmVector<SpecificationFile>;
+    type ExampleCollection = ImmVector<Example>;
+    type ExampleGroupCollection = ImmVector<ExampleGroup>;
 }
 
 namespace specify\example
@@ -73,7 +73,7 @@ namespace specify\example
     use \Generator;
 
     type ExampleGroupCollection = ImmVector<ExampleGroup>;
-    type ExampleCollection = Generator<int, Example, void>;
+    type ExampleCollection = ImmVector<Example>;
 }
 
 namespace specify\specification

@@ -13,7 +13,7 @@ namespace specify;
 
 use \Generator;
 
-interface Collector<Tt, Tk, Tv>
+interface Collector<Tt, Tr>
 {
-    public function collectFrom(Tt $target) : Generator<Tk, Tv, void>;
+    public function collectFrom(Tt $target) : Tr;
 }

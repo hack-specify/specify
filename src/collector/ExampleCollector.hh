@@ -18,11 +18,12 @@ use \ReflectionClass;
 use \ReflectionMethod;
 
 
-class ExampleCollector implements Collector<Specification, int, Example>
+class ExampleCollector implements Collector<Specification, ExampleCollection>
 {
 
     public function collectFrom(Specification $target) : ExampleCollection
     {
+        $examples = Vector {};
         $reflection = new ReflectionClass($target);
         $methods = $reflection->getMethods(ReflectionMethod::IS_PUBLIC);
 
@@ -32,8 +33,11 @@ class ExampleCollector implements Collector<Specification, int, Example>
             if ($attribute === null) {
                 continue;
             }
-            yield new Example($target, $method);
+            $examples->add(new Example($target, $method));
         }
+        $examples->shuffle();
+
+        return $examples->toImmVector();
     }
 
 }

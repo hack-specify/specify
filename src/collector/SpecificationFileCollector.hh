@@ -12,20 +12,24 @@
 namespace specify\collector;
 
 use specify\Collector;
+use \Generator;
 
-class SpecificationFileCollector implements Collector<DirectoryPath, int, SpecificationFile>
+class SpecificationFileCollector implements Collector<DirectoryPath, SpecificationFileCollection>
 {
 
     public function collectFrom(DirectoryPath $target) : SpecificationFileCollection
     {
+        $specFiles = Vector {};
         $files = $this->findFiles($target);
 
         foreach ($files as $file) {
             if ($this->matchFile($file) === false) {
                 continue;
             }
-            yield $file;
+            $specFiles->add($file);
         }
+
+        return $specFiles->toImmVector();
     }
 
     private function matchFile(string $entry) : bool
@@ -44,7 +48,7 @@ class SpecificationFileCollector implements Collector<DirectoryPath, int, Specif
         return true;
     }
 
-    private function findFiles(string $target) : SpecificationFileCollection
+    private function findFiles(string $target) : Generator<int, SpecificationFile, void>
     {
         $targetDirectory = dir($target);
         $currentDirectory = $target;
