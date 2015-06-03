@@ -9,14 +9,14 @@ use \Exception;
 
 describe(PendingExample::class, function() {
     describe('->verify()', function() {
-        context('when passed', function() {
+        context('when pending', function() {
             beforeEach(function() {
                 $this->prophet = new Prophet();
 
                 $notifier = $this->prophet->prophesize(LifeCycleNotifier::class);
                 $this->notifier = $notifier->reveal();
             });
-            it('returns passed result', function() {
+            it('returns pending result', function() {
                 $target = new A();
                 $exampleMethod = new ReflectionMethod($target, 'example2');
 
@@ -24,7 +24,9 @@ describe(PendingExample::class, function() {
                 $result = $pendingExample->verify($this->notifier);
 
                 expect($result->getDescription())->toBe("example2");
-                expect($result->isPassed())->toBeTrue();
+                expect($result->isPassed())->toBeFalse();
+                expect($result->isFailed())->toBeFalse();
+                expect($result->isPending())->toBeTrue();
             });
         });
     });

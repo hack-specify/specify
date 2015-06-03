@@ -40,7 +40,7 @@ class PendingExample implements SpecificationExample<ExampleResult>
             $description = (string) $attributeValues[0];
         }
 
-        $result = ExampleResult::passed($description);
+        $result = ExampleResult::pending($description);
 
         return $result;
     }
