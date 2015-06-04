@@ -9,7 +9,9 @@ describe(StopWatch::class, function() {
             $this->stopWatch->start();
         });
         it('returns processing result', function() {
-            $result = $this->stopWatch->stop();
+            $this->stopWatch->stop();
+            $result = $this->stopWatch->getResult();
+
             expect($result->getProcessingTime())->toBeGreaterThan(0);
         });
     });

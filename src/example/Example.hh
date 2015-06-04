@@ -73,11 +73,12 @@ class Example implements SpecificationExample<ExampleResult>
         $this->stopWatch->stop();
 
         $result = null;
+        $totalTime = $this->stopWatch->getResult();
 
         if ($failedReasonException === null) {
-            $result = ExampleResult::passed($this->description);
+            $result = ExampleResult::passed($this->description, $totalTime);
         } else {
-            $result = ExampleResult::failed($this->description, $failedReasonException);
+            $result = ExampleResult::failed($this->description, $totalTime, $failedReasonException);
         }
 
         return $result;

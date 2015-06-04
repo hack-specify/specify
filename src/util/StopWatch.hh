@@ -16,24 +16,33 @@ class StopWatch
 {
 
     private float $startAt = 0.0;
+    private ProcessingTime $processingTime;
+
+    public function __construct()
+    {
+        $this->processingTime = new ProcessingTime();
+    }
 
     public function start() : void
     {
         $this->startAt = (float) microtime(true);
     }
 
-    public function stop() : ProcessingTime
+    public function stop() : void
     {
         $stopAt = (float) microtime(true);
         $processingTime = $stopAt - $this->startAt;
 
-        $result = new ProcessingTime(
+        $this->processingTime = new ProcessingTime(
             $this->startAt,
             $stopAt,
             $processingTime
         );
+    }
 
-        return $result;
+    public function getResult() : ProcessingTime
+    {
+        return $this->processingTime;
     }
 
 }
