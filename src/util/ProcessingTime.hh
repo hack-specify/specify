@@ -17,8 +17,7 @@ final class ProcessingTime
 
     public function __construct(
         private float $startAt = 0.0,
-        private float $stopAt = 0.0,
-        private float $processingTime = 0.0
+        private float $stopAt = 0.0
     )
     {
     }
@@ -33,9 +32,10 @@ final class ProcessingTime
         return $this->stopAt;
     }
 
+    <<__Memoize>>
     public function getProcessingTime() : float
     {
-        return $this->processingTime;
+        return $this->stopAt - $this->startAt;
     }
 
 }

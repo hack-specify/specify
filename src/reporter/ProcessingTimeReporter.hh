@@ -16,16 +16,16 @@ use specify\LifeCycleMessageSubscriber;
 use specify\event\ExamplePackageStart;
 use specify\event\ExamplePackageFinish;
 use specify\io\ConsoleOutput;
+use specify\io\Console;
 
 
 final class ProcessingTimeReporter implements LifeCycleMessageSubscriber
 {
 
-    private ConsoleOutput $writer;
-
-    public function __construct()
+    public function __construct(
+        private Console $writer = new ConsoleOutput()
+    )
     {
-        $this->writer = new ConsoleOutput();
     }
 
     public function handle(LifeCycleEvent $event) : void

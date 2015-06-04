@@ -31,12 +31,10 @@ class StopWatch
     public function stop() : void
     {
         $stopAt = (float) microtime(true);
-        $processingTime = $stopAt - $this->startAt;
 
         $this->processingTime = new ProcessingTime(
             $this->startAt,
-            $stopAt,
-            $processingTime
+            $stopAt
         );
     }
 
