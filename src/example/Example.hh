@@ -15,6 +15,7 @@ use specify\Specification;
 use specify\SpecificationExample;
 use specify\LifeCycleNotifier;
 use specify\result\ExampleResult;
+use specify\util\StopWatch;
 use \ReflectionMethod;
 use \Exception;
 
@@ -24,32 +25,60 @@ class Example implements SpecificationExample<ExampleResult>
 
     const string ATTRIBUTE_NAME = 'Example';
 
+    private string $description = 'example description empty';
+    private StopWatch $stopWatch;
+
     public function __construct(
         private Specification $target,
         private ReflectionMethod $method
     )
     {
+        $this->init();
     }
 
     public function verify(LifeCycleNotifier $notifier) : ExampleResult
     {
-        $description = 'pending';
+        $notifier->exampleStart($this->description);
+
+        $result = $this->verifyExample();
+
+        $notifier->exampleFinish($result);
+
+        return $result;
+    }
+
+    private function init() : void
+    {
+        $this->stopWatch = new StopWatch();
+
         $attributeValues = $this->method->getAttribute(self::ATTRIBUTE_NAME);
 
-        if ($attributeValues !== null) {
-            $description = (string) $attributeValues[0];
+        if ($attributeValues === null) {
+            return;
         }
 
-        $result = ExampleResult::passed($description);
-        $notifier->exampleStart($description);
+        $this->description = (string) $attributeValues[0];
+    }
 
+    private function verifyExample() : ExampleResult
+    {
+        $failedReasonException = null;
+
+        $this->stopWatch->start();
         try {
             $this->method->invoke($this->target);
         } catch (Exception $exception) {
-            $result = ExampleResult::failed($description, $exception);
+            $failedReasonException = $exception;
         }
+        $this->stopWatch->stop();
 
-        $notifier->exampleFinish($result);
+        $result = null;
+
+        if ($failedReasonException === null) {
+            $result = ExampleResult::passed($this->description);
+        } else {
+            $result = ExampleResult::failed($this->description, $failedReasonException);
+        }
 
         return $result;
     }
