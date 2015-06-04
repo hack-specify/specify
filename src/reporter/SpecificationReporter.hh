@@ -48,7 +48,7 @@ class SpecificationReporter implements LifeCycleMessageSubscriber
 
     public function onExamplePackageStart(ExamplePackageStart $event) : void
     {
-        $this->writer->writeln("\n%s\n", $event->getDescription());
+        $this->writer->writeln("\nPackage: %s\n", $event->getDescription());
         $this->indentLevel++;
         $this->reporter->handle($event);
     }
@@ -69,12 +69,12 @@ class SpecificationReporter implements LifeCycleMessageSubscriber
         $indentSpace = str_pad("", $this->indentLevel * 2, " ");
 
         foreach ($exampleResults as $exampleResult) {
-            $format = "<white>%s</white>\n";
+            $format = "<green>✓</green> <white>%s</white>\n";
 
             if ($exampleResult->isFailed()) {
-                $format = "<red>%s</red>\n";
+                $format = "  <red>%s</red>\n";
             } else if ($exampleResult->isPending()) {
-                $format = "<gray>%s</gray>\n";
+                $format = "  <lightCyan>%s</lightCyan>\n";
             }
             $this->writer->write($indentSpace . $format, $exampleResult->getDescription());
         }
