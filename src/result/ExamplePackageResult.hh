@@ -80,6 +80,19 @@ class ExamplePackageResult implements VerifyResult
     }
 
     <<__Memoize>>
+    public function getFailedExamples() : ExampleResultCollection
+    {
+        $totalFailedExamples = Vector {};
+
+        foreach ($this->exampleGroupResults as $exampleGroupResult) {
+            $failedExamples = $exampleGroupResult->getFailedExamples();
+            $totalFailedExamples->addAll($failedExamples);
+        }
+
+        return $totalFailedExamples;
+    }
+
+    <<__Memoize>>
     public function isPassed() : bool
     {
         $result = true;

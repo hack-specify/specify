@@ -80,6 +80,14 @@ namespace specify\example
     type ExampleCollection = ImmVector<SpecificationExample<ExampleResult>>;
 }
 
+
+namespace specify\event
+{
+    use specify\result\ExampleResult;
+
+    type ExampleResultCollection = Vector<ExampleResult>;
+}
+
 namespace specify\reporter
 {
     use specify\LifeCycleMessageSubscriber;

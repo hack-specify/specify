@@ -43,6 +43,11 @@ final class ExamplePackageFinish extends AbstractNamedEvent implements LifeCycle
         return $this->result->getPendingExampleCount();
     }
 
+    public function getFailedExamples() : ExampleResultCollection
+    {
+        return $this->getFailedExamples();
+    }
+
     public function getProcessingTime() : float
     {
         $processingTime = $this->result->getProcessingTime();
