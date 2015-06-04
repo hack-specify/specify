@@ -50,7 +50,12 @@ class ExamplePackage implements SpecificationExample<ExamplePackageResult>
         $this->stopWatch->stop();
         $totalTime = $this->stopWatch->getResult();
 
-        $packageResult = new ExamplePackageResult($this->getDescription(), $groupResults, $totalTime);
+        $packageResult = new ExamplePackageResult(
+            $this->getDescription(),
+            $groupResults->toImmVector(),
+            $totalTime
+        );
+
         $notifier->examplePackageFinish($packageResult);
 
         return $packageResult;

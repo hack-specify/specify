@@ -89,7 +89,7 @@ class ExamplePackageResult implements VerifyResult
             $totalFailedExamples->addAll($failedExamples);
         }
 
-        return $totalFailedExamples;
+        return $totalFailedExamples->toImmVector();
     }
 
     <<__Memoize>>

@@ -71,7 +71,7 @@ class ExampleGroup implements SpecificationExample<ExampleGroupResult>
 
         $result = new ExampleGroupResult(
             $this->description,
-            $exampleResults,
+            $exampleResults->toImmVector(),
             $totalTime
         );
 
