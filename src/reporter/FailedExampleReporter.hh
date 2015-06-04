@@ -43,8 +43,14 @@ final class FailedExampleReporter implements LifeCycleMessageSubscriber
             $description = $failedExampleResult->getDescription();
             $reasonException = $failedExampleResult->getFailedReasonException();
 
+            $reasonMessage = '';
+
+            if ($reasonException !== null) {
+                $reasonMessage = $reasonException->getMessage();
+            }
+
             $this->writer->writeln("%d) %s", $orderNo + 1, $description);
-            $this->writer->writeln("  ", $reasonException->getMessage());
+            $this->writer->writeln("  ", $reasonMessage);
             $this->writer->writeln("");
         }
     }
