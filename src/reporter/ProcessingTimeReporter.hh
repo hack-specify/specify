@@ -35,7 +35,7 @@ final class ProcessingTimeReporter implements LifeCycleMessageSubscriber
         }
     }
 
-    public function onExamplePackageFinish(ExamplePackageFinish $event) : void
+    private function onExamplePackageFinish(ExamplePackageFinish $event) : void
     {
         $processingTime = $event->getProcessingTime();
         $this->writer->write("Finished in %F seconds\n", $processingTime);
