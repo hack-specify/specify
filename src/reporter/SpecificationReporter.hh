@@ -20,7 +20,7 @@ use specify\event\ExamplePackageFinish;
 use specify\io\ConsoleOutput;
 
 
-class SpecificationReporter implements LifeCycleMessageSubscriber
+final class SpecificationReporter implements LifeCycleMessageSubscriber
 {
 
     private int $indentLevel = 0;

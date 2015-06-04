@@ -12,7 +12,7 @@
 namespace specify\util;
 
 
-class ProcessingTime
+final class ProcessingTime
 {
 
     public function __construct(

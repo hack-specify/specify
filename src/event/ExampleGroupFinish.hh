@@ -16,7 +16,7 @@ use specify\LifeCycleEventType;
 use specify\result\ExampleGroupResult;
 use DateTime;
 
-class ExampleGroupFinish extends AbstractNamedEvent implements LifeCycleEvent
+final class ExampleGroupFinish extends AbstractNamedEvent implements LifeCycleEvent
 {
 
     public function __construct(

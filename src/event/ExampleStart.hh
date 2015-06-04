@@ -15,7 +15,7 @@ use specify\LifeCycleEvent;
 use specify\LifeCycleEventType;
 use specify\result\ExampleResult;
 
-class ExampleStart extends AbstractNamedEvent implements LifeCycleEvent
+final class ExampleStart extends AbstractNamedEvent implements LifeCycleEvent
 {
 
     public function __construct(
