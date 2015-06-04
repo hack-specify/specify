@@ -2,8 +2,7 @@
 
 use specify\example\PendingExample;
 use specify\fixtures\example\Example as FixtureExample;
-use \Prophecy\Prophet;
-use \Prophecy\Argument;
+use specify\helper\NotifyRecorder;
 use \Exception;
 
 
@@ -11,10 +10,7 @@ describe(PendingExample::class, function() {
     describe('->verify()', function() {
         context('when pending', function() {
             beforeEach(function() {
-                $this->prophet = new Prophet();
-
-                $notifier = $this->prophet->prophesize(LifeCycleNotifier::class);
-                $this->notifier = $notifier->reveal();
+                $this->notifier = new NotifyRecorder();
             });
             it('returns pending result', function() {
                 $target = new FixtureExample();

@@ -83,10 +83,10 @@ class ExamplePackageResult implements VerifyResult
     public function isPassed() : bool
     {
         $result = true;
-        $groupResults = $this->exampleGroupResults->getIterator();
+        $exampleGroupResults = $this->exampleGroupResults->items();
 
-        foreach ($groupResults as $groupResult) {
-            if ($groupResult->isPassed()) {
+        foreach ($exampleGroupResults as $exampleGroupResult) {
+            if ($exampleGroupResult->isPassed() || $exampleGroupResult->isPending()) {
                 continue;
             }
             $result = false;
@@ -99,6 +99,23 @@ class ExamplePackageResult implements VerifyResult
     public function isFailed() : bool
     {
         return $this->isPassed() === false;
+    }
+
+    <<__Memoize>>
+    public function isPending() : bool
+    {
+        $result = true;
+        $exampleGroupResults = $this->exampleGroupResults->items();
+
+        foreach ($exampleGroupResults as $exampleGroupResult) {
+            if ($exampleGroupResult->isPending()) {
+                continue;
+            }
+            $result = false;
+            break;
+        }
+
+        return $result;
     }
 
 }

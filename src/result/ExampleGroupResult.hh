@@ -70,10 +70,10 @@ class ExampleGroupResult implements VerifyResult
     public function isPassed() : bool
     {
         $result = true;
-        $methodResults = $this->exampleResults->getIterator();
+        $exampleResults = $this->exampleResults->items();
 
-        foreach ($methodResults as $methodResult) {
-            if ($methodResult->isPassed()) {
+        foreach ($exampleResults as $exampleResult) {
+            if ($exampleResult->isPassed() || $exampleResult->isPending()) {
                 continue;
             }
             $result = false;
@@ -86,6 +86,23 @@ class ExampleGroupResult implements VerifyResult
     public function isFailed() : bool
     {
         return $this->isPassed() === false;
+    }
+
+    <<__Memoize>>
+    public function isPending() : bool
+    {
+        $result = true;
+        $exampleResults = $this->exampleResults->items();
+
+        foreach ($exampleResults as $exampleResult) {
+            if ($exampleResult->isPending()) {
+                continue;
+            }
+            $result = false;
+            break;
+        }
+
+        return $result;
     }
 
 }
