@@ -11,6 +11,10 @@
 
 namespace specify\notifier;
 
+use specify\result\ExampleResult;
+
 interface ExampleNotifier
 {
+    public function exampleStart(string $description) : void;
+    public function exampleFinish(ExampleResult $result) : void;
 }

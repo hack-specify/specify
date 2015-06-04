@@ -2,6 +2,7 @@
 
 use specify\example\Example;
 use specify\fixtures\A;
+use specify\helper\NotifyRecorder;
 use \Prophecy\Prophet;
 use \Prophecy\Argument;
 use \Exception;
@@ -11,10 +12,7 @@ describe(Example::class, function() {
     describe('->verify()', function() {
         context('when passed', function() {
             beforeEach(function() {
-                $this->prophet = new Prophet();
-
-                $notifier = $this->prophet->prophesize(LifeCycleNotifier::class);
-                $this->notifier = $notifier->reveal();
+                $this->notifier = new NotifyRecorder();
             });
             it('returns passed result', function() {
                 $target = new A();

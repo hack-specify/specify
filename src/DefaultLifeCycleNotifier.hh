@@ -13,8 +13,11 @@ namespace specify;
 
 use specify\event\ExamplePackageStart;
 use specify\event\ExampleGroupStart;
+use specify\event\ExampleStart;
+use specify\event\ExampleFinish;
 use specify\event\ExampleGroupFinish;
 use specify\event\ExamplePackageFinish;
+use specify\result\ExampleResult;
 use specify\result\ExampleGroupResult;
 use specify\result\ExamplePackageResult;
 
@@ -36,6 +39,16 @@ class DefaultLifeCycleNotifier implements LifeCycleNotifier
     public function exampleGroupStart(string $description) : void
     {
         $this->send(new ExampleGroupStart($description));
+    }
+
+    public function exampleStart(string $description) : void
+    {
+        $this->send(new ExampleStart($description));
+    }
+
+    public function exampleFinish(ExampleResult $result) : void
+    {
+        $this->send(new ExampleFinish($result));
     }
 
     public function exampleGroupFinish(ExampleGroupResult $result) : void

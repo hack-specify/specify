@@ -41,12 +41,15 @@ class Example implements SpecificationExample<ExampleResult>
         }
 
         $result = ExampleResult::passed($description);
+        $notifier->exampleStart($description);
 
         try {
             $this->method->invoke($this->target);
         } catch (Exception $exception) {
             $result = ExampleResult::failed($description, $exception);
         }
+
+        $notifier->exampleFinish($result);
 
         return $result;
     }
