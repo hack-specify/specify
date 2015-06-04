@@ -20,7 +20,7 @@ class ExampleGroupResult implements VerifyResult
     public function __construct(
         private string $description,
         private ExampleResultCollection $exampleResults,
-        private ?ProcessingTime $totalTime = null,
+        private ProcessingTime $totalTime,
     )
     {
     }
