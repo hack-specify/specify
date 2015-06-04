@@ -18,10 +18,9 @@ use specify\event\ExamplePackageFinish;
 use specify\io\ConsoleOutput;
 
 
-class ProcessingTimeReporter implements LifeCycleMessageSubscriber
+final class ProcessingTimeReporter implements LifeCycleMessageSubscriber
 {
 
-    private float $startAt = 0.0;
     private ConsoleOutput $writer;
 
     public function __construct()
@@ -31,23 +30,14 @@ class ProcessingTimeReporter implements LifeCycleMessageSubscriber
 
     public function handle(LifeCycleEvent $event) : void
     {
-        if ($event instanceof ExamplePackageStart) {
-            $this->onExamplePackageStart($event);
-        } else if ($event instanceof ExamplePackageFinish) {
+        if ($event instanceof ExamplePackageFinish) {
             $this->onExamplePackageFinish($event);
         }
     }
 
-    public function onExamplePackageStart(ExamplePackageStart $event) : void
-    {
-        $this->startAt = $event->getSendAtMicrotime();
-    }
-
     public function onExamplePackageFinish(ExamplePackageFinish $event) : void
     {
-        $finishAt = $event->getSendAtMicrotime();
-        $processingTime = $finishAt - $this->startAt;
-
+        $processingTime = $event->getProcessingTime();
         $this->writer->write("Finished in %F seconds\n", $processingTime);
     }
 
