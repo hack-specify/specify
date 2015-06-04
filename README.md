@@ -5,6 +5,7 @@ Specify
 
 **Specify** is BDD testing framework for [Hack](http://hacklang.org/).
 
+![Screen Shot](https://raw.githubusercontent.com/hack-specify/specify/master/screen-shot.png)
 
 Installation
 ----------------------------
