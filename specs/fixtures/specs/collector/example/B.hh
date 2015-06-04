@@ -1,6 +1,6 @@
 <?hh //strict
 
-namespace specify\fixtures\example;
+namespace specify\fixtures\collector\example;
 
 use specify\Specification;
 

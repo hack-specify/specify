@@ -19,7 +19,7 @@ describe(PackageSpecification::class, function() {
     });
     describe('->resolve()', function() {
         it('returns the ReflectionClass instance of resolve class', function() {
-            $file = realpath(__DIR__ . '/../fixtures/specs/A.hh');
+            $file = realpath(__DIR__ . '/../fixtures/specs/example/Example.hh');
             $result = $this->specification->resolve($file);
 
             expect($result)->toBeAnInstanceOf(ReflectionClass::class);

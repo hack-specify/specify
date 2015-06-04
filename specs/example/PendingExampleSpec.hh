@@ -1,7 +1,7 @@
 <?hh //partial
 
 use specify\example\PendingExample;
-use specify\fixtures\A;
+use specify\fixtures\example\Example as FixtureExample;
 use \Prophecy\Prophet;
 use \Prophecy\Argument;
 use \Exception;
@@ -17,13 +17,13 @@ describe(PendingExample::class, function() {
                 $this->notifier = $notifier->reveal();
             });
             it('returns pending result', function() {
-                $target = new A();
+                $target = new FixtureExample();
                 $exampleMethod = new ReflectionMethod($target, 'example2');
 
                 $pendingExample = new PendingExample($target, $exampleMethod);
                 $result = $pendingExample->verify($this->notifier);
 
-                expect($result->getDescription())->toBe("example2");
+                expect($result->getDescription())->toBe("example2 is pending");
                 expect($result->isPassed())->toBeFalse();
                 expect($result->isFailed())->toBeFalse();
                 expect($result->isPending())->toBeTrue();

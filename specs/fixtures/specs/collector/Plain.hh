@@ -1,6 +1,6 @@
 <?hh //strict
 
-namespace specify\fixtures;
+namespace specify\fixtures\collector;
 
 /**
  * This file is not subject to collection

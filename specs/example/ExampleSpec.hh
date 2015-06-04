@@ -1,7 +1,7 @@
 <?hh //partial
 
 use specify\example\Example;
-use specify\fixtures\A;
+use specify\fixtures\example\Example as FixtureExample;
 use specify\helper\NotifyRecorder;
 use \Prophecy\Prophet;
 use \Prophecy\Argument;
@@ -15,7 +15,7 @@ describe(Example::class, function() {
                 $this->notifier = new NotifyRecorder();
             });
             it('returns passed result', function() {
-                $target = new A();
+                $target = new FixtureExample();
                 $exampleMethod = new ReflectionMethod($target, 'example1');
 
                 $example = new Example($target, $exampleMethod);

@@ -7,8 +7,7 @@ use specify\example\ExampleGroup;
 use specify\result\ExampleGroupResult;
 use specify\result\ExamplePackageResult;
 use specify\helper\NotifyRecorder;
-use specify\fixtures\A;
-use specify\fixtures\example\B;
+use specify\fixtures\example\Example;
 
 
 describe(ExamplePackage::class, function() {
@@ -16,13 +15,13 @@ describe(ExamplePackage::class, function() {
         beforeEach(function() {
             $this->notifier = new NotifyRecorder();
             $this->package = new ExamplePackage('package', ImmVector {
-                new ExampleGroup(new ReflectionClass(A::class)),
-                new ExampleGroup(new ReflectionClass(B::class))
+                new ExampleGroup(new ReflectionClass(Example::class)),
+                new ExampleGroup(new ReflectionClass(Example::class))
             });
         });
         it('verify all example groups', function() {
             $result = $this->package->verify($this->notifier);
-            expect($result->getExampleCount())->toBe(3);
+            expect($result->getExampleCount())->toBe(6);
         });
     });
 });
