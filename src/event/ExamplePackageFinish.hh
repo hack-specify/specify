@@ -14,6 +14,7 @@ namespace specify\event;
 use specify\LifeCycleEvent;
 use specify\LifeCycleEventType;
 use specify\result\ExamplePackageResult;
+use specify\util\ProcessingTime;
 use \DateTime;
 
 
@@ -40,6 +41,12 @@ class ExamplePackageFinish extends AbstractNamedEvent implements LifeCycleEvent
     public function getPendingExampleCount() : int
     {
         return $this->result->getPendingExampleCount();
+    }
+
+    public function getProcessingTime() : float
+    {
+        $processingTime = $this->result->getProcessingTime();
+        return $processingTime->getProcessingTime();
     }
 
     public function isPassed() : bool

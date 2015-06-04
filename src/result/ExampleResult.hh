@@ -22,19 +22,20 @@ class ExampleResult implements VerifyResult
     public function __construct(
         private string $description,
         private ExampleResultType $result,
-        private ?ProcessingTime $totalTime = null,
+        private ProcessingTime $processingTime = new ProcessingTime(),
         private ?Exception $exception = null
     )
     {
-        if ($this->totalTime !== null) {
-            return;
-        }
-        $this->totalTime = new ProcessingTime();
     }
 
     public function getDescription() : string
     {
         return $this->description;
+    }
+
+    public function getProcessingTime() : ProcessingTime
+    {
+        return $this->processingTime;
     }
 
     public function isPassed() : bool

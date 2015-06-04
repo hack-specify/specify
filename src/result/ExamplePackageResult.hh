@@ -20,7 +20,7 @@ class ExamplePackageResult implements VerifyResult
     public function __construct(
         private string $description,
         private ExampleGroupResultCollection $exampleGroupResults,
-        private ProcessingTime $totalTime
+        private ProcessingTime $processingTime
     )
     {
     }
@@ -33,6 +33,11 @@ class ExamplePackageResult implements VerifyResult
     public function getExampleGroupResults() : ExampleGroupResultCollection
     {
         return $this->exampleGroupResults;
+    }
+
+    public function getProcessingTime() : ProcessingTime
+    {
+        return $this->processingTime;
     }
 
     <<__Memoize>>
