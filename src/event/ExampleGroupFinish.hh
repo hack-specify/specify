@@ -46,6 +46,11 @@ final class ExampleGroupFinish extends AbstractNamedEvent implements LifeCycleEv
         return $this->result->isFailed();
     }
 
+    public function isPending() : bool
+    {
+        return $this->result->isPending();
+    }
+
     public function getExampleGroupResult() : ExampleGroupResult
     {
         return $this->result;

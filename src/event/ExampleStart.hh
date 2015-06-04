@@ -25,4 +25,9 @@ final class ExampleStart extends AbstractNamedEvent implements LifeCycleEvent
         parent::__construct(LifeCycleEventType::ExampleStart);
     }
 
+    public function getDescription() : string
+    {
+        return $this->description;
+    }
+
 }

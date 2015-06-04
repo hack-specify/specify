@@ -59,6 +59,11 @@ final class ExamplePackageFinish extends AbstractNamedEvent implements LifeCycle
         return $this->result->isFailed();
     }
 
+    public function isPending() : bool
+    {
+        return $this->result->isPending();
+    }
+
     public function getExamplePackageResult() : ExamplePackageResult
     {
         return $this->result;
