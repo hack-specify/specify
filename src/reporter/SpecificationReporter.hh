@@ -90,7 +90,6 @@ final class SpecificationReporter implements LifeCycleMessageSubscriber
     private function onExamplePackageFinish(ExamplePackageFinish $event) : void
     {
         $event->sendTo($this->reporter);
-        $this->writer->writeln("");
     }
 
 }

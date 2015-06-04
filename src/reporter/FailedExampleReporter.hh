@@ -37,21 +37,26 @@ final class FailedExampleReporter implements LifeCycleMessageSubscriber
 
     private function onExamplePackageFinish(ExamplePackageFinish $event) : void
     {
+        $this->writer->writeln("");
+
         $failedExampleResults = $event->getFailedExamples();
 
         foreach ($failedExampleResults as $orderNo => $failedExampleResult) {
             $description = $failedExampleResult->getDescription();
             $reasonException = $failedExampleResult->getFailedReasonException();
 
-            $reasonMessage = '';
+            $this->writer->writeln("%d) %s\n", $orderNo + 1, $description);
 
-            if ($reasonException !== null) {
-                $reasonMessage = $reasonException->getMessage();
+            if ($reasonException === null) {
+                return;
             }
 
-            $this->writer->writeln("%d) %s", $orderNo + 1, $description);
-            $this->writer->writeln("  ", $reasonMessage);
-            $this->writer->writeln("");
+            $reasonMessage = $reasonException->getMessage();
+            $this->writer->writeln("  %s\n", $reasonMessage);
+            $this->writer->writeln("  %s:%d\n",
+                $reasonException->getFile(),
+                $reasonException->getLine()
+            );
         }
     }
 
