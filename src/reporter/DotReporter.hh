@@ -30,7 +30,7 @@ final class DotReporter implements LifeCycleMessageSubscriber
         private Console $writer = new ConsoleOutput()
     )
     {
-        $this->reporter = new ProcessingTimeReporter();
+        $this->reporter = new ProcessingTimeReporter($this->writer);
     }
 
     public function handle(LifeCycleEvent $event) : void
