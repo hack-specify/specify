@@ -18,19 +18,23 @@ use specify\event\ExampleGroupStart;
 use specify\event\ExampleGroupFinish;
 use specify\event\ExamplePackageFinish;
 use specify\io\ConsoleOutput;
+use specify\io\Console;
 
 
 final class SpecificationReporter implements LifeCycleMessageSubscriber
 {
 
     private int $indentLevel = 0;
-    private ConsoleOutput $writer;
-    private ProcessingTimeReporter $reporter;
+    private CompositionReporter $reporter;
 
-    public function __construct()
+    public function __construct(
+        private Console $writer = new ConsoleOutput()
+    )
     {
-        $this->writer = new ConsoleOutput();
-        $this->reporter = new ProcessingTimeReporter();
+        $this->reporter = new CompositionReporter(ImmVector {
+            new ProcessingTimeReporter($this->writer),
+            new SummaryReporter($this->writer)
+        });
     }
 
     public function handle(LifeCycleEvent $event) : void
@@ -50,7 +54,7 @@ final class SpecificationReporter implements LifeCycleMessageSubscriber
     {
         $this->writer->writeln("\nPackage: %s\n", $event->getDescription());
         $this->indentLevel++;
-        $this->reporter->handle($event);
+//        $event->sendTo($this->reporter);
     }
 
     public function onExampleGroupStart(ExampleGroupStart $event) : void
@@ -85,21 +89,8 @@ final class SpecificationReporter implements LifeCycleMessageSubscriber
 
     public function onExamplePackageFinish(ExamplePackageFinish $event) : void
     {
-        $this->reporter->handle($event);
-
-        $template = "%d example, %d failures, %d pending";
-
-        if ($event->isFailed()) {
-            $template = "<red>{$template}</red>";
-        } else {
-            $template = "<green>{$template}</green>";
-        }
-
-        $this->writer->writeln($template,
-            $event->getExampleCount(),
-            $event->getFailedExampleCount(),
-            $event->getPendingExampleCount()
-        );
+        $event->sendTo($this->reporter);
+        $this->writer->writeln("");
     }
 
 }

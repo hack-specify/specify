@@ -24,13 +24,13 @@ use specify\io\Console;
 final class DotReporter implements LifeCycleMessageSubscriber
 {
 
-    private ReporterCollection $reporters;
+    private CompositionReporter $reporter;
 
     public function __construct(
         private Console $writer = new ConsoleOutput()
     )
     {
-        $this->reporters = new CompositionReporter(ImmVector {
+        $this->reporter = new CompositionReporter(ImmVector {
             new ProcessingTimeReporter($this->writer),
             new SummaryReporter($this->writer)
         });
@@ -68,7 +68,7 @@ final class DotReporter implements LifeCycleMessageSubscriber
     private function onExamplePackageFinish(ExamplePackageFinish $event) : void
     {
         $this->writer->writeln("\n");
-        $event->sendTo($this->reporters);
+        $event->sendTo($this->reporter);
         $this->writer->write("\n");
     }
 
