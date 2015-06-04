@@ -80,6 +80,13 @@ namespace specify\example
     type ExampleCollection = ImmVector<SpecificationExample<ExampleResult>>;
 }
 
+namespace specify\reporter
+{
+    use specify\LifeCycleMessageSubscriber;
+
+    type ReporterCollection = ImmVector<LifeCycleMessageSubscriber>;
+}
+
 namespace specify\specification
 {
     type PackageNamespace = string;

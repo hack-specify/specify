@@ -52,9 +52,16 @@ describe(DotReporter::class, function() {
                 $this->event = new ExamplePackageFinish($packageResult);
             });
             it('repoter example processing time', function() {
+
+                $results = [];
+                $results[] = "\n\nFinished in 1000.000000 seconds\n";
+                $results[] = "\e[0;32m1 example, 0 failures, 0 pending\e[0m\n\n";
+
+                $output = implode($results, '');
+
                 expect(() ==> {
                     $this->repoter->handle($this->event);
-                })->toPrint("\n\nFinished in 1000.000000 seconds\n");
+                })->toPrint($output);
             });
         });
     });
