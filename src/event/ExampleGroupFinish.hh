@@ -36,6 +36,12 @@ final class ExampleGroupFinish extends AbstractNamedEvent implements LifeCycleEv
         return $this->result->getFailedExampleCount();
     }
 
+    public function getProcessingTime() : float
+    {
+        $processingTime = $this->result->getProcessingTime();
+        return $processingTime->getProcessingTime();
+    }
+
     public function isPassed() : bool
     {
         return $this->result->isPassed();
