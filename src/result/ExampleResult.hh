@@ -33,14 +33,14 @@ class ExampleResult implements VerifyResult
         return $this->description;
     }
 
-    public function getDescription() : string
-    {
-        return $this->description;
-    }
-
-    public function getFailedReasonException() : Exception
+    public function getFailedReasonException() : ?Exception
     {
         return $this->exception;
+    }
+
+    public function getProcessingTime() : ProcessingTime
+    {
+        return $this->processingTime;
     }
 
     public function isPassed() : bool

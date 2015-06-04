@@ -33,7 +33,8 @@ final class SpecificationReporter implements LifeCycleMessageSubscriber
     {
         $this->reporter = new CompositionReporter(ImmVector {
             new ProcessingTimeReporter($this->writer),
-            new SummaryReporter($this->writer)
+            new SummaryReporter($this->writer),
+            new FailedExampleReporter($this->writer)
         });
     }
 
@@ -50,14 +51,13 @@ final class SpecificationReporter implements LifeCycleMessageSubscriber
         }
     }
 
-    public function onExamplePackageStart(ExamplePackageStart $event) : void
+    private function onExamplePackageStart(ExamplePackageStart $event) : void
     {
         $this->writer->writeln("\nPackage: %s\n", $event->getDescription());
         $this->indentLevel++;
-//        $event->sendTo($this->reporter);
     }
 
-    public function onExampleGroupStart(ExampleGroupStart $event) : void
+    private function onExampleGroupStart(ExampleGroupStart $event) : void
     {
         $indentSpace = str_pad("", $this->indentLevel * 2, " ");
 
@@ -65,7 +65,7 @@ final class SpecificationReporter implements LifeCycleMessageSubscriber
         $this->indentLevel++;
     }
 
-    public function onExampleGroupFinish(ExampleGroupFinish $event) : void
+    private function onExampleGroupFinish(ExampleGroupFinish $event) : void
     {
         $result = $event->getExampleGroupResult();
         $exampleResults = $result->getExampleResults();
@@ -87,7 +87,7 @@ final class SpecificationReporter implements LifeCycleMessageSubscriber
         $this->indentLevel--;
     }
 
-    public function onExamplePackageFinish(ExamplePackageFinish $event) : void
+    private function onExamplePackageFinish(ExamplePackageFinish $event) : void
     {
         $event->sendTo($this->reporter);
         $this->writer->writeln("");
