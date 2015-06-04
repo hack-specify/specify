@@ -17,17 +17,25 @@ use specify\event\ExamplePackageStart;
 use specify\event\ExampleGroupStart;
 use specify\event\ExampleGroupFinish;
 use specify\event\ExamplePackageFinish;
+use specify\io\ConsoleOutput;
+use specify\io\Console;
 
 
-class SpecificationReporter implements LifeCycleMessageSubscriber
+final class SpecificationReporter implements LifeCycleMessageSubscriber
 {
 
-    private ProcessingTimeReporter $reporter;
     private int $indentLevel = 0;
+    private CompositionReporter $reporter;
 
-    public function __construct()
+    public function __construct(
+        private Console $writer = new ConsoleOutput()
+    )
     {
-        $this->reporter = new ProcessingTimeReporter();
+        $this->reporter = new CompositionReporter(ImmVector {
+            new ProcessingTimeReporter($this->writer),
+            new SummaryReporter($this->writer),
+            new FailedExampleReporter($this->writer)
+        });
     }
 
     public function handle(LifeCycleEvent $event) : void
@@ -43,63 +51,45 @@ class SpecificationReporter implements LifeCycleMessageSubscriber
         }
     }
 
-    public function onExamplePackageStart(ExamplePackageStart $event) : void
+    private function onExamplePackageStart(ExamplePackageStart $event) : void
     {
-        $this->writeln("\n%s\n\n", $event->getDescription());
-        $this->indentLevel++;
-        $this->reporter->handle($event);
-    }
-
-    public function onExampleGroupStart(ExampleGroupStart $event) : void
-    {
-        $this->writeWithIndent("%s\n", $event->getDescription());
+        $this->writer->writeln("\nPackage: %s\n", $event->getDescription());
         $this->indentLevel++;
     }
 
-    public function onExampleGroupFinish(ExampleGroupFinish $event) : void
+    private function onExampleGroupStart(ExampleGroupStart $event) : void
+    {
+        $indentSpace = str_pad("", $this->indentLevel * 2, " ");
+
+        $this->writer->write($indentSpace . "<white>%s</white>\n", $event->getDescription());
+        $this->indentLevel++;
+    }
+
+    private function onExampleGroupFinish(ExampleGroupFinish $event) : void
     {
         $result = $event->getExampleGroupResult();
         $exampleResults = $result->getExampleResults();
 
+        $indentSpace = str_pad("", $this->indentLevel * 2, " ");
+
         foreach ($exampleResults as $exampleResult) {
+            $format = "<green>✓</green> <white>%s</white>\n";
+
             if ($exampleResult->isFailed()) {
-                $status = 'ng';
+                $format = "  <red>%s</red>\n";
             } else if ($exampleResult->isPending()) {
-                $status = 'pending';
-            } else {
-                $status = 'ok';
+                $format = "  <lightCyan>%s</lightCyan>\n";
             }
-            $this->writeWithIndent("%s %s\n", $status, $exampleResult->getDescription());
+            $this->writer->write($indentSpace . $format, $exampleResult->getDescription());
         }
 
-        $this->writeln("\n");
+        $this->writer->writeln("");
         $this->indentLevel--;
     }
 
-    public function onExamplePackageFinish(ExamplePackageFinish $event) : void
+    private function onExamplePackageFinish(ExamplePackageFinish $event) : void
     {
-        $this->reporter->handle($event);
-
-        $this->writeln("%d example, %d failures, %d pending\n",
-            $event->getExampleCount(),
-            $event->getFailedExampleCount(),
-            $event->getPendingExampleCount()
-        );
-    }
-
-    private function writeWithIndent(string $format, ...) : void
-    {
-        $values = func_get_args();
-        $indentSpace = str_pad("", $this->indentLevel * 2, " ");
-
-        $values[0] = $indentSpace . $format;
-        echo call_user_func_array('sprintf', $values);
-    }
-
-    private function writeln(string $format, ...) : void
-    {
-        $values = func_get_args();
-        echo call_user_func_array('sprintf', $values);
+        $event->sendTo($this->reporter);
     }
 
 }

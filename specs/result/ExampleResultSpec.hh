@@ -8,8 +8,15 @@ describe(ExampleResult::class, function() {
     describe('->passed()', function() {
         it('returns passed result', function() {
             $exampleResult = ExampleResult::passed('foo');
+
             $result = $exampleResult->isPassed();
             expect($result)->toBeTrue();
+
+            $result = $exampleResult->isFailed();
+            expect($result)->toBeFalse();
+
+            $result = $exampleResult->isPending();
+            expect($result)->toBeFalse();
         });
     });
     describe('->failed()', function() {
@@ -20,11 +27,15 @@ describe(ExampleResult::class, function() {
 
             $result = $exampleResult->isPassed();
             expect($result)->toBeFalse();
+
+            $result = $exampleResult->isPending();
+            expect($result)->toBeFalse();
         });
     });
     context('->pending()', function() {
         it('returns pending result', function() {
             $exampleResult = ExampleResult::pending('foo');
+
             $result = $exampleResult->isFailed();
             expect($result)->toBeFalse();
 

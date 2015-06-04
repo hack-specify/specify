@@ -13,12 +13,10 @@ namespace specify;
 
 use specify\result\ExampleGroupResult;
 use specify\result\ExamplePackageResult;
+use specify\notifier\ExampleNotifier;
+use specify\notifier\ExampleGroupNotifier;
+use specify\notifier\ExamplePackageNotifier;
 
-
-interface LifeCycleNotifier
+interface LifeCycleNotifier extends ExampleNotifier, ExamplePackageNotifier, ExampleGroupNotifier
 {
-    public function examplePackageStart(string $description) : void;
-    public function exampleGroupStart(string $description) : void;
-    public function exampleGroupFinish(ExampleGroupResult $result) : void;
-    public function examplePackageFinish(ExamplePackageResult $result) : void;
 }

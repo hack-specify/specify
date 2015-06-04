@@ -12,13 +12,15 @@
 namespace specify\result;
 
 use specify\VerifyResult;
+use specify\util\ProcessingTime;
 
 class ExampleGroupResult implements VerifyResult
 {
 
     public function __construct(
         private string $description,
-        private ExampleResultCollection $exampleResults
+        private ExampleResultCollection $exampleResults,
+        private ProcessingTime $processingTime,
     )
     {
     }
@@ -31,6 +33,11 @@ class ExampleGroupResult implements VerifyResult
     public function getExampleResults() : ExampleResultCollection
     {
         return $this->exampleResults;
+    }
+
+    public function getProcessingTime() : ProcessingTime
+    {
+        return $this->processingTime;
     }
 
     <<__Memoize>>
@@ -52,21 +59,28 @@ class ExampleGroupResult implements VerifyResult
     <<__Memoize>>
     public function getFailedExampleCount() : int
     {
+        $failedExamples = $this->getFailedExamples();
+        return $failedExamples->count();
+    }
+
+    <<__Memoize>>
+    public function getFailedExamples() : ExampleResultCollection
+    {
         $failedExamples = $this->exampleResults->filter((ExampleResult $exampleResult) ==> {
-            return $exampleResult->isPassed();
+            return $exampleResult->isFailed();
         });
 
-        return $failedExamples->count();
+        return $failedExamples;
     }
 
     <<__Memoize>>
     public function isPassed() : bool
     {
         $result = true;
-        $methodResults = $this->exampleResults->getIterator();
+        $exampleResults = $this->exampleResults->items();
 
-        foreach ($methodResults as $methodResult) {
-            if ($methodResult->isPassed()) {
+        foreach ($exampleResults as $exampleResult) {
+            if ($exampleResult->isPassed() || $exampleResult->isPending()) {
                 continue;
             }
             $result = false;
@@ -79,6 +93,23 @@ class ExampleGroupResult implements VerifyResult
     public function isFailed() : bool
     {
         return $this->isPassed() === false;
+    }
+
+    <<__Memoize>>
+    public function isPending() : bool
+    {
+        $result = true;
+        $exampleResults = $this->exampleResults->items();
+
+        foreach ($exampleResults as $exampleResult) {
+            if ($exampleResult->isPending()) {
+                continue;
+            }
+            $result = false;
+            break;
+        }
+
+        return $result;
     }
 
 }

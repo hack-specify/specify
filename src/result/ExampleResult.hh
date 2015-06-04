@@ -12,6 +12,7 @@
 namespace specify\result;
 
 use specify\VerifyResult;
+use specify\util\ProcessingTime;
 use \Exception;
 
 
@@ -21,6 +22,7 @@ class ExampleResult implements VerifyResult
     public function __construct(
         private string $description,
         private ExampleResultType $result,
+        private ProcessingTime $processingTime = new ProcessingTime(),
         private ?Exception $exception = null
     )
     {
@@ -29,6 +31,16 @@ class ExampleResult implements VerifyResult
     public function getDescription() : string
     {
         return $this->description;
+    }
+
+    public function getFailedReasonException() : ?Exception
+    {
+        return $this->exception;
+    }
+
+    public function getProcessingTime() : ProcessingTime
+    {
+        return $this->processingTime;
     }
 
     public function isPassed() : bool
@@ -46,9 +58,9 @@ class ExampleResult implements VerifyResult
         return $this->result === ExampleResultType::Failed;
     }
 
-    public static function passed(string $description) : ExampleResult
+    public static function passed(string $description, ProcessingTime $totalTime) : ExampleResult
     {
-        return new self($description, ExampleResultType::Passed);
+        return new self($description, ExampleResultType::Passed, $totalTime);
     }
 
     public static function pending(string $description) : ExampleResult
@@ -56,9 +68,9 @@ class ExampleResult implements VerifyResult
         return new self($description, ExampleResultType::Pending);
     }
 
-    public static function failed(string $description, Exception $reason) : ExampleResult
+    public static function failed(string $description, ProcessingTime $totalTime, Exception $reason) : ExampleResult
     {
-        return new self($description, ExampleResultType::Failed, $reason);
+        return new self($description, ExampleResultType::Failed, $totalTime, $reason);
     }
 
 }

@@ -14,10 +14,11 @@ namespace specify\event;
 use specify\LifeCycleEvent;
 use specify\LifeCycleEventType;
 use specify\result\ExamplePackageResult;
+use specify\util\ProcessingTime;
 use \DateTime;
 
 
-class ExamplePackageFinish extends AbstractNamedEvent implements LifeCycleEvent
+final class ExamplePackageFinish extends AbstractNamedEvent implements LifeCycleEvent
 {
 
     public function __construct(
@@ -40,6 +41,32 @@ class ExamplePackageFinish extends AbstractNamedEvent implements LifeCycleEvent
     public function getPendingExampleCount() : int
     {
         return $this->result->getPendingExampleCount();
+    }
+
+    public function getFailedExamples() : ExampleResultCollection
+    {
+        return $this->result->getFailedExamples();
+    }
+
+    public function getProcessingTime() : float
+    {
+        $processingTime = $this->result->getProcessingTime();
+        return $processingTime->getProcessingTime();
+    }
+
+    public function isPassed() : bool
+    {
+        return $this->result->isPassed();
+    }
+
+    public function isFailed() : bool
+    {
+        return $this->result->isFailed();
+    }
+
+    public function isPending() : bool
+    {
+        return $this->result->isPending();
     }
 
     public function getExamplePackageResult() : ExamplePackageResult

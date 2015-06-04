@@ -15,6 +15,8 @@ enum LifeCycleEventType : string
 {
     ExamplePackageStart = 'examplePackageStart';
     ExampleGroupStart = 'exampleGroupStart';
+    ExampleStart = 'exampleStart';
+    ExampleFinish = 'exampleFinish';
     ExampleGroupFinish = 'exampleGroupFinish';
     ExamplePackageFinish = 'examplePackageFinish';
 }

@@ -10,8 +10,8 @@ describe(ExampleGroupCollector::class, function() {
     describe('->collectFrom()', function() {
         beforeEach(function() {
             $package = shape(
-                'namespace' => 'specify\\fixtures\\',
-                'packageDirectory' => realpath(__DIR__ . '/../fixtures/specs')
+                'namespace' => 'specify\\fixtures\\collector\\',
+                'packageDirectory' => realpath(__DIR__ . '/../fixtures/specs/collector')
             );
             $this->spec = new PackageSpecification($package);
             $this->collector = new ExampleGroupCollector();

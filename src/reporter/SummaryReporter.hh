@@ -19,7 +19,7 @@ use specify\io\ConsoleOutput;
 use specify\io\Console;
 
 
-final class ProcessingTimeReporter implements LifeCycleMessageSubscriber
+final class SummaryReporter implements LifeCycleMessageSubscriber
 {
 
     public function __construct(
@@ -37,8 +37,19 @@ final class ProcessingTimeReporter implements LifeCycleMessageSubscriber
 
     private function onExamplePackageFinish(ExamplePackageFinish $event) : void
     {
-        $processingTime = $event->getProcessingTime();
-        $this->writer->write("Finished in %F seconds\n", $processingTime);
+        $template = "%d example, %d failures, %d pending";
+
+        if ($event->isFailed()) {
+            $template = "<red>{$template}</red>";
+        } else {
+            $template = "<green>{$template}</green>";
+        }
+
+        $this->writer->writeln($template,
+            $event->getExampleCount(),
+            $event->getFailedExampleCount(),
+            $event->getPendingExampleCount()
+        );
     }
 
 }

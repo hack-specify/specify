@@ -12,13 +12,15 @@
 namespace specify\result;
 
 use specify\VerifyResult;
+use specify\util\ProcessingTime;
 
 class ExamplePackageResult implements VerifyResult
 {
 
     public function __construct(
         private string $description,
-        private ExampleGroupResultCollection $exampleGroupResults
+        private ExampleGroupResultCollection $exampleGroupResults,
+        private ProcessingTime $processingTime
     )
     {
     }
@@ -31,6 +33,11 @@ class ExamplePackageResult implements VerifyResult
     public function getExampleGroupResults() : ExampleGroupResultCollection
     {
         return $this->exampleGroupResults;
+    }
+
+    public function getProcessingTime() : ProcessingTime
+    {
+        return $this->processingTime;
     }
 
     <<__Memoize>>
@@ -73,13 +80,26 @@ class ExamplePackageResult implements VerifyResult
     }
 
     <<__Memoize>>
+    public function getFailedExamples() : ExampleResultCollection
+    {
+        $totalFailedExamples = Vector {};
+
+        foreach ($this->exampleGroupResults as $exampleGroupResult) {
+            $failedExamples = $exampleGroupResult->getFailedExamples();
+            $totalFailedExamples->addAll($failedExamples);
+        }
+
+        return $totalFailedExamples->toImmVector();
+    }
+
+    <<__Memoize>>
     public function isPassed() : bool
     {
         $result = true;
-        $groupResults = $this->exampleGroupResults->getIterator();
+        $exampleGroupResults = $this->exampleGroupResults->items();
 
-        foreach ($groupResults as $groupResult) {
-            if ($groupResult->isPassed()) {
+        foreach ($exampleGroupResults as $exampleGroupResult) {
+            if ($exampleGroupResult->isPassed() || $exampleGroupResult->isPending()) {
                 continue;
             }
             $result = false;
@@ -92,6 +112,23 @@ class ExamplePackageResult implements VerifyResult
     public function isFailed() : bool
     {
         return $this->isPassed() === false;
+    }
+
+    <<__Memoize>>
+    public function isPending() : bool
+    {
+        $result = true;
+        $exampleGroupResults = $this->exampleGroupResults->items();
+
+        foreach ($exampleGroupResults as $exampleGroupResult) {
+            if ($exampleGroupResult->isPending()) {
+                continue;
+            }
+            $result = false;
+            break;
+        }
+
+        return $result;
     }
 
 }

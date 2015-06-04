@@ -40,7 +40,9 @@ class PendingExample implements SpecificationExample<ExampleResult>
             $description = (string) $attributeValues[0];
         }
 
+        $notifier->exampleStart($description);
         $result = ExampleResult::pending($description);
+        $notifier->exampleFinish($result);
 
         return $result;
     }

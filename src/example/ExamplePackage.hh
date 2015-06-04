@@ -14,16 +14,20 @@ namespace specify\example;
 use specify\SpecificationExample;
 use specify\LifeCycleNotifier;
 use specify\result\ExamplePackageResult;
+use specify\util\StopWatch;
 
 
 class ExamplePackage implements SpecificationExample<ExamplePackageResult>
 {
+
+    private StopWatch $stopWatch;
 
     public function __construct(
         private string $description,
         private ExampleGroupCollection $exampleGroups
     )
     {
+        $this->stopWatch = new StopWatch();
     }
 
     public function getDescription() : string
@@ -36,12 +40,22 @@ class ExamplePackage implements SpecificationExample<ExamplePackageResult>
         $groupResults = Vector {};
         $notifier->examplePackageStart($this->getDescription());
 
+        $this->stopWatch->start();
+
         foreach ($this->exampleGroups as $exampleGroup) {
             $result = $exampleGroup->verify($notifier);
             $groupResults->add($result);
         }
 
-        $packageResult = new ExamplePackageResult($this->getDescription(), $groupResults);
+        $this->stopWatch->stop();
+        $totalTime = $this->stopWatch->getResult();
+
+        $packageResult = new ExamplePackageResult(
+            $this->getDescription(),
+            $groupResults->toImmVector(),
+            $totalTime
+        );
+
         $notifier->examplePackageFinish($packageResult);
 
         return $packageResult;

@@ -8,7 +8,7 @@ describe(SpecificationFileCollector::class, function() {
             $this->collector = new SpecificationFileCollector();
         });
         it('returns the spec files', function() {
-            $files = $this->collector->collectFrom(__DIR__ . '/../fixtures/specs');
+            $files = $this->collector->collectFrom(__DIR__ . '/../fixtures/specs/collector');
             expect($files->count())->toBe(3);
         });
     });

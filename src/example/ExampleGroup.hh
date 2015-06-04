@@ -16,6 +16,7 @@ use specify\LifeCycleNotifier;
 use specify\SpecificationExample;
 use specify\result\ExampleGroupResult;
 use specify\collector\ExampleCollector;
+use specify\util\StopWatch;
 
 use \ReflectionClass;
 use \ReflectionMethod;
@@ -28,6 +29,7 @@ class ExampleGroup implements SpecificationExample<ExampleGroupResult>
     private string $description;
     private Specification $exampleGroup;
     private ExampleCollection $examples;
+    private StopWatch $stopWatch;
 
     public function __construct(
         ReflectionClass $target
@@ -38,6 +40,7 @@ class ExampleGroup implements SpecificationExample<ExampleGroupResult>
 
         $collector = new ExampleCollector();
         $this->examples = $collector->collectFrom($this->exampleGroup);
+        $this->stopWatch = new StopWatch();
     }
 
     public function getDescription() : string
@@ -56,14 +59,20 @@ class ExampleGroup implements SpecificationExample<ExampleGroupResult>
 
         $notifier->exampleGroupStart($this->getDescription());
 
+        $this->stopWatch->start();
+
         foreach ($this->examples as $example) {
             $result = $example->verify($notifier);
             $exampleResults->add($result);
         }
 
+        $this->stopWatch->stop();
+        $totalTime = $this->stopWatch->getResult();
+
         $result = new ExampleGroupResult(
             $this->description,
-            $exampleResults
+            $exampleResults->toImmVector(),
+            $totalTime
         );
 
         $notifier->exampleGroupFinish($result);

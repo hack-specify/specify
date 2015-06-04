@@ -23,7 +23,7 @@ namespace specify
 
     type ExampleCollection = Generator<int, Example, void>;
     type VerifyResultCollection = Vector<VerifyResult>;
-    type ExampleResultCollection = Vector<ExampleResult>;
+    type ExampleResultCollection = Vector<ExampleResult>; //
 
     type ExampleReporter = LifeCycleMessageSubscriber;
     type ConfigOptions = shape(
@@ -50,8 +50,8 @@ namespace specify\result
 {
     use specify\result\ExampleResult;
 
-    type ExampleResultCollection = Vector<ExampleResult>;
-    type ExampleGroupResultCollection = Vector<ExampleGroupResult>;
+    type ExampleResultCollection = ImmVector<ExampleResult>;
+    type ExampleGroupResultCollection = ImmVector<ExampleGroupResult>;
 }
 
 
@@ -78,6 +78,21 @@ namespace specify\example
 
     type ExampleGroupCollection = ImmVector<ExampleGroup>;
     type ExampleCollection = ImmVector<SpecificationExample<ExampleResult>>;
+}
+
+
+namespace specify\event
+{
+    use specify\result\ExampleResult;
+
+    type ExampleResultCollection = ImmVector<ExampleResult>;
+}
+
+namespace specify\reporter
+{
+    use specify\LifeCycleMessageSubscriber;
+
+    type ReporterCollection = ImmVector<LifeCycleMessageSubscriber>;
 }
 
 namespace specify\specification
