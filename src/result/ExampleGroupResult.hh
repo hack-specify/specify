@@ -60,7 +60,7 @@ class ExampleGroupResult implements VerifyResult
     public function getFailedExampleCount() : int
     {
         $failedExamples = $this->exampleResults->filter((ExampleResult $exampleResult) ==> {
-            return $exampleResult->isPassed();
+            return $exampleResult->isFailed();
         });
 
         return $failedExamples->count();
