@@ -25,4 +25,19 @@ final class ExampleFinish extends AbstractNamedEvent implements LifeCycleEvent
         parent::__construct(LifeCycleEventType::ExampleFinish);
     }
 
+    public function isPassed() : bool
+    {
+        return $this->result->isPassed();
+    }
+
+    public function isFailed() : bool
+    {
+        return $this->result->isFailed();
+    }
+
+    public function isPending() : bool
+    {
+        return $this->result->isPending();
+    }
+
 }
