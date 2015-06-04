@@ -12,13 +12,15 @@
 namespace specify\result;
 
 use specify\VerifyResult;
+use specify\util\ProcessingTime;
 
 class ExampleGroupResult implements VerifyResult
 {
 
     public function __construct(
         private string $description,
-        private ExampleResultCollection $exampleResults
+        private ExampleResultCollection $exampleResults,
+        private ?ProcessingTime $totalTime = null,
     )
     {
     }
