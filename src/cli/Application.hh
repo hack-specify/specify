@@ -12,7 +12,7 @@
 namespace specify\cli;
 
 use specify\Specify;
-use specify\DefaultLifeCycleNotifier;
+use specify\notifier\DefaultLifeCycleNotifier;
 use specify\example\ExamplePackage;
 use specify\result\ExamplePackageResult;
 use specify\collector\ExampleGroupCollector;
@@ -47,12 +47,10 @@ class Application
 
     private function shutdown(ExamplePackageResult $result) : void
     {
-        $success = 0;
-
-        if ($result->isFailed()) {
-            exit($success);
+        if ($result->isPassed()) {
+            exit(ApplicationResultStatus::Passed);
         }
-        exit(1);
+        exit(ApplicationResultStatus::Failed);
     }
 
 }

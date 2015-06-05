@@ -88,6 +88,13 @@ namespace specify\event
     type ExampleResultCollection = ImmVector<ExampleResult>;
 }
 
+namespace specify\notifier
+{
+    use specify\LifeCycleMessageSubscriber;
+
+    type LifeCycleMessageSubscriberCollection = ImmVector<LifeCycleMessageSubscriber>;
+}
+
 namespace specify\reporter
 {
     use specify\LifeCycleMessageSubscriber;

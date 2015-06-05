@@ -9,8 +9,10 @@
  * with this source code in the file LICENSE.
  */
 
-namespace specify;
+namespace specify\notifier;
 
+use specify\LifeCycleEvent;
+use specify\LifeCycleNotifier;
 use specify\event\ExamplePackageStart;
 use specify\event\ExampleGroupStart;
 use specify\event\ExampleStart;
