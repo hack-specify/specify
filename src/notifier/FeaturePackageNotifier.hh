@@ -15,6 +15,6 @@ use specify\result\FeaturePackageResult;
 
 interface FeaturePackageNotifier
 {
-    public function examplePackageStart(string $description) : void;
-    public function examplePackageFinish(FeaturePackageResult $result) : void;
+    public function featurePackageStart(string $description) : void;
+    public function featurePackageFinish(FeaturePackageResult $result) : void;
 }

@@ -15,6 +15,6 @@ use specify\result\FeatureResult;
 
 interface FeatureNotifier
 {
-    public function exampleStart(string $description) : void;
-    public function exampleFinish(FeatureResult $result) : void;
+    public function featureStart(string $description) : void;
+    public function featureFinish(FeatureResult $result) : void;
 }

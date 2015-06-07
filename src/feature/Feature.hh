@@ -38,11 +38,11 @@ class Feature implements FeatureSpecification<FeatureResult>
 
     public function verify(LifeCycleNotifier $notifier) : FeatureResult
     {
-        $notifier->exampleStart($this->description);
+        $notifier->featureStart($this->description);
 
         $result = $this->verifyExample();
 
-        $notifier->exampleFinish($result);
+        $notifier->featureFinish($result);
 
         return $result;
     }

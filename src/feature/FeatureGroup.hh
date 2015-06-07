@@ -57,7 +57,7 @@ class FeatureGroup implements FeatureSpecification<FeatureGroupResult>
     {
         $exampleResults = Vector {};
 
-        $notifier->exampleGroupStart($this->getDescription());
+        $notifier->featureGroupStart($this->getDescription());
 
         $this->stopWatch->start();
 
@@ -75,7 +75,7 @@ class FeatureGroup implements FeatureSpecification<FeatureGroupResult>
             $totalTime
         );
 
-        $notifier->exampleGroupFinish($result);
+        $notifier->featureGroupFinish($result);
 
         return $result;
     }

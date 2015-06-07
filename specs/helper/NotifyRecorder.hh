@@ -19,32 +19,32 @@ class NotifyRecorder implements LifeCycleNotifier
     private Vector<FeatureGroupResult> $groupResults = Vector {};
     private ?FeaturePackageResult $packageResult;
 
-    public function examplePackageStart(string $description) : void
+    public function featurePackageStart(string $description) : void
     {
         $this->packageDescription = $description;
     }
 
-    public function exampleGroupStart(string $description) : void
+    public function featureGroupStart(string $description) : void
     {
         $this->groupDescriptions->add($description);
     }
 
-    public function exampleStart(string $description) : void
+    public function featureStart(string $description) : void
     {
         $this->exampleDescriptions->add($description);
     }
 
-    public function exampleFinish(FeatureResult $result) : void
+    public function featureFinish(FeatureResult $result) : void
     {
         $this->exampleResults->add($result);
     }
 
-    public function exampleGroupFinish(FeatureGroupResult $result) : void
+    public function featureGroupFinish(FeatureGroupResult $result) : void
     {
         $this->groupResults->add($result);
     }
 
-    public function examplePackageFinish(FeaturePackageResult $result) : void
+    public function featurePackageFinish(FeaturePackageResult $result) : void
     {
         $this->packageResult = $result;
     }

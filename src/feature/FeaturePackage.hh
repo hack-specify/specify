@@ -38,7 +38,7 @@ class FeaturePackage implements FeatureSpecification<FeaturePackageResult>
     public function verify(LifeCycleNotifier $notifier) : FeaturePackageResult
     {
         $groupResults = Vector {};
-        $notifier->examplePackageStart($this->getDescription());
+        $notifier->featurePackageStart($this->getDescription());
 
         $this->stopWatch->start();
 
@@ -56,7 +56,7 @@ class FeaturePackage implements FeatureSpecification<FeaturePackageResult>
             $totalTime
         );
 
-        $notifier->examplePackageFinish($packageResult);
+        $notifier->featurePackageFinish($packageResult);
 
         return $packageResult;
     }

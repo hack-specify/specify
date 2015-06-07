@@ -40,9 +40,9 @@ class PendingFeature implements FeatureSpecification<FeatureResult>
             $description = (string) $attributeValues[0];
         }
 
-        $notifier->exampleStart($description);
+        $notifier->featureStart($description);
         $result = FeatureResult::pending($description);
-        $notifier->exampleFinish($result);
+        $notifier->featureFinish($result);
 
         return $result;
     }

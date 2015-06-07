@@ -33,32 +33,32 @@ class DefaultLifeCycleNotifier implements LifeCycleNotifier
     {
     }
 
-    public function examplePackageStart(string $description) : void
+    public function featurePackageStart(string $description) : void
     {
         $this->send(new FeaturePackageStart($description));
     }
 
-    public function exampleGroupStart(string $description) : void
+    public function featureGroupStart(string $description) : void
     {
         $this->send(new FeatureGroupStart($description));
     }
 
-    public function exampleStart(string $description) : void
+    public function featureStart(string $description) : void
     {
         $this->send(new FeatureStart($description));
     }
 
-    public function exampleFinish(FeatureResult $result) : void
+    public function featureFinish(FeatureResult $result) : void
     {
         $this->send(new FeatureFinish($result));
     }
 
-    public function exampleGroupFinish(FeatureGroupResult $result) : void
+    public function featureGroupFinish(FeatureGroupResult $result) : void
     {
         $this->send(new FeatureGroupFinish($result));
     }
 
-    public function examplePackageFinish(FeaturePackageResult $result) : void
+    public function featurePackageFinish(FeaturePackageResult $result) : void
     {
         $this->send(new FeaturePackageFinish($result));
     }

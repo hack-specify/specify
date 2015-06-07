@@ -15,6 +15,6 @@ use specify\result\FeatureGroupResult;
 
 interface FeatureGroupNotifier
 {
-    public function exampleGroupStart(string $description) : void;
-    public function exampleGroupFinish(FeatureGroupResult $result) : void;
+    public function featureGroupStart(string $description) : void;
+    public function featureGroupFinish(FeatureGroupResult $result) : void;
 }
