@@ -6,20 +6,20 @@ use specify\Specification;
 use \Exception;
 
 
-class Example implements Specification
+class FeatureExample implements Specification
 {
 
-    <<Example("example1")>>
+    <<Feature("example1")>>
     public function example1() : void
     {
     }
 
-    <<PendingExample("example2 is pending")>>
+    <<PendingFeature("example2 is pending")>>
     public function example2() : void
     {
     }
 
-    <<Example("example3")>>
+    <<Feature("example3")>>
     public function example3() : void
     {
         throw new Exception('failed');

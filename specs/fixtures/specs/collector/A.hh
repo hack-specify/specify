@@ -7,12 +7,12 @@ use specify\Specification;
 class A implements Specification
 {
 
-    <<Example("example1")>>
+    <<Feature("example1")>>
     public function example1() : void
     {
     }
 
-    <<PendingExample("example2")>>
+    <<PendingFeature("example2")>>
     public function example2() : void
     {
     }

@@ -16,9 +16,9 @@ describe(FeatureGroupCollector::class, function() {
             $this->spec = new PackageSpecification($package);
             $this->collector = new FeatureGroupCollector();
         });
-        it('returns the example group objects', function() {
-            $exampleGroups = $this->collector->collectFrom($this->spec);
-            expect($exampleGroups->count())->toBe(2);
+        it('returns the feature group objects', function() {
+            $featureGroups = $this->collector->collectFrom($this->spec);
+            expect($featureGroups->count())->toBe(2);
         });
     });
 });

@@ -22,7 +22,7 @@ use \Exception;
 class PendingFeature implements FeatureSpecification<FeatureResult>
 {
 
-    const string ATTRIBUTE_NAME = 'PendingExample';
+    const string ATTRIBUTE_NAME = 'PendingFeature';
 
     public function __construct(
         private Specification $target,

@@ -1,7 +1,7 @@
 <?hh //partial
 
 use specify\feature\Feature;
-use specify\fixtures\example\Example as FixtureExample;
+use specify\fixtures\example\FeatureExample;
 use specify\helper\NotifyRecorder;
 use \Prophecy\Prophet;
 use \Prophecy\Argument;
@@ -15,7 +15,7 @@ describe(Feature::class, function() {
                 $this->notifier = new NotifyRecorder();
             });
             it('returns passed result', function() {
-                $target = new FixtureExample();
+                $target = new FeatureExample();
                 $featureMethod = new ReflectionMethod($target, 'example1');
 
                 $feature = new Feature($target, $featureMethod);
@@ -31,7 +31,7 @@ describe(Feature::class, function() {
                 $this->notifier = new NotifyRecorder();
             });
             it('returns passed result', function() {
-                $target = new FixtureExample();
+                $target = new FeatureExample();
                 $featureMethod = new ReflectionMethod($target, 'example3');
 
                 $feature = new Feature($target, $featureMethod);

@@ -1,7 +1,7 @@
 <?hh //partial
 
 use specify\feature\PendingFeature;
-use specify\fixtures\example\Example as FixtureExample;
+use specify\fixtures\example\FeatureExample;
 use specify\helper\NotifyRecorder;
 use \Exception;
 
@@ -13,7 +13,7 @@ describe(PendingFeature::class, function() {
                 $this->notifier = new NotifyRecorder();
             });
             it('returns pending result', function() {
-                $target = new FixtureExample();
+                $target = new FeatureExample();
                 $pendingFeatureMethod = new ReflectionMethod($target, 'example2');
 
                 $pendingFeature = new PendingFeature($target, $pendingFeatureMethod);

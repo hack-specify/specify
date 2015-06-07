@@ -1,18 +1,18 @@
 <?hh //partial
 
 use specify\collector\FeatureCollector;
-use specify\fixtures\example\Example;
+use specify\fixtures\example\FeatureExample;
 
 
 describe(FeatureCollector::class, function() {
     describe('->collectFrom()', function() {
         beforeEach(function() {
-            $this->exampleGroup = new Example();
+            $this->featureGroup = new FeatureExample();
             $this->collector = new FeatureCollector();
         });
         it('returns the example objects', function() {
-            $examples = $this->collector->collectFrom($this->exampleGroup);
-            expect($examples->count())->toBe(3);
+            $features = $this->collector->collectFrom($this->featureGroup);
+            expect($features->count())->toBe(3);
         });
     });
 });

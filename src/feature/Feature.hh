@@ -23,7 +23,7 @@ use \Exception;
 class Feature implements FeatureSpecification<FeatureResult>
 {
 
-    const string ATTRIBUTE_NAME = 'Example';
+    const string ATTRIBUTE_NAME = 'Feature';
 
     private string $description = 'example description empty';
     private StopWatch $stopWatch;
