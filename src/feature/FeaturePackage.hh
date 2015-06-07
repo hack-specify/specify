@@ -24,7 +24,7 @@ class FeaturePackage implements FeatureSpecification<FeaturePackageResult>
 
     public function __construct(
         private string $description,
-        private ExampleGroupCollection $exampleGroups
+        private FeatureGroupCollection $exampleGroups
     )
     {
         $this->stopWatch = new StopWatch();

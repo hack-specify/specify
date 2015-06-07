@@ -28,7 +28,7 @@ class FeatureGroup implements FeatureSpecification<FeatureGroupResult>
 
     private string $description;
     private Specification $exampleGroup;
-    private ExampleCollection $examples;
+    private FeatureCollection $examples;
     private StopWatch $stopWatch;
 
     public function __construct(
@@ -48,7 +48,7 @@ class FeatureGroup implements FeatureSpecification<FeatureGroupResult>
         return $this->description;
     }
 
-    public function getExamples() : ExampleCollection
+    public function getFeatures() : FeatureCollection
     {
         return $this->examples;
     }

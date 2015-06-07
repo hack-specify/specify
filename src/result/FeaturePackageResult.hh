@@ -19,7 +19,7 @@ class FeaturePackageResult implements VerifyResult
 
     public function __construct(
         private string $description,
-        private ExampleGroupResultCollection $exampleGroupResults,
+        private FeatureGroupResultCollection $exampleGroupResults,
         private ProcessingTime $processingTime
     )
     {
@@ -30,7 +30,7 @@ class FeaturePackageResult implements VerifyResult
         return $this->description;
     }
 
-    public function getFeatureGroupResults() : ExampleGroupResultCollection
+    public function getFeatureGroupResults() : FeatureGroupResultCollection
     {
         return $this->exampleGroupResults;
     }
@@ -80,7 +80,7 @@ class FeaturePackageResult implements VerifyResult
     }
 
     <<__Memoize>>
-    public function getFailedFeatures() : ExampleResultCollection
+    public function getFailedFeatures() : FeatureResultCollection
     {
         $totalFailedExamples = Vector {};
 

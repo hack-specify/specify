@@ -21,7 +21,7 @@ use \ReflectionClass;
 use \ReflectionMethod;
 
 
-class FeatureCollector implements Collector<Specification, ExampleCollection>
+class FeatureCollector implements Collector<Specification, FeatureCollection>
 {
 
     private Map<string, ReflectionClass> $registry;
@@ -35,7 +35,7 @@ class FeatureCollector implements Collector<Specification, ExampleCollection>
         };
     }
 
-    public function collectFrom(Specification $target) : ExampleCollection
+    public function collectFrom(Specification $target) : FeatureCollection
     {
         $examples = Vector {};
         $reflection = new ReflectionClass($target);

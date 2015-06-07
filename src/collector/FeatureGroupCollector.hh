@@ -18,13 +18,13 @@ use specify\specification\PackageSpecification;
 use specify\specification\NotSpecificationFileException;
 
 
-class FeatureGroupCollector implements Collector<PackageSpecification, ExampleGroupCollection>
+class FeatureGroupCollector implements Collector<PackageSpecification, FeatureGroupCollection>
 {
 
     /**
      *
      */
-    public function collectFrom(PackageSpecification $target) : ExampleGroupCollection
+    public function collectFrom(PackageSpecification $target) : FeatureGroupCollection
     {
         $exampleGroups = Vector {};
         $targetDirectory = $target->getPackageDirectory();

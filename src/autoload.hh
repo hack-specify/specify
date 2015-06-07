@@ -50,8 +50,8 @@ namespace specify\result
 {
     use specify\result\FeatureResult;
 
-    type ExampleResultCollection = ImmVector<FeatureResult>;
-    type ExampleGroupResultCollection = ImmVector<FeatureGroupResult>;
+    type FeatureResultCollection = ImmVector<FeatureResult>;
+    type FeatureGroupResultCollection = ImmVector<FeatureGroupResult>;
 }
 
 
@@ -66,8 +66,8 @@ namespace specify\collector
     type DirectoryPath = string;
     type SpecificationFile = string;
     type SpecificationFileCollection = ImmVector<SpecificationFile>;
-    type ExampleCollection = ImmVector<FeatureSpecification<FeatureResult>>;
-    type ExampleGroupCollection = ImmVector<FeatureGroup>;
+    type FeatureCollection = ImmVector<FeatureSpecification<FeatureResult>>;
+    type FeatureGroupCollection = ImmVector<FeatureGroup>;
 }
 
 namespace specify\feature
@@ -76,8 +76,8 @@ namespace specify\feature
     use specify\FeatureSpecification;
     use specify\result\FeatureResult;
 
-    type ExampleGroupCollection = ImmVector<FeatureGroup>;
-    type ExampleCollection = ImmVector<FeatureSpecification<FeatureResult>>;
+    type FeatureGroupCollection = ImmVector<FeatureGroup>;
+    type FeatureCollection = ImmVector<FeatureSpecification<FeatureResult>>;
 }
 
 
@@ -85,7 +85,7 @@ namespace specify\event
 {
     use specify\result\FeatureResult;
 
-    type ExampleResultCollection = ImmVector<FeatureResult>;
+    type FeatureResultCollection = ImmVector<FeatureResult>;
 }
 
 namespace specify\notifier

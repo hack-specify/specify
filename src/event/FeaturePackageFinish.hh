@@ -43,7 +43,7 @@ final class FeaturePackageFinish extends AbstractNamedEvent implements LifeCycle
         return $this->result->getPendingFeatureCount();
     }
 
-    public function getFailedFeatures() : ExampleResultCollection
+    public function getFailedFeatures() : FeatureResultCollection
     {
         return $this->result->getFailedFeatures();
     }
