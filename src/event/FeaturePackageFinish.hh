@@ -28,24 +28,24 @@ final class FeaturePackageFinish extends AbstractNamedEvent implements LifeCycle
         parent::__construct(LifeCycleEventType::ExamplePackageFinish);
     }
 
-    public function getExampleCount() : int
+    public function getFeatureCount() : int
     {
-        return $this->result->getExampleCount();
+        return $this->result->getFeatureCount();
     }
 
-    public function getFailedExampleCount() : int
+    public function getFailedFeatureCount() : int
     {
-        return $this->result->getFailedExampleCount();
+        return $this->result->getFailedFeatureCount();
     }
 
-    public function getPendingExampleCount() : int
+    public function getPendingFeatureCount() : int
     {
-        return $this->result->getPendingExampleCount();
+        return $this->result->getPendingFeatureCount();
     }
 
-    public function getFailedExamples() : ExampleResultCollection
+    public function getFailedFeatures() : ExampleResultCollection
     {
-        return $this->result->getFailedExamples();
+        return $this->result->getFailedFeatures();
     }
 
     public function getProcessingTime() : float
@@ -69,7 +69,7 @@ final class FeaturePackageFinish extends AbstractNamedEvent implements LifeCycle
         return $this->result->isPending();
     }
 
-    public function getExamplePackageResult() : FeaturePackageResult
+    public function getFeaturePackageResult() : FeaturePackageResult
     {
         return $this->result;
     }

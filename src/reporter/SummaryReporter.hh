@@ -37,7 +37,7 @@ final class SummaryReporter implements LifeCycleMessageSubscriber
 
     private function onExamplePackageFinish(FeaturePackageFinish $event) : void
     {
-        $template = "%d example, %d failures, %d pending";
+        $template = "%d feature, %d failures, %d pending";
 
         if ($event->isFailed()) {
             $template = "<red>{$template}</red>";
@@ -46,9 +46,9 @@ final class SummaryReporter implements LifeCycleMessageSubscriber
         }
 
         $this->writer->writeln($template,
-            $event->getExampleCount(),
-            $event->getFailedExampleCount(),
-            $event->getPendingExampleCount()
+            $event->getFeatureCount(),
+            $event->getFailedFeatureCount(),
+            $event->getPendingFeatureCount()
         );
     }
 

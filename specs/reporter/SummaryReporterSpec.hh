@@ -35,7 +35,7 @@ describe(SummaryReporter::class, function() {
                 it('report verify summary by passed color', function() {
                     expect(() ==> {
                         $this->reporter->handle($this->event);
-                    })->toPrint("\e[0;32m1 example, 0 failures, 0 pending\e[0m\n");
+                    })->toPrint("\e[0;32m1 feature, 0 failures, 0 pending\e[0m\n");
                 });
             });
             context('when failed', function() {
@@ -53,7 +53,7 @@ describe(SummaryReporter::class, function() {
                 it('report verify summary by failed color', function() {
                     expect(() ==> {
                         $this->reporter->handle($this->event);
-                    })->toPrint("\e[0;31m1 example, 1 failures, 0 pending\e[0m\n");
+                    })->toPrint("\e[0;31m1 feature, 1 failures, 0 pending\e[0m\n");
                 });
             });
         });

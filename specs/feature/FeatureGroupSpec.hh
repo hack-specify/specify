@@ -12,20 +12,20 @@ use \Exception;
 describe(FeatureGroup::class, function() {
     describe('->getDescription()', function() {
         beforeEach(function() {
-            $this->exampleGroup = new FeatureGroup(new ReflectionClass(Example::class));
+            $this->featureGroup = new FeatureGroup(new ReflectionClass(Example::class));
         });
-        it('returns description of example group', function() {
-            expect($this->exampleGroup->getDescription())->toBe(Example::class);
+        it('returns description of feature group', function() {
+            expect($this->featureGroup->getDescription())->toBe(Example::class);
         });
     });
     describe('->verify()', function() {
         beforeEach(function() {
             $this->notifier = new NotifyRecorder();
-            $this->exampleGroup = new FeatureGroup(new ReflectionClass(Example::class));
+            $this->featureGroup = new FeatureGroup(new ReflectionClass(Example::class));
         });
-        it('verify all examples', function() {
-            $result = $this->exampleGroup->verify($this->notifier);
-            expect($result->getExampleCount())->toBe(3);
+        it('verify all features', function() {
+            $result = $this->featureGroup->verify($this->notifier);
+            expect($result->getFeatureCount())->toBe(3);
         });
     });
 });

@@ -26,14 +26,14 @@ final class FeatureGroupFinish extends AbstractNamedEvent implements LifeCycleEv
         parent::__construct(LifeCycleEventType::ExampleGroupFinish);
     }
 
-    public function getExampleCount() : int
+    public function getFeatureCount() : int
     {
-        return $this->result->getExampleCount();
+        return $this->result->getFeatureCount();
     }
 
-    public function getFailedExampleCount() : int
+    public function getFailedFeatureCount() : int
     {
-        return $this->result->getFailedExampleCount();
+        return $this->result->getFailedFeatureCount();
     }
 
     public function getProcessingTime() : float
@@ -57,7 +57,7 @@ final class FeatureGroupFinish extends AbstractNamedEvent implements LifeCycleEv
         return $this->result->isPending();
     }
 
-    public function getExampleGroupResult() : FeatureGroupResult
+    public function getFeatureGroupResult() : FeatureGroupResult
     {
         return $this->result;
     }

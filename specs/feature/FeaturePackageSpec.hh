@@ -19,9 +19,9 @@ describe(FeaturePackage::class, function() {
                 new FeatureGroup(new ReflectionClass(Example::class))
             });
         });
-        it('verify all example groups', function() {
+        it('verify all feature groups', function() {
             $result = $this->package->verify($this->notifier);
-            expect($result->getExampleCount())->toBe(6);
+            expect($result->getFeatureCount())->toBe(6);
         });
     });
 });

@@ -39,7 +39,7 @@ final class FailedExampleReporter implements LifeCycleMessageSubscriber
     {
         $this->writer->writeln("");
 
-        $failedExampleResults = $event->getFailedExamples();
+        $failedExampleResults = $event->getFailedFeatures();
 
         foreach ($failedExampleResults as $orderNo => $failedExampleResult) {
             $description = $failedExampleResult->getDescription();

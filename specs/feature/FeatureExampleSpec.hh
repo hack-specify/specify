@@ -14,10 +14,10 @@ describe(PendingFeature::class, function() {
             });
             it('returns pending result', function() {
                 $target = new FixtureExample();
-                $exampleMethod = new ReflectionMethod($target, 'example2');
+                $pendingFeatureMethod = new ReflectionMethod($target, 'example2');
 
-                $pendingExample = new PendingFeature($target, $exampleMethod);
-                $result = $pendingExample->verify($this->notifier);
+                $pendingFeature = new PendingFeature($target, $pendingFeatureMethod);
+                $result = $pendingFeature->verify($this->notifier);
 
                 expect($result->getDescription())->toBe("example2 is pending");
                 expect($result->isPassed())->toBeFalse();

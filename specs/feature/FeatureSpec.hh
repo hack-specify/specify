@@ -8,7 +8,7 @@ use \Prophecy\Argument;
 use \Exception;
 
 
-describe(Example::class, function() {
+describe(Feature::class, function() {
     describe('->verify()', function() {
         context('when passed', function() {
             beforeEach(function() {
@@ -16,10 +16,10 @@ describe(Example::class, function() {
             });
             it('returns passed result', function() {
                 $target = new FixtureExample();
-                $exampleMethod = new ReflectionMethod($target, 'example1');
+                $featureMethod = new ReflectionMethod($target, 'example1');
 
-                $example = new Feature($target, $exampleMethod);
-                $result = $example->verify($this->notifier);
+                $feature = new Feature($target, $featureMethod);
+                $result = $feature->verify($this->notifier);
 
                 expect($result->getDescription())->toBe("example1");
                 expect($result->isPassed())->toBeTrue();
@@ -32,10 +32,10 @@ describe(Example::class, function() {
             });
             it('returns passed result', function() {
                 $target = new FixtureExample();
-                $exampleMethod = new ReflectionMethod($target, 'example3');
+                $featureMethod = new ReflectionMethod($target, 'example3');
 
-                $example = new Feature($target, $exampleMethod);
-                $result = $example->verify($this->notifier);
+                $feature = new Feature($target, $featureMethod);
+                $result = $feature->verify($this->notifier);
 
                 expect($result->getDescription())->toBe("example3");
                 expect($result->isPassed())->toBeFalse();

@@ -30,7 +30,7 @@ class FeatureGroupResult implements VerifyResult
         return $this->description;
     }
 
-    public function getExampleResults() : ExampleResultCollection
+    public function getFeatureResults() : ExampleResultCollection
     {
         return $this->exampleResults;
     }
@@ -41,13 +41,13 @@ class FeatureGroupResult implements VerifyResult
     }
 
     <<__Memoize>>
-    public function getExampleCount() : int
+    public function getFeatureCount() : int
     {
         return $this->exampleResults->count();
     }
 
     <<__Memoize>>
-    public function getPendingExampleCount() : int
+    public function getPendingFeatureCount() : int
     {
         $pendingExamples = $this->exampleResults->filter((FeatureResult $exampleResult) ==> {
             return $exampleResult->isPending();
@@ -57,14 +57,14 @@ class FeatureGroupResult implements VerifyResult
     }
 
     <<__Memoize>>
-    public function getFailedExampleCount() : int
+    public function getFailedFeatureCount() : int
     {
-        $failedExamples = $this->getFailedExamples();
+        $failedExamples = $this->getFailedFeatures();
         return $failedExamples->count();
     }
 
     <<__Memoize>>
-    public function getFailedExamples() : ExampleResultCollection
+    public function getFailedFeatures() : ExampleResultCollection
     {
         $failedExamples = $this->exampleResults->filter((FeatureResult $exampleResult) ==> {
             return $exampleResult->isFailed();

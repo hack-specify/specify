@@ -40,10 +40,10 @@ class ExampleMessageSubscriber implements LifeCycleMessageSubscriber
 
     public function onExampleGroupFinish(FeatureGroupFinish $event) : void
     {
-        $result = $event->getExampleGroupResult();
+        $result = $event->getFeatureGroupResult();
 
         echo $result->getDescription(), "\n";
-        $exampleResults = $result->getExampleResults();
+        $exampleResults = $result->getFeatureResults();
 
         foreach ($exampleResults as $exampleResult) {
             $status = $exampleResult->isFailed() ? 'ok' : 'ng';

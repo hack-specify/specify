@@ -30,7 +30,7 @@ class FeaturePackageResult implements VerifyResult
         return $this->description;
     }
 
-    public function getExampleGroupResults() : ExampleGroupResultCollection
+    public function getFeatureGroupResults() : ExampleGroupResultCollection
     {
         return $this->exampleGroupResults;
     }
@@ -41,51 +41,51 @@ class FeaturePackageResult implements VerifyResult
     }
 
     <<__Memoize>>
-    public function getExampleCount() : int
+    public function getFeatureCount() : int
     {
         $exampleCount = 0;
         $groupResults = $this->exampleGroupResults->items();
 
         foreach ($groupResults as $groupResult) {
-            $exampleCount += $groupResult->getExampleCount();
+            $exampleCount += $groupResult->getFeatureCount();
         }
 
         return $exampleCount;
     }
 
     <<__Memoize>>
-    public function getPendingExampleCount() : int
+    public function getPendingFeatureCount() : int
     {
         $pendingExampleCount = 0;
         $groupResults = $this->exampleGroupResults->items();
 
         foreach ($groupResults as $groupResult) {
-            $pendingExampleCount += $groupResult->getPendingExampleCount();
+            $pendingExampleCount += $groupResult->getPendingFeatureCount();
         }
 
         return $pendingExampleCount;
     }
 
     <<__Memoize>>
-    public function getFailedExampleCount() : int
+    public function getFailedFeatureCount() : int
     {
         $failedExampleCount = 0;
         $groupResults = $this->exampleGroupResults->items();
 
         foreach ($groupResults as $groupResult) {
-            $failedExampleCount += $groupResult->getFailedExampleCount();
+            $failedExampleCount += $groupResult->getFailedFeatureCount();
         }
 
         return $failedExampleCount;
     }
 
     <<__Memoize>>
-    public function getFailedExamples() : ExampleResultCollection
+    public function getFailedFeatures() : ExampleResultCollection
     {
         $totalFailedExamples = Vector {};
 
         foreach ($this->exampleGroupResults as $exampleGroupResult) {
-            $failedExamples = $exampleGroupResult->getFailedExamples();
+            $failedExamples = $exampleGroupResult->getFailedFeatures();
             $totalFailedExamples->addAll($failedExamples);
         }
 

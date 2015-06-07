@@ -55,7 +55,7 @@ describe(DotReporter::class, function() {
 
                 $results = [];
                 $results[] = "\n\nFinished in 1000.000000 seconds\n";
-                $results[] = "\e[0;32m1 example, 0 failures, 0 pending\e[0m\n\n";
+                $results[] = "\e[0;32m1 feature, 0 failures, 0 pending\e[0m\n\n";
 
                 $output = implode($results, '');
 

@@ -67,8 +67,8 @@ final class SpecificationReporter implements LifeCycleMessageSubscriber
 
     private function onExampleGroupFinish(FeatureGroupFinish $event) : void
     {
-        $result = $event->getExampleGroupResult();
-        $exampleResults = $result->getExampleResults();
+        $result = $event->getFeatureGroupResult();
+        $exampleResults = $result->getFeatureResults();
 
         $indentSpace = str_pad("", $this->indentLevel * 2, " ");
 
