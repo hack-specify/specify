@@ -18,7 +18,7 @@ use specify\specification\PackageSpecification;
 use specify\specification\NotSpecificationFileException;
 
 
-class ExampleGroupCollector implements Collector<PackageSpecification, ExampleGroupCollection>
+class FeatureGroupCollector implements Collector<PackageSpecification, ExampleGroupCollection>
 {
 
     /**

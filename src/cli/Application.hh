@@ -15,7 +15,7 @@ use specify\Specify;
 use specify\notifier\DefaultLifeCycleNotifier;
 use specify\feature\FeaturePackage;
 use specify\result\ExamplePackageResult;
-use specify\collector\ExampleGroupCollector;
+use specify\collector\FeatureGroupCollector;
 
 
 class Application
@@ -34,7 +34,7 @@ class Application
             $config->getExampleReporter()
         });
 
-        $collector = new ExampleGroupCollector();
+        $collector = new FeatureGroupCollector();
 
         $package = $config->getPackage();
         $groups = $collector->collectFrom($package);

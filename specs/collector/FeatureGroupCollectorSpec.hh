@@ -1,12 +1,12 @@
 <?hh //partial
 
-use specify\collector\ExampleGroupCollector;
+use specify\collector\FeatureGroupCollector;
 use specify\specification\PackageSpecification;
 use specify\fixtures\A;
 use specify\fixtures\example\B;
 
 
-describe(ExampleGroupCollector::class, function() {
+describe(FeatureGroupCollector::class, function() {
     describe('->collectFrom()', function() {
         beforeEach(function() {
             $package = shape(
@@ -14,7 +14,7 @@ describe(ExampleGroupCollector::class, function() {
                 'packageDirectory' => realpath(__DIR__ . '/../fixtures/specs/collector')
             );
             $this->spec = new PackageSpecification($package);
-            $this->collector = new ExampleGroupCollector();
+            $this->collector = new FeatureGroupCollector();
         });
         it('returns the example group objects', function() {
             $exampleGroups = $this->collector->collectFrom($this->spec);

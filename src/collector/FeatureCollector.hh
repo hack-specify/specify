@@ -21,7 +21,7 @@ use \ReflectionClass;
 use \ReflectionMethod;
 
 
-class ExampleCollector implements Collector<Specification, ExampleCollection>
+class FeatureCollector implements Collector<Specification, ExampleCollection>
 {
 
     private Map<string, ReflectionClass> $registry;

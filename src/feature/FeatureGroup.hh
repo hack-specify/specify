@@ -15,7 +15,7 @@ use specify\Specification;
 use specify\LifeCycleNotifier;
 use specify\FeatureSpecification;
 use specify\result\ExampleGroupResult;
-use specify\collector\ExampleCollector;
+use specify\collector\FeatureCollector;
 use specify\util\StopWatch;
 
 use \ReflectionClass;
@@ -38,7 +38,7 @@ class FeatureGroup implements FeatureSpecification<ExampleGroupResult>
         $this->description = $target->getName();
         $this->exampleGroup = $target->newInstance();
 
-        $collector = new ExampleCollector();
+        $collector = new FeatureCollector();
         $this->examples = $collector->collectFrom($this->exampleGroup);
         $this->stopWatch = new StopWatch();
     }
