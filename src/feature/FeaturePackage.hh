@@ -17,7 +17,7 @@ use specify\result\ExamplePackageResult;
 use specify\util\StopWatch;
 
 
-class ExamplePackage implements FeatureSpecification<ExamplePackageResult>
+class FeaturePackage implements FeatureSpecification<ExamplePackageResult>
 {
 
     private StopWatch $stopWatch;

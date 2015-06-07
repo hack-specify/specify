@@ -13,8 +13,8 @@ namespace specify\collector;
 
 use specify\Collector;
 use specify\Specification;
-use specify\feature\Example;
-use specify\feature\PendingExample;
+use specify\feature\Feature;
+use specify\feature\PendingFeature;
 use specify\result\ExampleResult;
 use specify\FeatureSpecification;
 use \ReflectionClass;
@@ -30,8 +30,8 @@ class ExampleCollector implements Collector<Specification, ExampleCollection>
     public function __construct()
     {
         $this->registry = Map {
-            Example::ATTRIBUTE_NAME => new ReflectionClass(Example::class),
-            PendingExample::ATTRIBUTE_NAME => new ReflectionClass(PendingExample::class)
+            Feature::ATTRIBUTE_NAME => new ReflectionClass(Feature::class),
+            PendingFeature::ATTRIBUTE_NAME => new ReflectionClass(PendingFeature::class)
         };
     }
 

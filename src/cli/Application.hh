@@ -13,7 +13,7 @@ namespace specify\cli;
 
 use specify\Specify;
 use specify\notifier\DefaultLifeCycleNotifier;
-use specify\feature\ExamplePackage;
+use specify\feature\FeaturePackage;
 use specify\result\ExamplePackageResult;
 use specify\collector\ExampleGroupCollector;
 
@@ -39,7 +39,7 @@ class Application
         $package = $config->getPackage();
         $groups = $collector->collectFrom($package);
 
-        $package = new ExamplePackage($package->getNamespace(), $groups);
+        $package = new FeaturePackage($package->getNamespace(), $groups);
         $packageResult = $package->verify($lifeCycleNotifier);
 
         $this->shutdown($packageResult);

@@ -19,7 +19,7 @@ use \ReflectionMethod;
 use \Exception;
 
 
-class PendingExample implements FeatureSpecification<ExampleResult>
+class PendingFeature implements FeatureSpecification<ExampleResult>
 {
 
     const string ATTRIBUTE_NAME = 'PendingExample';

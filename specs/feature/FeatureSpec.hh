@@ -1,6 +1,6 @@
 <?hh //partial
 
-use specify\feature\Example;
+use specify\feature\Feature;
 use specify\fixtures\example\Example as FixtureExample;
 use specify\helper\NotifyRecorder;
 use \Prophecy\Prophet;
@@ -18,7 +18,7 @@ describe(Example::class, function() {
                 $target = new FixtureExample();
                 $exampleMethod = new ReflectionMethod($target, 'example1');
 
-                $example = new Example($target, $exampleMethod);
+                $example = new Feature($target, $exampleMethod);
                 $result = $example->verify($this->notifier);
 
                 expect($result->getDescription())->toBe("example1");
@@ -34,7 +34,7 @@ describe(Example::class, function() {
                 $target = new FixtureExample();
                 $exampleMethod = new ReflectionMethod($target, 'example3');
 
-                $example = new Example($target, $exampleMethod);
+                $example = new Feature($target, $exampleMethod);
                 $result = $example->verify($this->notifier);
 
                 expect($result->getDescription())->toBe("example3");

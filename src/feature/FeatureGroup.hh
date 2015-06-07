@@ -23,7 +23,7 @@ use \ReflectionMethod;
 use \Exception;
 
 
-class ExampleGroup implements FeatureSpecification<ExampleGroupResult>
+class FeatureGroup implements FeatureSpecification<ExampleGroupResult>
 {
 
     private string $description;

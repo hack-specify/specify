@@ -11,7 +11,7 @@
 
 namespace specify
 {
-    use specify\feature\Example;
+    use specify\feature\Feature;
     use specify\result\ExampleResult;
     use specify\result\ExampleGroupResult;
     use specify\specification\PackageSpecification;
@@ -21,7 +21,7 @@ namespace specify
 
     type LifeCycleMessageSubscriberCollection = ImmVector<LifeCycleMessageSubscriber>;
 
-    type ExampleCollection = Generator<int, Example, void>;
+    type ExampleCollection = Generator<int, Feature, void>;
     type VerifyResultCollection = Vector<VerifyResult>;
     type ExampleResultCollection = Vector<ExampleResult>; //
 
@@ -59,15 +59,15 @@ namespace specify\collector
 {
     use \Generator;
     use specify\FeatureSpecification;
-    use specify\feature\Example;
-    use specify\feature\ExampleGroup;
+    use specify\feature\Feature;
+    use specify\feature\FeatureGroup;
     use specify\result\ExampleResult;
 
     type DirectoryPath = string;
     type SpecificationFile = string;
     type SpecificationFileCollection = ImmVector<SpecificationFile>;
     type ExampleCollection = ImmVector<FeatureSpecification<ExampleResult>>;
-    type ExampleGroupCollection = ImmVector<ExampleGroup>;
+    type ExampleGroupCollection = ImmVector<FeatureGroup>;
 }
 
 namespace specify\feature
@@ -76,7 +76,7 @@ namespace specify\feature
     use specify\FeatureSpecification;
     use specify\result\ExampleResult;
 
-    type ExampleGroupCollection = ImmVector<ExampleGroup>;
+    type ExampleGroupCollection = ImmVector<FeatureGroup>;
     type ExampleCollection = ImmVector<FeatureSpecification<ExampleResult>>;
 }
 

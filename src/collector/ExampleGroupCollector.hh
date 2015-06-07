@@ -13,7 +13,7 @@ namespace specify\collector;
 
 use specify\Collector;
 use specify\Specification;
-use specify\feature\ExampleGroup;
+use specify\feature\FeatureGroup;
 use specify\specification\PackageSpecification;
 use specify\specification\NotSpecificationFileException;
 
@@ -37,7 +37,7 @@ class ExampleGroupCollector implements Collector<PackageSpecification, ExampleGr
                 continue;
             }
 
-            $group = new ExampleGroup($reflection);
+            $group = new FeatureGroup($reflection);
             $exampleGroups->add($group);
         }
         $exampleGroups->shuffle();

@@ -1,12 +1,12 @@
 <?hh //partial
 
-use specify\feature\PendingExample;
+use specify\feature\PendingFeature;
 use specify\fixtures\example\Example as FixtureExample;
 use specify\helper\NotifyRecorder;
 use \Exception;
 
 
-describe(PendingExample::class, function() {
+describe(PendingFeature::class, function() {
     describe('->verify()', function() {
         context('when pending', function() {
             beforeEach(function() {
@@ -16,7 +16,7 @@ describe(PendingExample::class, function() {
                 $target = new FixtureExample();
                 $exampleMethod = new ReflectionMethod($target, 'example2');
 
-                $pendingExample = new PendingExample($target, $exampleMethod);
+                $pendingExample = new PendingFeature($target, $exampleMethod);
                 $result = $pendingExample->verify($this->notifier);
 
                 expect($result->getDescription())->toBe("example2 is pending");

@@ -20,7 +20,7 @@ use \ReflectionMethod;
 use \Exception;
 
 
-class Example implements FeatureSpecification<ExampleResult>
+class Feature implements FeatureSpecification<ExampleResult>
 {
 
     const string ATTRIBUTE_NAME = 'Example';
