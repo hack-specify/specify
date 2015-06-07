@@ -19,7 +19,7 @@ class FeatureGroupResult implements VerifyResult
 
     public function __construct(
         private string $description,
-        private FeatureResultCollection $exampleResults,
+        private FeatureResultCollection $featureResults,
         private ProcessingTime $processingTime,
     )
     {
@@ -32,7 +32,7 @@ class FeatureGroupResult implements VerifyResult
 
     public function getFeatureResults() : FeatureResultCollection
     {
-        return $this->exampleResults;
+        return $this->featureResults;
     }
 
     public function getProcessingTime() : ProcessingTime
@@ -43,44 +43,44 @@ class FeatureGroupResult implements VerifyResult
     <<__Memoize>>
     public function getFeatureCount() : int
     {
-        return $this->exampleResults->count();
+        return $this->featureResults->count();
     }
 
     <<__Memoize>>
     public function getPendingFeatureCount() : int
     {
-        $pendingExamples = $this->exampleResults->filter((FeatureResult $exampleResult) ==> {
-            return $exampleResult->isPending();
+        $pendingFeatures = $this->featureResults->filter((FeatureResult $featureResult) ==> {
+            return $featureResult->isPending();
         });
 
-        return $pendingExamples->count();
+        return $pendingFeatures->count();
     }
 
     <<__Memoize>>
     public function getFailedFeatureCount() : int
     {
-        $failedExamples = $this->getFailedFeatures();
-        return $failedExamples->count();
+        $failedFeatures = $this->getFailedFeatures();
+        return $failedFeatures->count();
     }
 
     <<__Memoize>>
     public function getFailedFeatures() : FeatureResultCollection
     {
-        $failedExamples = $this->exampleResults->filter((FeatureResult $exampleResult) ==> {
-            return $exampleResult->isFailed();
+        $failedFeatures = $this->featureResults->filter((FeatureResult $featureResult) ==> {
+            return $featureResult->isFailed();
         });
 
-        return $failedExamples;
+        return $failedFeatures;
     }
 
     <<__Memoize>>
     public function isPassed() : bool
     {
         $result = true;
-        $exampleResults = $this->exampleResults->items();
+        $featureResults = $this->featureResults->items();
 
-        foreach ($exampleResults as $exampleResult) {
-            if ($exampleResult->isPassed() || $exampleResult->isPending()) {
+        foreach ($featureResults as $featureResult) {
+            if ($featureResult->isPassed() || $featureResult->isPending()) {
                 continue;
             }
             $result = false;
@@ -99,10 +99,10 @@ class FeatureGroupResult implements VerifyResult
     public function isPending() : bool
     {
         $result = true;
-        $exampleResults = $this->exampleResults->items();
+        $featureResults = $this->featureResults->items();
 
-        foreach ($exampleResults as $exampleResult) {
-            if ($exampleResult->isPending()) {
+        foreach ($featureResults as $featureResult) {
+            if ($featureResult->isPending()) {
                 continue;
             }
             $result = false;

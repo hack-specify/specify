@@ -19,7 +19,7 @@ class FeaturePackageResult implements VerifyResult
 
     public function __construct(
         private string $description,
-        private FeatureGroupResultCollection $exampleGroupResults,
+        private FeatureGroupResultCollection $featureGroupResults,
         private ProcessingTime $processingTime
     )
     {
@@ -32,7 +32,7 @@ class FeaturePackageResult implements VerifyResult
 
     public function getFeatureGroupResults() : FeatureGroupResultCollection
     {
-        return $this->exampleGroupResults;
+        return $this->featureGroupResults;
     }
 
     public function getProcessingTime() : ProcessingTime
@@ -44,7 +44,7 @@ class FeaturePackageResult implements VerifyResult
     public function getFeatureCount() : int
     {
         $exampleCount = 0;
-        $groupResults = $this->exampleGroupResults->items();
+        $groupResults = $this->featureGroupResults->items();
 
         foreach ($groupResults as $groupResult) {
             $exampleCount += $groupResult->getFeatureCount();
@@ -56,50 +56,50 @@ class FeaturePackageResult implements VerifyResult
     <<__Memoize>>
     public function getPendingFeatureCount() : int
     {
-        $pendingExampleCount = 0;
-        $groupResults = $this->exampleGroupResults->items();
+        $pendingCount = 0;
+        $groupResults = $this->featureGroupResults->items();
 
         foreach ($groupResults as $groupResult) {
-            $pendingExampleCount += $groupResult->getPendingFeatureCount();
+            $pendingCount += $groupResult->getPendingFeatureCount();
         }
 
-        return $pendingExampleCount;
+        return $pendingCount;
     }
 
     <<__Memoize>>
     public function getFailedFeatureCount() : int
     {
-        $failedExampleCount = 0;
-        $groupResults = $this->exampleGroupResults->items();
+        $failedCount = 0;
+        $groupResults = $this->featureGroupResults->items();
 
         foreach ($groupResults as $groupResult) {
-            $failedExampleCount += $groupResult->getFailedFeatureCount();
+            $failedCount += $groupResult->getFailedFeatureCount();
         }
 
-        return $failedExampleCount;
+        return $failedCount;
     }
 
     <<__Memoize>>
     public function getFailedFeatures() : FeatureResultCollection
     {
-        $totalFailedExamples = Vector {};
+        $totalFailedFeatures = Vector {};
 
-        foreach ($this->exampleGroupResults as $exampleGroupResult) {
-            $failedExamples = $exampleGroupResult->getFailedFeatures();
-            $totalFailedExamples->addAll($failedExamples);
+        foreach ($this->featureGroupResults as $featureGroupResult) {
+            $failedFeatures = $featureGroupResult->getFailedFeatures();
+            $totalFailedFeatures->addAll($failedFeatures);
         }
 
-        return $totalFailedExamples->toImmVector();
+        return $totalFailedFeatures->toImmVector();
     }
 
     <<__Memoize>>
     public function isPassed() : bool
     {
         $result = true;
-        $exampleGroupResults = $this->exampleGroupResults->items();
+        $featureGroupResults = $this->featureGroupResults->items();
 
-        foreach ($exampleGroupResults as $exampleGroupResult) {
-            if ($exampleGroupResult->isPassed() || $exampleGroupResult->isPending()) {
+        foreach ($featureGroupResults as $featureGroupResult) {
+            if ($featureGroupResult->isPassed() || $featureGroupResult->isPending()) {
                 continue;
             }
             $result = false;
@@ -118,10 +118,10 @@ class FeaturePackageResult implements VerifyResult
     public function isPending() : bool
     {
         $result = true;
-        $exampleGroupResults = $this->exampleGroupResults->items();
+        $featureGroupResults = $this->featureGroupResults->items();
 
-        foreach ($exampleGroupResults as $exampleGroupResult) {
-            if ($exampleGroupResult->isPending()) {
+        foreach ($featureGroupResults as $featureGroupResult) {
+            if ($featureGroupResult->isPending()) {
                 continue;
             }
             $result = false;
