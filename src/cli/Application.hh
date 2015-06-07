@@ -14,7 +14,7 @@ namespace specify\cli;
 use specify\Specify;
 use specify\notifier\DefaultLifeCycleNotifier;
 use specify\feature\FeaturePackage;
-use specify\result\ExamplePackageResult;
+use specify\result\FeaturePackageResult;
 use specify\collector\FeatureGroupCollector;
 
 
@@ -45,7 +45,7 @@ class Application
         $this->shutdown($packageResult);
     }
 
-    private function shutdown(ExamplePackageResult $result) : void
+    private function shutdown(FeaturePackageResult $result) : void
     {
         if ($result->isPassed()) {
             exit(ApplicationResultStatus::Passed);

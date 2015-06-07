@@ -13,7 +13,7 @@ namespace specify\event;
 
 use specify\LifeCycleEvent;
 use specify\LifeCycleEventType;
-use specify\result\ExamplePackageResult;
+use specify\result\FeaturePackageResult;
 use specify\util\ProcessingTime;
 use \DateTime;
 
@@ -22,7 +22,7 @@ final class ExamplePackageFinish extends AbstractNamedEvent implements LifeCycle
 {
 
     public function __construct(
-        private ExamplePackageResult $result
+        private FeaturePackageResult $result
     )
     {
         parent::__construct(LifeCycleEventType::ExamplePackageFinish);
@@ -69,7 +69,7 @@ final class ExamplePackageFinish extends AbstractNamedEvent implements LifeCycle
         return $this->result->isPending();
     }
 
-    public function getExamplePackageResult() : ExamplePackageResult
+    public function getExamplePackageResult() : FeaturePackageResult
     {
         return $this->result;
     }

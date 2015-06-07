@@ -16,12 +16,12 @@ use specify\util\ProcessingTime;
 use \Exception;
 
 
-class ExampleResult implements VerifyResult
+class FeatureResult implements VerifyResult
 {
 
     public function __construct(
         private string $description,
-        private ExampleResultType $result,
+        private FeatureResultType $result,
         private ProcessingTime $processingTime = new ProcessingTime(),
         private ?Exception $exception = null
     )
@@ -45,32 +45,32 @@ class ExampleResult implements VerifyResult
 
     public function isPassed() : bool
     {
-        return $this->result === ExampleResultType::Passed;
+        return $this->result === FeatureResultType::Passed;
     }
 
     public function isPending() : bool
     {
-        return $this->result === ExampleResultType::Pending;
+        return $this->result === FeatureResultType::Pending;
     }
 
     public function isFailed() : bool
     {
-        return $this->result === ExampleResultType::Failed;
+        return $this->result === FeatureResultType::Failed;
     }
 
-    public static function passed(string $description, ProcessingTime $totalTime) : ExampleResult
+    public static function passed(string $description, ProcessingTime $totalTime) : FeatureResult
     {
-        return new self($description, ExampleResultType::Passed, $totalTime);
+        return new self($description, FeatureResultType::Passed, $totalTime);
     }
 
-    public static function pending(string $description) : ExampleResult
+    public static function pending(string $description) : FeatureResult
     {
-        return new self($description, ExampleResultType::Pending);
+        return new self($description, FeatureResultType::Pending);
     }
 
-    public static function failed(string $description, ProcessingTime $totalTime, Exception $reason) : ExampleResult
+    public static function failed(string $description, ProcessingTime $totalTime, Exception $reason) : FeatureResult
     {
-        return new self($description, ExampleResultType::Failed, $totalTime, $reason);
+        return new self($description, FeatureResultType::Failed, $totalTime, $reason);
     }
 
 }

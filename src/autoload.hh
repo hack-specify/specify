@@ -12,8 +12,8 @@
 namespace specify
 {
     use specify\feature\Feature;
-    use specify\result\ExampleResult;
-    use specify\result\ExampleGroupResult;
+    use specify\result\FeatureResult;
+    use specify\result\FeatureGroupResult;
     use specify\specification\PackageSpecification;
 
     use \ReflectionMethod;
@@ -23,7 +23,7 @@ namespace specify
 
     type ExampleCollection = Generator<int, Feature, void>;
     type VerifyResultCollection = Vector<VerifyResult>;
-    type ExampleResultCollection = Vector<ExampleResult>; //
+    type ExampleResultCollection = Vector<FeatureResult>; //
 
     type ExampleReporter = LifeCycleMessageSubscriber;
     type ConfigOptions = shape(
@@ -48,10 +48,10 @@ namespace specify\config
 
 namespace specify\result
 {
-    use specify\result\ExampleResult;
+    use specify\result\FeatureResult;
 
-    type ExampleResultCollection = ImmVector<ExampleResult>;
-    type ExampleGroupResultCollection = ImmVector<ExampleGroupResult>;
+    type ExampleResultCollection = ImmVector<FeatureResult>;
+    type ExampleGroupResultCollection = ImmVector<FeatureGroupResult>;
 }
 
 
@@ -61,12 +61,12 @@ namespace specify\collector
     use specify\FeatureSpecification;
     use specify\feature\Feature;
     use specify\feature\FeatureGroup;
-    use specify\result\ExampleResult;
+    use specify\result\FeatureResult;
 
     type DirectoryPath = string;
     type SpecificationFile = string;
     type SpecificationFileCollection = ImmVector<SpecificationFile>;
-    type ExampleCollection = ImmVector<FeatureSpecification<ExampleResult>>;
+    type ExampleCollection = ImmVector<FeatureSpecification<FeatureResult>>;
     type ExampleGroupCollection = ImmVector<FeatureGroup>;
 }
 
@@ -74,18 +74,18 @@ namespace specify\feature
 {
     use \Generator;
     use specify\FeatureSpecification;
-    use specify\result\ExampleResult;
+    use specify\result\FeatureResult;
 
     type ExampleGroupCollection = ImmVector<FeatureGroup>;
-    type ExampleCollection = ImmVector<FeatureSpecification<ExampleResult>>;
+    type ExampleCollection = ImmVector<FeatureSpecification<FeatureResult>>;
 }
 
 
 namespace specify\event
 {
-    use specify\result\ExampleResult;
+    use specify\result\FeatureResult;
 
-    type ExampleResultCollection = ImmVector<ExampleResult>;
+    type ExampleResultCollection = ImmVector<FeatureResult>;
 }
 
 namespace specify\notifier

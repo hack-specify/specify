@@ -11,10 +11,10 @@
 
 namespace specify\notifier;
 
-use specify\result\ExampleResult;
+use specify\result\FeatureResult;
 
 interface ExampleNotifier
 {
     public function exampleStart(string $description) : void;
-    public function exampleFinish(ExampleResult $result) : void;
+    public function exampleFinish(FeatureResult $result) : void;
 }

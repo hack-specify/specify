@@ -11,7 +11,7 @@
 
 namespace specify\result;
 
-enum ExampleResultType : int
+enum FeatureResultType : int
 {
     Passed = 0;
     Failed = 1;

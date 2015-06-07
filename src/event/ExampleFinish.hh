@@ -13,13 +13,13 @@ namespace specify\event;
 
 use specify\LifeCycleEvent;
 use specify\LifeCycleEventType;
-use specify\result\ExampleResult;
+use specify\result\FeatureResult;
 
 final class ExampleFinish extends AbstractNamedEvent implements LifeCycleEvent
 {
 
     public function __construct(
-        private ExampleResult $result
+        private FeatureResult $result
     )
     {
         parent::__construct(LifeCycleEventType::ExampleFinish);

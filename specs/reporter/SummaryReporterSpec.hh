@@ -1,9 +1,9 @@
 <?hh //partial
 
 use specify\event\ExamplePackageFinish;
-use specify\result\ExampleResult;
-use specify\result\ExampleGroupResult;
-use specify\result\ExamplePackageResult;
+use specify\result\FeatureResult;
+use specify\result\FeatureGroupResult;
+use specify\result\FeaturePackageResult;
 use specify\io\BufferWriter;
 use specify\io\ConsoleOutput;
 use specify\util\ProcessingTime;
@@ -22,11 +22,11 @@ describe(SummaryReporter::class, function() {
         context('when handle example package finish event', function() {
             context('when passed', function() {
                 beforeEach(function() {
-                    $group = new ExampleGroupResult('foo', Vector {
-                        ExampleResult::passed('foo->bar1()')
+                    $group = new FeatureGroupResult('foo', Vector {
+                        FeatureResult::passed('foo->bar1()')
                     });
 
-                    $packageResult = new ExamplePackageResult('package', ImmVector {
+                    $packageResult = new FeaturePackageResult('package', ImmVector {
                         $group
                     }, $this->processingTime);
 
@@ -40,11 +40,11 @@ describe(SummaryReporter::class, function() {
             });
             context('when failed', function() {
                 beforeEach(function() {
-                    $group = new ExampleGroupResult('foo', Vector {
-                        ExampleResult::failed('foo->bar1()')
+                    $group = new FeatureGroupResult('foo', Vector {
+                        FeatureResult::failed('foo->bar1()')
                     });
 
-                    $packageResult = new ExamplePackageResult('package', ImmVector {
+                    $packageResult = new FeaturePackageResult('package', ImmVector {
                         $group
                     }, $this->processingTime);
 

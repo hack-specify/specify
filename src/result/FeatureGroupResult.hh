@@ -14,7 +14,7 @@ namespace specify\result;
 use specify\VerifyResult;
 use specify\util\ProcessingTime;
 
-class ExampleGroupResult implements VerifyResult
+class FeatureGroupResult implements VerifyResult
 {
 
     public function __construct(
@@ -49,7 +49,7 @@ class ExampleGroupResult implements VerifyResult
     <<__Memoize>>
     public function getPendingExampleCount() : int
     {
-        $pendingExamples = $this->exampleResults->filter((ExampleResult $exampleResult) ==> {
+        $pendingExamples = $this->exampleResults->filter((FeatureResult $exampleResult) ==> {
             return $exampleResult->isPending();
         });
 
@@ -66,7 +66,7 @@ class ExampleGroupResult implements VerifyResult
     <<__Memoize>>
     public function getFailedExamples() : ExampleResultCollection
     {
-        $failedExamples = $this->exampleResults->filter((ExampleResult $exampleResult) ==> {
+        $failedExamples = $this->exampleResults->filter((FeatureResult $exampleResult) ==> {
             return $exampleResult->isFailed();
         });
 

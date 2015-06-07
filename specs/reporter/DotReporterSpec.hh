@@ -1,8 +1,8 @@
 <?hh //partial
 
-use specify\result\ExampleResult;
-use specify\result\ExampleGroupResult;
-use specify\result\ExamplePackageResult;
+use specify\result\FeatureResult;
+use specify\result\FeatureGroupResult;
+use specify\result\FeaturePackageResult;
 use specify\event\ExamplePackageStart;
 use specify\event\ExampleFinish;
 use specify\event\ExamplePackageFinish;
@@ -22,10 +22,10 @@ describe(DotReporter::class, function() {
         context('when handle example finish events', function() {
             beforeEach(function() {
                 $this->events = tuple(
-                    new ExampleFinish(ExampleResult::pending('foo->bar()')),
-                    new ExampleFinish(ExampleResult::passed('foo->bar1()')),
-                    new ExampleFinish(ExampleResult::failed('foo->bar2()')),
-                    new ExampleFinish(ExampleResult::pending('bar->bar()'))
+                    new ExampleFinish(FeatureResult::pending('foo->bar()')),
+                    new ExampleFinish(FeatureResult::passed('foo->bar1()')),
+                    new ExampleFinish(FeatureResult::failed('foo->bar2()')),
+                    new ExampleFinish(FeatureResult::pending('bar->bar()'))
                 );
             });
             it('repoter example progress', function() {
@@ -41,11 +41,11 @@ describe(DotReporter::class, function() {
         context('when handle example package finish event', function() {
             beforeEach(function() {
                 $processingTime = new ProcessingTime(1000.0, 2000.0);
-                $group = new ExampleGroupResult('foo', Vector {
-                    ExampleResult::passed('foo->bar1()')
+                $group = new FeatureGroupResult('foo', Vector {
+                    FeatureResult::passed('foo->bar1()')
                 });
 
-                $packageResult = new ExamplePackageResult('package', ImmVector {
+                $packageResult = new FeaturePackageResult('package', ImmVector {
                     $group
                 }, $processingTime);
 

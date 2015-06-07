@@ -14,7 +14,7 @@ namespace specify\result;
 use specify\VerifyResult;
 use specify\util\ProcessingTime;
 
-class ExamplePackageResult implements VerifyResult
+class FeaturePackageResult implements VerifyResult
 {
 
     public function __construct(

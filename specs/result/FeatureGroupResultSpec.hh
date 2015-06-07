@@ -1,16 +1,16 @@
 <?hh //partial
 
-use specify\result\ExampleResult;
-use specify\result\ExampleGroupResult;
+use specify\result\FeatureResult;
+use specify\result\FeatureGroupResult;
 use \Exception;
 
 
-describe(ExampleGroupResult::class, function() {
+describe(FeatureGroupResult::class, function() {
     describe('->isPassed()', function() {
         context('when passed', function() {
             it('returns true', function() {
-                $groupResult = new ExampleGroupResult('foo', Vector {
-                    ExampleResult::passed('foo->bar()')
+                $groupResult = new FeatureGroupResult('foo', Vector {
+                    FeatureResult::passed('foo->bar()')
                 });
                 $result = $groupResult->isPassed();
                 expect($result)->toBeTrue();
@@ -20,8 +20,8 @@ describe(ExampleGroupResult::class, function() {
     describe('->isFailed()', function() {
         context('when failed', function() {
             it('returns failed result', function() {
-                $groupResult = new ExampleGroupResult('foo', Vector {
-                    ExampleResult::failed('foo->bar()', new Exception('failed!!'))
+                $groupResult = new FeatureGroupResult('foo', Vector {
+                    FeatureResult::failed('foo->bar()', new Exception('failed!!'))
                 });
                 $result = $groupResult->isFailed();
                 expect($result)->toBeTrue();
@@ -34,9 +34,9 @@ describe(ExampleGroupResult::class, function() {
     describe('->isPending()', function() {
         context('when failed', function() {
             it('returns false', function() {
-                $groupResult = new ExampleGroupResult('foo', Vector {
-                    ExampleResult::failed('foo->bar()'),
-                    ExampleResult::pending('foo->foo()')
+                $groupResult = new FeatureGroupResult('foo', Vector {
+                    FeatureResult::failed('foo->bar()'),
+                    FeatureResult::pending('foo->foo()')
                 });
                 $result = $groupResult->isPending();
                 expect($result)->toBeFalse();
@@ -50,9 +50,9 @@ describe(ExampleGroupResult::class, function() {
         });
         context('when pending', function() {
             it('returns true', function() {
-                $groupResult = new ExampleGroupResult('foo', Vector {
-                    ExampleResult::pending('foo->bar()'),
-                    ExampleResult::pending('foo->foo()')
+                $groupResult = new FeatureGroupResult('foo', Vector {
+                    FeatureResult::pending('foo->bar()'),
+                    FeatureResult::pending('foo->foo()')
                 });
                 $result = $groupResult->isPending();
                 expect($result)->toBeTrue();

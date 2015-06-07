@@ -15,7 +15,7 @@ use specify\Collector;
 use specify\Specification;
 use specify\feature\Feature;
 use specify\feature\PendingFeature;
-use specify\result\ExampleResult;
+use specify\result\FeatureResult;
 use specify\FeatureSpecification;
 use \ReflectionClass;
 use \ReflectionMethod;
@@ -54,7 +54,7 @@ class FeatureCollector implements Collector<Specification, ExampleCollection>
         return $examples->toImmVector();
     }
 
-    private function createExample(Specification $target, ReflectionMethod $method) : ?FeatureSpecification<ExampleResult>
+    private function createExample(Specification $target, ReflectionMethod $method) : ?FeatureSpecification<FeatureResult>
     {
         $example = null;
         $attributes = $method->getAttributes();

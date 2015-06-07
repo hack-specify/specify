@@ -14,7 +14,7 @@ namespace specify\feature;
 use specify\Specification;
 use specify\LifeCycleNotifier;
 use specify\FeatureSpecification;
-use specify\result\ExampleGroupResult;
+use specify\result\FeatureGroupResult;
 use specify\collector\FeatureCollector;
 use specify\util\StopWatch;
 
@@ -23,7 +23,7 @@ use \ReflectionMethod;
 use \Exception;
 
 
-class FeatureGroup implements FeatureSpecification<ExampleGroupResult>
+class FeatureGroup implements FeatureSpecification<FeatureGroupResult>
 {
 
     private string $description;
@@ -53,7 +53,7 @@ class FeatureGroup implements FeatureSpecification<ExampleGroupResult>
         return $this->examples;
     }
 
-    public function verify(LifeCycleNotifier $notifier) : ExampleGroupResult
+    public function verify(LifeCycleNotifier $notifier) : FeatureGroupResult
     {
         $exampleResults = Vector {};
 
@@ -69,7 +69,7 @@ class FeatureGroup implements FeatureSpecification<ExampleGroupResult>
         $this->stopWatch->stop();
         $totalTime = $this->stopWatch->getResult();
 
-        $result = new ExampleGroupResult(
+        $result = new FeatureGroupResult(
             $this->description,
             $exampleResults->toImmVector(),
             $totalTime

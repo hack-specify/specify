@@ -11,10 +11,10 @@
 
 namespace specify\notifier;
 
-use specify\result\ExampleGroupResult;
+use specify\result\FeatureGroupResult;
 
 interface ExampleGroupNotifier
 {
     public function exampleGroupStart(string $description) : void;
-    public function exampleGroupFinish(ExampleGroupResult $result) : void;
+    public function exampleGroupFinish(FeatureGroupResult $result) : void;
 }

@@ -4,9 +4,9 @@ namespace specify\helper;
 
 use specify\LifeCycleEvent;
 use specify\LifeCycleNotifier;
-use specify\result\ExampleResult;
-use specify\result\ExampleGroupResult;
-use specify\result\ExamplePackageResult;
+use specify\result\FeatureResult;
+use specify\result\FeatureGroupResult;
+use specify\result\FeaturePackageResult;
 
 
 class NotifyRecorder implements LifeCycleNotifier
@@ -15,9 +15,9 @@ class NotifyRecorder implements LifeCycleNotifier
     private ?string $packageDescription;
     private Vector<string> $groupDescriptions = Vector {};
     private Vector<string> $exampleDescriptions = Vector {};
-    private Vector<ExampleResult> $exampleResults = Vector {};
-    private Vector<ExampleGroupResult> $groupResults = Vector {};
-    private ?ExamplePackageResult $packageResult;
+    private Vector<FeatureResult> $exampleResults = Vector {};
+    private Vector<FeatureGroupResult> $groupResults = Vector {};
+    private ?FeaturePackageResult $packageResult;
 
     public function examplePackageStart(string $description) : void
     {
@@ -34,17 +34,17 @@ class NotifyRecorder implements LifeCycleNotifier
         $this->exampleDescriptions->add($description);
     }
 
-    public function exampleFinish(ExampleResult $result) : void
+    public function exampleFinish(FeatureResult $result) : void
     {
         $this->exampleResults->add($result);
     }
 
-    public function exampleGroupFinish(ExampleGroupResult $result) : void
+    public function exampleGroupFinish(FeatureGroupResult $result) : void
     {
         $this->groupResults->add($result);
     }
 
-    public function examplePackageFinish(ExamplePackageResult $result) : void
+    public function examplePackageFinish(FeaturePackageResult $result) : void
     {
         $this->packageResult = $result;
     }

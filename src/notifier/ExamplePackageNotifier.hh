@@ -11,10 +11,10 @@
 
 namespace specify\notifier;
 
-use specify\result\ExamplePackageResult;
+use specify\result\FeaturePackageResult;
 
 interface ExamplePackageNotifier
 {
     public function examplePackageStart(string $description) : void;
-    public function examplePackageFinish(ExamplePackageResult $result) : void;
+    public function examplePackageFinish(FeaturePackageResult $result) : void;
 }

@@ -13,14 +13,14 @@ namespace specify\event;
 
 use specify\LifeCycleEvent;
 use specify\LifeCycleEventType;
-use specify\result\ExampleGroupResult;
+use specify\result\FeatureGroupResult;
 use DateTime;
 
 final class ExampleGroupFinish extends AbstractNamedEvent implements LifeCycleEvent
 {
 
     public function __construct(
-        private ExampleGroupResult $result
+        private FeatureGroupResult $result
     )
     {
         parent::__construct(LifeCycleEventType::ExampleGroupFinish);
@@ -57,7 +57,7 @@ final class ExampleGroupFinish extends AbstractNamedEvent implements LifeCycleEv
         return $this->result->isPending();
     }
 
-    public function getExampleGroupResult() : ExampleGroupResult
+    public function getExampleGroupResult() : FeatureGroupResult
     {
         return $this->result;
     }

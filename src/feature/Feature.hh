@@ -14,13 +14,13 @@ namespace specify\feature;
 use specify\Specification;
 use specify\FeatureSpecification;
 use specify\LifeCycleNotifier;
-use specify\result\ExampleResult;
+use specify\result\FeatureResult;
 use specify\util\StopWatch;
 use \ReflectionMethod;
 use \Exception;
 
 
-class Feature implements FeatureSpecification<ExampleResult>
+class Feature implements FeatureSpecification<FeatureResult>
 {
 
     const string ATTRIBUTE_NAME = 'Example';
@@ -36,7 +36,7 @@ class Feature implements FeatureSpecification<ExampleResult>
         $this->init();
     }
 
-    public function verify(LifeCycleNotifier $notifier) : ExampleResult
+    public function verify(LifeCycleNotifier $notifier) : FeatureResult
     {
         $notifier->exampleStart($this->description);
 
@@ -60,7 +60,7 @@ class Feature implements FeatureSpecification<ExampleResult>
         $this->description = (string) $attributeValues[0];
     }
 
-    private function verifyExample() : ExampleResult
+    private function verifyExample() : FeatureResult
     {
         $failedReasonException = null;
 
@@ -76,9 +76,9 @@ class Feature implements FeatureSpecification<ExampleResult>
         $totalTime = $this->stopWatch->getResult();
 
         if ($failedReasonException === null) {
-            $result = ExampleResult::passed($this->description, $totalTime);
+            $result = FeatureResult::passed($this->description, $totalTime);
         } else {
-            $result = ExampleResult::failed($this->description, $totalTime, $failedReasonException);
+            $result = FeatureResult::failed($this->description, $totalTime, $failedReasonException);
         }
 
         return $result;

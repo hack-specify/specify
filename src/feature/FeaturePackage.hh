@@ -13,11 +13,11 @@ namespace specify\feature;
 
 use specify\FeatureSpecification;
 use specify\LifeCycleNotifier;
-use specify\result\ExamplePackageResult;
+use specify\result\FeaturePackageResult;
 use specify\util\StopWatch;
 
 
-class FeaturePackage implements FeatureSpecification<ExamplePackageResult>
+class FeaturePackage implements FeatureSpecification<FeaturePackageResult>
 {
 
     private StopWatch $stopWatch;
@@ -35,7 +35,7 @@ class FeaturePackage implements FeatureSpecification<ExamplePackageResult>
         return $this->description;
     }
 
-    public function verify(LifeCycleNotifier $notifier) : ExamplePackageResult
+    public function verify(LifeCycleNotifier $notifier) : FeaturePackageResult
     {
         $groupResults = Vector {};
         $notifier->examplePackageStart($this->getDescription());
@@ -50,7 +50,7 @@ class FeaturePackage implements FeatureSpecification<ExamplePackageResult>
         $this->stopWatch->stop();
         $totalTime = $this->stopWatch->getResult();
 
-        $packageResult = new ExamplePackageResult(
+        $packageResult = new FeaturePackageResult(
             $this->getDescription(),
             $groupResults->toImmVector(),
             $totalTime

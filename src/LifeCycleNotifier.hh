@@ -11,8 +11,8 @@
 
 namespace specify;
 
-use specify\result\ExampleGroupResult;
-use specify\result\ExamplePackageResult;
+use specify\result\FeatureGroupResult;
+use specify\result\FeaturePackageResult;
 use specify\notifier\ExampleNotifier;
 use specify\notifier\ExampleGroupNotifier;
 use specify\notifier\ExamplePackageNotifier;

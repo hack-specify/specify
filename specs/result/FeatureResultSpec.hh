@@ -1,13 +1,13 @@
 <?hh //partial
 
-use specify\result\ExampleResult;
+use specify\result\FeatureResult;
 use \Exception;
 
 
-describe(ExampleResult::class, function() {
+describe(FeatureResult::class, function() {
     describe('->passed()', function() {
         it('returns passed result', function() {
-            $exampleResult = ExampleResult::passed('foo');
+            $exampleResult = FeatureResult::passed('foo');
 
             $result = $exampleResult->isPassed();
             expect($result)->toBeTrue();
@@ -21,7 +21,7 @@ describe(ExampleResult::class, function() {
     });
     describe('->failed()', function() {
         it('returns failed result', function() {
-            $exampleResult = ExampleResult::failed('foo', new Exception('failed!!'));
+            $exampleResult = FeatureResult::failed('foo', new Exception('failed!!'));
             $result = $exampleResult->isFailed();
             expect($result)->toBeTrue();
 
@@ -34,7 +34,7 @@ describe(ExampleResult::class, function() {
     });
     context('->pending()', function() {
         it('returns pending result', function() {
-            $exampleResult = ExampleResult::pending('foo');
+            $exampleResult = FeatureResult::pending('foo');
 
             $result = $exampleResult->isFailed();
             expect($result)->toBeFalse();

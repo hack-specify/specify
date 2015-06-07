@@ -1,7 +1,7 @@
 <?hh //partial
 
 use specify\event\ExamplePackageFinish;
-use specify\result\ExamplePackageResult;
+use specify\result\FeaturePackageResult;
 use specify\io\BufferWriter;
 use specify\io\ConsoleOutput;
 use specify\util\ProcessingTime;
@@ -17,7 +17,7 @@ describe(ProcessingTimeReporter::class, function() {
         });
         it('report processing time', function() {
             $processingTime = new ProcessingTime(1000.0, 2000.0);
-            $result = new ExamplePackageResult('package', Vector {}, $processingTime);
+            $result = new FeaturePackageResult('package', Vector {}, $processingTime);
             $event = new ExamplePackageFinish($result);
 
             expect(() ==> {
