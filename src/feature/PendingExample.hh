@@ -9,17 +9,17 @@
  * with this source code in the file LICENSE.
  */
 
-namespace specify\example;
+namespace specify\feature;
 
 use specify\Specification;
-use specify\SpecificationExample;
+use specify\FeatureSpecification;
 use specify\LifeCycleNotifier;
 use specify\result\ExampleResult;
 use \ReflectionMethod;
 use \Exception;
 
 
-class PendingExample implements SpecificationExample<ExampleResult>
+class PendingExample implements FeatureSpecification<ExampleResult>
 {
 
     const string ATTRIBUTE_NAME = 'PendingExample';

@@ -13,10 +13,10 @@ namespace specify\collector;
 
 use specify\Collector;
 use specify\Specification;
-use specify\example\Example;
-use specify\example\PendingExample;
+use specify\feature\Example;
+use specify\feature\PendingExample;
 use specify\result\ExampleResult;
-use specify\SpecificationExample;
+use specify\FeatureSpecification;
 use \ReflectionClass;
 use \ReflectionMethod;
 
@@ -54,7 +54,7 @@ class ExampleCollector implements Collector<Specification, ExampleCollection>
         return $examples->toImmVector();
     }
 
-    private function createExample(Specification $target, ReflectionMethod $method) : ?SpecificationExample<ExampleResult>
+    private function createExample(Specification $target, ReflectionMethod $method) : ?FeatureSpecification<ExampleResult>
     {
         $example = null;
         $attributes = $method->getAttributes();

@@ -11,7 +11,7 @@
 
 namespace specify
 {
-    use specify\example\Example;
+    use specify\feature\Example;
     use specify\result\ExampleResult;
     use specify\result\ExampleGroupResult;
     use specify\specification\PackageSpecification;
@@ -58,26 +58,26 @@ namespace specify\result
 namespace specify\collector
 {
     use \Generator;
-    use specify\SpecificationExample;
-    use specify\example\Example;
-    use specify\example\ExampleGroup;
+    use specify\FeatureSpecification;
+    use specify\feature\Example;
+    use specify\feature\ExampleGroup;
     use specify\result\ExampleResult;
 
     type DirectoryPath = string;
     type SpecificationFile = string;
     type SpecificationFileCollection = ImmVector<SpecificationFile>;
-    type ExampleCollection = ImmVector<SpecificationExample<ExampleResult>>;
+    type ExampleCollection = ImmVector<FeatureSpecification<ExampleResult>>;
     type ExampleGroupCollection = ImmVector<ExampleGroup>;
 }
 
-namespace specify\example
+namespace specify\feature
 {
     use \Generator;
-    use specify\SpecificationExample;
+    use specify\FeatureSpecification;
     use specify\result\ExampleResult;
 
     type ExampleGroupCollection = ImmVector<ExampleGroup>;
-    type ExampleCollection = ImmVector<SpecificationExample<ExampleResult>>;
+    type ExampleCollection = ImmVector<FeatureSpecification<ExampleResult>>;
 }
 
 

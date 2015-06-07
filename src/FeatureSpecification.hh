@@ -11,7 +11,7 @@
 
 namespace specify;
 
-interface SpecificationExample<Tr>
+interface FeatureSpecification<Tr>
 {
     public function verify(LifeCycleNotifier $notifier) : Tr;
 }

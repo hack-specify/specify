@@ -13,7 +13,7 @@ namespace specify\cli;
 
 use specify\Specify;
 use specify\notifier\DefaultLifeCycleNotifier;
-use specify\example\ExamplePackage;
+use specify\feature\ExamplePackage;
 use specify\result\ExamplePackageResult;
 use specify\collector\ExampleGroupCollector;
 

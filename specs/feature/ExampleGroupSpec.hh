@@ -1,7 +1,7 @@
 <?hh //partial
 
 use specify\LifeCycleNotifier;
-use specify\example\ExampleGroup;
+use specify\feature\ExampleGroup;
 use specify\result\ExampleGroupResult;
 use specify\fixtures\example\Example;
 use specify\helper\NotifyRecorder;

@@ -9,10 +9,10 @@
  * with this source code in the file LICENSE.
  */
 
-namespace specify\example;
+namespace specify\feature;
 
 use specify\Specification;
-use specify\SpecificationExample;
+use specify\FeatureSpecification;
 use specify\LifeCycleNotifier;
 use specify\result\ExampleResult;
 use specify\util\StopWatch;
@@ -20,7 +20,7 @@ use \ReflectionMethod;
 use \Exception;
 
 
-class Example implements SpecificationExample<ExampleResult>
+class Example implements FeatureSpecification<ExampleResult>
 {
 
     const string ATTRIBUTE_NAME = 'Example';

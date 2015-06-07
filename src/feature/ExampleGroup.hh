@@ -9,11 +9,11 @@
  * with this source code in the file LICENSE.
  */
 
-namespace specify\example;
+namespace specify\feature;
 
 use specify\Specification;
 use specify\LifeCycleNotifier;
-use specify\SpecificationExample;
+use specify\FeatureSpecification;
 use specify\result\ExampleGroupResult;
 use specify\collector\ExampleCollector;
 use specify\util\StopWatch;
@@ -23,7 +23,7 @@ use \ReflectionMethod;
 use \Exception;
 
 
-class ExampleGroup implements SpecificationExample<ExampleGroupResult>
+class ExampleGroup implements FeatureSpecification<ExampleGroupResult>
 {
 
     private string $description;

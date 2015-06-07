@@ -9,15 +9,15 @@
  * with this source code in the file LICENSE.
  */
 
-namespace specify\example;
+namespace specify\feature;
 
-use specify\SpecificationExample;
+use specify\FeatureSpecification;
 use specify\LifeCycleNotifier;
 use specify\result\ExamplePackageResult;
 use specify\util\StopWatch;
 
 
-class ExamplePackage implements SpecificationExample<ExamplePackageResult>
+class ExamplePackage implements FeatureSpecification<ExamplePackageResult>
 {
 
     private StopWatch $stopWatch;

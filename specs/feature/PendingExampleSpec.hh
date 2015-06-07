@@ -1,6 +1,6 @@
 <?hh //partial
 
-use specify\example\PendingExample;
+use specify\feature\PendingExample;
 use specify\fixtures\example\Example as FixtureExample;
 use specify\helper\NotifyRecorder;
 use \Exception;

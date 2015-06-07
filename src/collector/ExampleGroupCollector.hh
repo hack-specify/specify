@@ -13,7 +13,7 @@ namespace specify\collector;
 
 use specify\Collector;
 use specify\Specification;
-use specify\example\ExampleGroup;
+use specify\feature\ExampleGroup;
 use specify\specification\PackageSpecification;
 use specify\specification\NotSpecificationFileException;
 

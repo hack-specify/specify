@@ -1,6 +1,6 @@
 <?hh //partial
 
-use specify\example\Example;
+use specify\feature\Example;
 use specify\fixtures\example\Example as FixtureExample;
 use specify\helper\NotifyRecorder;
 use \Prophecy\Prophet;

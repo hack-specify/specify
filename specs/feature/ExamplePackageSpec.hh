@@ -2,8 +2,8 @@
 
 use specify\LifeCycleNotifier;
 use specify\SpecificationExample;
-use specify\example\ExamplePackage;
-use specify\example\ExampleGroup;
+use specify\feature\ExamplePackage;
+use specify\feature\ExampleGroup;
 use specify\result\ExampleGroupResult;
 use specify\result\ExamplePackageResult;
 use specify\helper\NotifyRecorder;
