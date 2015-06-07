@@ -31,19 +31,19 @@ final class FailedExampleReporter implements LifeCycleMessageSubscriber
     public function handle(LifeCycleEvent $event) : void
     {
         if ($event instanceof FeaturePackageFinish) {
-            $this->onExamplePackageFinish($event);
+            $this->onPackageFinish($event);
         }
     }
 
-    private function onExamplePackageFinish(FeaturePackageFinish $event) : void
+    private function onPackageFinish(FeaturePackageFinish $event) : void
     {
         $this->writer->writeln("");
 
-        $failedExampleResults = $event->getFailedFeatures();
+        $failedResults = $event->getFailedFeatures();
 
-        foreach ($failedExampleResults as $orderNo => $failedExampleResult) {
-            $description = $failedExampleResult->getDescription();
-            $reasonException = $failedExampleResult->getFailedReasonException();
+        foreach ($failedResults as $orderNo => $failedResult) {
+            $description = $failedResult->getDescription();
+            $reasonException = $failedResult->getFailedReasonException();
 
             $this->writer->writeln("%d) %s\n", $orderNo + 1, $description);
 

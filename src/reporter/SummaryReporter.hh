@@ -31,11 +31,11 @@ final class SummaryReporter implements LifeCycleMessageSubscriber
     public function handle(LifeCycleEvent $event) : void
     {
         if ($event instanceof FeaturePackageFinish) {
-            $this->onExamplePackageFinish($event);
+            $this->onPackageFinish($event);
         }
     }
 
-    private function onExamplePackageFinish(FeaturePackageFinish $event) : void
+    private function onPackageFinish(FeaturePackageFinish $event) : void
     {
         $template = "%d feature, %d failures, %d pending";
 

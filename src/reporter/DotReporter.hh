@@ -40,20 +40,20 @@ final class DotReporter implements LifeCycleMessageSubscriber
     public function handle(LifeCycleEvent $event) : void
     {
         if ($event instanceof FeaturePackageStart) {
-            $this->onExamplePackageStart($event);
+            $this->onPackageStart($event);
         } else if ($event instanceof FeatureFinish) {
-            $this->onExampleFinish($event);
+            $this->onFeatureFinish($event);
         } else if ($event instanceof FeaturePackageFinish) {
-            $this->onExamplePackageFinish($event);
+            $this->onPackageFinish($event);
         }
     }
 
-    private function onExamplePackageStart(FeaturePackageStart $event) : void
+    private function onPackageStart(FeaturePackageStart $event) : void
     {
         $this->writer->writeln('');
     }
 
-    private function onExampleFinish(FeatureFinish $event) : void
+    private function onFeatureFinish(FeatureFinish $event) : void
     {
         $value = '.';
 
@@ -66,7 +66,7 @@ final class DotReporter implements LifeCycleMessageSubscriber
         $this->writer->write($value);
     }
 
-    private function onExamplePackageFinish(FeaturePackageFinish $event) : void
+    private function onPackageFinish(FeaturePackageFinish $event) : void
     {
         $this->writer->writeln("\n");
         $event->sendTo($this->reporter);

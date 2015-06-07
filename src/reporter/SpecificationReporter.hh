@@ -41,23 +41,23 @@ final class SpecificationReporter implements LifeCycleMessageSubscriber
     public function handle(LifeCycleEvent $event) : void
     {
         if ($event instanceof FeaturePackageStart) {
-            $this->onExamplePackageStart($event);
+            $this->onPackageStart($event);
         } else if ($event instanceof FeatureGroupStart) {
-            $this->onExampleGroupStart($event);
+            $this->onGroupStart($event);
         } else if ($event instanceof FeatureGroupFinish) {
-            $this->onExampleGroupFinish($event);
+            $this->onGroupFinish($event);
         } else if ($event instanceof FeaturePackageFinish) {
-            $this->onExamplePackageFinish($event);
+            $this->onPackageFinish($event);
         }
     }
 
-    private function onExamplePackageStart(FeaturePackageStart $event) : void
+    private function onPackageStart(FeaturePackageStart $event) : void
     {
         $this->writer->writeln("\nPackage: %s\n", $event->getDescription());
         $this->indentLevel++;
     }
 
-    private function onExampleGroupStart(FeatureGroupStart $event) : void
+    private function onGroupStart(FeatureGroupStart $event) : void
     {
         $indentSpace = str_pad("", $this->indentLevel * 2, " ");
 
@@ -65,29 +65,29 @@ final class SpecificationReporter implements LifeCycleMessageSubscriber
         $this->indentLevel++;
     }
 
-    private function onExampleGroupFinish(FeatureGroupFinish $event) : void
+    private function onGroupFinish(FeatureGroupFinish $event) : void
     {
         $result = $event->getFeatureGroupResult();
-        $exampleResults = $result->getFeatureResults();
+        $featureResults = $result->getFeatureResults();
 
         $indentSpace = str_pad("", $this->indentLevel * 2, " ");
 
-        foreach ($exampleResults as $exampleResult) {
+        foreach ($featureResults as $featureResult) {
             $format = "<green>✓</green> <white>%s</white>\n";
 
-            if ($exampleResult->isFailed()) {
+            if ($featureResult->isFailed()) {
                 $format = "  <red>%s</red>\n";
-            } else if ($exampleResult->isPending()) {
+            } else if ($featureResult->isPending()) {
                 $format = "  <lightCyan>%s</lightCyan>\n";
             }
-            $this->writer->write($indentSpace . $format, $exampleResult->getDescription());
+            $this->writer->write($indentSpace . $format, $featureResult->getDescription());
         }
 
         $this->writer->writeln("");
         $this->indentLevel--;
     }
 
-    private function onExamplePackageFinish(FeaturePackageFinish $event) : void
+    private function onPackageFinish(FeaturePackageFinish $event) : void
     {
         $event->sendTo($this->reporter);
     }
