@@ -13,10 +13,10 @@ namespace specify\reporter;
 
 use specify\LifeCycleEvent;
 use specify\LifeCycleMessageSubscriber;
-use specify\event\ExamplePackageStart;
-use specify\event\ExampleGroupStart;
-use specify\event\ExampleGroupFinish;
-use specify\event\ExamplePackageFinish;
+use specify\event\FeaturePackageStart;
+use specify\event\FeatureGroupStart;
+use specify\event\FeatureGroupFinish;
+use specify\event\FeaturePackageFinish;
 use specify\io\ConsoleOutput;
 use specify\io\Console;
 
@@ -40,24 +40,24 @@ final class SpecificationReporter implements LifeCycleMessageSubscriber
 
     public function handle(LifeCycleEvent $event) : void
     {
-        if ($event instanceof ExamplePackageStart) {
+        if ($event instanceof FeaturePackageStart) {
             $this->onExamplePackageStart($event);
-        } else if ($event instanceof ExampleGroupStart) {
+        } else if ($event instanceof FeatureGroupStart) {
             $this->onExampleGroupStart($event);
-        } else if ($event instanceof ExampleGroupFinish) {
+        } else if ($event instanceof FeatureGroupFinish) {
             $this->onExampleGroupFinish($event);
-        } else if ($event instanceof ExamplePackageFinish) {
+        } else if ($event instanceof FeaturePackageFinish) {
             $this->onExamplePackageFinish($event);
         }
     }
 
-    private function onExamplePackageStart(ExamplePackageStart $event) : void
+    private function onExamplePackageStart(FeaturePackageStart $event) : void
     {
         $this->writer->writeln("\nPackage: %s\n", $event->getDescription());
         $this->indentLevel++;
     }
 
-    private function onExampleGroupStart(ExampleGroupStart $event) : void
+    private function onExampleGroupStart(FeatureGroupStart $event) : void
     {
         $indentSpace = str_pad("", $this->indentLevel * 2, " ");
 
@@ -65,7 +65,7 @@ final class SpecificationReporter implements LifeCycleMessageSubscriber
         $this->indentLevel++;
     }
 
-    private function onExampleGroupFinish(ExampleGroupFinish $event) : void
+    private function onExampleGroupFinish(FeatureGroupFinish $event) : void
     {
         $result = $event->getExampleGroupResult();
         $exampleResults = $result->getExampleResults();
@@ -87,7 +87,7 @@ final class SpecificationReporter implements LifeCycleMessageSubscriber
         $this->indentLevel--;
     }
 
-    private function onExamplePackageFinish(ExamplePackageFinish $event) : void
+    private function onExamplePackageFinish(FeaturePackageFinish $event) : void
     {
         $event->sendTo($this->reporter);
     }

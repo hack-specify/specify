@@ -13,10 +13,10 @@ namespace specify;
 
 use specify\result\FeatureGroupResult;
 use specify\result\FeaturePackageResult;
-use specify\notifier\ExampleNotifier;
-use specify\notifier\ExampleGroupNotifier;
-use specify\notifier\ExamplePackageNotifier;
+use specify\notifier\FeatureNotifier;
+use specify\notifier\FeatureGroupNotifier;
+use specify\notifier\FeaturePackageNotifier;
 
-interface LifeCycleNotifier extends ExampleNotifier, ExamplePackageNotifier, ExampleGroupNotifier
+interface LifeCycleNotifier extends FeatureNotifier, FeaturePackageNotifier, FeatureGroupNotifier
 {
 }

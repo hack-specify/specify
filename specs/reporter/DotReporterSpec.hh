@@ -3,9 +3,9 @@
 use specify\result\FeatureResult;
 use specify\result\FeatureGroupResult;
 use specify\result\FeaturePackageResult;
-use specify\event\ExamplePackageStart;
-use specify\event\ExampleFinish;
-use specify\event\ExamplePackageFinish;
+use specify\event\FeaturePackageStart;
+use specify\event\FeatureFinish;
+use specify\event\FeaturePackageFinish;
 use specify\io\BufferWriter;
 use specify\io\ConsoleOutput;
 use specify\reporter\DotReporter;
@@ -22,10 +22,10 @@ describe(DotReporter::class, function() {
         context('when handle example finish events', function() {
             beforeEach(function() {
                 $this->events = tuple(
-                    new ExampleFinish(FeatureResult::pending('foo->bar()')),
-                    new ExampleFinish(FeatureResult::passed('foo->bar1()')),
-                    new ExampleFinish(FeatureResult::failed('foo->bar2()')),
-                    new ExampleFinish(FeatureResult::pending('bar->bar()'))
+                    new FeatureFinish(FeatureResult::pending('foo->bar()')),
+                    new FeatureFinish(FeatureResult::passed('foo->bar1()')),
+                    new FeatureFinish(FeatureResult::failed('foo->bar2()')),
+                    new FeatureFinish(FeatureResult::pending('bar->bar()'))
                 );
             });
             it('repoter example progress', function() {
@@ -49,7 +49,7 @@ describe(DotReporter::class, function() {
                     $group
                 }, $processingTime);
 
-                $this->event = new ExamplePackageFinish($packageResult);
+                $this->event = new FeaturePackageFinish($packageResult);
             });
             it('repoter example processing time', function() {
 

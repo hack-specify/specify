@@ -13,12 +13,12 @@ namespace specify\notifier;
 
 use specify\LifeCycleEvent;
 use specify\LifeCycleNotifier;
-use specify\event\ExamplePackageStart;
-use specify\event\ExampleGroupStart;
-use specify\event\ExampleStart;
-use specify\event\ExampleFinish;
-use specify\event\ExampleGroupFinish;
-use specify\event\ExamplePackageFinish;
+use specify\event\FeaturePackageStart;
+use specify\event\FeatureGroupStart;
+use specify\event\FeatureStart;
+use specify\event\FeatureFinish;
+use specify\event\FeatureGroupFinish;
+use specify\event\FeaturePackageFinish;
 use specify\result\FeatureResult;
 use specify\result\FeatureGroupResult;
 use specify\result\FeaturePackageResult;
@@ -35,32 +35,32 @@ class DefaultLifeCycleNotifier implements LifeCycleNotifier
 
     public function examplePackageStart(string $description) : void
     {
-        $this->send(new ExamplePackageStart($description));
+        $this->send(new FeaturePackageStart($description));
     }
 
     public function exampleGroupStart(string $description) : void
     {
-        $this->send(new ExampleGroupStart($description));
+        $this->send(new FeatureGroupStart($description));
     }
 
     public function exampleStart(string $description) : void
     {
-        $this->send(new ExampleStart($description));
+        $this->send(new FeatureStart($description));
     }
 
     public function exampleFinish(FeatureResult $result) : void
     {
-        $this->send(new ExampleFinish($result));
+        $this->send(new FeatureFinish($result));
     }
 
     public function exampleGroupFinish(FeatureGroupResult $result) : void
     {
-        $this->send(new ExampleGroupFinish($result));
+        $this->send(new FeatureGroupFinish($result));
     }
 
     public function examplePackageFinish(FeaturePackageResult $result) : void
     {
-        $this->send(new ExamplePackageFinish($result));
+        $this->send(new FeaturePackageFinish($result));
     }
 
     private function send(LifeCycleEvent $event) : void

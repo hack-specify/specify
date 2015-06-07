@@ -13,16 +13,27 @@ namespace specify\event;
 
 use specify\LifeCycleEvent;
 use specify\LifeCycleEventType;
-use specify\result\FeatureResult;
+use specify\result\FeatureGroupResult;
+use DateTime;
 
-final class ExampleFinish extends AbstractNamedEvent implements LifeCycleEvent
+final class FeatureGroupFinish extends AbstractNamedEvent implements LifeCycleEvent
 {
 
     public function __construct(
-        private FeatureResult $result
+        private FeatureGroupResult $result
     )
     {
-        parent::__construct(LifeCycleEventType::ExampleFinish);
+        parent::__construct(LifeCycleEventType::ExampleGroupFinish);
+    }
+
+    public function getExampleCount() : int
+    {
+        return $this->result->getExampleCount();
+    }
+
+    public function getFailedExampleCount() : int
+    {
+        return $this->result->getFailedExampleCount();
     }
 
     public function getProcessingTime() : float
@@ -44,6 +55,11 @@ final class ExampleFinish extends AbstractNamedEvent implements LifeCycleEvent
     public function isPending() : bool
     {
         return $this->result->isPending();
+    }
+
+    public function getExampleGroupResult() : FeatureGroupResult
+    {
+        return $this->result;
     }
 
 }

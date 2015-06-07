@@ -13,10 +13,10 @@ namespace specify\reporter;
 
 use specify\LifeCycleEvent;
 use specify\LifeCycleMessageSubscriber;
-use specify\event\ExamplePackageStart;
-use specify\event\ExampleStart;
-use specify\event\ExampleFinish;
-use specify\event\ExamplePackageFinish;
+use specify\event\FeaturePackageStart;
+use specify\event\FeatureStart;
+use specify\event\FeatureFinish;
+use specify\event\FeaturePackageFinish;
 use specify\io\ConsoleOutput;
 use specify\io\Console;
 
@@ -39,21 +39,21 @@ final class DotReporter implements LifeCycleMessageSubscriber
 
     public function handle(LifeCycleEvent $event) : void
     {
-        if ($event instanceof ExamplePackageStart) {
+        if ($event instanceof FeaturePackageStart) {
             $this->onExamplePackageStart($event);
-        } else if ($event instanceof ExampleFinish) {
+        } else if ($event instanceof FeatureFinish) {
             $this->onExampleFinish($event);
-        } else if ($event instanceof ExamplePackageFinish) {
+        } else if ($event instanceof FeaturePackageFinish) {
             $this->onExamplePackageFinish($event);
         }
     }
 
-    private function onExamplePackageStart(ExamplePackageStart $event) : void
+    private function onExamplePackageStart(FeaturePackageStart $event) : void
     {
         $this->writer->writeln('');
     }
 
-    private function onExampleFinish(ExampleFinish $event) : void
+    private function onExampleFinish(FeatureFinish $event) : void
     {
         $value = '.';
 
@@ -66,7 +66,7 @@ final class DotReporter implements LifeCycleMessageSubscriber
         $this->writer->write($value);
     }
 
-    private function onExamplePackageFinish(ExamplePackageFinish $event) : void
+    private function onExamplePackageFinish(FeaturePackageFinish $event) : void
     {
         $this->writer->writeln("\n");
         $event->sendTo($this->reporter);

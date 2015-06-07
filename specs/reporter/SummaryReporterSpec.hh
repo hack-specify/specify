@@ -1,6 +1,6 @@
 <?hh //partial
 
-use specify\event\ExamplePackageFinish;
+use specify\event\FeaturePackageFinish;
 use specify\result\FeatureResult;
 use specify\result\FeatureGroupResult;
 use specify\result\FeaturePackageResult;
@@ -30,7 +30,7 @@ describe(SummaryReporter::class, function() {
                         $group
                     }, $this->processingTime);
 
-                    $this->event = new ExamplePackageFinish($packageResult);
+                    $this->event = new FeaturePackageFinish($packageResult);
                 });
                 it('report verify summary by passed color', function() {
                     expect(() ==> {
@@ -48,7 +48,7 @@ describe(SummaryReporter::class, function() {
                         $group
                     }, $this->processingTime);
 
-                    $this->event = new ExamplePackageFinish($packageResult);
+                    $this->event = new FeaturePackageFinish($packageResult);
                 });
                 it('report verify summary by failed color', function() {
                     expect(() ==> {

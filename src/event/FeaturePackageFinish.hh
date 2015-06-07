@@ -18,7 +18,7 @@ use specify\util\ProcessingTime;
 use \DateTime;
 
 
-final class ExamplePackageFinish extends AbstractNamedEvent implements LifeCycleEvent
+final class FeaturePackageFinish extends AbstractNamedEvent implements LifeCycleEvent
 {
 
     public function __construct(

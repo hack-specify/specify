@@ -15,15 +15,14 @@ use specify\LifeCycleEvent;
 use specify\LifeCycleEventType;
 use \DateTime;
 
-
-final class ExamplePackageStart extends AbstractNamedEvent implements LifeCycleEvent
+final class FeatureGroupStart extends AbstractNamedEvent implements LifeCycleEvent
 {
 
     public function __construct(
         private string $description
     )
     {
-        parent::__construct(LifeCycleEventType::ExamplePackageStart);
+        parent::__construct(LifeCycleEventType::ExampleGroupStart);
     }
 
     public function getDescription() : string

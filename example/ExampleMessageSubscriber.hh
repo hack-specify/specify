@@ -5,10 +5,10 @@ namespace specify\example;
 use specify\BehaviorResult;
 use specify\LifeCycleEvent;
 use specify\LifeCycleMessageSubscriber;
-use specify\event\ExamplePackageStart;
-use specify\event\ExampleGroupStart;
-use specify\event\ExampleGroupFinish;
-use specify\event\ExamplePackageFinish;
+use specify\event\FeaturePackageStart;
+use specify\event\FeatureGroupStart;
+use specify\event\FeatureGroupFinish;
+use specify\event\FeaturePackageFinish;
 
 
 class ExampleMessageSubscriber implements LifeCycleMessageSubscriber
@@ -17,28 +17,28 @@ class ExampleMessageSubscriber implements LifeCycleMessageSubscriber
     public function handle(LifeCycleEvent $event) : void
     {
 
-        if ($event instanceof ExamplePackageStart) {
+        if ($event instanceof FeaturePackageStart) {
             $this->onExamplePackageStart($event);
-        } else if ($event instanceof ExampleGroupStart) {
+        } else if ($event instanceof FeatureGroupStart) {
             $this->onExampleGroupStart($event);
-        } else if ($event instanceof ExampleGroupFinish) {
+        } else if ($event instanceof FeatureGroupFinish) {
             $this->onExampleGroupFinish($event);
-        } else if ($event instanceof ExamplePackageFinish) {
+        } else if ($event instanceof FeaturePackageFinish) {
             $this->onExamplePackageFinish($event);
         }
     }
 
-    public function onExamplePackageStart(ExamplePackageStart $event) : void
+    public function onExamplePackageStart(FeaturePackageStart $event) : void
     {
         echo $event->getName(), "\n";
     }
 
-    public function onExampleGroupStart(ExampleGroupStart $event) : void
+    public function onExampleGroupStart(FeatureGroupStart $event) : void
     {
         echo $event->getName(), "\n";
     }
 
-    public function onExampleGroupFinish(ExampleGroupFinish $event) : void
+    public function onExampleGroupFinish(FeatureGroupFinish $event) : void
     {
         $result = $event->getExampleGroupResult();
 
@@ -51,7 +51,7 @@ class ExampleMessageSubscriber implements LifeCycleMessageSubscriber
         }
     }
 
-    public function onExamplePackageFinish(ExamplePackageFinish $event) : void
+    public function onExamplePackageFinish(FeaturePackageFinish $event) : void
     {
         echo $event->getName(), "\n";
     }

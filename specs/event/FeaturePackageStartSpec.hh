@@ -1,12 +1,12 @@
 <?hh //partial
 
 use specify\LifeCycleEventType;
-use specify\event\ExamplePackageStart;
+use specify\event\FeaturePackageStart;
 
-describe(ExamplePackageStart::class, function() {
+describe(FeaturePackageStart::class, function() {
     describe('->getName()', function() {
         beforeEach(function() {
-            $this->message = new ExamplePackageStart('description');
+            $this->message = new FeaturePackageStart('description');
         });
         it('returns the event name', function() {
             $name = (string) LifeCycleEventType::ExamplePackageStart;
