@@ -27,8 +27,8 @@ class FeatureGroup implements FeatureSpecification<FeatureGroupResult>
 {
 
     private string $description;
-    private Specification $exampleGroup;
-    private FeatureCollection $examples;
+    private Specification $featureGroup;
+    private FeatureCollection $features;
     private StopWatch $stopWatch;
 
     public function __construct(
@@ -36,10 +36,10 @@ class FeatureGroup implements FeatureSpecification<FeatureGroupResult>
     )
     {
         $this->description = $target->getName();
-        $this->exampleGroup = $target->newInstance();
+        $this->featureGroup = $target->newInstance();
 
         $collector = new FeatureCollector();
-        $this->examples = $collector->collectFrom($this->exampleGroup);
+        $this->features = $collector->collectFrom($this->featureGroup);
         $this->stopWatch = new StopWatch();
     }
 
@@ -50,20 +50,20 @@ class FeatureGroup implements FeatureSpecification<FeatureGroupResult>
 
     public function getFeatures() : FeatureCollection
     {
-        return $this->examples;
+        return $this->features;
     }
 
     public function verify(LifeCycleNotifier $notifier) : FeatureGroupResult
     {
-        $exampleResults = Vector {};
+        $results = Vector {};
 
         $notifier->featureGroupStart($this->getDescription());
 
         $this->stopWatch->start();
 
-        foreach ($this->examples as $example) {
-            $result = $example->verify($notifier);
-            $exampleResults->add($result);
+        foreach ($this->features as $feature) {
+            $result = $feature->verify($notifier);
+            $results->add($result);
         }
 
         $this->stopWatch->stop();
@@ -71,7 +71,7 @@ class FeatureGroup implements FeatureSpecification<FeatureGroupResult>
 
         $result = new FeatureGroupResult(
             $this->description,
-            $exampleResults->toImmVector(),
+            $results->toImmVector(),
             $totalTime
         );
 

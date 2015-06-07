@@ -26,7 +26,7 @@ class FeatureGroupCollector implements Collector<PackageSpecification, FeatureGr
      */
     public function collectFrom(PackageSpecification $target) : FeatureGroupCollection
     {
-        $exampleGroups = Vector {};
+        $groups = Vector {};
         $targetDirectory = $target->getPackageDirectory();
         $specificationFiles = $this->getSpecificationFiles($targetDirectory);
 
@@ -38,11 +38,11 @@ class FeatureGroupCollector implements Collector<PackageSpecification, FeatureGr
             }
 
             $group = new FeatureGroup($reflection);
-            $exampleGroups->add($group);
+            $groups->add($group);
         }
-        $exampleGroups->shuffle();
+        $groups->shuffle();
 
-        return $exampleGroups->toImmVector();
+        return $groups->toImmVector();
     }
 
     /**

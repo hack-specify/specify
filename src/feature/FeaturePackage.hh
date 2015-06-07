@@ -24,7 +24,7 @@ class FeaturePackage implements FeatureSpecification<FeaturePackageResult>
 
     public function __construct(
         private string $description,
-        private FeatureGroupCollection $exampleGroups
+        private FeatureGroupCollection $featureGroups
     )
     {
         $this->stopWatch = new StopWatch();
@@ -37,14 +37,14 @@ class FeaturePackage implements FeatureSpecification<FeaturePackageResult>
 
     public function verify(LifeCycleNotifier $notifier) : FeaturePackageResult
     {
-        $groupResults = Vector {};
+        $results = Vector {};
         $notifier->featurePackageStart($this->getDescription());
 
         $this->stopWatch->start();
 
-        foreach ($this->exampleGroups as $exampleGroup) {
-            $result = $exampleGroup->verify($notifier);
-            $groupResults->add($result);
+        foreach ($this->featureGroups as $featureGroup) {
+            $result = $featureGroup->verify($notifier);
+            $results->add($result);
         }
 
         $this->stopWatch->stop();
@@ -52,7 +52,7 @@ class FeaturePackage implements FeatureSpecification<FeaturePackageResult>
 
         $packageResult = new FeaturePackageResult(
             $this->getDescription(),
-            $groupResults->toImmVector(),
+            $results->toImmVector(),
             $totalTime
         );
 

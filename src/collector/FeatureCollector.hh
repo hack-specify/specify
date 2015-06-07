@@ -37,30 +37,30 @@ class FeatureCollector implements Collector<Specification, FeatureCollection>
 
     public function collectFrom(Specification $target) : FeatureCollection
     {
-        $examples = Vector {};
+        $features = Vector {};
         $reflection = new ReflectionClass($target);
         $methods = $reflection->getMethods(ReflectionMethod::IS_PUBLIC);
 
         foreach ($methods as $method) {
-            $example = $this->createExample($target, $method);
+            $feature = $this->createFeature($target, $method);
 
-            if ($example === null) {
+            if ($feature === null) {
                 continue;
             }
-            $examples->add($example);
+            $features->add($feature);
         }
-        $examples->shuffle();
+        $features->shuffle();
 
-        return $examples->toImmVector();
+        return $features->toImmVector();
     }
 
-    private function createExample(Specification $target, ReflectionMethod $method) : ?FeatureSpecification<FeatureResult>
+    private function createFeature(Specification $target, ReflectionMethod $method) : ?FeatureSpecification<FeatureResult>
     {
-        $example = null;
+        $feature = null;
         $attributes = $method->getAttributes();
 
         if ($attributes === null) {
-            return $example;
+            return $feature;
         }
 
         foreach ($attributes as $key => $attribute) {
@@ -70,11 +70,11 @@ class FeatureCollector implements Collector<Specification, FeatureCollection>
             $args = [$target, $method];
 
             $factory = $this->registry->at($key);
-            $example = $factory->newInstanceArgs($args);
+            $feature = $factory->newInstanceArgs($args);
             break;
         }
 
-        return $example;
+        return $feature;
     }
 
 }
