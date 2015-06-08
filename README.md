@@ -1,7 +1,7 @@
 Specify
 ============================
 
-[![Build Status](https://travis-ci.org/hack-specify/specify.svg?branch=master)](https://travis-ci.org/hack-specify/specify)
+[![Build Status](https://travis-ci.org/hhspecify/specify.svg?branch=master)](https://travis-ci.org/hhspecify/specify)
 
 **Specify** is BDD testing framework for [Hack](http://hacklang.org/), inspired by [spock](https://github.com/spockframework/spock).
 
