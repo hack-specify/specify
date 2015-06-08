@@ -11,19 +11,7 @@
 
 namespace specify
 {
-    use specify\feature\Feature;
-    use specify\result\FeatureResult;
-    use specify\result\FeatureGroupResult;
     use specify\specification\PackageSpecification;
-
-    use \ReflectionMethod;
-    use \Generator;
-
-    type LifeCycleMessageSubscriberCollection = ImmVector<LifeCycleMessageSubscriber>;
-
-    type ExampleCollection = Generator<int, Feature, void>;
-    type VerifyResultCollection = Vector<VerifyResult>;
-    type ExampleResultCollection = Vector<FeatureResult>; //
 
     type FeatureReporter = LifeCycleMessageSubscriber;
     type ConfigOptions = shape(
@@ -57,9 +45,7 @@ namespace specify\result
 
 namespace specify\collector
 {
-    use \Generator;
     use specify\FeatureSpecification;
-    use specify\feature\Feature;
     use specify\feature\FeatureGroup;
     use specify\notifier\FeatureNotifier;
     use specify\result\FeatureResult;
@@ -73,7 +59,6 @@ namespace specify\collector
 
 namespace specify\feature
 {
-    use \Generator;
     use specify\FeatureSpecification;
     use specify\result\FeatureResult;
     use specify\notifier\FeatureNotifier;
