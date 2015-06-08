@@ -3,7 +3,8 @@ Specify
 
 [![Build Status](https://travis-ci.org/hack-specify/specify.svg?branch=master)](https://travis-ci.org/hack-specify/specify)
 
-**Specify** is BDD testing framework for [Hack](http://hacklang.org/).
+**Specify** is BDD testing framework for [Hack](http://hacklang.org/), inspired by [spock](https://github.com/spockframework/spock).
+
 
 ![Screen Shot](https://raw.githubusercontent.com/hack-specify/specify/master/screen-shot.png)
 
@@ -47,37 +48,51 @@ Specify::configure((ConfigBuilder $builder) ==> {
 It will create a specification file to **vendorname/spec**.  
 Specification must implement **specify\Specification**.  
 
-It will specify the specification in the **Example** attribute.  
+It will specify the specification in the **Feature** attribute.  
 
 ```hack
-<?hh //strict
-
-namespace vendorname\spec;
-
 use specify\Specification;
+use specify\feature\FeatureVerifierBuilder as Feature;
 
-class StackSpecification implements Specification
+final class StackSpec implements Specification
 {
 
-    private Stack<int> $stack;
-
-    public function __construct()
+    public function __construct(
+        private Stack<int> $stack = new Stack()
+    )
     {
+    }
+
+    <<Feature("Stack::add")>>
+    public function add_value_to_stack(Feature $feature) : void
+    {
+    }
+}
+```
+
+### Write a feature specification
+
+It will describe the setup / when / then block.  
+Block specified in lambda expression.
+
+```hack
+<<Feature("Stack::add")>>
+public function add_value_to_stack(Feature $feature) : void
+{
+    //setup block - Setup
+    $feature->setup(() ==> {
         $this->stack = new Stack();
-    }
+    });
 
-    <<Example("->push() - returns the size")>>
-    public function push() : void
-    {
-        $result = $this->stack->push(100);
-        invariant($result === 1, "must returns the size");
-    }
+    //when block - Stimulus
+    $feature->when(() ==> {
+        $this->stack->add(1);
+    });
 
-    <<PendingExample("->remove() - remove item from stack")>>
-    public function remove() : void
-    {
-    }
-
+    //then block - Response
+    $feature->then(() ==> {
+        invariant($this->stack->count() === 1, 'must have been added value');
+    });
 }
 ```
 

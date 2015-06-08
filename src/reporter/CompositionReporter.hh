@@ -24,7 +24,7 @@ final class CompositionReporter implements LifeCycleMessageSubscriber
     {
     }
 
-    public function handle(LifeCycleEvent $event) : void
+    public function receive(LifeCycleEvent $event) : void
     {
         foreach ($this->reporters as $reporter) {
             $event->sendTo($reporter);

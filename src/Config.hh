@@ -20,12 +20,12 @@ class Config
     const string FILE_NAME = 'specify.hh';
 
     private PackageSpecification $package;
-    private ExampleReporter $exampleReporter;
+    private FeatureReporter $featureReporter;
 
     public function __construct(ConfigOptions $config)
     {
         $this->package = $config['package'];
-        $this->exampleReporter = $config['exampleReporter'];
+        $this->featureReporter = $config['featureReporter'];
     }
 
     public function getPackage() : PackageSpecification
@@ -33,9 +33,9 @@ class Config
         return $this->package;
     }
 
-    public function getExampleReporter() : ExampleReporter
+    public function getFeatureReporter() : FeatureReporter
     {
-        return $this->exampleReporter;
+        return $this->featureReporter;
     }
 
 }

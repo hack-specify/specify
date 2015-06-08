@@ -8,7 +8,7 @@ namespace specify\fixtures\collector;
 class Plain
 {
 
-    <<Example("example1")>>
+    <<Feature("example1")>>
     public function example1() : void
     {
     }

@@ -48,7 +48,7 @@ abstract class AbstractNamedEvent implements LifeCycleEvent
 
     public function sendTo(LifeCycleMessageSubscriber $subscriber) : void
     {
-        $subscriber->handle($this);
+        $subscriber->receive($this);
     }
 
 }

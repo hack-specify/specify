@@ -13,41 +13,58 @@ namespace specify\cli;
 
 use specify\Specify;
 use specify\notifier\DefaultLifeCycleNotifier;
-use specify\example\ExamplePackage;
-use specify\result\ExamplePackageResult;
-use specify\collector\ExampleGroupCollector;
+use specify\feature\FeaturePackage;
+use specify\result\FeaturePackageResult;
+use specify\collector\FeatureGroupCollector;
+use specify\reporter\ShutdownReporter;
 
 
 class Application
 {
 
+    public function __construct(
+        private FeaturePackageResult $packageResult = FeaturePackageResult::createEmptyResult()
+    )
+    {
+    }
+
     public function run(Argument $argv) : void
+    {
+        $this->startup($argv);
+        $this->doRun();
+        $this->shutdown();
+    }
+
+    private function startup(Argument $argv) : void
     {
         $configFile = $argv->getConfigFile();
         $loadConfigFile = getcwd() . '/' . $configFile;
 
         include_once $loadConfigFile;
+    }
 
+    private function doRun() : void
+    {
         $config = Specify::currentConfig();
 
         $lifeCycleNotifier = new DefaultLifeCycleNotifier(ImmVector {
-            $config->getExampleReporter()
+            $config->getFeatureReporter()
         });
 
-        $collector = new ExampleGroupCollector();
+        $collector = new FeatureGroupCollector();
 
         $package = $config->getPackage();
         $groups = $collector->collectFrom($package);
 
-        $package = new ExamplePackage($package->getNamespace(), $groups);
+        $package = new FeaturePackage($package->getNamespace(), $groups);
         $packageResult = $package->verify($lifeCycleNotifier);
 
-        $this->shutdown($packageResult);
+        $this->packageResult = $packageResult;
     }
 
-    private function shutdown(ExamplePackageResult $result) : void
+    private function shutdown() : void
     {
-        if ($result->isPassed()) {
+        if ($this->packageResult->isPassed()) {
             exit(ApplicationResultStatus::Passed);
         }
         exit(ApplicationResultStatus::Failed);

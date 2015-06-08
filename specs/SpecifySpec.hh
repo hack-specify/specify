@@ -26,7 +26,7 @@ describe(Specify::class, function() {
             Specify::configure((ConfigBuilder $builder) ==> {
 
                 $builder->package($this->package)
-                    ->exampleReporter($this->reporter);
+                    ->featureReporter($this->reporter);
 
             });
             $config = Specify::currentConfig();
@@ -34,7 +34,7 @@ describe(Specify::class, function() {
             $package = $config->getPackage();
             expect($package)->toBeAnInstanceOf(PackageSpecification::class);
 
-            $reporter = $config->getExampleReporter();
+            $reporter = $config->getFeatureReporter();
             expect($reporter)->toBeAnInstanceOf(LifeCycleMessageSubscriber::class);
         });
     });

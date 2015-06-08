@@ -24,13 +24,12 @@
       "specify\\": "src"
     },
     "files": [
-      "src/autoload.hh"
+      "src/bootstrap.hh"
     ]
   },
   "autoload-dev": {
     "psr-4": {
       "specify\\example\\": "example",
-      "specify\\helper\\": "specs/helper",
       "specify\\fixtures\\": "specs/fixtures/specs"
     }
   },

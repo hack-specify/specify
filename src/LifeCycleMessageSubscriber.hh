@@ -18,5 +18,5 @@ use specify\event\RunnerStop;
 
 interface LifeCycleMessageSubscriber
 {
-    public function handle(LifeCycleEvent $event) : void;
+    public function receive(LifeCycleEvent $event) : void;
 }

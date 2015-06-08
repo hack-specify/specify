@@ -13,10 +13,11 @@ namespace specify\reporter;
 
 use specify\LifeCycleEvent;
 use specify\LifeCycleMessageSubscriber;
-use specify\event\ExamplePackageStart;
-use specify\event\ExampleGroupStart;
-use specify\event\ExampleGroupFinish;
-use specify\event\ExamplePackageFinish;
+use specify\event\FeaturePackageStart;
+use specify\event\FeatureGroupStart;
+use specify\event\FeatureFinish;
+use specify\event\FeatureGroupFinish;
+use specify\event\FeaturePackageFinish;
 use specify\io\ConsoleOutput;
 use specify\io\Console;
 
@@ -25,39 +26,33 @@ final class SpecificationReporter implements LifeCycleMessageSubscriber
 {
 
     private int $indentLevel = 0;
-    private CompositionReporter $reporter;
 
     public function __construct(
         private Console $writer = new ConsoleOutput()
     )
     {
-        $this->reporter = new CompositionReporter(ImmVector {
-            new ProcessingTimeReporter($this->writer),
-            new SummaryReporter($this->writer),
-            new FailedExampleReporter($this->writer)
-        });
     }
 
-    public function handle(LifeCycleEvent $event) : void
+    public function receive(LifeCycleEvent $event) : void
     {
-        if ($event instanceof ExamplePackageStart) {
-            $this->onExamplePackageStart($event);
-        } else if ($event instanceof ExampleGroupStart) {
-            $this->onExampleGroupStart($event);
-        } else if ($event instanceof ExampleGroupFinish) {
-            $this->onExampleGroupFinish($event);
-        } else if ($event instanceof ExamplePackageFinish) {
-            $this->onExamplePackageFinish($event);
+        if ($event instanceof FeaturePackageStart) {
+            $this->onPackageStart($event);
+        } else if ($event instanceof FeatureGroupStart) {
+            $this->onGroupStart($event);
+        } else if ($event instanceof FeatureFinish) {
+            $this->onFeatureFinish($event);
+        } else if ($event instanceof FeatureGroupFinish) {
+            $this->onGroupFinish($event);
         }
     }
 
-    private function onExamplePackageStart(ExamplePackageStart $event) : void
+    private function onPackageStart(FeaturePackageStart $event) : void
     {
         $this->writer->writeln("\nPackage: %s\n", $event->getDescription());
         $this->indentLevel++;
     }
 
-    private function onExampleGroupStart(ExampleGroupStart $event) : void
+    private function onGroupStart(FeatureGroupStart $event) : void
     {
         $indentSpace = str_pad("", $this->indentLevel * 2, " ");
 
@@ -65,31 +60,24 @@ final class SpecificationReporter implements LifeCycleMessageSubscriber
         $this->indentLevel++;
     }
 
-    private function onExampleGroupFinish(ExampleGroupFinish $event) : void
+    private function onFeatureFinish(FeatureFinish $event) : void
     {
-        $result = $event->getExampleGroupResult();
-        $exampleResults = $result->getExampleResults();
-
         $indentSpace = str_pad("", $this->indentLevel * 2, " ");
+        $format = "<green>✓</green> <white>%s</white>\n";
 
-        foreach ($exampleResults as $exampleResult) {
-            $format = "<green>✓</green> <white>%s</white>\n";
-
-            if ($exampleResult->isFailed()) {
-                $format = "  <red>%s</red>\n";
-            } else if ($exampleResult->isPending()) {
-                $format = "  <lightCyan>%s</lightCyan>\n";
-            }
-            $this->writer->write($indentSpace . $format, $exampleResult->getDescription());
+        if ($event->isFailed()) {
+            $format = "  <red>%s</red>\n";
+        } else if ($event->isPending()) {
+            $format = "  <lightCyan>%s</lightCyan>\n";
         }
 
-        $this->writer->writeln("");
-        $this->indentLevel--;
+        $this->writer->write($indentSpace . $format, $event->getDescription());
     }
 
-    private function onExamplePackageFinish(ExamplePackageFinish $event) : void
+    private function onGroupFinish(FeatureGroupFinish $event) : void
     {
-        $event->sendTo($this->reporter);
+        $this->writer->writeln("");
+        $this->indentLevel--;
     }
 
 }

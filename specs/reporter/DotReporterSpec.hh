@@ -1,11 +1,11 @@
 <?hh //partial
 
-use specify\result\ExampleResult;
-use specify\result\ExampleGroupResult;
-use specify\result\ExamplePackageResult;
-use specify\event\ExamplePackageStart;
-use specify\event\ExampleFinish;
-use specify\event\ExamplePackageFinish;
+use specify\result\FeatureResult;
+use specify\result\FeatureGroupResult;
+use specify\result\FeaturePackageResult;
+use specify\event\FeaturePackageStart;
+use specify\event\FeatureFinish;
+use specify\event\FeaturePackageFinish;
 use specify\io\BufferWriter;
 use specify\io\ConsoleOutput;
 use specify\reporter\DotReporter;
@@ -22,10 +22,10 @@ describe(DotReporter::class, function() {
         context('when handle example finish events', function() {
             beforeEach(function() {
                 $this->events = tuple(
-                    new ExampleFinish(ExampleResult::pending('foo->bar()')),
-                    new ExampleFinish(ExampleResult::passed('foo->bar1()')),
-                    new ExampleFinish(ExampleResult::failed('foo->bar2()')),
-                    new ExampleFinish(ExampleResult::pending('bar->bar()'))
+                    new FeatureFinish(FeatureResult::pending('foo->bar()')),
+                    new FeatureFinish(FeatureResult::passed('foo->bar1()')),
+                    new FeatureFinish(FeatureResult::failed('foo->bar2()')),
+                    new FeatureFinish(FeatureResult::pending('bar->bar()'))
                 );
             });
             it('repoter example progress', function() {
@@ -33,35 +33,9 @@ describe(DotReporter::class, function() {
 
                 expect(() ==> {
                     foreach ($this->events as $event) {
-                        $this->repoter->handle($event);
+                        $this->repoter->receive($event);
                     }
                 })->toPrint($result);
-            });
-        });
-        context('when handle example package finish event', function() {
-            beforeEach(function() {
-                $processingTime = new ProcessingTime(1000.0, 2000.0);
-                $group = new ExampleGroupResult('foo', Vector {
-                    ExampleResult::passed('foo->bar1()')
-                });
-
-                $packageResult = new ExamplePackageResult('package', ImmVector {
-                    $group
-                }, $processingTime);
-
-                $this->event = new ExamplePackageFinish($packageResult);
-            });
-            it('repoter example processing time', function() {
-
-                $results = [];
-                $results[] = "\n\nFinished in 1000.000000 seconds\n";
-                $results[] = "\e[0;32m1 example, 0 failures, 0 pending\e[0m\n\n";
-
-                $output = implode($results, '');
-
-                expect(() ==> {
-                    $this->repoter->handle($this->event);
-                })->toPrint($output);
             });
         });
     });

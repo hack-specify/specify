@@ -13,8 +13,8 @@ namespace specify\reporter;
 
 use specify\LifeCycleEvent;
 use specify\LifeCycleMessageSubscriber;
-use specify\event\ExamplePackageStart;
-use specify\event\ExamplePackageFinish;
+use specify\event\FeaturePackageStart;
+use specify\event\FeaturePackageFinish;
 use specify\io\ConsoleOutput;
 use specify\io\Console;
 
@@ -28,16 +28,16 @@ final class SummaryReporter implements LifeCycleMessageSubscriber
     {
     }
 
-    public function handle(LifeCycleEvent $event) : void
+    public function receive(LifeCycleEvent $event) : void
     {
-        if ($event instanceof ExamplePackageFinish) {
-            $this->onExamplePackageFinish($event);
+        if ($event instanceof FeaturePackageFinish) {
+            $this->onPackageFinish($event);
         }
     }
 
-    private function onExamplePackageFinish(ExamplePackageFinish $event) : void
+    private function onPackageFinish(FeaturePackageFinish $event) : void
     {
-        $template = "%d example, %d failures, %d pending";
+        $template = "%d feature, %d failures, %d pending";
 
         if ($event->isFailed()) {
             $template = "<red>{$template}</red>";
@@ -46,9 +46,9 @@ final class SummaryReporter implements LifeCycleMessageSubscriber
         }
 
         $this->writer->writeln($template,
-            $event->getExampleCount(),
-            $event->getFailedExampleCount(),
-            $event->getPendingExampleCount()
+            $event->getFeatureCount(),
+            $event->getFailedFeatureCount(),
+            $event->getPendingFeatureCount()
         );
     }
 

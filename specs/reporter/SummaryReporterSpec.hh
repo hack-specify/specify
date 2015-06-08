@@ -1,9 +1,9 @@
 <?hh //partial
 
-use specify\event\ExamplePackageFinish;
-use specify\result\ExampleResult;
-use specify\result\ExampleGroupResult;
-use specify\result\ExamplePackageResult;
+use specify\event\FeaturePackageFinish;
+use specify\result\FeatureResult;
+use specify\result\FeatureGroupResult;
+use specify\result\FeaturePackageResult;
 use specify\io\BufferWriter;
 use specify\io\ConsoleOutput;
 use specify\util\ProcessingTime;
@@ -22,38 +22,38 @@ describe(SummaryReporter::class, function() {
         context('when handle example package finish event', function() {
             context('when passed', function() {
                 beforeEach(function() {
-                    $group = new ExampleGroupResult('foo', Vector {
-                        ExampleResult::passed('foo->bar1()')
+                    $group = new FeatureGroupResult('foo', Vector {
+                        FeatureResult::passed('foo->bar1()')
                     });
 
-                    $packageResult = new ExamplePackageResult('package', ImmVector {
+                    $packageResult = new FeaturePackageResult('package', ImmVector {
                         $group
                     }, $this->processingTime);
 
-                    $this->event = new ExamplePackageFinish($packageResult);
+                    $this->event = new FeaturePackageFinish($packageResult);
                 });
                 it('report verify summary by passed color', function() {
                     expect(() ==> {
-                        $this->reporter->handle($this->event);
-                    })->toPrint("\e[0;32m1 example, 0 failures, 0 pending\e[0m\n");
+                        $this->reporter->receive($this->event);
+                    })->toPrint("\e[0;32m1 feature, 0 failures, 0 pending\e[0m\n");
                 });
             });
             context('when failed', function() {
                 beforeEach(function() {
-                    $group = new ExampleGroupResult('foo', Vector {
-                        ExampleResult::failed('foo->bar1()')
+                    $group = new FeatureGroupResult('foo', Vector {
+                        FeatureResult::failed('foo->bar1()')
                     });
 
-                    $packageResult = new ExamplePackageResult('package', ImmVector {
+                    $packageResult = new FeaturePackageResult('package', ImmVector {
                         $group
                     }, $this->processingTime);
 
-                    $this->event = new ExamplePackageFinish($packageResult);
+                    $this->event = new FeaturePackageFinish($packageResult);
                 });
                 it('report verify summary by failed color', function() {
                     expect(() ==> {
-                        $this->reporter->handle($this->event);
-                    })->toPrint("\e[0;31m1 example, 1 failures, 0 pending\e[0m\n");
+                        $this->reporter->receive($this->event);
+                    })->toPrint("\e[0;31m1 feature, 1 failures, 0 pending\e[0m\n");
                 });
             });
         });

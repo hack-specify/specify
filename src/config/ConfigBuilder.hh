@@ -12,20 +12,25 @@
 namespace specify\config;
 
 use specify\Config;
+use specify\Builder;
 use specify\LifeCycleMessageSubscriber;
 use specify\specification\PackageSpecification;
 use specify\reporter\SpecificationReporter;
+use specify\reporter\FailedSummaryReporter;
+use specify\reporter\CompositionReporter;
 
 
-class ConfigBuilder
+class ConfigBuilder implements Builder<Config>
 {
 
     private ?PackageSpecification $package;
-    private ExampleReporter $exampleReporter;
+    private FeatureReporter $featureReporter;
+    private FeatureReporter $summaryReporter;
 
     public function __construct()
     {
-        $this->exampleReporter = new SpecificationReporter();
+        $this->featureReporter = new SpecificationReporter();
+        $this->summaryReporter = new FailedSummaryReporter();
     }
 
     public function package(SpecificationPackage $package) : this
@@ -34,21 +39,28 @@ class ConfigBuilder
         return $this;
     }
 
-    public function exampleReporter(ExampleReporter $exampleReporter) : this
+    public function featureReporter(FeatureReporter $featureReporter) : this
     {
-        $this->exampleReporter = $exampleReporter;
+        $this->featureReporter = $featureReporter;
         return $this;
     }
 
     public function build() : Config
     {
+
         if ($this->package === null) {
             throw new RequiredException('The package is required');
         }
 
+        $package = $this->package;
+        $reporter = new CompositionReporter(ImmVector {
+            $this->featureReporter,
+            $this->summaryReporter
+        });
+
         return new Config(shape(
-            'package' => $this->package,
-            'exampleReporter' => $this->exampleReporter
+            'package' => $package,
+            'featureReporter' => $reporter
         ));
     }
 

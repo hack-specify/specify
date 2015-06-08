@@ -1,5 +1,6 @@
 <?hh //partial
 
+use specify\Specification;
 use specify\specification\PackageSpecification;
 use \ReflectionClass;
 
@@ -18,11 +19,11 @@ describe(PackageSpecification::class, function() {
         });
     });
     describe('->resolve()', function() {
-        it('returns the ReflectionClass instance of resolve class', function() {
-            $file = realpath(__DIR__ . '/../fixtures/specs/example/Example.hh');
+        it('returns the instance of resolve class', function() {
+            $file = realpath(__DIR__ . '/../fixtures/specs/example/FeatureExample.hh');
             $result = $this->specification->resolve($file);
 
-            expect($result)->toBeAnInstanceOf(ReflectionClass::class);
+            expect($result)->toBeAnInstanceOf(Specification::class);
         });
     });
 });
