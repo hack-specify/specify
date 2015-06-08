@@ -24,7 +24,7 @@
       "specify\\": "src"
     },
     "files": [
-      "src/autoload.hh"
+      "src/bootstrap.hh"
     ]
   },
   "autoload-dev": {
