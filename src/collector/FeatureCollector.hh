@@ -15,6 +15,7 @@ use specify\Collector;
 use specify\Specification;
 use specify\feature\Feature;
 use specify\feature\PendingFeature;
+use specify\feature\FeatureSpecificationFactory;
 use specify\result\FeatureResult;
 use specify\FeatureSpecification;
 use \ReflectionClass;
@@ -37,44 +38,45 @@ class FeatureCollector implements Collector<Specification, FeatureCollection>
 
     public function collectFrom(Specification $target) : FeatureCollection
     {
-        $features = Vector {};
-        $reflection = new ReflectionClass($target);
-        $methods = $reflection->getMethods(ReflectionMethod::IS_PUBLIC);
+        $features = $this->collectFeatureFrom($target);
+        $pendingFeatures = $this->collectPendingFeatureFrom($target);
 
-        foreach ($methods as $method) {
-            $feature = $this->createFeature($target, $method);
+        $results = Vector {};
+        $results->addAll($features);
+        $results->addAll($pendingFeatures);
+        $results->shuffle();
 
-            if ($feature === null) {
-                continue;
-            }
-            $features->add($feature);
-        }
-        $features->shuffle();
+        return $results->toImmVector();
+    }
+
+
+    private function collectFeatureFrom(Specification $target) : FeatureCollection
+    {
+        $factory = new FeatureSpecificationFactory($target);
+
+        $collector = MethodCollector::createForFeature();
+        $methods = $collector->collectFrom($target);
+
+        $features = $methods->map((ReflectionMethod $method) ==> {
+            return $factory->createFeatureFrom($method);
+        });
 
         return $features->toImmVector();
     }
 
-    private function createFeature(Specification $target, ReflectionMethod $method) : ?FeatureSpecification<FeatureResult>
+
+    private function collectPendingFeatureFrom(Specification $target) : FeatureCollection
     {
-        $feature = null;
-        $attributes = $method->getAttributes();
+        $factory = new FeatureSpecificationFactory($target);
 
-        if ($attributes === null) {
-            return $feature;
-        }
+        $collector = MethodCollector::createForPendingFeature();
+        $methods = $collector->collectFrom($target);
 
-        foreach ($attributes as $key => $attribute) {
-            if ($this->registry->contains($key) === false) {
-                continue;
-            }
-            $args = [$target, $method];
+        $features = $methods->map((ReflectionMethod $method) ==> {
+            return $factory->createPendingFeatureFrom($method);
+        });
 
-            $factory = $this->registry->at($key);
-            $feature = $factory->newInstanceArgs($args);
-            break;
-        }
-
-        return $feature;
+        return $features->toImmVector();
     }
 
 }

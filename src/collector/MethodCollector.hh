@@ -46,4 +46,14 @@ class MethodCollector implements Collector<Specification, ImmVector<ReflectionMe
         return $results->toImmVector();
     }
 
+    public static function createForFeature() : MethodCollector
+    {
+        return new self(AttributeType::Feature);
+    }
+
+    public static function createForPendingFeature() : MethodCollector
+    {
+        return new self(AttributeType::PendingFeature);
+    }
+
 }

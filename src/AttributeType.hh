@@ -14,4 +14,5 @@ namespace specify;
 enum AttributeType : string
 {
     Feature = 'Feature';
+    PendingFeature = 'PendingFeature';
 }
