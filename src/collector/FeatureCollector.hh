@@ -25,17 +25,6 @@ use \ReflectionMethod;
 class FeatureCollector implements Collector<Specification, FeatureCollection>
 {
 
-    private Map<string, ReflectionClass> $registry;
-
-
-    public function __construct()
-    {
-        $this->registry = Map {
-            Feature::ATTRIBUTE_NAME => new ReflectionClass(Feature::class),
-            PendingFeature::ATTRIBUTE_NAME => new ReflectionClass(PendingFeature::class)
-        };
-    }
-
     public function collectFrom(Specification $target) : FeatureCollection
     {
         $features = $this->collectFeatureFrom($target);

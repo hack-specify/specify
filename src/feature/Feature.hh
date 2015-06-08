@@ -12,6 +12,7 @@
 namespace specify\feature;
 
 use specify\Specification;
+use specify\AttributeType;
 use specify\FeatureSpecification;
 use specify\notifier\FeatureNotifier;
 use specify\result\FeatureResult;
@@ -22,8 +23,6 @@ use \Exception;
 
 class Feature implements FeatureSpecification<FeatureResult, FeatureNotifier>
 {
-
-    const string ATTRIBUTE_NAME = 'Feature';
 
     private string $description = 'example description empty';
     private StopWatch $stopWatch;
@@ -53,7 +52,7 @@ class Feature implements FeatureSpecification<FeatureResult, FeatureNotifier>
     {
         $this->stopWatch = new StopWatch();
 
-        $attributeValues = $this->method->getAttribute(self::ATTRIBUTE_NAME);
+        $attributeValues = $this->method->getAttribute((string) AttributeType::Feature);
 
         if ($attributeValues === null) {
             return;

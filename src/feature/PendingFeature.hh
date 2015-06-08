@@ -12,6 +12,7 @@
 namespace specify\feature;
 
 use specify\Specification;
+use specify\AttributeType;
 use specify\FeatureSpecification;
 use specify\notifier\FeatureNotifier;
 use specify\result\FeatureResult;
@@ -21,8 +22,6 @@ use \Exception;
 
 class PendingFeature implements FeatureSpecification<FeatureResult, FeatureNotifier>
 {
-
-    const string ATTRIBUTE_NAME = 'PendingFeature';
 
     public function __construct(
         private Specification $target,
@@ -34,7 +33,7 @@ class PendingFeature implements FeatureSpecification<FeatureResult, FeatureNotif
     public function verify(FeatureNotifier $notifier) : FeatureResult
     {
         $description = 'pending';
-        $attributeValues = $this->method->getAttribute(self::ATTRIBUTE_NAME);
+        $attributeValues = $this->method->getAttribute((string) AttributeType::PendingFeature);
 
         if ($attributeValues !== null) {
             $description = (string) $attributeValues[0];
