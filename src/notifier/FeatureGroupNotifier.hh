@@ -13,7 +13,7 @@ namespace specify\notifier;
 
 use specify\result\FeatureGroupResult;
 
-interface FeatureGroupNotifier
+interface FeatureGroupNotifier extends FeatureNotifier
 {
     public function featureGroupStart(string $description) : void;
     public function featureGroupFinish(FeatureGroupResult $result) : void;

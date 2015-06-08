@@ -13,7 +13,7 @@ namespace specify\notifier;
 
 use specify\result\FeaturePackageResult;
 
-interface FeaturePackageNotifier
+interface FeaturePackageNotifier extends FeatureGroupNotifier
 {
     public function featurePackageStart(string $description) : void;
     public function featurePackageFinish(FeaturePackageResult $result) : void;
