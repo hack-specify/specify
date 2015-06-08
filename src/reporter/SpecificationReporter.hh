@@ -15,6 +15,7 @@ use specify\LifeCycleEvent;
 use specify\LifeCycleMessageSubscriber;
 use specify\event\FeaturePackageStart;
 use specify\event\FeatureGroupStart;
+use specify\event\FeatureFinish;
 use specify\event\FeatureGroupFinish;
 use specify\event\FeaturePackageFinish;
 use specify\io\ConsoleOutput;
@@ -38,10 +39,10 @@ final class SpecificationReporter implements LifeCycleMessageSubscriber
             $this->onPackageStart($event);
         } else if ($event instanceof FeatureGroupStart) {
             $this->onGroupStart($event);
+        } else if ($event instanceof FeatureFinish) {
+            $this->onFeatureFinish($event);
         } else if ($event instanceof FeatureGroupFinish) {
             $this->onGroupFinish($event);
-//        } else if ($event instanceof FeaturePackageFinish) {
-//            $this->onPackageFinish($event);
         }
     }
 
@@ -59,24 +60,22 @@ final class SpecificationReporter implements LifeCycleMessageSubscriber
         $this->indentLevel++;
     }
 
-    private function onGroupFinish(FeatureGroupFinish $event) : void
+    private function onFeatureFinish(FeatureFinish $event) : void
     {
-        $result = $event->getFeatureGroupResult();
-        $featureResults = $result->getFeatureResults();
-
         $indentSpace = str_pad("", $this->indentLevel * 2, " ");
+        $format = "<green>✓</green> <white>%s</white>\n";
 
-        foreach ($featureResults as $featureResult) {
-            $format = "<green>✓</green> <white>%s</white>\n";
-
-            if ($featureResult->isFailed()) {
-                $format = "  <red>%s</red>\n";
-            } else if ($featureResult->isPending()) {
-                $format = "  <lightCyan>%s</lightCyan>\n";
-            }
-            $this->writer->write($indentSpace . $format, $featureResult->getDescription());
+        if ($event->isFailed()) {
+            $format = "  <red>%s</red>\n";
+        } else if ($event->isPending()) {
+            $format = "  <lightCyan>%s</lightCyan>\n";
         }
 
+        $this->writer->write($indentSpace . $format, $event->getDescription());
+    }
+
+    private function onGroupFinish(FeatureGroupFinish $event) : void
+    {
         $this->writer->writeln("");
         $this->indentLevel--;
     }
