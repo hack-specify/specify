@@ -13,6 +13,7 @@ namespace specify\feature;
 
 use specify\notifier\FeatureNotifier;
 use specify\FeatureSpecification;
+use \Exception;
 
 
 class FeatureVerifier implements FeatureSpecification<void, FeatureNotifier>
@@ -22,23 +23,43 @@ class FeatureVerifier implements FeatureSpecification<void, FeatureNotifier>
         private (function():void) $setup = () ==> {},
         private (function():void) $when = () ==> {},
         private (function():void) $then = () ==> {},
-        private (function():void) $cleanup = () ==> {}
+        private ?(function(?Exception):void) $thenThrown = null,
+        private ?(function():void) $cleanup = null
     )
     {
     }
 
     public function verify(FeatureNotifier $notifier) : void
     {
-        $blocks = [
-            $this->setup,
-            $this->when,
-            $this->then,
-            $this->cleanup
-        ];
+        $thrownException = null;
 
-        foreach ($blocks as $block) {
-            $block();
+        $setup = $this->setup;
+        $setup();
+
+        try {
+            $when = $this->when;
+            $when();
+        } catch (Exception $exception) {
+            $thrownException = $exception;
         }
+
+        if ($this->thenThrown !== null) {
+            $then = $this->thenThrown;
+            $then($thrownException);
+        } else {
+            if ($thrownException !== null) {
+                throw $thrownException;
+            }
+            $then = $this->then;
+            $then();
+        }
+
+        if ($this->cleanup === null) {
+            return;
+        }
+
+        $cleanup = $this->cleanup;
+        $cleanup();
     }
 
 }

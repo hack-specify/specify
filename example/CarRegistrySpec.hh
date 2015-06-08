@@ -49,7 +49,7 @@ final class CarRegistrySpec implements Specification
             $this->carRegistry->register($this->car);
         });
 
-        $feature->thenThrown((Exception $exception) ==> {
+        $feature->thenThrown((?Exception $exception) ==> {
             invariant($exception instanceof Exception, 'must throw an exception');
         });
     }

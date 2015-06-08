@@ -22,8 +22,8 @@ class FeatureVerifierBuilder implements Builder<FeatureVerifier>
         private (function():void) $setup = () ==> {},
         private (function():void) $when = () ==> {},
         private (function():void) $then = () ==> {},
-        private (function(Exception):void) $thenThrown = (Exception $exception) ==> {},
-        private (function():void) $cleanup = () ==> {}
+        private ?(function(?Exception):void) $thenThrown = null,
+        private ?(function():void) $cleanup = null
     )
     {
     }
@@ -46,7 +46,7 @@ class FeatureVerifierBuilder implements Builder<FeatureVerifier>
         return $this;
     }
 
-    public function thenThrown((function(Exception): void) $then) : this
+    public function thenThrown((function(?Exception): void) $then) : this
     {
         $this->thenThrown = $then;
         return $this;
@@ -64,15 +64,9 @@ class FeatureVerifierBuilder implements Builder<FeatureVerifier>
             $this->setup,
             $this->when,
             $this->then,
+            $this->thenThrown,
             $this->cleanup
         );
     }
-/*
-    public function __set(string $name, mixed $value) : void
-    {
-        if (method_exists($this, $name)) {
-            call_user_func_array([ $this, $name ], [ $value ]);
-        }
-    }
-*/
+
 }

@@ -11,17 +11,17 @@ describe(FeatureVerifierBuilder::class, function() {
 
             $feature = new FeatureVerifierBuilder();
 
-            $feature->setup = () ==> {
+            $feature->setup(() ==> {
                 $this->stack = Vector {};
-            };
+            });
 
-            $feature->when = () ==> {
+            $feature->when(() ==> {
                 $this->stack->add(1);
-            };
+            });
 
-            $feature->then = () ==> {
+            $feature->then(() ==> {
                 invariant($this->stack->count() === 1, 'should be count 1');
-            };
+            });
 
             $this->verifier = $feature->build();
         });
