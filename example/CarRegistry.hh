@@ -13,6 +13,10 @@ final class CarRegistry implements Registry<Car>
 
     public function register(Car $car) : void
     {
+        if ($this->cars->containsKey($car->getName())) {
+            throw new AlreadyRegisteredException();
+        }
+
         $this->cars->set($car->getName(), $car);
     }
 
