@@ -31,7 +31,7 @@ class Application
         $config = Specify::currentConfig();
 
         $lifeCycleNotifier = new DefaultLifeCycleNotifier(ImmVector {
-            $config->getExampleReporter()
+            $config->getFeatureReporter()
         });
 
         $collector = new FeatureGroupCollector();

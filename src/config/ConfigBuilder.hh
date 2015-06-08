@@ -21,11 +21,11 @@ class ConfigBuilder
 {
 
     private ?PackageSpecification $package;
-    private ExampleReporter $exampleReporter;
+    private FeatureReporter $featureReporter;
 
     public function __construct()
     {
-        $this->exampleReporter = new SpecificationReporter();
+        $this->featureReporter = new SpecificationReporter();
     }
 
     public function package(SpecificationPackage $package) : this
@@ -34,9 +34,9 @@ class ConfigBuilder
         return $this;
     }
 
-    public function exampleReporter(ExampleReporter $exampleReporter) : this
+    public function featureReporter(FeatureReporter $featureReporter) : this
     {
-        $this->exampleReporter = $exampleReporter;
+        $this->featureReporter = $featureReporter;
         return $this;
     }
 
@@ -48,7 +48,7 @@ class ConfigBuilder
 
         return new Config(shape(
             'package' => $this->package,
-            'exampleReporter' => $this->exampleReporter
+            'featureReporter' => $this->featureReporter
         ));
     }
 

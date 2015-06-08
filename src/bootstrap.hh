@@ -25,10 +25,10 @@ namespace specify
     type VerifyResultCollection = Vector<VerifyResult>;
     type ExampleResultCollection = Vector<FeatureResult>; //
 
-    type ExampleReporter = LifeCycleMessageSubscriber;
+    type FeatureReporter = LifeCycleMessageSubscriber;
     type ConfigOptions = shape(
         'package' => PackageSpecification,
-        'exampleReporter' => ExampleReporter
+        'featureReporter' => FeatureReporter
     );
 }
 
@@ -43,7 +43,7 @@ namespace specify\config
         'namespace' => PackageNamespace,
         'packageDirectory' => DirectoryPath
     );
-    type ExampleReporter = LifeCycleMessageSubscriber;
+    type FeatureReporter = LifeCycleMessageSubscriber;
 }
 
 namespace specify\result
