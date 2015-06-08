@@ -1,12 +1,12 @@
 <?hh //partial
 
-use specify\Feature;
+use specify\feature\FeatureBuilder;
 
-describe(Feature::class, function() {
+describe(FeatureBuilder::class, function() {
     describe('->verify()', function() {
         beforeEach(function() {
             $this->stack = Vector {};
-            $this->feature = new Feature();
+            $this->feature = new FeatureBuilder();
 
             $this->feature->setup(() ==> {
                 $this->stack = Vector {};

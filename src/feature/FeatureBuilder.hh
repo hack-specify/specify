@@ -9,10 +9,10 @@
  * with this source code in the file LICENSE.
  */
 
-namespace specify;
+namespace specify\feature;
 
 
-class Feature
+class FeatureBuilder
 {
 
     private Vector<(function(): void)> $blocks = Vector {};
