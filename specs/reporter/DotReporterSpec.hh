@@ -38,31 +38,5 @@ describe(DotReporter::class, function() {
                 })->toPrint($result);
             });
         });
-        context('when handle example package finish event', function() {
-            beforeEach(function() {
-                $processingTime = new ProcessingTime(1000.0, 2000.0);
-                $group = new FeatureGroupResult('foo', Vector {
-                    FeatureResult::passed('foo->bar1()')
-                });
-
-                $packageResult = new FeaturePackageResult('package', ImmVector {
-                    $group
-                }, $processingTime);
-
-                $this->event = new FeaturePackageFinish($packageResult);
-            });
-            it('repoter example processing time', function() {
-
-                $results = [];
-                $results[] = "\n\nFinished in 1000.000000 seconds\n";
-                $results[] = "\e[0;32m1 feature, 0 failures, 0 pending\e[0m\n\n";
-
-                $output = implode($results, '');
-
-                expect(() ==> {
-                    $this->repoter->receive($this->event);
-                })->toPrint($output);
-            });
-        });
     });
 });

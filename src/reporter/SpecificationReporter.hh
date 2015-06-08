@@ -25,17 +25,11 @@ final class SpecificationReporter implements LifeCycleMessageSubscriber
 {
 
     private int $indentLevel = 0;
-    private CompositionReporter $reporter;
 
     public function __construct(
         private Console $writer = new ConsoleOutput()
     )
     {
-        $this->reporter = new CompositionReporter(ImmVector {
-            new ProcessingTimeReporter($this->writer),
-            new SummaryReporter($this->writer),
-            new FailedFeatureReporter($this->writer)
-        });
     }
 
     public function receive(LifeCycleEvent $event) : void
@@ -46,8 +40,8 @@ final class SpecificationReporter implements LifeCycleMessageSubscriber
             $this->onGroupStart($event);
         } else if ($event instanceof FeatureGroupFinish) {
             $this->onGroupFinish($event);
-        } else if ($event instanceof FeaturePackageFinish) {
-            $this->onPackageFinish($event);
+//        } else if ($event instanceof FeaturePackageFinish) {
+//            $this->onPackageFinish($event);
         }
     }
 
@@ -85,11 +79,6 @@ final class SpecificationReporter implements LifeCycleMessageSubscriber
 
         $this->writer->writeln("");
         $this->indentLevel--;
-    }
-
-    private function onPackageFinish(FeaturePackageFinish $event) : void
-    {
-        $event->sendTo($this->reporter);
     }
 
 }

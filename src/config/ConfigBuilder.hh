@@ -16,6 +16,8 @@ use specify\Builder;
 use specify\LifeCycleMessageSubscriber;
 use specify\specification\PackageSpecification;
 use specify\reporter\SpecificationReporter;
+use specify\reporter\FailedSummaryReporter;
+use specify\reporter\CompositionReporter;
 
 
 class ConfigBuilder implements Builder<Config>
@@ -23,10 +25,12 @@ class ConfigBuilder implements Builder<Config>
 
     private ?PackageSpecification $package;
     private FeatureReporter $featureReporter;
+    private FeatureReporter $summaryReporter;
 
     public function __construct()
     {
         $this->featureReporter = new SpecificationReporter();
+        $this->summaryReporter = new FailedSummaryReporter();
     }
 
     public function package(SpecificationPackage $package) : this
@@ -43,13 +47,20 @@ class ConfigBuilder implements Builder<Config>
 
     public function build() : Config
     {
+
         if ($this->package === null) {
             throw new RequiredException('The package is required');
         }
 
+        $package = $this->package;
+        $reporter = new CompositionReporter(ImmVector {
+            $this->featureReporter,
+            $this->summaryReporter
+        });
+
         return new Config(shape(
-            'package' => $this->package,
-            'featureReporter' => $this->featureReporter
+            'package' => $package,
+            'featureReporter' => $reporter
         ));
     }
 

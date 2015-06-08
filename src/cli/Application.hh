@@ -16,6 +16,7 @@ use specify\notifier\DefaultLifeCycleNotifier;
 use specify\feature\FeaturePackage;
 use specify\result\FeaturePackageResult;
 use specify\collector\FeatureGroupCollector;
+use specify\reporter\ShutdownReporter;
 
 
 class Application
