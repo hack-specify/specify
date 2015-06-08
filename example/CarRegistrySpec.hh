@@ -19,8 +19,8 @@ final class CarRegistrySpec implements Specification
         $this->car = new Car('Ferrari');
     }
 
-    <<Feature("registration of car")>>
-    public function register_a_new_car(Feature $feature) : void
+    <<Feature("CarRegistry::register")>>
+    public function register_a_car(Feature $feature) : void
     {
         $feature->setup(() ==> {
             $this->carRegistry = new CarRegistry();
@@ -35,8 +35,8 @@ final class CarRegistrySpec implements Specification
         });
     }
 
-    <<Feature("registration of car")>>
-    public function tries_to_already_registered_the_registered_car(Feature $feature) : void
+    <<Feature("CarRegistry::register")>>
+    public function throw_an_exception_when_that_has_already_been_registered(Feature $feature) : void
     {
         $feature->setup(() ==> {
             $this->car = new Car('Ferrari');

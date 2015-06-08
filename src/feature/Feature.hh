@@ -24,7 +24,7 @@ use \Exception;
 class Feature implements FeatureSpecification<FeatureResult, FeatureNotifier>
 {
 
-    private string $description = 'example description empty';
+    private string $description = 'feature description empty';
     private StopWatch $stopWatch;
     private FeatureVerifierBuilder $verifierBuilder;
 
@@ -58,6 +58,9 @@ class Feature implements FeatureSpecification<FeatureResult, FeatureNotifier>
             return;
         }
         $this->description = (string) $attributeValues[0];
+
+        $name = $this->method->getName();
+        $this->description .= ' - ' . str_replace('_', ' ', $name);
     }
 
     private function verifyExample(FeatureNotifier $notifier) : FeatureResult
