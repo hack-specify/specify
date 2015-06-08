@@ -12,6 +12,8 @@
 namespace specify\feature;
 
 use specify\Builder;
+use \Exception;
+
 
 class FeatureVerifierBuilder implements Builder<FeatureVerifier>
 {
@@ -20,6 +22,7 @@ class FeatureVerifierBuilder implements Builder<FeatureVerifier>
         private (function():void) $setup = () ==> {},
         private (function():void) $when = () ==> {},
         private (function():void) $then = () ==> {},
+        private (function(Exception):void) $thenThrown = (Exception $exception) ==> {},
         private (function():void) $cleanup = () ==> {}
     )
     {
@@ -43,6 +46,12 @@ class FeatureVerifierBuilder implements Builder<FeatureVerifier>
         return $this;
     }
 
+    public function thenThrown((function(Exception): void) $then) : this
+    {
+        $this->thenThrown = $then;
+        return $this;
+    }
+
     public function cleanup((function(): void) $cleanup) : this
     {
         $this->cleanup = $cleanup;
@@ -58,12 +67,12 @@ class FeatureVerifierBuilder implements Builder<FeatureVerifier>
             $this->cleanup
         );
     }
-
-    public function __set( string $name, mixed $value) : void
+/*
+    public function __set(string $name, mixed $value) : void
     {
         if (method_exists($this, $name)) {
             call_user_func_array([ $this, $name ], [ $value ]);
         }
     }
-
+*/
 }
