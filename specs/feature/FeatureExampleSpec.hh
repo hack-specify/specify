@@ -2,7 +2,7 @@
 
 use specify\feature\PendingFeature;
 use specify\fixtures\example\FeatureExample;
-use specify\helper\NotifyRecorder;
+use specify\notifier\NullNotifier;
 use \Exception;
 
 
@@ -10,7 +10,7 @@ describe(PendingFeature::class, function() {
     describe('->verify()', function() {
         context('when pending', function() {
             beforeEach(function() {
-                $this->notifier = new NotifyRecorder();
+                $this->notifier = new NullNotifier();
             });
             it('returns pending result', function() {
                 $target = new FeatureExample();

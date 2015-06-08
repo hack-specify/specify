@@ -6,14 +6,14 @@ use specify\feature\FeaturePackage;
 use specify\feature\FeatureGroup;
 use specify\result\FeatureGroupResult;
 use specify\result\FeaturePackageResult;
-use specify\helper\NotifyRecorder;
+use specify\notifier\NullNotifier;
 use specify\fixtures\example\FeatureExample;
 
 
 describe(FeaturePackage::class, function() {
     describe('->verify()', function() {
         beforeEach(function() {
-            $this->notifier = new NotifyRecorder();
+            $this->notifier = new NullNotifier();
             $this->package = new FeaturePackage('package', ImmVector {
                 new FeatureGroup(new ReflectionClass(FeatureExample::class)),
                 new FeatureGroup(new ReflectionClass(FeatureExample::class))

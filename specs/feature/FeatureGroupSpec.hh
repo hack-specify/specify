@@ -4,7 +4,7 @@ use specify\LifeCycleNotifier;
 use specify\feature\FeatureGroup;
 use specify\result\ExampleGroupResult;
 use specify\fixtures\example\FeatureExample;
-use specify\helper\NotifyRecorder;
+use specify\notifier\NullNotifier;
 use \ReflectionClass;
 use \Exception;
 
@@ -20,7 +20,7 @@ describe(FeatureGroup::class, function() {
     });
     describe('->verify()', function() {
         beforeEach(function() {
-            $this->notifier = new NotifyRecorder();
+            $this->notifier = new NullNotifier();
             $this->featureGroup = new FeatureGroup(new ReflectionClass(FeatureExample::class));
         });
         it('verify all features', function() {

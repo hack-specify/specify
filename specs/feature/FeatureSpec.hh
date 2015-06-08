@@ -2,7 +2,7 @@
 
 use specify\feature\Feature;
 use specify\fixtures\example\FeatureExample;
-use specify\helper\NotifyRecorder;
+use specify\notifier\NullNotifier;
 use \Prophecy\Prophet;
 use \Prophecy\Argument;
 use \Exception;
@@ -12,7 +12,7 @@ describe(Feature::class, function() {
     describe('->verify()', function() {
         context('when passed', function() {
             beforeEach(function() {
-                $this->notifier = new NotifyRecorder();
+                $this->notifier = new NullNotifier();
             });
             it('returns passed result', function() {
                 $target = new FeatureExample();
@@ -28,7 +28,7 @@ describe(Feature::class, function() {
         });
         context('when failed', function() {
             beforeEach(function() {
-                $this->notifier = new NotifyRecorder();
+                $this->notifier = new NullNotifier();
             });
             it('returns passed result', function() {
                 $target = new FeatureExample();

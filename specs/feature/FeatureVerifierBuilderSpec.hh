@@ -1,7 +1,7 @@
 <?hh //partial
 
 use specify\feature\FeatureVerifierBuilder;
-use specify\helper\NotifyRecorder;
+use specify\notifier\NullNotifier;
 
 
 describe(FeatureVerifierBuilder::class, function() {
@@ -26,7 +26,7 @@ describe(FeatureVerifierBuilder::class, function() {
             $this->verifier = $feature->build();
         });
         it('verify success', function() {
-            $this->verifier->verify(new NotifyRecorder());
+            $this->verifier->verify(new NullNotifier());
         });
     });
 });
