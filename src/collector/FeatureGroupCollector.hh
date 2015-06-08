@@ -32,12 +32,12 @@ class FeatureGroupCollector implements Collector<PackageSpecification, FeatureGr
 
         foreach ($specificationFiles as $specificationFile) {
             try {
-                $reflection = $target->resolve($specificationFile);
+                $specification = $target->resolve($specificationFile);
             } catch (NotSpecificationFileException $exception) {
                 continue;
             }
 
-            $group = new FeatureGroup($reflection);
+            $group = new FeatureGroup($specification);
             $groups->add($group);
         }
         $groups->shuffle();

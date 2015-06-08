@@ -45,7 +45,7 @@ class PackageSpecification
         return $this->packageDirectory;
     }
 
-    public function resolve(SpecificationFile $file) : ReflectionClass
+    public function resolve(SpecificationFile $file) : Specification
     {
         $relativeClass = $this->relativeClassFrom($file);
         $fullName = $this->ns . $relativeClass;
@@ -60,7 +60,7 @@ class PackageSpecification
             throw new NotSpecificationFileException();
         }
 
-        return $reflection;
+        return $reflection->newInstance();
     }
 
     private function relativeClassFrom(SpecificationFile $file) : string

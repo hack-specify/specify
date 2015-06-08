@@ -15,8 +15,8 @@ describe(FeaturePackage::class, function() {
         beforeEach(function() {
             $this->notifier = new NullNotifier();
             $this->package = new FeaturePackage('package', ImmVector {
-                new FeatureGroup(new ReflectionClass(FeatureExample::class)),
-                new FeatureGroup(new ReflectionClass(FeatureExample::class))
+                new FeatureGroup(new FeatureExample()),
+                new FeatureGroup(new FeatureExample())
             });
         });
         it('verify all feature groups', function() {

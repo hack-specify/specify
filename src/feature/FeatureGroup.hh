@@ -32,11 +32,11 @@ class FeatureGroup implements FeatureSpecification<FeatureGroupResult, FeatureGr
     private StopWatch $stopWatch;
 
     public function __construct(
-        ReflectionClass $target
+        Specification $target
     )
     {
-        $this->description = $target->getName();
-        $this->featureGroup = $target->newInstance();
+        $this->description = get_class($target);
+        $this->featureGroup = $target;
 
         $collector = new FeatureCollector();
         $this->features = $collector->collectFrom($this->featureGroup);
