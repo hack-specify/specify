@@ -19,7 +19,7 @@ use specify\io\ConsoleOutput;
 use specify\io\Console;
 
 
-final class FailedExampleReporter implements LifeCycleMessageSubscriber
+final class FailedFeatureReporter implements LifeCycleMessageSubscriber
 {
 
     public function __construct(

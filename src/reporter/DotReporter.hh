@@ -33,7 +33,7 @@ final class DotReporter implements LifeCycleMessageSubscriber
         $this->reporter = new CompositionReporter(ImmVector {
             new ProcessingTimeReporter($this->writer),
             new SummaryReporter($this->writer),
-            new FailedExampleReporter($this->writer)
+            new FailedFeatureReporter($this->writer)
         });
     }
 
