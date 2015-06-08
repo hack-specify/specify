@@ -13,14 +13,14 @@ namespace specify\feature;
 
 use specify\Specification;
 use specify\FeatureSpecification;
-use specify\LifeCycleNotifier;
+use specify\notifier\FeatureNotifier;
 use specify\result\FeatureResult;
 use specify\util\StopWatch;
 use \ReflectionMethod;
 use \Exception;
 
 
-class Feature implements FeatureSpecification<FeatureResult>
+class Feature implements FeatureSpecification<FeatureResult, FeatureNotifier>
 {
 
     const string ATTRIBUTE_NAME = 'Feature';
@@ -36,7 +36,7 @@ class Feature implements FeatureSpecification<FeatureResult>
         $this->init();
     }
 
-    public function verify(LifeCycleNotifier $notifier) : FeatureResult
+    public function verify(FeatureNotifier $notifier) : FeatureResult
     {
         $notifier->featureStart($this->description);
 

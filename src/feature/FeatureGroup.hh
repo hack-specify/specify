@@ -12,7 +12,7 @@
 namespace specify\feature;
 
 use specify\Specification;
-use specify\LifeCycleNotifier;
+use specify\notifier\FeatureGroupNotifier;
 use specify\FeatureSpecification;
 use specify\result\FeatureGroupResult;
 use specify\collector\FeatureCollector;
@@ -23,7 +23,7 @@ use \ReflectionMethod;
 use \Exception;
 
 
-class FeatureGroup implements FeatureSpecification<FeatureGroupResult>
+class FeatureGroup implements FeatureSpecification<FeatureGroupResult, FeatureGroupNotifier>
 {
 
     private string $description;
@@ -53,7 +53,7 @@ class FeatureGroup implements FeatureSpecification<FeatureGroupResult>
         return $this->features;
     }
 
-    public function verify(LifeCycleNotifier $notifier) : FeatureGroupResult
+    public function verify(FeatureGroupNotifier $notifier) : FeatureGroupResult
     {
         $results = Vector {};
 

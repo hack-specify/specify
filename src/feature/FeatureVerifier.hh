@@ -15,7 +15,7 @@ use specify\LifeCycleNotifier;
 use specify\FeatureSpecification;
 
 
-class FeatureVerifier implements FeatureSpecification<void>
+class FeatureVerifier implements FeatureSpecification<void, LifeCycleNotifier>
 {
 
     public function __construct(

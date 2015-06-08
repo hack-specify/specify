@@ -13,13 +13,13 @@ namespace specify\feature;
 
 use specify\Specification;
 use specify\FeatureSpecification;
-use specify\LifeCycleNotifier;
+use specify\notifier\FeatureNotifier;
 use specify\result\FeatureResult;
 use \ReflectionMethod;
 use \Exception;
 
 
-class PendingFeature implements FeatureSpecification<FeatureResult>
+class PendingFeature implements FeatureSpecification<FeatureResult, FeatureNotifier>
 {
 
     const string ATTRIBUTE_NAME = 'PendingFeature';
@@ -31,7 +31,7 @@ class PendingFeature implements FeatureSpecification<FeatureResult>
     {
     }
 
-    public function verify(LifeCycleNotifier $notifier) : FeatureResult
+    public function verify(FeatureNotifier $notifier) : FeatureResult
     {
         $description = 'pending';
         $attributeValues = $this->method->getAttribute(self::ATTRIBUTE_NAME);

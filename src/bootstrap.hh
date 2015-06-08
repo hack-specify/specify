@@ -61,12 +61,13 @@ namespace specify\collector
     use specify\FeatureSpecification;
     use specify\feature\Feature;
     use specify\feature\FeatureGroup;
+    use specify\notifier\FeatureNotifier;
     use specify\result\FeatureResult;
 
     type DirectoryPath = string;
     type SpecificationFile = string;
     type SpecificationFileCollection = ImmVector<SpecificationFile>;
-    type FeatureCollection = ImmVector<FeatureSpecification<FeatureResult>>;
+    type FeatureCollection = ImmVector<FeatureSpecification<FeatureResult, FeatureNotifier>>;
     type FeatureGroupCollection = ImmVector<FeatureGroup>;
 }
 
@@ -75,9 +76,10 @@ namespace specify\feature
     use \Generator;
     use specify\FeatureSpecification;
     use specify\result\FeatureResult;
+    use specify\notifier\FeatureNotifier;
 
     type FeatureGroupCollection = ImmVector<FeatureGroup>;
-    type FeatureCollection = ImmVector<FeatureSpecification<FeatureResult>>;
+    type FeatureCollection = ImmVector<FeatureSpecification<FeatureResult, FeatureNotifier>>;
 }
 
 

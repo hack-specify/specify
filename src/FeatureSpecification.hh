@@ -11,7 +11,7 @@
 
 namespace specify;
 
-interface FeatureSpecification<Tr>
+interface FeatureSpecification<Tr, Tn>
 {
-    public function verify(LifeCycleNotifier $notifier) : Tr;
+    public function verify(Tn $notifier) : Tr;
 }

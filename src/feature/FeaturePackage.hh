@@ -12,12 +12,12 @@
 namespace specify\feature;
 
 use specify\FeatureSpecification;
-use specify\LifeCycleNotifier;
+use specify\notifier\FeaturePackageNotifier;
 use specify\result\FeaturePackageResult;
 use specify\util\StopWatch;
 
 
-class FeaturePackage implements FeatureSpecification<FeaturePackageResult>
+class FeaturePackage implements FeatureSpecification<FeaturePackageResult, FeaturePackageNotifier>
 {
 
     private StopWatch $stopWatch;
@@ -35,7 +35,7 @@ class FeaturePackage implements FeatureSpecification<FeaturePackageResult>
         return $this->description;
     }
 
-    public function verify(LifeCycleNotifier $notifier) : FeaturePackageResult
+    public function verify(FeaturePackageNotifier $notifier) : FeaturePackageResult
     {
         $results = Vector {};
         $notifier->featurePackageStart($this->getDescription());
