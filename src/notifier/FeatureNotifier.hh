@@ -12,9 +12,10 @@
 namespace specify\notifier;
 
 use specify\result\FeatureResult;
+use specify\feature\FeatureDescription;
 
 interface FeatureNotifier
 {
-    public function featureStart(string $description) : void;
+    public function featureStart(FeatureDescription $description) : void;
     public function featureFinish(FeatureResult $result) : void;
 }

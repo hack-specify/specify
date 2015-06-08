@@ -15,7 +15,7 @@ use specify\LifeCycleNotifier;
 use specify\result\FeatureResult;
 use specify\result\FeatureGroupResult;
 use specify\result\FeaturePackageResult;
-
+use specify\feature\FeatureDescription;
 
 class NullNotifier implements LifeCycleNotifier
 {
@@ -34,7 +34,7 @@ class NullNotifier implements LifeCycleNotifier
     {
     }
 
-    public function featureStart(string $description) : void
+    public function featureStart(FeatureDescription $description) : void
     {
     }
 

@@ -13,6 +13,7 @@ namespace specify\result;
 
 use specify\VerifyResult;
 use specify\util\ProcessingTime;
+use specify\feature\FeatureDescription;
 use \Exception;
 
 
@@ -20,7 +21,7 @@ class FeatureResult implements VerifyResult
 {
 
     public function __construct(
-        private string $description,
+        private FeatureDescription $description,
         private FeatureResultType $result,
         private ProcessingTime $processingTime = new ProcessingTime(),
         private ?Exception $exception = null
@@ -28,7 +29,7 @@ class FeatureResult implements VerifyResult
     {
     }
 
-    public function getDescription() : string
+    public function getDescription() : FeatureDescription
     {
         return $this->description;
     }
@@ -58,17 +59,17 @@ class FeatureResult implements VerifyResult
         return $this->result === FeatureResultType::Failed;
     }
 
-    public static function passed(string $description, ProcessingTime $totalTime) : FeatureResult
+    public static function passed(FeatureDescription $description, ProcessingTime $totalTime) : FeatureResult
     {
         return new self($description, FeatureResultType::Passed, $totalTime);
     }
 
-    public static function pending(string $description) : FeatureResult
+    public static function pending(FeatureDescription $description) : FeatureResult
     {
         return new self($description, FeatureResultType::Pending);
     }
 
-    public static function failed(string $description, ProcessingTime $totalTime, Exception $reason) : FeatureResult
+    public static function failed(FeatureDescription $description, ProcessingTime $totalTime, Exception $reason) : FeatureResult
     {
         return new self($description, FeatureResultType::Failed, $totalTime, $reason);
     }

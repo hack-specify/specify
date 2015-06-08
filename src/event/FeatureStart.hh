@@ -13,19 +13,21 @@ namespace specify\event;
 
 use specify\LifeCycleEvent;
 use specify\LifeCycleEventType;
+use specify\feature\FeatureDescription;
 use specify\result\ExampleResult;
+
 
 final class FeatureStart extends AbstractNamedEvent implements LifeCycleEvent
 {
 
     public function __construct(
-        private string $description
+        private FeatureDescription $description
     )
     {
         parent::__construct(LifeCycleEventType::ExampleStart);
     }
 
-    public function getDescription() : string
+    public function getDescription() : FeatureDescription
     {
         return $this->description;
     }

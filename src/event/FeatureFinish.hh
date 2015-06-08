@@ -14,6 +14,8 @@ namespace specify\event;
 use specify\LifeCycleEvent;
 use specify\LifeCycleEventType;
 use specify\result\FeatureResult;
+use specify\feature\FeatureDescription;
+
 
 final class FeatureFinish extends AbstractNamedEvent implements LifeCycleEvent
 {
@@ -25,7 +27,7 @@ final class FeatureFinish extends AbstractNamedEvent implements LifeCycleEvent
         parent::__construct(LifeCycleEventType::ExampleFinish);
     }
 
-    public function getDescription() : string
+    public function getDescription() : FeatureDescription
     {
         return $this->result->getDescription();
     }

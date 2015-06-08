@@ -22,6 +22,7 @@ use specify\event\FeaturePackageFinish;
 use specify\result\FeatureResult;
 use specify\result\FeatureGroupResult;
 use specify\result\FeaturePackageResult;
+use specify\feature\FeatureDescription;
 
 
 class DefaultLifeCycleNotifier implements LifeCycleNotifier
@@ -43,7 +44,7 @@ class DefaultLifeCycleNotifier implements LifeCycleNotifier
         $this->send(new FeatureGroupStart($description));
     }
 
-    public function featureStart(string $description) : void
+    public function featureStart(FeatureDescription $description) : void
     {
         $this->send(new FeatureStart($description));
     }

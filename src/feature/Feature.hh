@@ -24,7 +24,7 @@ use \Exception;
 class Feature implements FeatureSpecification<FeatureResult, FeatureNotifier>
 {
 
-    private string $description = 'feature description empty';
+    private FeatureDescription $description;
     private StopWatch $stopWatch;
     private FeatureVerifierBuilder $verifierBuilder;
 
@@ -34,7 +34,9 @@ class Feature implements FeatureSpecification<FeatureResult, FeatureNotifier>
     )
     {
         $this->verifierBuilder = new FeatureVerifierBuilder();
-        $this->init();
+        $this->stopWatch = new StopWatch();
+        $this->description = new FeatureDescription();
+        $this->setup();
     }
 
     public function verify(FeatureNotifier $notifier) : FeatureResult
@@ -48,19 +50,24 @@ class Feature implements FeatureSpecification<FeatureResult, FeatureNotifier>
         return $result;
     }
 
-    private function init() : void
+    private function setup() : void
     {
-        $this->stopWatch = new StopWatch();
+        $values = $this->method->getAttribute((string) AttributeType::Feature);
 
-        $attributeValues = $this->method->getAttribute((string) AttributeType::Feature);
-
-        if ($attributeValues === null) {
+        if ($values === null) {
             return;
         }
-        $this->description = (string) $attributeValues[0];
+        $description = (string) $values[0];
 
         $name = $this->method->getName();
-        $this->description .= ' - ' . str_replace('_', ' ', $name);
+        $detailDescription = str_replace('_', ' ', $name);
+
+        $this->description = new FeatureDescription($description, $detailDescription);
+    }
+
+    private function getDescription() : FeatureDescription
+    {
+        return $this->description;
     }
 
     private function verifyExample(FeatureNotifier $notifier) : FeatureResult
@@ -82,9 +89,9 @@ class Feature implements FeatureSpecification<FeatureResult, FeatureNotifier>
         $totalTime = $this->stopWatch->getResult();
 
         if ($failedReasonException === null) {
-            $result = FeatureResult::passed($this->description, $totalTime);
+            $result = FeatureResult::passed($this->getDescription(), $totalTime);
         } else {
-            $result = FeatureResult::failed($this->description, $totalTime, $failedReasonException);
+            $result = FeatureResult::failed($this->getDescription(), $totalTime, $failedReasonException);
         }
 
         return $result;

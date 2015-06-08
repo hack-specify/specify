@@ -1,6 +1,7 @@
 <?hh //partial
 
 use specify\feature\Feature;
+use specify\feature\FeatureDescription;
 use specify\fixtures\example\FeatureExample;
 use specify\notifier\NullNotifier;
 use \Prophecy\Prophet;
@@ -21,7 +22,7 @@ describe(Feature::class, function() {
                 $feature = new Feature($target, $featureMethod);
                 $result = $feature->verify($this->notifier);
 
-                expect($result->getDescription())->toBe("example1 - example1");
+                expect($result->getDescription())->toBeAnInstanceOf(FeatureDescription::class);
                 expect($result->isPassed())->toBeTrue();
                 expect($result->isFailed())->toBeFalse();
             });
@@ -37,7 +38,7 @@ describe(Feature::class, function() {
                 $feature = new Feature($target, $featureMethod);
                 $result = $feature->verify($this->notifier);
 
-                expect($result->getDescription())->toBe("example3 - example3");
+                expect($result->getDescription())->toBeAnInstanceOf(FeatureDescription::class);
                 expect($result->isPassed())->toBeFalse();
                 expect($result->isFailed())->toBeTrue();
             });
