@@ -65,20 +65,6 @@ final class StackSpec implements Specification
     <<Feature("Stack::add")>>
     public function add_value_to_stack(Feature $feature) : void
     {
-        //setup block
-        $feature->setup(() ==> {
-            $this->stack = new Stack();
-        });
-
-        //when block
-        $feature->when(() ==> {
-            $this->stack->add(1);
-        });
-
-        //then block
-        $feature->then(() ==> {
-            invariant($this->stack->count() === 1, 'must have been added value');
-        });
     }
 }
 ```
