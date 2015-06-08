@@ -4,24 +4,25 @@ namespace specify\example;
 
 use \Exception;
 use specify\Specification;
+use specify\feature\FeatureVerifierBuilder as Feature;
 
 
 final class ExampleSpecA implements Specification
 {
 
-    <<Example("example1")>>
-    public function example1() : void
+    <<Feature("example1")>>
+    public function example1(Feature $feature) : void
     {
     }
 
-    <<Example("example2")>>
-    public function example2() : void
+    <<Feature("example2")>>
+    public function example2(Feature $feature) : void
     {
         throw new Exception('oops!!');
     }
 
-    <<PendingExample("example3")>>
-    public function example3() : void
+    <<PendingFeature("example3")>>
+    public function example3(Feature $feature) : void
     {
     }
 
