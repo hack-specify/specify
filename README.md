@@ -38,7 +38,7 @@ Specify::configure((ConfigBuilder $builder) ==> {
     );
 
     $builder->package($package)
-        ->exampleReporter(new SpecificationReporter());
+        ->featureReporter(new SpecificationReporter());
 
 });
 ```
