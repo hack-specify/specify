@@ -19,8 +19,8 @@ class FeaturePackageResult implements VerifyResult
 
     public function __construct(
         private string $description,
-        private FeatureGroupResultCollection $featureGroupResults,
-        private ProcessingTime $processingTime
+        private FeatureGroupResultCollection $featureGroupResults = ImmVector {},
+        private ProcessingTime $processingTime = new ProcessingTime()
     )
     {
     }
@@ -129,6 +129,11 @@ class FeaturePackageResult implements VerifyResult
         }
 
         return $result;
+    }
+
+    public static function createEmptyResult() : FeaturePackageResult
+    {
+        return new FeaturePackageResult('empty package');
     }
 
 }
