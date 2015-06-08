@@ -71,7 +71,7 @@ final class StackSpec implements Specification
 
 ### Write a feature specification
 
-It will describe the setup / when / then block.
+It will describe the setup / when / then block.  
 Block specified in lambda expression.
 
 ```hack
