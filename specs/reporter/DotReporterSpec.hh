@@ -33,7 +33,7 @@ describe(DotReporter::class, function() {
 
                 expect(() ==> {
                     foreach ($this->events as $event) {
-                        $this->repoter->handle($event);
+                        $this->repoter->receive($event);
                     }
                 })->toPrint($result);
             });
@@ -60,7 +60,7 @@ describe(DotReporter::class, function() {
                 $output = implode($results, '');
 
                 expect(() ==> {
-                    $this->repoter->handle($this->event);
+                    $this->repoter->receive($this->event);
                 })->toPrint($output);
             });
         });

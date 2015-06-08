@@ -28,7 +28,7 @@ final class ProcessingTimeReporter implements LifeCycleMessageSubscriber
     {
     }
 
-    public function handle(LifeCycleEvent $event) : void
+    public function receive(LifeCycleEvent $event) : void
     {
         if ($event instanceof FeaturePackageFinish) {
             $this->onPackageFinish($event);

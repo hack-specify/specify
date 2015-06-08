@@ -14,9 +14,8 @@ use specify\event\FeaturePackageFinish;
 class ExampleMessageSubscriber implements LifeCycleMessageSubscriber
 {
 
-    public function handle(LifeCycleEvent $event) : void
+    public function receive(LifeCycleEvent $event) : void
     {
-
         if ($event instanceof FeaturePackageStart) {
             $this->onExamplePackageStart($event);
         } else if ($event instanceof FeatureGroupStart) {

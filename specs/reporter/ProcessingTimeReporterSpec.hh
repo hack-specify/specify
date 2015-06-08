@@ -21,7 +21,7 @@ describe(ProcessingTimeReporter::class, function() {
             $event = new FeaturePackageFinish($result);
 
             expect(() ==> {
-                $this->repoter->handle($event);
+                $this->repoter->receive($event);
             })->toPrint("Finished in 1000.000000 seconds\n");
         });
     });

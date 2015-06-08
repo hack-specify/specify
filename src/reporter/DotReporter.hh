@@ -37,7 +37,7 @@ final class DotReporter implements LifeCycleMessageSubscriber
         });
     }
 
-    public function handle(LifeCycleEvent $event) : void
+    public function receive(LifeCycleEvent $event) : void
     {
         if ($event instanceof FeaturePackageStart) {
             $this->onPackageStart($event);
