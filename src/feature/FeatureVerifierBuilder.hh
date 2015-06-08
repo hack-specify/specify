@@ -11,8 +11,9 @@
 
 namespace specify\feature;
 
+use specify\Builder;
 
-class FeatureVerifierBuilder
+class FeatureVerifierBuilder implements Builder<FeatureVerifier>
 {
 
     public function __construct(

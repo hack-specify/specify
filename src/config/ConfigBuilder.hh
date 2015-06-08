@@ -12,12 +12,13 @@
 namespace specify\config;
 
 use specify\Config;
+use specify\Builder;
 use specify\LifeCycleMessageSubscriber;
 use specify\specification\PackageSpecification;
 use specify\reporter\SpecificationReporter;
 
 
-class ConfigBuilder
+class ConfigBuilder implements Builder<Config>
 {
 
     private ?PackageSpecification $package;
