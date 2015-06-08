@@ -11,11 +11,11 @@
 
 namespace specify\feature;
 
-use specify\LifeCycleNotifier;
+use specify\notifier\FeatureNotifier;
 use specify\FeatureSpecification;
 
 
-class FeatureVerifier implements FeatureSpecification<void, LifeCycleNotifier>
+class FeatureVerifier implements FeatureSpecification<void, FeatureNotifier>
 {
 
     public function __construct(
@@ -27,7 +27,7 @@ class FeatureVerifier implements FeatureSpecification<void, LifeCycleNotifier>
     {
     }
 
-    public function verify(LifeCycleNotifier $notifier) : void
+    public function verify(FeatureNotifier $notifier) : void
     {
         $blocks = [
             $this->setup,

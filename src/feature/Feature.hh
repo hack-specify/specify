@@ -27,12 +27,14 @@ class Feature implements FeatureSpecification<FeatureResult, FeatureNotifier>
 
     private string $description = 'example description empty';
     private StopWatch $stopWatch;
+    private FeatureVerifierBuilder $verifierBuilder;
 
     public function __construct(
         private Specification $target,
         private ReflectionMethod $method
     )
     {
+        $this->verifierBuilder = new FeatureVerifierBuilder();
         $this->init();
     }
 
@@ -40,7 +42,7 @@ class Feature implements FeatureSpecification<FeatureResult, FeatureNotifier>
     {
         $notifier->featureStart($this->description);
 
-        $result = $this->verifyExample();
+        $result = $this->verifyExample($notifier);
 
         $notifier->featureFinish($result);
 
@@ -56,17 +58,19 @@ class Feature implements FeatureSpecification<FeatureResult, FeatureNotifier>
         if ($attributeValues === null) {
             return;
         }
-
         $this->description = (string) $attributeValues[0];
     }
 
-    private function verifyExample() : FeatureResult
+    private function verifyExample(FeatureNotifier $notifier) : FeatureResult
     {
         $failedReasonException = null;
 
         $this->stopWatch->start();
         try {
-            $this->method->invoke($this->target);
+            $this->method->invoke($this->target, $this->verifierBuilder);
+
+            $verifier = $this->verifierBuilder->build();
+            $verifier->verify($notifier);
         } catch (Exception $exception) {
             $failedReasonException = $exception;
         }
