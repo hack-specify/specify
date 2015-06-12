@@ -1,9 +1,9 @@
-Specify
+HHSpecify
 ============================
 
 [![Build Status](https://travis-ci.org/hhspecify/hhspecify.svg?branch=0.1.1-alpha4)](https://travis-ci.org/hhspecify/hhspecify)
 
-**Specify** is BDD testing framework for [Hack](http://hacklang.org/), inspired by [spock](https://github.com/spockframework/spock).
+**HHSpecify** is BDD testing framework for [Hack](http://hacklang.org/), inspired by [spock](https://github.com/spockframework/spock).
 
 
 ![Screen Shot](https://raw.githubusercontent.com/hack-specify/specify/master/screen-shot.png)
@@ -13,7 +13,7 @@ Installation
 
 Installed by [composer](https://getcomposer.org/).
 
-	composer require specify/specify
+	composer require hhspecify/hhspecify
 
 Basic usage
 ----------------------------
@@ -26,11 +26,11 @@ Use the **configure** method to do the setup.
 ```hack
 <?hh //partial
 
-use specify\Specify;
-use specify\config\ConfigBuilder;
-use specify\reporter\SpecificationReporter;
+use hhspecify\Specify;
+use hhspecify\config\ConfigBuilder;
+use hhspecify\reporter\SpecificationReporter;
 
-Specify::configure((ConfigBuilder $builder) ==> {
+HHSpecify::configure((ConfigBuilder $builder) ==> {
 
     $package = shape(
         'namespace' => 'vendorname\\spec\\', //The package namespace of the spec
@@ -46,13 +46,13 @@ Specify::configure((ConfigBuilder $builder) ==> {
 ### Create a specification file
 
 It will create a specification file to **vendorname/spec**.  
-Specification must implement **specify\Specification**.  
+Specification must implement **hhspecify\Specification**.  
 
 It will specify the specification in the **Feature** attribute.  
 
 ```hack
-use specify\Specification;
-use specify\feature\FeatureVerifierBuilder as Feature;
+use hhspecify\Specification;
+use hhspecify\feature\FeatureVerifierBuilder as Feature;
 
 final class StackSpec implements Specification
 {
@@ -100,7 +100,7 @@ public function add_value_to_stack(Feature $feature) : void
 
 In the package root directory run the following command.  
 
-	vendor/bin/specify
+	vendor/bin/hhspecify
 
 
 Run the test

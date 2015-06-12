@@ -1,0 +1,34 @@
+#!/usr/bin/env hhvm
+<?hh //partial
+
+$autloadFiles = [
+    __DIR__ . '/../vendor/autoload.php',
+    __DIR__ . '/../../vendor/autoload.php',
+    __DIR__ . '/../../../autoload.php'
+];
+
+$composerInstall = false;
+
+foreach ($autloadFiles as $autloadFile) {
+    if (file_exists($autloadFile)) {
+        require $autloadFile;
+        $composerInstall = true;
+        break;
+    }
+}
+
+if (!$composerInstall) {
+    echo 'You must set up the dependencies, run the following commands:'. PHP_EOL .
+        'curl -s http://getcomposer.org/installer | php' . PHP_EOL .
+        'php composer.phar install' . PHP_EOL;
+    exit(1);
+}
+
+unset($composerInstall, $autloadFiles, $autloadFile);
+
+
+use hhspecify\cli\Argument;
+use hhspecify\cli\Application;
+
+$application = new Application();
+$application->run(new Argument($argv));

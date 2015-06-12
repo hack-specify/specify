@@ -1,7 +1,7 @@
 <?hh //strict
 
 /**
- * This file is part of specify.
+ * This file is part of hhspecify.
  *
  * (c) Noritaka Horio <holy.shared.design@gmail.com>
  *
@@ -9,10 +9,10 @@
  * with this source code in the file LICENSE.
  */
 
-namespace specify\result;
+namespace hhspecify\result;
 
-use specify\VerifyResult;
-use specify\util\ProcessingTime;
+use hhspecify\VerifyResult;
+use hhspecify\util\ProcessingTime;
 
 class FeatureGroupResult implements VerifyResult
 {
@@ -33,6 +33,30 @@ class FeatureGroupResult implements VerifyResult
     public function getFeatureResults() : FeatureResultCollection
     {
         return $this->featureResults;
+    }
+
+    <<__Memoize>>
+    public function getLabelGroupFeatureResults() : LabelGroupFeatureResult
+    {
+        $labelGroups = Map {};
+        $featureResults = $this->getFeatureResults();
+
+        foreach ($featureResults as $featureResult) {
+            $label = $featureResult->getLabel();
+
+            if ($labelGroups->containsKey($label) === false) {
+                $labelGroups->set($label, Vector {});
+            }
+
+            $results = $labelGroups->at($label);
+            $results->add($featureResult);
+        }
+
+        $labelGroups = $labelGroups->mapWithKey((string $label, Vector<FeatureResult> $results) ==> {
+            return $results->toImmVector();
+        });
+
+        return $labelGroups->toImmMap();
     }
 
     public function getProcessingTime() : ProcessingTime

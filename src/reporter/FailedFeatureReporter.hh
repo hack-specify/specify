@@ -1,7 +1,7 @@
 <?hh //strict
 
 /**
- * This file is part of specify.
+ * This file is part of hhspecify.
  *
  * (c) Noritaka Horio <holy.shared.design@gmail.com>
  *
@@ -9,14 +9,14 @@
  * with this source code in the file LICENSE.
  */
 
-namespace specify\reporter;
+namespace hhspecify\reporter;
 
-use specify\LifeCycleEvent;
-use specify\LifeCycleMessageSubscriber;
-use specify\event\FeaturePackageStart;
-use specify\event\FeaturePackageFinish;
-use specify\io\ConsoleOutput;
-use specify\io\Console;
+use hhspecify\LifeCycleEvent;
+use hhspecify\LifeCycleMessageSubscriber;
+use hhspecify\event\FeaturePackageStart;
+use hhspecify\event\FeaturePackageFinish;
+use hhspecify\io\ConsoleOutput;
+use hhspecify\io\Console;
 
 
 final class FailedFeatureReporter implements LifeCycleMessageSubscriber
@@ -53,9 +53,12 @@ final class FailedFeatureReporter implements LifeCycleMessageSubscriber
 
             $reasonMessage = $reasonException->getMessage();
             $this->writer->writeln("  %s\n", $reasonMessage);
-            $this->writer->writeln("  %s:%d\n",
+            $this->writer->writeln("  File: %s\n  Line: %d\n",
                 $reasonException->getFile(),
                 $reasonException->getLine()
+            );
+            $this->writer->writeln("  %s\n",
+                $reasonException->getTraceAsString()
             );
         }
     }

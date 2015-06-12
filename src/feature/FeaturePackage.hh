@@ -1,7 +1,7 @@
 <?hh //strict
 
 /**
- * This file is part of specify.
+ * This file is part of hhspecify.
  *
  * (c) Noritaka Horio <holy.shared.design@gmail.com>
  *
@@ -9,12 +9,12 @@
  * with this source code in the file LICENSE.
  */
 
-namespace specify\feature;
+namespace hhspecify\feature;
 
-use specify\FeatureSpecification;
-use specify\notifier\FeaturePackageNotifier;
-use specify\result\FeaturePackageResult;
-use specify\util\StopWatch;
+use hhspecify\FeatureSpecification;
+use hhspecify\notifier\FeaturePackageNotifier;
+use hhspecify\result\FeaturePackageResult;
+use hhspecify\util\StopWatch;
 
 
 class FeaturePackage implements FeatureSpecification<FeaturePackageResult, FeaturePackageNotifier>

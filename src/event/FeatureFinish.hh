@@ -1,7 +1,7 @@
 <?hh //strict
 
 /**
- * This file is part of specify.
+ * This file is part of hhspecify.
  *
  * (c) Noritaka Horio <holy.shared.design@gmail.com>
  *
@@ -9,11 +9,13 @@
  * with this source code in the file LICENSE.
  */
 
-namespace specify\event;
+namespace hhspecify\event;
 
-use specify\LifeCycleEvent;
-use specify\LifeCycleEventType;
-use specify\result\FeatureResult;
+use hhspecify\LifeCycleEvent;
+use hhspecify\LifeCycleEventType;
+use hhspecify\result\FeatureResult;
+use hhspecify\feature\FeatureDescription;
+
 
 final class FeatureFinish extends AbstractNamedEvent implements LifeCycleEvent
 {
@@ -23,6 +25,11 @@ final class FeatureFinish extends AbstractNamedEvent implements LifeCycleEvent
     )
     {
         parent::__construct(LifeCycleEventType::ExampleFinish);
+    }
+
+    public function getLabel() : string
+    {
+        return $this->result->getLabel();
     }
 
     public function getDescription() : string

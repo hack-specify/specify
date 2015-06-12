@@ -1,7 +1,7 @@
 <?hh //strict
 
 /**
- * This file is part of specify.
+ * This file is part of hhspecify.
  *
  * (c) Noritaka Horio <holy.shared.design@gmail.com>
  *
@@ -9,11 +9,10 @@
  * with this source code in the file LICENSE.
  */
 
-namespace specify;
+namespace hhspecify;
 
 interface VerifyResult
 {
-    public function getDescription() : string;
     public function isPassed() : bool;
     public function isFailed() : bool;
 }

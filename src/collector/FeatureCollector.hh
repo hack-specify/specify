@@ -1,7 +1,7 @@
 <?hh //strict
 
 /**
- * This file is part of specify.
+ * This file is part of hhspecify.
  *
  * (c) Noritaka Horio <holy.shared.design@gmail.com>
  *
@@ -9,15 +9,15 @@
  * with this source code in the file LICENSE.
  */
 
-namespace specify\collector;
+namespace hhspecify\collector;
 
-use specify\Collector;
-use specify\Specification;
-use specify\feature\Feature;
-use specify\feature\PendingFeature;
-use specify\feature\FeatureSpecificationFactory;
-use specify\result\FeatureResult;
-use specify\FeatureSpecification;
+use hhspecify\Collector;
+use hhspecify\Specification;
+use hhspecify\feature\Feature;
+use hhspecify\feature\PendingFeature;
+use hhspecify\feature\FeatureSpecificationFactory;
+use hhspecify\result\FeatureResult;
+use hhspecify\FeatureSpecification;
 use \ReflectionClass;
 use \ReflectionMethod;
 

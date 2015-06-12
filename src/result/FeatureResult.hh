@@ -1,7 +1,7 @@
 <?hh //strict
 
 /**
- * This file is part of specify.
+ * This file is part of hhspecify.
  *
  * (c) Noritaka Horio <holy.shared.design@gmail.com>
  *
@@ -9,10 +9,11 @@
  * with this source code in the file LICENSE.
  */
 
-namespace specify\result;
+namespace hhspecify\result;
 
-use specify\VerifyResult;
-use specify\util\ProcessingTime;
+use hhspecify\VerifyResult;
+use hhspecify\util\ProcessingTime;
+use hhspecify\feature\FeatureDescription;
 use \Exception;
 
 
@@ -20,17 +21,22 @@ class FeatureResult implements VerifyResult
 {
 
     public function __construct(
-        private string $description,
-        private FeatureResultType $result,
+        private FeatureDescription $description,
+        private FeatureResultType $resultType,
         private ProcessingTime $processingTime = new ProcessingTime(),
         private ?Exception $exception = null
     )
     {
     }
 
+    public function getLabel() : string
+    {
+        return $this->description->getLabel();
+    }
+
     public function getDescription() : string
     {
-        return $this->description;
+        return $this->description->getDescription();
     }
 
     public function getFailedReasonException() : ?Exception
@@ -45,30 +51,30 @@ class FeatureResult implements VerifyResult
 
     public function isPassed() : bool
     {
-        return $this->result === FeatureResultType::Passed;
+        return $this->resultType === FeatureResultType::Passed;
     }
 
     public function isPending() : bool
     {
-        return $this->result === FeatureResultType::Pending;
+        return $this->resultType === FeatureResultType::Pending;
     }
 
     public function isFailed() : bool
     {
-        return $this->result === FeatureResultType::Failed;
+        return $this->resultType === FeatureResultType::Failed;
     }
 
-    public static function passed(string $description, ProcessingTime $totalTime) : FeatureResult
+    public static function passed(FeatureDescription $description, ProcessingTime $totalTime) : FeatureResult
     {
         return new self($description, FeatureResultType::Passed, $totalTime);
     }
 
-    public static function pending(string $description) : FeatureResult
+    public static function pending(FeatureDescription $description) : FeatureResult
     {
         return new self($description, FeatureResultType::Pending);
     }
 
-    public static function failed(string $description, ProcessingTime $totalTime, Exception $reason) : FeatureResult
+    public static function failed(FeatureDescription $description, ProcessingTime $totalTime, Exception $reason) : FeatureResult
     {
         return new self($description, FeatureResultType::Failed, $totalTime, $reason);
     }
