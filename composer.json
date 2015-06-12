@@ -1,5 +1,5 @@
 {
-  "name": "specify/specify",
+  "name": "hhspecify/hhspecify",
   "type": "library",
   "keywords": [ "hack", "hhvm", "spec", "test", "bdd" ],
   "description": "BDD testing framework for Hack",
