@@ -35,6 +35,30 @@ class FeatureGroupResult implements VerifyResult
         return $this->featureResults;
     }
 
+    <<__Memoize>>
+    public function getLabelGroupFeatureResults() : LabelGroupFeatureResult
+    {
+        $labelGroups = Map {};
+        $featureResults = $this->getFeatureResults();
+
+        foreach ($featureResults as $featureResult) {
+            $label = $featureResult->getLabel();
+
+            if ($labelGroups->containsKey($label) === false) {
+                $labelGroups->set($label, Vector {});
+            }
+
+            $results = $labelGroups->at($label);
+            $results->add($featureResult);
+        }
+
+        $labelGroups = $labelGroups->mapWithKey((string $label, Vector<FeatureResult> $results) ==> {
+            return $results->toImmVector();
+        });
+
+        return $labelGroups->toImmMap();
+    }
+
     public function getProcessingTime() : ProcessingTime
     {
         return $this->processingTime;

@@ -2,65 +2,110 @@
 
 use hhspecify\result\FeatureResult;
 use hhspecify\result\FeatureGroupResult;
+use hhspecify\feature\FeatureDescription;
 use \Exception;
 
 
 describe(FeatureGroupResult::class, function() {
+    describe('->getLabelGroupFeatureResults()', function() {
+        beforeEach(function() {
+            $this->groupResult = new FeatureGroupResult('foo', Vector {
+                FeatureResult::passed(new FeatureDescription('label1', 'foo->bar() patturn1')),
+                FeatureResult::passed(new FeatureDescription('label1', 'foo->bar() patturn2')),
+                FeatureResult::passed(new FeatureDescription('label2', 'foo->bar() patturn1'))
+            });
+        });
+        it('grouping by label', function() {
+            $result = $this->groupResult->getLabelGroupFeatureResults();
+
+            $labelResult = $result->at('label1');
+            expect($labelResult->count())->toBe(2);
+
+            $labelResult = $result->at('label2');
+            expect($labelResult->count())->toBe(1);
+        });
+    });
     describe('->isPassed()', function() {
         context('when passed', function() {
-            it('returns true', function() {
-                $groupResult = new FeatureGroupResult('foo', Vector {
-                    FeatureResult::passed('foo->bar()')
+            beforeEach(function() {
+                $description = new FeatureDescription('label', 'foo->bar()');
+                $passedResult = FeatureResult::passed($description);
+
+                $this->groupResult = new FeatureGroupResult('foo', Vector {
+                    $passedResult
                 });
-                $result = $groupResult->isPassed();
+            });
+            it('returns true', function() {
+                $result = $this->groupResult->isPassed();
                 expect($result)->toBeTrue();
             });
         });
     });
     describe('->isFailed()', function() {
         context('when failed', function() {
-            it('returns failed result', function() {
-                $groupResult = new FeatureGroupResult('foo', Vector {
-                    FeatureResult::failed('foo->bar()', new Exception('failed!!'))
+            beforeEach(function() {
+                $description = new FeatureDescription('label', 'foo->bar()');
+                $failedResult = FeatureResult::failed($description);
+
+                $this->groupResult = new FeatureGroupResult('foo', Vector {
+                    $failedResult
                 });
-                $result = $groupResult->isFailed();
+            });
+            it('returns failed result', function() {
+                $result = $this->groupResult->isFailed();
                 expect($result)->toBeTrue();
 
-                $result = $groupResult->isPassed();
+                $result = $this->groupResult->isPassed();
                 expect($result)->toBeFalse();
             });
         });
     });
     describe('->isPending()', function() {
         context('when failed', function() {
-            it('returns false', function() {
-                $groupResult = new FeatureGroupResult('foo', Vector {
-                    FeatureResult::failed('foo->bar()'),
-                    FeatureResult::pending('foo->foo()')
+            beforeEach(function() {
+                $description = new FeatureDescription('label', 'foo->bar()');
+                $failedResult = FeatureResult::failed($description);
+
+                $description = new FeatureDescription('label', 'foo->foo()');
+                $pendingResult = FeatureResult::failed($description);
+
+                $this->groupResult = new FeatureGroupResult('foo', Vector {
+                    $failedResult,
+                    $pendingResult
                 });
-                $result = $groupResult->isPending();
+            });
+            it('returns false', function() {
+                $result = $this->groupResult->isPending();
                 expect($result)->toBeFalse();
 
-                $result = $groupResult->isPassed();
+                $result = $this->groupResult->isPassed();
                 expect($result)->toBeFalse();
 
-                $result = $groupResult->isFailed();
+                $result = $this->groupResult->isFailed();
                 expect($result)->toBeTrue();
             });
         });
         context('when pending', function() {
-            it('returns true', function() {
-                $groupResult = new FeatureGroupResult('foo', Vector {
-                    FeatureResult::pending('foo->bar()'),
-                    FeatureResult::pending('foo->foo()')
+            beforeEach(function() {
+                $description = new FeatureDescription('label', 'foo->bar()');
+                $pendingResult1 = FeatureResult::pending($description);
+
+                $description = new FeatureDescription('label', 'foo->foo()');
+                $pendingResult2 = FeatureResult::pending($description);
+
+                $this->groupResult = new FeatureGroupResult('foo', Vector {
+                    $pendingResult1,
+                    $pendingResult2
                 });
-                $result = $groupResult->isPending();
+            });
+            it('returns true', function() {
+                $result = $this->groupResult->isPending();
                 expect($result)->toBeTrue();
 
-                $result = $groupResult->isPassed();
+                $result = $this->groupResult->isPassed();
                 expect($result)->toBeTrue();
 
-                $result = $groupResult->isFailed();
+                $result = $this->groupResult->isFailed();
                 expect($result)->toBeFalse();
             });
         });

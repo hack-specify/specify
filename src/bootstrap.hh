@@ -40,6 +40,7 @@ namespace hhspecify\result
 
     type FeatureResultCollection = ImmVector<FeatureResult>;
     type FeatureGroupResultCollection = ImmVector<FeatureGroupResult>;
+    type LabelGroupFeatureResult = ImmMap<string, ImmVector<FeatureResult>>;
 }
 
 
