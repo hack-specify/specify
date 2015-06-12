@@ -17,30 +17,48 @@ use hhspecify\feature\FeaturePackage;
 use hhspecify\result\FeaturePackageResult;
 use hhspecify\collector\FeatureGroupCollector;
 use hhspecify\reporter\ShutdownReporter;
+use hhspecify\io\ConsoleOutput;
 
 
 class Application
 {
 
-    public function __construct(
-        private FeaturePackageResult $packageResult = FeaturePackageResult::createEmptyResult()
-    )
+    private Argument $argv;
+    private FeaturePackageResult $packageResult;
+    private ConsoleOutput $console;
+
+    public function __construct()
     {
+        $this->argv = new Argument();
+        $this->packageResult = FeaturePackageResult::createEmptyResult();
+        $this->console = new ConsoleOutput();
     }
 
     public function run(Argument $argv) : void
     {
-        $this->startup($argv);
+        $this->argv = $argv;
+
+        if ($this->isHelpMode()) {
+            $this->printHelpMessage();
+            return;
+        }
+
+        $this->startup();
         $this->doRun();
         $this->shutdown();
     }
 
-    private function startup(Argument $argv) : void
+    private function startup() : void
     {
-        $configFile = $argv->getConfigFile();
+        $configFile = $this->argv->getConfigFile();
         $loadConfigFile = getcwd() . '/' . $configFile;
 
         include_once $loadConfigFile;
+    }
+
+    private function isHelpMode() : bool
+    {
+        return $this->argv->hasHelpOption();
     }
 
     private function doRun() : void
@@ -68,6 +86,15 @@ class Application
             exit(ApplicationResultStatus::Passed);
         }
         exit(ApplicationResultStatus::Failed);
+    }
+
+    private function printHelpMessage() : void
+    {
+        $this->console->writeln("\n<cyan>Usage:</cyan>");
+        $this->console->writeln("  hhspecify [options]\n");
+        $this->console->writeln("<cyan>Options:</cyan>");
+        $this->console->writeln("  -c, --config=CONFIGURATION  A hack file containing hhspecify configuration");
+        $this->console->writeln("  -h, --help                  Display this help message\n");
     }
 
 }
