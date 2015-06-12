@@ -22,7 +22,7 @@ class Argument
         private ?Traversable<string> $argv = []
     )
     {
-        $options = getopt('c:', ['config::']);
+        $options = getopt('c::h::', ['config::', 'help::']);
         $this->options = new ImmMap($options);
     }
 
@@ -35,6 +35,17 @@ class Argument
         }
 
         return (string) $value;
+    }
+
+    public function hasHelpOption() : bool
+    {
+        $value = $this->getOption('h', 'help');
+
+        if ($value === null) {
+            return false;
+        }
+
+        return true;
     }
 
     /**
