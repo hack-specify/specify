@@ -29,9 +29,14 @@ class FeatureResult implements VerifyResult
     {
     }
 
-    public function getDescription() : FeatureDescription
+    public function getDescription() : string
     {
-        return $this->description;
+        return $this->description->getDescription();
+    }
+
+    public function getDetailDescription() : string
+    {
+        return $this->description->getDetailDescription();
     }
 
     public function getFailedReasonException() : ?Exception
