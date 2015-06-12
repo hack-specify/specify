@@ -17,7 +17,7 @@ use hhspecify\specification\PackageSpecification;
 class Config
 {
 
-    const string FILE_NAME = 'specify.hh';
+    const string FILE_NAME = 'hhspecify.hh';
 
     private PackageSpecification $package;
     private FeatureReporter $featureReporter;

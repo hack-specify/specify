@@ -38,7 +38,7 @@
   ],
   "scripts": {
     "test": "vendor/bin/peridot -c peridot.hh --grep *Spec.hh spec -r dot",
-    "example": "bin/hhspecify -c example/specify.hh"
+    "example": "bin/hhspecify -c example/hhspecify.hh"
   },
   "minimum-stability": "dev"
 }
