@@ -22,12 +22,11 @@ class FeatureResult implements VerifyResult
 
     public function __construct(
         private FeatureDescription $description,
-        private FeatureResultType $result,
+        private FeatureResultType $resultType,
         private ProcessingTime $processingTime = new ProcessingTime(),
         private ?Exception $exception = null
     )
     {
-        invariant($description instanceof FeatureDescription, 'must be FeatureDescription');
     }
 
     public function getLabel() : string
@@ -52,17 +51,17 @@ class FeatureResult implements VerifyResult
 
     public function isPassed() : bool
     {
-        return $this->result === FeatureResultType::Passed;
+        return $this->resultType === FeatureResultType::Passed;
     }
 
     public function isPending() : bool
     {
-        return $this->result === FeatureResultType::Pending;
+        return $this->resultType === FeatureResultType::Pending;
     }
 
     public function isFailed() : bool
     {
-        return $this->result === FeatureResultType::Failed;
+        return $this->resultType === FeatureResultType::Failed;
     }
 
     public static function passed(FeatureDescription $description, ProcessingTime $totalTime) : FeatureResult
