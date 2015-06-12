@@ -6,6 +6,7 @@ use hhspecify\result\FeaturePackageResult;
 use hhspecify\event\FeaturePackageStart;
 use hhspecify\event\FeatureFinish;
 use hhspecify\event\FeaturePackageFinish;
+use hhspecify\feature\FeatureDescription;
 use hhspecify\io\BufferWriter;
 use hhspecify\io\ConsoleOutput;
 use hhspecify\reporter\DotReporter;
@@ -21,11 +22,16 @@ describe(DotReporter::class, function() {
         });
         context('when handle example finish events', function() {
             beforeEach(function() {
+                $description1 = new FeatureDescription('', 'foo->bar()');
+                $description2 = new FeatureDescription('', 'foo->bar1()');
+                $description3 = new FeatureDescription('', 'foo->bar2()');
+                $description4 = new FeatureDescription('', 'bar->bar()');
+
                 $this->events = tuple(
-                    new FeatureFinish(FeatureResult::pending('foo->bar()')),
-                    new FeatureFinish(FeatureResult::passed('foo->bar1()')),
-                    new FeatureFinish(FeatureResult::failed('foo->bar2()')),
-                    new FeatureFinish(FeatureResult::pending('bar->bar()'))
+                    new FeatureFinish(FeatureResult::pending($description1)),
+                    new FeatureFinish(FeatureResult::passed($description2)),
+                    new FeatureFinish(FeatureResult::failed($description3)),
+                    new FeatureFinish(FeatureResult::pending($description4))
                 );
             });
             it('repoter example progress', function() {

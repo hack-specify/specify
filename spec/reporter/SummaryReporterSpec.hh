@@ -8,6 +8,7 @@ use hhspecify\io\BufferWriter;
 use hhspecify\io\ConsoleOutput;
 use hhspecify\util\ProcessingTime;
 use hhspecify\reporter\SummaryReporter;
+use hhspecify\feature\FeatureDescription;
 
 
 describe(SummaryReporter::class, function() {
@@ -22,8 +23,11 @@ describe(SummaryReporter::class, function() {
         context('when handle example package finish event', function() {
             context('when passed', function() {
                 beforeEach(function() {
+                    $description = new FeatureDescription('label', 'foo->bar1()');
+                    $result = FeatureResult::passed($description);
+
                     $group = new FeatureGroupResult('foo', Vector {
-                        FeatureResult::passed('foo->bar1()')
+                        $result
                     });
 
                     $packageResult = new FeaturePackageResult('package', ImmVector {
@@ -40,8 +44,11 @@ describe(SummaryReporter::class, function() {
             });
             context('when failed', function() {
                 beforeEach(function() {
+                    $description = new FeatureDescription('label', 'foo->bar1()');
+                    $result = FeatureResult::failed($description);
+
                     $group = new FeatureGroupResult('foo', Vector {
-                        FeatureResult::failed('foo->bar1()')
+                        $result
                     });
 
                     $packageResult = new FeaturePackageResult('package', ImmVector {

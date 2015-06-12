@@ -27,6 +27,7 @@ class FeatureResult implements VerifyResult
         private ?Exception $exception = null
     )
     {
+        invariant($description instanceof FeatureDescription, 'must be FeatureDescription');
     }
 
     public function getLabel() : string
