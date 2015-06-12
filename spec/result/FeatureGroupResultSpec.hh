@@ -3,6 +3,7 @@
 use hhspecify\result\FeatureResult;
 use hhspecify\result\FeatureGroupResult;
 use hhspecify\feature\FeatureDescription;
+use hhspecify\util\ProcessingTime;
 use \Exception;
 
 
@@ -10,9 +11,9 @@ describe(FeatureGroupResult::class, function() {
     describe('->getLabelGroupFeatureResults()', function() {
         beforeEach(function() {
             $this->groupResult = new FeatureGroupResult('foo', Vector {
-                FeatureResult::passed(new FeatureDescription('label1', 'foo->bar() patturn1')),
-                FeatureResult::passed(new FeatureDescription('label1', 'foo->bar() patturn2')),
-                FeatureResult::passed(new FeatureDescription('label2', 'foo->bar() patturn1'))
+                FeatureResult::passed(new FeatureDescription('label1', 'foo->bar() patturn1'), new ProcessingTime()),
+                FeatureResult::passed(new FeatureDescription('label1', 'foo->bar() patturn2'), new ProcessingTime()),
+                FeatureResult::passed(new FeatureDescription('label2', 'foo->bar() patturn1'), new ProcessingTime())
             });
         });
         it('grouping by label', function() {
@@ -29,7 +30,7 @@ describe(FeatureGroupResult::class, function() {
         context('when passed', function() {
             beforeEach(function() {
                 $description = new FeatureDescription('label', 'foo->bar()');
-                $passedResult = FeatureResult::passed($description);
+                $passedResult = FeatureResult::passed($description, new ProcessingTime());
 
                 $this->groupResult = new FeatureGroupResult('foo', Vector {
                     $passedResult
@@ -45,7 +46,7 @@ describe(FeatureGroupResult::class, function() {
         context('when failed', function() {
             beforeEach(function() {
                 $description = new FeatureDescription('label', 'foo->bar()');
-                $failedResult = FeatureResult::failed($description);
+                $failedResult = FeatureResult::failed($description, new ProcessingTime(), new Exception('failed'));
 
                 $this->groupResult = new FeatureGroupResult('foo', Vector {
                     $failedResult
@@ -64,10 +65,10 @@ describe(FeatureGroupResult::class, function() {
         context('when failed', function() {
             beforeEach(function() {
                 $description = new FeatureDescription('label', 'foo->bar()');
-                $failedResult = FeatureResult::failed($description);
+                $failedResult = FeatureResult::failed($description, new ProcessingTime(), new Exception('failed'));
 
                 $description = new FeatureDescription('label', 'foo->foo()');
-                $pendingResult = FeatureResult::failed($description);
+                $pendingResult = FeatureResult::failed($description, new ProcessingTime(), new Exception('failed'));
 
                 $this->groupResult = new FeatureGroupResult('foo', Vector {
                     $failedResult,

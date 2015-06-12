@@ -9,6 +9,7 @@ use hhspecify\io\ConsoleOutput;
 use hhspecify\util\ProcessingTime;
 use hhspecify\reporter\SummaryReporter;
 use hhspecify\feature\FeatureDescription;
+use \Exception;
 
 
 describe(SummaryReporter::class, function() {
@@ -24,7 +25,7 @@ describe(SummaryReporter::class, function() {
             context('when passed', function() {
                 beforeEach(function() {
                     $description = new FeatureDescription('label', 'foo->bar1()');
-                    $result = FeatureResult::passed($description);
+                    $result = FeatureResult::passed($description, new ProcessingTime());
 
                     $group = new FeatureGroupResult('foo', Vector {
                         $result
@@ -45,7 +46,7 @@ describe(SummaryReporter::class, function() {
             context('when failed', function() {
                 beforeEach(function() {
                     $description = new FeatureDescription('label', 'foo->bar1()');
-                    $result = FeatureResult::failed($description);
+                    $result = FeatureResult::failed($description, new ProcessingTime(), new Exception('failed'));
 
                     $group = new FeatureGroupResult('foo', Vector {
                         $result

@@ -2,6 +2,7 @@
 
 use hhspecify\result\FeatureResult;
 use hhspecify\feature\FeatureDescription;
+use hhspecify\util\ProcessingTime;
 use \Exception;
 
 
@@ -9,7 +10,7 @@ describe(FeatureResult::class, function() {
     describe('->passed()', function() {
         beforeEach(function() {
             $description = new FeatureDescription('foo');
-            $this->exampleResult = FeatureResult::passed($description);
+            $this->exampleResult = FeatureResult::passed($description, new ProcessingTime());
         });
         it('returns passed result', function() {
             $result = $this->exampleResult->isPassed();
@@ -25,7 +26,7 @@ describe(FeatureResult::class, function() {
     describe('->failed()', function() {
         beforeEach(function() {
             $description = new FeatureDescription('foo');
-            $this->exampleResult = FeatureResult::failed($description, new Exception('failed!!'));
+            $this->exampleResult = FeatureResult::failed($description, new ProcessingTime(), new Exception('failed!!'));
         });
         it('returns failed result', function() {
             $result = $this->exampleResult->isFailed();

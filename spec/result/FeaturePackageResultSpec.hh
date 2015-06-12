@@ -4,6 +4,7 @@ use hhspecify\result\FeatureResult;
 use hhspecify\result\FeatureGroupResult;
 use hhspecify\result\FeaturePackageResult;
 use hhspecify\feature\FeatureDescription;
+use hhspecify\util\ProcessingTime;
 use \Exception;
 
 
@@ -15,11 +16,11 @@ describe(FeaturePackageResult::class, function() {
                 $description2 = new FeatureDescription('l2', 'bar->bar()');
 
                 $group1 = new FeatureGroupResult('foo', Vector {
-                    FeatureResult::passed($description1)
+                    FeatureResult::passed($description1, new ProcessingTime())
                 });
 
                 $group2 = new FeatureGroupResult('bar', Vector {
-                    FeatureResult::passed($description2)
+                    FeatureResult::passed($description2, new ProcessingTime())
                 });
 
                 $this->packageResult = new FeaturePackageResult('package', ImmVector {
@@ -39,7 +40,7 @@ describe(FeaturePackageResult::class, function() {
                 $description2 = new FeatureDescription('l2', 'bar->bar()');
 
                 $group1 = new FeatureGroupResult('foo', Vector {
-                    FeatureResult::failed($description1)
+                    FeatureResult::failed($description1, new ProcessingTime(), new Exception('failed'))
                 });
                 $group2 = new FeatureGroupResult('bar', Vector {
                     FeatureResult::pending($description2)

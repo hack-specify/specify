@@ -11,6 +11,7 @@ use hhspecify\io\BufferWriter;
 use hhspecify\io\ConsoleOutput;
 use hhspecify\reporter\DotReporter;
 use hhspecify\util\ProcessingTime;
+use \Exception;
 
 
 describe(DotReporter::class, function() {
@@ -29,8 +30,8 @@ describe(DotReporter::class, function() {
 
                 $this->events = tuple(
                     new FeatureFinish(FeatureResult::pending($description1)),
-                    new FeatureFinish(FeatureResult::passed($description2)),
-                    new FeatureFinish(FeatureResult::failed($description3)),
+                    new FeatureFinish(FeatureResult::passed($description2, new ProcessingTime())),
+                    new FeatureFinish(FeatureResult::failed($description3, new ProcessingTime(), new Exception('failed'))),
                     new FeatureFinish(FeatureResult::pending($description4))
                 );
             });
