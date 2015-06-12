@@ -15,10 +15,15 @@ final class FeatureDescription
 {
 
     public function __construct(
-        private string $description = 'feature description empty',
-        private string $detailDescription = ''
+        private string $label = 'none',
+        private string $description = 'feature description empty'
     )
     {
+    }
+
+    public function getLabel() : string
+    {
+        return $this->label;
     }
 
     public function getDescription() : string
@@ -26,16 +31,11 @@ final class FeatureDescription
         return $this->description;
     }
 
-    public function getDetailDescription() : string
-    {
-        return $this->detailDescription;
-    }
-
     public function __toString() : string
     {
         return sprintf('%s - %s',
-            $this->getDescription(),
-            $this->getDetailDescription()
+            $this->getLabel(),
+            $this->getDescription()
         );
     }
 

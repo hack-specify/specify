@@ -27,9 +27,14 @@ final class FeatureStart extends AbstractNamedEvent implements LifeCycleEvent
         parent::__construct(LifeCycleEventType::ExampleStart);
     }
 
-    public function getDescription() : FeatureDescription
+    public function getLabel() : string
     {
-        return $this->description;
+        return $this->description->getLabel();
+    }
+
+    public function getDescription() : string
+    {
+        return $this->description->getDescription();
     }
 
 }

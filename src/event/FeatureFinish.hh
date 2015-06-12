@@ -27,14 +27,14 @@ final class FeatureFinish extends AbstractNamedEvent implements LifeCycleEvent
         parent::__construct(LifeCycleEventType::ExampleFinish);
     }
 
+    public function getLabel() : string
+    {
+        return $this->result->getLabel();
+    }
+
     public function getDescription() : string
     {
         return $this->result->getDescription();
-    }
-
-    public function getDetailDescription() : string
-    {
-        return $this->result->getDetailDescription();
     }
 
     public function getProcessingTime() : float
