@@ -27,8 +27,8 @@ if (!$composerInstall) {
 unset($composerInstall, $autloadFiles, $autloadFile);
 
 
-use specify\cli\Argument;
-use specify\cli\Application;
+use hhspecify\cli\Argument;
+use hhspecify\cli\Application;
 
 $application = new Application();
 $application->run(new Argument($argv));

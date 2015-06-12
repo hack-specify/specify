@@ -1,7 +1,7 @@
 <?hh //strict
 
 /**
- * This file is part of specify.
+ * This file is part of hhspecify.
  *
  * (c) Noritaka Horio <holy.shared.design@gmail.com>
  *
@@ -9,11 +9,11 @@
  * with this source code in the file LICENSE.
  */
 
-namespace specify\result;
+namespace hhspecify\result;
 
-use specify\VerifyResult;
-use specify\util\ProcessingTime;
-use specify\feature\FeatureDescription;
+use hhspecify\VerifyResult;
+use hhspecify\util\ProcessingTime;
+use hhspecify\feature\FeatureDescription;
 use \Exception;
 
 

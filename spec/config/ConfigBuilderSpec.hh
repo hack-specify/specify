@@ -1,9 +1,9 @@
 <?hh //partial
 
-use specify\LifeCycleNotifier;
-use specify\LifeCycleMessageSubscriber;
-use specify\config\ConfigBuilder;
-use specify\specification\PackageSpecification;
+use hhspecify\LifeCycleNotifier;
+use hhspecify\LifeCycleMessageSubscriber;
+use hhspecify\config\ConfigBuilder;
+use hhspecify\specification\PackageSpecification;
 use \Prophecy\Prophet;
 use \Prophecy\Argument;
 

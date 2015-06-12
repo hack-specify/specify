@@ -21,7 +21,7 @@
   },
   "autoload": {
     "psr-4": {
-      "specify\\": "src"
+      "hhspecify\\": "src"
     },
     "files": [
       "src/bootstrap.hh"
@@ -29,16 +29,16 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "specify\\example\\": "example",
-      "specify\\fixtures\\": "spec/fixtures/spec"
+      "hhspecify\\example\\": "example",
+      "hhspecify\\fixtures\\": "spec/fixtures/spec"
     }
   },
   "bin": [
-    "bin/specify"
+    "bin/hhspecify"
   ],
   "scripts": {
     "test": "vendor/bin/peridot -c peridot.hh --grep *Spec.hh spec -r dot",
-    "example": "bin/specify -c example/specify.hh"
+    "example": "bin/hhspecify -c example/specify.hh"
   },
   "minimum-stability": "dev"
 }

@@ -1,15 +1,15 @@
 <?hh //partial
 
-use specify\result\FeatureResult;
-use specify\result\FeatureGroupResult;
-use specify\result\FeaturePackageResult;
-use specify\event\FeaturePackageStart;
-use specify\event\FeatureFinish;
-use specify\event\FeaturePackageFinish;
-use specify\io\BufferWriter;
-use specify\io\ConsoleOutput;
-use specify\reporter\DotReporter;
-use specify\util\ProcessingTime;
+use hhspecify\result\FeatureResult;
+use hhspecify\result\FeatureGroupResult;
+use hhspecify\result\FeaturePackageResult;
+use hhspecify\event\FeaturePackageStart;
+use hhspecify\event\FeatureFinish;
+use hhspecify\event\FeaturePackageFinish;
+use hhspecify\io\BufferWriter;
+use hhspecify\io\ConsoleOutput;
+use hhspecify\reporter\DotReporter;
+use hhspecify\util\ProcessingTime;
 
 
 describe(DotReporter::class, function() {

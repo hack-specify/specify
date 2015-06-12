@@ -1,15 +1,15 @@
 <?hh //partial
 
-use specify\Specify;
-use specify\config\ConfigBuilder;
-use specify\LifeCycleNotifier;
-use specify\LifeCycleMessageSubscriber;
-use specify\specification\PackageSpecification;
+use hhspecify\HHSpecify;
+use hhspecify\config\ConfigBuilder;
+use hhspecify\LifeCycleNotifier;
+use hhspecify\LifeCycleMessageSubscriber;
+use hhspecify\specification\PackageSpecification;
 use \Prophecy\Prophet;
 use \Prophecy\Argument;
 
 
-describe(Specify::class, function() {
+describe(HHSpecify::class, function() {
     describe('->configure()', function() {
         beforeEach(function() {
             $this->prophet = new Prophet();
@@ -23,13 +23,13 @@ describe(Specify::class, function() {
             );
         });
         it('configure the settings for specify', function() {
-            Specify::configure((ConfigBuilder $builder) ==> {
+            HHSpecify::configure((ConfigBuilder $builder) ==> {
 
                 $builder->package($this->package)
                     ->featureReporter($this->reporter);
 
             });
-            $config = Specify::currentConfig();
+            $config = HHSpecify::currentConfig();
 
             $package = $config->getPackage();
             expect($package)->toBeAnInstanceOf(PackageSpecification::class);

@@ -1,13 +1,13 @@
 <?hh //partial
 
-use specify\event\FeaturePackageFinish;
-use specify\result\FeatureResult;
-use specify\result\FeatureGroupResult;
-use specify\result\FeaturePackageResult;
-use specify\io\BufferWriter;
-use specify\io\ConsoleOutput;
-use specify\util\ProcessingTime;
-use specify\reporter\SummaryReporter;
+use hhspecify\event\FeaturePackageFinish;
+use hhspecify\result\FeatureResult;
+use hhspecify\result\FeatureGroupResult;
+use hhspecify\result\FeaturePackageResult;
+use hhspecify\io\BufferWriter;
+use hhspecify\io\ConsoleOutput;
+use hhspecify\util\ProcessingTime;
+use hhspecify\reporter\SummaryReporter;
 
 
 describe(SummaryReporter::class, function() {

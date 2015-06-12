@@ -1,7 +1,7 @@
 <?hh //strict
 
 /**
- * This file is part of specify.
+ * This file is part of hhspecify.
  *
  * (c) Noritaka Horio <holy.shared.design@gmail.com>
  *
@@ -9,10 +9,10 @@
  * with this source code in the file LICENSE.
  */
 
-namespace specify\notifier;
+namespace hhspecify\notifier;
 
-use specify\result\FeatureResult;
-use specify\feature\FeatureDescription;
+use hhspecify\result\FeatureResult;
+use hhspecify\feature\FeatureDescription;
 
 interface FeatureNotifier
 {

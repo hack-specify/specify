@@ -1,7 +1,7 @@
 <?hh //partial
 
-use specify\result\FeatureResult;
-use specify\result\FeatureGroupResult;
+use hhspecify\result\FeatureResult;
+use hhspecify\result\FeatureGroupResult;
 use \Exception;
 
 

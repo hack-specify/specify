@@ -1,10 +1,10 @@
 <?hh //partial
 
-use specify\LifeCycleNotifier;
-use specify\feature\FeatureGroup;
-use specify\result\ExampleGroupResult;
-use specify\fixtures\example\FeatureExample;
-use specify\notifier\NullNotifier;
+use hhspecify\LifeCycleNotifier;
+use hhspecify\feature\FeatureGroup;
+use hhspecify\result\ExampleGroupResult;
+use hhspecify\fixtures\example\FeatureExample;
+use hhspecify\notifier\NullNotifier;
 use \ReflectionClass;
 use \Exception;
 

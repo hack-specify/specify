@@ -1,6 +1,6 @@
 <?hh //partial
 
-use specify\collector\SpecificationFileCollector;
+use hhspecify\collector\SpecificationFileCollector;
 
 describe(SpecificationFileCollector::class, function() {
     describe('->collectFrom()', function() {

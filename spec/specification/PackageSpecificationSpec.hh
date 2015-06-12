@@ -1,13 +1,13 @@
 <?hh //partial
 
-use specify\Specification;
-use specify\specification\PackageSpecification;
+use hhspecify\Specification;
+use hhspecify\specification\PackageSpecification;
 use \ReflectionClass;
 
 describe(PackageSpecification::class, function() {
     beforeEach(function() {
         $package = shape(
-            'namespace' => 'specify\\fixtures\\',
+            'namespace' => 'hhspecify\\fixtures\\',
             'packageDirectory' => realpath(__DIR__ . '/../fixtures/spec')
         );
         $this->specification = new PackageSpecification($package);
@@ -15,7 +15,7 @@ describe(PackageSpecification::class, function() {
     describe('->getNamespace()', function() {
         it('returns the namespace', function() {
             $result = $this->specification->getNamespace();
-            expect($result)->toBe('specify\\fixtures');
+            expect($result)->toBe('hhspecify\\fixtures');
         });
     });
     describe('->resolve()', function() {

@@ -1,7 +1,7 @@
 <?hh //partial
 
-use specify\feature\FeatureVerifierBuilder;
-use specify\notifier\NullNotifier;
+use hhspecify\feature\FeatureVerifierBuilder;
+use hhspecify\notifier\NullNotifier;
 use \Exception;
 use \InvalidArgumentException;
 

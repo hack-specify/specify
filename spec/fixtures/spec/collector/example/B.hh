@@ -1,8 +1,8 @@
 <?hh //strict
 
-namespace specify\fixtures\collector\example;
+namespace hhspecify\fixtures\collector\example;
 
-use specify\Specification;
+use hhspecify\Specification;
 
 class B implements Specification
 {

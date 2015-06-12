@@ -1,7 +1,7 @@
 <?hh //strict
 
 /**
- * This file is part of specify.
+ * This file is part of hhspecify.
  *
  * (c) Noritaka Horio <holy.shared.design@gmail.com>
  *
@@ -9,11 +9,11 @@
  * with this source code in the file LICENSE.
  */
 
-namespace specify\event;
+namespace hhspecify\event;
 
-use specify\LifeCycleEvent;
-use specify\LifeCycleEventType;
-use specify\LifeCycleMessageSubscriber;
+use hhspecify\LifeCycleEvent;
+use hhspecify\LifeCycleEventType;
+use hhspecify\LifeCycleMessageSubscriber;
 use \DateTime;
 
 

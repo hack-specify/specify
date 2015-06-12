@@ -1,11 +1,11 @@
 <?hh //partial
 
-use specify\event\FeaturePackageFinish;
-use specify\result\FeaturePackageResult;
-use specify\io\BufferWriter;
-use specify\io\ConsoleOutput;
-use specify\util\ProcessingTime;
-use specify\reporter\ProcessingTimeReporter;
+use hhspecify\event\FeaturePackageFinish;
+use hhspecify\result\FeaturePackageResult;
+use hhspecify\io\BufferWriter;
+use hhspecify\io\ConsoleOutput;
+use hhspecify\util\ProcessingTime;
+use hhspecify\reporter\ProcessingTimeReporter;
 
 
 describe(ProcessingTimeReporter::class, function() {

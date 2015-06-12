@@ -1,7 +1,7 @@
 <?hh //strict
 
 /**
- * This file is part of specify.
+ * This file is part of hhspecify.
  *
  * (c) Noritaka Horio <holy.shared.design@gmail.com>
  *
@@ -9,9 +9,9 @@
  * with this source code in the file LICENSE.
  */
 
-namespace specify;
+namespace hhspecify;
 
-use specify\specification\PackageSpecification;
+use hhspecify\specification\PackageSpecification;
 
 
 class Config

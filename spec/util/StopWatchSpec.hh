@@ -1,6 +1,6 @@
 <?hh //partial
 
-use specify\util\StopWatch;
+use hhspecify\util\StopWatch;
 
 describe(StopWatch::class, function() {
     describe('->stop()', function() {

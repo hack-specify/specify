@@ -1,14 +1,14 @@
 <?hh //partial
 
-use specify\Specify;
-use specify\config\ConfigBuilder;
-use specify\reporter\SpecificationReporter;
+use hhspecify\HHSpecify;
+use hhspecify\config\ConfigBuilder;
+use hhspecify\reporter\SpecificationReporter;
 
 
-Specify::configure((ConfigBuilder $builder) ==> {
+HHSpecify::configure((ConfigBuilder $builder) ==> {
 
     $package = shape(
-        'namespace' => 'specify\\example\\',
+        'namespace' => 'hhspecify\\example\\',
         'packageDirectory' => __DIR__
     );
 

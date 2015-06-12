@@ -1,9 +1,9 @@
 <?hh //partial
 
-use specify\feature\Feature;
-use specify\feature\FeatureDescription;
-use specify\fixtures\example\FeatureExample;
-use specify\notifier\NullNotifier;
+use hhspecify\feature\Feature;
+use hhspecify\feature\FeatureDescription;
+use hhspecify\fixtures\example\FeatureExample;
+use hhspecify\notifier\NullNotifier;
 use \Prophecy\Prophet;
 use \Prophecy\Argument;
 use \Exception;

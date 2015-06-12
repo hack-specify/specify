@@ -1,7 +1,7 @@
 <?hh //partial
 
-use specify\LifeCycleEventType;
-use specify\event\FeaturePackageFinish;
+use hhspecify\LifeCycleEventType;
+use hhspecify\event\FeaturePackageFinish;
 
 describe(FeaturePackageFinish::class, function() {
     describe('->getName()', function() {

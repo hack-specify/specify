@@ -1,7 +1,7 @@
 <?hh //partial
 
-use specify\collector\FeatureCollector;
-use specify\fixtures\example\FeatureExample;
+use hhspecify\collector\FeatureCollector;
+use hhspecify\fixtures\example\FeatureExample;
 
 
 describe(FeatureCollector::class, function() {

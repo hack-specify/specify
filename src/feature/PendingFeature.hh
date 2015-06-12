@@ -1,7 +1,7 @@
 <?hh //strict
 
 /**
- * This file is part of specify.
+ * This file is part of hhspecify.
  *
  * (c) Noritaka Horio <holy.shared.design@gmail.com>
  *
@@ -9,13 +9,13 @@
  * with this source code in the file LICENSE.
  */
 
-namespace specify\feature;
+namespace hhspecify\feature;
 
-use specify\Specification;
-use specify\AttributeType;
-use specify\FeatureSpecification;
-use specify\notifier\FeatureNotifier;
-use specify\result\FeatureResult;
+use hhspecify\Specification;
+use hhspecify\AttributeType;
+use hhspecify\FeatureSpecification;
+use hhspecify\notifier\FeatureNotifier;
+use hhspecify\result\FeatureResult;
 use \ReflectionMethod;
 use \Exception;
 

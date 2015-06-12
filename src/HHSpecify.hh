@@ -1,7 +1,7 @@
 <?hh //strict
 
 /**
- * This file is part of specify.
+ * This file is part of hhspecify.
  *
  * (c) Noritaka Horio <holy.shared.design@gmail.com>
  *
@@ -9,12 +9,12 @@
  * with this source code in the file LICENSE.
  */
 
-namespace specify;
+namespace hhspecify;
 
-use specify\config\ConfigBuilder;
+use hhspecify\config\ConfigBuilder;
 
 
-class Specify
+class HHSpecify
 {
 
     private static ?ConfigBuilder $builder;

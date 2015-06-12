@@ -1,7 +1,7 @@
 <?hh //strict
 
 /**
- * This file is part of specify.
+ * This file is part of hhspecify.
  *
  * (c) Noritaka Horio <holy.shared.design@gmail.com>
  *
@@ -9,14 +9,14 @@
  * with this source code in the file LICENSE.
  */
 
-namespace specify\cli;
+namespace hhspecify\cli;
 
-use specify\Specify;
-use specify\notifier\DefaultLifeCycleNotifier;
-use specify\feature\FeaturePackage;
-use specify\result\FeaturePackageResult;
-use specify\collector\FeatureGroupCollector;
-use specify\reporter\ShutdownReporter;
+use hhspecify\HHSpecify;
+use hhspecify\notifier\DefaultLifeCycleNotifier;
+use hhspecify\feature\FeaturePackage;
+use hhspecify\result\FeaturePackageResult;
+use hhspecify\collector\FeatureGroupCollector;
+use hhspecify\reporter\ShutdownReporter;
 
 
 class Application
@@ -45,7 +45,7 @@ class Application
 
     private function doRun() : void
     {
-        $config = Specify::currentConfig();
+        $config = HHSpecify::currentConfig();
 
         $lifeCycleNotifier = new DefaultLifeCycleNotifier(ImmVector {
             $config->getFeatureReporter()

@@ -1,8 +1,8 @@
 <?hh //partial
 
-use specify\result\FeatureResult;
-use specify\result\FeatureGroupResult;
-use specify\result\FeaturePackageResult;
+use hhspecify\result\FeatureResult;
+use hhspecify\result\FeatureGroupResult;
+use hhspecify\result\FeaturePackageResult;
 use \Exception;
 
 

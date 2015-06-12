@@ -1,13 +1,13 @@
 <?hh //partial
 
-use specify\LifeCycleNotifier;
-use specify\SpecificationExample;
-use specify\feature\FeaturePackage;
-use specify\feature\FeatureGroup;
-use specify\result\FeatureGroupResult;
-use specify\result\FeaturePackageResult;
-use specify\notifier\NullNotifier;
-use specify\fixtures\example\FeatureExample;
+use hhspecify\LifeCycleNotifier;
+use hhspecify\SpecificationExample;
+use hhspecify\feature\FeaturePackage;
+use hhspecify\feature\FeatureGroup;
+use hhspecify\result\FeatureGroupResult;
+use hhspecify\result\FeaturePackageResult;
+use hhspecify\notifier\NullNotifier;
+use hhspecify\fixtures\example\FeatureExample;
 
 
 describe(FeaturePackage::class, function() {

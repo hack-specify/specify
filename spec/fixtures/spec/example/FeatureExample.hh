@@ -1,9 +1,9 @@
 <?hh //strict
 
-namespace specify\fixtures\example;
+namespace hhspecify\fixtures\example;
 
-use specify\Specification;
-use specify\feature\FeatureVerifierBuilder as Feature;
+use hhspecify\Specification;
+use hhspecify\feature\FeatureVerifierBuilder as Feature;
 use \Exception;
 
 

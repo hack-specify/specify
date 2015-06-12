@@ -2,13 +2,13 @@
 
 namespace specify\example;
 
-use specify\BehaviorResult;
-use specify\LifeCycleEvent;
-use specify\LifeCycleMessageSubscriber;
-use specify\event\FeaturePackageStart;
-use specify\event\FeatureGroupStart;
-use specify\event\FeatureGroupFinish;
-use specify\event\FeaturePackageFinish;
+use hhspecify\BehaviorResult;
+use hhspecify\LifeCycleEvent;
+use hhspecify\LifeCycleMessageSubscriber;
+use hhspecify\event\FeaturePackageStart;
+use hhspecify\event\FeatureGroupStart;
+use hhspecify\event\FeatureGroupFinish;
+use hhspecify\event\FeaturePackageFinish;
 
 
 class ExampleMessageSubscriber implements LifeCycleMessageSubscriber

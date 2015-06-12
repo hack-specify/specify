@@ -1,6 +1,6 @@
 <?hh //partial
 
-use specify\result\FeatureResult;
+use hhspecify\result\FeatureResult;
 use \Exception;
 
 

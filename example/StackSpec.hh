@@ -1,10 +1,10 @@
 <?hh //strict
 
-namespace specify\example;
+namespace hhspecify\example;
 
 use \Exception;
-use specify\Specification;
-use specify\feature\FeatureVerifierBuilder as Feature;
+use hhspecify\Specification;
+use hhspecify\feature\FeatureVerifierBuilder as Feature;
 
 
 final class StackSpec implements Specification
