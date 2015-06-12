@@ -18,6 +18,7 @@ use hhspecify\event\FeatureGroupStart;
 use hhspecify\event\FeatureFinish;
 use hhspecify\event\FeatureGroupFinish;
 use hhspecify\event\FeaturePackageFinish;
+use hhspecify\result\FeatureResult;
 use hhspecify\io\ConsoleOutput;
 use hhspecify\io\Console;
 
@@ -25,6 +26,7 @@ use hhspecify\io\Console;
 final class SpecificationReporter implements LifeCycleMessageSubscriber
 {
 
+    private string $indent = '';
     private int $indentLevel = 0;
 
     public function __construct(
@@ -39,8 +41,6 @@ final class SpecificationReporter implements LifeCycleMessageSubscriber
             $this->onPackageStart($event);
         } else if ($event instanceof FeatureGroupStart) {
             $this->onGroupStart($event);
-        } else if ($event instanceof FeatureFinish) {
-            $this->onFeatureFinish($event);
         } else if ($event instanceof FeatureGroupFinish) {
             $this->onGroupFinish($event);
         }
@@ -49,35 +49,61 @@ final class SpecificationReporter implements LifeCycleMessageSubscriber
     private function onPackageStart(FeaturePackageStart $event) : void
     {
         $this->writer->writeln("\nPackage: %s\n", $event->getDescription());
-        $this->indentLevel++;
     }
 
     private function onGroupStart(FeatureGroupStart $event) : void
     {
-        $indentSpace = str_pad("", $this->indentLevel * 2, " ");
-
-        $this->writer->write($indentSpace . "<white>%s</white>\n", $event->getDescription());
-        $this->indentLevel++;
-    }
-
-    private function onFeatureFinish(FeatureFinish $event) : void
-    {
-        $indentSpace = str_pad("", $this->indentLevel * 2, " ");
-        $format = "<green>✓</green> <white>%s</white>\n";
-
-        if ($event->isFailed()) {
-            $format = "  <red>%s</red>\n";
-        } else if ($event->isPending()) {
-            $format = "  <lightCyan>%s</lightCyan>\n";
-        }
-
-        $this->writer->write($indentSpace . $format, $event->getDescription());
+        $this->nextLevel();
+        $this->writer->write($this->indent . "<white>%s</white>\n", $event->getDescription());
     }
 
     private function onGroupFinish(FeatureGroupFinish $event) : void
     {
+        $result = $event->getLabelGroupFeatureResults();
+
+        foreach ($result->toArray() as $label => $featureResults) {
+            $this->nextLevel();
+            $this->writeFeatureLabel($label);
+            $this->writeFeatureResults($featureResults);
+            $this->parentLevel();
+        }
         $this->writer->writeln("");
+        $this->parentLevel();
+    }
+
+    private function writeFeatureLabel(string $label) : void
+    {
+        $this->writer->writeln($this->indent . $label);
+    }
+
+    private function writeFeatureResults(FeatureResultCollection $results) : void
+    {
+        $this->nextLevel();
+
+        foreach ($results->items() as $result) {
+            $format = "<green>✓</green> <white>%s</white>";
+
+            if ($result->isFailed()) {
+                $format = "  <red>%s</red>";
+            } else if ($result->isPending()) {
+                $format = "  <lightCyan>%s</lightCyan>";
+            }
+            $this->writer->writeln($this->indent . $format, $result->getDescription());
+        }
+
+        $this->parentLevel();
+    }
+
+    private function nextLevel() : void
+    {
+        $this->indentLevel++;
+        $this->indent = str_pad("", $this->indentLevel * 2, " ");
+    }
+
+    private function parentLevel() : void
+    {
         $this->indentLevel--;
+        $this->indent = str_pad("", $this->indentLevel * 2, " ");
     }
 
 }

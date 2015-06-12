@@ -36,6 +36,11 @@ final class FeatureGroupFinish extends AbstractNamedEvent implements LifeCycleEv
         return $this->result->getFailedFeatureCount();
     }
 
+    public function getLabelGroupFeatureResults() : LabelGroupFeatureResult
+    {
+        return $this->result->getLabelGroupFeatureResults();
+    }
+
     public function getProcessingTime() : float
     {
         $processingTime = $this->result->getProcessingTime();

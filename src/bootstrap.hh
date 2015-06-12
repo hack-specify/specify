@@ -74,6 +74,7 @@ namespace hhspecify\event
     use hhspecify\result\FeatureResult;
 
     type FeatureResultCollection = ImmVector<FeatureResult>;
+    type LabelGroupFeatureResult = ImmMap<string, ImmVector<FeatureResult>>;
 }
 
 namespace hhspecify\notifier
@@ -86,8 +87,11 @@ namespace hhspecify\notifier
 namespace hhspecify\reporter
 {
     use hhspecify\LifeCycleMessageSubscriber;
+    use hhspecify\result\FeatureResult;
 
     type ReporterCollection = ImmVector<LifeCycleMessageSubscriber>;
+    type FeatureResultCollection = ImmVector<FeatureResult>;
+    type LabelGroupFeatureResult = ImmMap<string, ImmVector<FeatureResult>>;
 }
 
 namespace hhspecify\specification
