@@ -20,7 +20,7 @@ describe(PendingFeature::class, function() {
                 $pendingFeature = new PendingFeature($target, $pendingFeatureMethod);
                 $result = $pendingFeature->verify($this->notifier);
 
-                expect($result->getDescription())->toBeAnInstanceOf(FeatureDescription::class);
+                expect($result->getDescription())->toBe('example2 is pending');
                 expect($result->isPassed())->toBeFalse();
                 expect($result->isFailed())->toBeFalse();
                 expect($result->isPending())->toBeTrue();

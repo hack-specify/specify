@@ -22,7 +22,7 @@ describe(Feature::class, function() {
                 $feature = new Feature($target, $featureMethod);
                 $result = $feature->verify($this->notifier);
 
-                expect($result->getDescription())->toBeAnInstanceOf(FeatureDescription::class);
+                expect($result->getDescription())->toBe('example1');
                 expect($result->isPassed())->toBeTrue();
                 expect($result->isFailed())->toBeFalse();
             });
@@ -38,7 +38,7 @@ describe(Feature::class, function() {
                 $feature = new Feature($target, $featureMethod);
                 $result = $feature->verify($this->notifier);
 
-                expect($result->getDescription())->toBeAnInstanceOf(FeatureDescription::class);
+                expect($result->getDescription())->toBe('example3');
                 expect($result->isPassed())->toBeFalse();
                 expect($result->isFailed())->toBeTrue();
             });
