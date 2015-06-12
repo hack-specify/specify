@@ -53,9 +53,12 @@ final class FailedFeatureReporter implements LifeCycleMessageSubscriber
 
             $reasonMessage = $reasonException->getMessage();
             $this->writer->writeln("  %s\n", $reasonMessage);
-            $this->writer->writeln("  %s:%d\n",
+            $this->writer->writeln("  File: %s\n  Line: %d\n",
                 $reasonException->getFile(),
                 $reasonException->getLine()
+            );
+            $this->writer->writeln("  %s\n",
+                $reasonException->getTraceAsString()
             );
         }
     }
