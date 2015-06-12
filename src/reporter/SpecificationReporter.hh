@@ -61,7 +61,7 @@ final class SpecificationReporter implements LifeCycleMessageSubscriber
     {
         $result = $event->getLabelGroupFeatureResults();
 
-        foreach ($result->toArray() as $label => $featureResults) {
+        foreach ($result->lazy() as $label => $featureResults) {
             $this->nextLevel();
             $this->writeFeatureLabel($label);
             $this->writeFeatureResults($featureResults);
