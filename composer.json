@@ -30,14 +30,14 @@
   "autoload-dev": {
     "psr-4": {
       "specify\\example\\": "example",
-      "specify\\fixtures\\": "specs/fixtures/specs"
+      "specify\\fixtures\\": "spec/fixtures/spec"
     }
   },
   "bin": [
     "bin/specify"
   ],
   "scripts": {
-    "test": "vendor/bin/peridot -c peridot.hh --grep *Spec.hh specs -r dot",
+    "test": "vendor/bin/peridot -c peridot.hh --grep *Spec.hh spec -r dot",
     "example": "bin/specify -c example/specify.hh"
   },
   "minimum-stability": "dev"

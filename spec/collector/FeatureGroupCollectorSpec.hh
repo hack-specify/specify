@@ -11,7 +11,7 @@ describe(FeatureGroupCollector::class, function() {
         beforeEach(function() {
             $package = shape(
                 'namespace' => 'specify\\fixtures\\collector\\',
-                'packageDirectory' => realpath(__DIR__ . '/../fixtures/specs/collector')
+                'packageDirectory' => realpath(__DIR__ . '/../fixtures/spec/collector')
             );
             $this->spec = new PackageSpecification($package);
             $this->collector = new FeatureGroupCollector();

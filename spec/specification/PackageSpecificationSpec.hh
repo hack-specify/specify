@@ -8,7 +8,7 @@ describe(PackageSpecification::class, function() {
     beforeEach(function() {
         $package = shape(
             'namespace' => 'specify\\fixtures\\',
-            'packageDirectory' => realpath(__DIR__ . '/../fixtures/specs')
+            'packageDirectory' => realpath(__DIR__ . '/../fixtures/spec')
         );
         $this->specification = new PackageSpecification($package);
     });
@@ -20,7 +20,7 @@ describe(PackageSpecification::class, function() {
     });
     describe('->resolve()', function() {
         it('returns the instance of resolve class', function() {
-            $file = realpath(__DIR__ . '/../fixtures/specs/example/FeatureExample.hh');
+            $file = realpath(__DIR__ . '/../fixtures/spec/example/FeatureExample.hh');
             $result = $this->specification->resolve($file);
 
             expect($result)->toBeAnInstanceOf(Specification::class);

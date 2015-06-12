@@ -19,7 +19,7 @@ describe(Specify::class, function() {
 
             $this->package = shape(
                 'namespace' => 'specify\\fixtures\\',
-                'packageDirectory' => realpath(__DIR__ . '/../fixtures/specs')
+                'packageDirectory' => realpath(__DIR__ . '/../fixtures/spec')
             );
         });
         it('configure the settings for specify', function() {
