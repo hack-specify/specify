@@ -1,6 +1,6 @@
 <?hh //strict
 
-namespace specify\example;
+namespace hhspecify\example;
 
 final class Stack<T>
 {

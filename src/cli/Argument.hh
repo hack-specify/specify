@@ -1,7 +1,7 @@
 <?hh //strict
 
 /**
- * This file is part of specify.
+ * This file is part of hhspecify.
  *
  * (c) Noritaka Horio <holy.shared.design@gmail.com>
  *
@@ -9,9 +9,9 @@
  * with this source code in the file LICENSE.
  */
 
-namespace specify\cli;
+namespace hhspecify\cli;
 
-use specify\Config;
+use hhspecify\Config;
 
 class Argument
 {
@@ -22,7 +22,7 @@ class Argument
         private ?Traversable<string> $argv = []
     )
     {
-        $options = getopt('c:', ['config::']);
+        $options = getopt('c::h::', ['config::', 'help::']);
         $this->options = new ImmMap($options);
     }
 
@@ -35,6 +35,17 @@ class Argument
         }
 
         return (string) $value;
+    }
+
+    public function hasHelpOption() : bool
+    {
+        $value = $this->getOption('h', 'help');
+
+        if ($value === null) {
+            return false;
+        }
+
+        return true;
     }
 
     /**

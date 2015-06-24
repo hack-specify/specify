@@ -1,7 +1,7 @@
 <?hh //strict
 
 /**
- * This file is part of specify.
+ * This file is part of hhspecify.
  *
  * (c) Noritaka Horio <holy.shared.design@gmail.com>
  *
@@ -9,25 +9,32 @@
  * with this source code in the file LICENSE.
  */
 
-namespace specify\event;
+namespace hhspecify\event;
 
-use specify\LifeCycleEvent;
-use specify\LifeCycleEventType;
-use specify\result\ExampleResult;
+use hhspecify\LifeCycleEvent;
+use hhspecify\LifeCycleEventType;
+use hhspecify\feature\FeatureDescription;
+use hhspecify\result\ExampleResult;
+
 
 final class FeatureStart extends AbstractNamedEvent implements LifeCycleEvent
 {
 
     public function __construct(
-        private string $description
+        private FeatureDescription $description
     )
     {
         parent::__construct(LifeCycleEventType::ExampleStart);
     }
 
+    public function getLabel() : string
+    {
+        return $this->description->getLabel();
+    }
+
     public function getDescription() : string
     {
-        return $this->description;
+        return $this->description->getDescription();
     }
 
 }

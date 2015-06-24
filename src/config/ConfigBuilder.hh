@@ -1,7 +1,7 @@
 <?hh //strict
 
 /**
- * This file is part of specify.
+ * This file is part of hhspecify.
  *
  * (c) Noritaka Horio <holy.shared.design@gmail.com>
  *
@@ -9,15 +9,15 @@
  * with this source code in the file LICENSE.
  */
 
-namespace specify\config;
+namespace hhspecify\config;
 
-use specify\Config;
-use specify\Builder;
-use specify\LifeCycleMessageSubscriber;
-use specify\specification\PackageSpecification;
-use specify\reporter\SpecificationReporter;
-use specify\reporter\FailedSummaryReporter;
-use specify\reporter\CompositionReporter;
+use hhspecify\Config;
+use hhspecify\Builder;
+use hhspecify\LifeCycleMessageSubscriber;
+use hhspecify\specification\PackageSpecification;
+use hhspecify\reporter\SpecificationReporter;
+use hhspecify\reporter\FailedSummaryReporter;
+use hhspecify\reporter\CompositionReporter;
 
 
 class ConfigBuilder implements Builder<Config>

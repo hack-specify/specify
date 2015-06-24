@@ -1,7 +1,7 @@
 <?hh //strict
 
 /**
- * This file is part of specify.
+ * This file is part of hhspecify.
  *
  * (c) Noritaka Horio <holy.shared.design@gmail.com>
  *
@@ -9,19 +9,20 @@
  * with this source code in the file LICENSE.
  */
 
-namespace specify\notifier;
+namespace hhspecify\notifier;
 
-use specify\LifeCycleEvent;
-use specify\LifeCycleNotifier;
-use specify\event\FeaturePackageStart;
-use specify\event\FeatureGroupStart;
-use specify\event\FeatureStart;
-use specify\event\FeatureFinish;
-use specify\event\FeatureGroupFinish;
-use specify\event\FeaturePackageFinish;
-use specify\result\FeatureResult;
-use specify\result\FeatureGroupResult;
-use specify\result\FeaturePackageResult;
+use hhspecify\LifeCycleEvent;
+use hhspecify\LifeCycleNotifier;
+use hhspecify\event\FeaturePackageStart;
+use hhspecify\event\FeatureGroupStart;
+use hhspecify\event\FeatureStart;
+use hhspecify\event\FeatureFinish;
+use hhspecify\event\FeatureGroupFinish;
+use hhspecify\event\FeaturePackageFinish;
+use hhspecify\result\FeatureResult;
+use hhspecify\result\FeatureGroupResult;
+use hhspecify\result\FeaturePackageResult;
+use hhspecify\feature\FeatureDescription;
 
 
 class DefaultLifeCycleNotifier implements LifeCycleNotifier
@@ -43,7 +44,7 @@ class DefaultLifeCycleNotifier implements LifeCycleNotifier
         $this->send(new FeatureGroupStart($description));
     }
 
-    public function featureStart(string $description) : void
+    public function featureStart(FeatureDescription $description) : void
     {
         $this->send(new FeatureStart($description));
     }

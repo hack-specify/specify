@@ -1,7 +1,7 @@
 <?hh //strict
 
 /**
- * This file is part of specify.
+ * This file is part of hhspecify.
  *
  * (c) Noritaka Horio <holy.shared.design@gmail.com>
  *
@@ -9,12 +9,13 @@
  * with this source code in the file LICENSE.
  */
 
-namespace specify\notifier;
+namespace hhspecify\notifier;
 
-use specify\LifeCycleNotifier;
-use specify\result\FeatureResult;
-use specify\result\FeatureGroupResult;
-use specify\result\FeaturePackageResult;
+use hhspecify\LifeCycleNotifier;
+use hhspecify\result\FeatureResult;
+use hhspecify\result\FeatureGroupResult;
+use hhspecify\result\FeaturePackageResult;
+use hhspecify\feature\FeatureDescription;
 
 
 class NullNotifier implements LifeCycleNotifier
@@ -34,7 +35,7 @@ class NullNotifier implements LifeCycleNotifier
     {
     }
 
-    public function featureStart(string $description) : void
+    public function featureStart(FeatureDescription $description) : void
     {
     }
 

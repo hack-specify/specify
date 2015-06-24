@@ -1,7 +1,7 @@
 <?hh //strict
 
 /**
- * This file is part of specify.
+ * This file is part of hhspecify.
  *
  * (c) Noritaka Horio <holy.shared.design@gmail.com>
  *
@@ -9,16 +9,16 @@
  * with this source code in the file LICENSE.
  */
 
-namespace specify\reporter;
+namespace hhspecify\reporter;
 
-use specify\LifeCycleEvent;
-use specify\LifeCycleMessageSubscriber;
-use specify\event\FeaturePackageStart;
-use specify\event\FeatureStart;
-use specify\event\FeatureFinish;
-use specify\event\FeaturePackageFinish;
-use specify\io\ConsoleOutput;
-use specify\io\Console;
+use hhspecify\LifeCycleEvent;
+use hhspecify\LifeCycleMessageSubscriber;
+use hhspecify\event\FeaturePackageStart;
+use hhspecify\event\FeatureStart;
+use hhspecify\event\FeatureFinish;
+use hhspecify\event\FeaturePackageFinish;
+use hhspecify\io\ConsoleOutput;
+use hhspecify\io\Console;
 
 
 final class DotReporter implements LifeCycleMessageSubscriber

@@ -1,7 +1,7 @@
 <?hh //strict
 
 /**
- * This file is part of specify.
+ * This file is part of hhspecify.
  *
  * (c) Noritaka Horio <holy.shared.design@gmail.com>
  *
@@ -9,9 +9,9 @@
  * with this source code in the file LICENSE.
  */
 
-namespace specify
+namespace hhspecify
 {
-    use specify\specification\PackageSpecification;
+    use hhspecify\specification\PackageSpecification;
 
     type FeatureReporter = LifeCycleMessageSubscriber;
     type ConfigOptions = shape(
@@ -20,9 +20,9 @@ namespace specify
     );
 }
 
-namespace specify\config
+namespace hhspecify\config
 {
-    use specify\LifeCycleMessageSubscriber;
+    use hhspecify\LifeCycleMessageSubscriber;
 
     type PackageNamespace = string;
     type DirectoryPath = string;
@@ -34,21 +34,22 @@ namespace specify\config
     type FeatureReporter = LifeCycleMessageSubscriber;
 }
 
-namespace specify\result
+namespace hhspecify\result
 {
-    use specify\result\FeatureResult;
+    use hhspecify\result\FeatureResult;
 
     type FeatureResultCollection = ImmVector<FeatureResult>;
     type FeatureGroupResultCollection = ImmVector<FeatureGroupResult>;
+    type LabelGroupFeatureResult = ImmMap<string, ImmVector<FeatureResult>>;
 }
 
 
-namespace specify\collector
+namespace hhspecify\collector
 {
-    use specify\FeatureSpecification;
-    use specify\feature\FeatureGroup;
-    use specify\notifier\FeatureNotifier;
-    use specify\result\FeatureResult;
+    use hhspecify\FeatureSpecification;
+    use hhspecify\feature\FeatureGroup;
+    use hhspecify\notifier\FeatureNotifier;
+    use hhspecify\result\FeatureResult;
 
     type DirectoryPath = string;
     type SpecificationFile = string;
@@ -57,39 +58,43 @@ namespace specify\collector
     type FeatureGroupCollection = ImmVector<FeatureGroup>;
 }
 
-namespace specify\feature
+namespace hhspecify\feature
 {
-    use specify\FeatureSpecification;
-    use specify\result\FeatureResult;
-    use specify\notifier\FeatureNotifier;
+    use hhspecify\FeatureSpecification;
+    use hhspecify\result\FeatureResult;
+    use hhspecify\notifier\FeatureNotifier;
 
     type FeatureGroupCollection = ImmVector<FeatureGroup>;
     type FeatureCollection = ImmVector<FeatureSpecification<FeatureResult, FeatureNotifier>>;
 }
 
 
-namespace specify\event
+namespace hhspecify\event
 {
-    use specify\result\FeatureResult;
+    use hhspecify\result\FeatureResult;
 
     type FeatureResultCollection = ImmVector<FeatureResult>;
+    type LabelGroupFeatureResult = ImmMap<string, ImmVector<FeatureResult>>;
 }
 
-namespace specify\notifier
+namespace hhspecify\notifier
 {
-    use specify\LifeCycleMessageSubscriber;
+    use hhspecify\LifeCycleMessageSubscriber;
 
     type LifeCycleMessageSubscriberCollection = ImmVector<LifeCycleMessageSubscriber>;
 }
 
-namespace specify\reporter
+namespace hhspecify\reporter
 {
-    use specify\LifeCycleMessageSubscriber;
+    use hhspecify\LifeCycleMessageSubscriber;
+    use hhspecify\result\FeatureResult;
 
     type ReporterCollection = ImmVector<LifeCycleMessageSubscriber>;
+    type FeatureResultCollection = ImmVector<FeatureResult>;
+    type LabelGroupFeatureResult = ImmMap<string, ImmVector<FeatureResult>>;
 }
 
-namespace specify\specification
+namespace hhspecify\specification
 {
     type PackageNamespace = string;
     type DirectoryPath = string;
