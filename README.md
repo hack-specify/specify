@@ -26,7 +26,7 @@ Use the **configure** method to do the setup.
 ```hack
 <?hh //partial
 
-use hhspecify\Specify;
+use hhspecify\HHSpecify;
 use hhspecify\config\ConfigBuilder;
 use hhspecify\reporter\SpecificationReporter;
 
