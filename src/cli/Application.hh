@@ -53,6 +53,7 @@ class Application
         $configFile = $this->argv->getConfigFile();
         $loadConfigFile = getcwd() . '/' . $configFile;
 
+        // UNSAFE
         include_once $loadConfigFile;
     }
 

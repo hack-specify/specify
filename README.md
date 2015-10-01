@@ -108,3 +108,9 @@ Run the test
 
 	composer install
 	composer test
+
+Run the example
+----------------------------
+
+	composer install
+	composer example
